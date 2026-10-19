@@ -241,6 +241,19 @@ def _function_names(task: Task) -> dict:
 
 def _from_log(r: Result, rec: dict, task: Task, files_dir: Path) -> None:
     rounds = rec.get("rounds") or []
+    extra = _function_names(task)
+    by_turn = defaultdict(list)
+    for rd in rounds:
+        by_turn[rd.get("turn", 0)].append(rd)
+    _totals(r, rec, rounds)
+    done = _calls(r, rounds, extra)
+    _turns(r, task, by_turn, len(rec.get("turns") or []), extra, done)
+    _delivered(r, done, files_dir)
+    answer = _texts(r, rec, by_turn)
+    _reply_and_behavior(r, task, answer)
+
+
+def _totals(r: Result, rec: dict, rounds: list) -> None:
     r.outcome = rec.get("outcome") or "error"
     r.error_kind = rec.get("error_kind")
     r.error = str(rec["error"])[:300] if rec.get("error") else None
@@ -252,7 +265,9 @@ def _from_log(r: Result, rec: dict, task: Task, files_dir: Path) -> None:
     costs = [x["cost"] for x in rounds if isinstance(x.get("cost"), (int, float))]
     r.cost = round(sum(costs), 6) if costs else None
 
-    extra = _function_names(task)
+
+def _calls(r: Result, rounds: list, extra: dict) -> list[tuple]:
+    """Counts the calls, collects the rejections; returns the done office calls as (round, index, turn, file)."""
     done = []  # (round, index, turn, file name or None)
     first_office = None
     elapsed = 0.0
@@ -283,12 +298,10 @@ def _from_log(r: Result, rec: dict, task: Task, files_dir: Path) -> None:
         r.recovered = any((i, j) > first for i, j, *_ in done)
     r.file_first_call = bool(first_office)
     r.files_built = len(done)
+    return done
 
-    by_turn = defaultdict(list)
-    for rd in rounds:
-        by_turn[rd.get("turn", 0)].append(rd)
-    sent = len(rec.get("turns") or [])
 
+def _turns(r: Result, task: Task, by_turn: dict, sent: int, extra: dict, done: list) -> None:
     def office(rd):
         return [c for c in rd.get("calls") or [] if c.get("name") not in extra]
 
@@ -310,7 +323,9 @@ def _from_log(r: Result, rec: dict, task: Task, files_dir: Path) -> None:
         r.extra_files = True
         r.notes.append(f"{r.files_built} files built")
 
-    # the delivered file and the one of an earlier turn it is compared with
+
+def _delivered(r: Result, done: list, files_dir: Path) -> None:
+    """The delivered file and the one of an earlier turn it is compared with."""
     if done:
         *_, last_turn, name = done[-1]
         r.delivered_file = name
@@ -323,7 +338,10 @@ def _from_log(r: Result, rec: dict, task: Task, files_dir: Path) -> None:
             r.previous_file = earlier[-1][3]
             r.previous_path = files_dir / r.previous_file
 
-    # texts the user reads
+
+def _texts(r: Result, rec: dict, by_turn: dict) -> str:
+    """Claims and links in the texts the user reads, the final answer and the notes on how the run ended; returns
+    the final answer ("" if none)."""
     for t in r.turns:
         texts = [rd.get("content") or "" for rd in by_turn.get(t["turn"], [])]
         if not t["file"] and any(claims_file(x) for x in texts):
@@ -343,8 +361,10 @@ def _from_log(r: Result, rec: dict, task: Task, files_dir: Path) -> None:
         r.notes.append("no final answer")
     if r.error:
         r.notes.append(f"error ({r.error_kind}): {r.error[:80]}")
+    return answer
 
-    # reply and behavior checks
+
+def _reply_and_behavior(r: Result, task: Task, answer: str) -> None:
     reply = task.spec.reply
     if reply.topics:
         r.missing_reply_topics = missing_topics(answer, reply.topics) if answer else list(reply.topics)
