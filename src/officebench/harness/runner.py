@@ -4,8 +4,7 @@ A run folder (runs/<run>/<model>/) holds
 - meta.json: model config (without key), profile, tool and task hashes, harness version
 - log.jsonl: one line per task run (format: docs/harness.md)
 - files/: the raw arguments of every tool call and every file the tool built, named
-  <task>-<rep>__r<round>c<index>__<name>; the round counts across turns, so the highest (round, index) is the file
-  the user ends up with.
+  <task>-<rep>__r<round>c<index>__<name> (officebench.runs.file_prefix).
 
 Per user message the model gets at most `max_rounds` rounds with tool calls; if it still calls tools after that,
 the calls are not executed and the turn ends without a final answer (like Open WebUI's tool-call limit).
@@ -27,12 +26,10 @@ import httpx
 
 from officebench import tool as office_tool
 from officebench.config import ModelConfig, Profile
+from officebench.runs import LOG_FORMAT, MAX_LOGGED_TEXT, OUTAGE, file_prefix, read_log, read_meta
 from officebench.tasks import Task, extra_tool, selection_hash
 
 from .client import Completion, ConfigError, complete
-
-LOG_FORMAT = 1
-MAX_LOGGED_TEXT = 4000
 
 
 def now() -> str:
@@ -46,22 +43,11 @@ def harness_version() -> str:
         commit = out.stdout.strip() if out.returncode == 0 else None
     except (OSError, subprocess.SubprocessError):
         commit = None
-    return f"{version('office-bench-de')}" + (f"+{commit}" if commit else "")
+    return version("office-bench-de") + (f"+{commit}" if commit else "")
 
 
 def safe_name(name: str) -> str:
     return re.sub(r"[/\\\x00-\x1f]", "_", name)[:150] or "_"
-
-
-def read_log(path: Path) -> dict[tuple[str, int], dict]:
-    """Last log line per (task, rep)."""
-    out = {}
-    if path.exists():
-        for line in path.read_text(encoding="utf-8").splitlines():
-            if line.strip():
-                rec = json.loads(line)
-                out[(rec["task"], rec["rep"])] = rec
-    return out
 
 
 def _round_entry(c: Completion, turn: int) -> dict:
@@ -115,7 +101,7 @@ async def run_task(http: httpx.AsyncClient, model: ModelConfig, api_key: str | N
             messages.append(assistant)
             tool_rounds += 1
             for index, tc in enumerate(c.tool_calls):
-                prefix = f"{tag}__r{round_no}c{index}__"
+                prefix = file_prefix(task.id, rep, round_no, index)
                 fn = urllib.parse.quote(tc.name, safe="")[:120] or "_empty_"
                 (files_dir / f"{prefix}{fn}.json").write_text(tc.arguments, encoding="utf-8")
                 result = await office_tool.execute(tc.name, tc.arguments, extras, profile.valves)
@@ -153,9 +139,8 @@ async def run(model: ModelConfig, profile: Profile, tasks: list[Task], repeats: 
             "tasks": [t.id for t in tasks], "task_selection_hash": selection_hash(tasks), "repeats": repeats,
             "harness": harness_version()}
     meta_path = folder / "meta.json"
-    old = {}
-    if meta_path.exists():
-        old = json.loads(meta_path.read_text(encoding="utf-8"))
+    old = read_meta(folder) if meta_path.exists() else {}
+    if old:
         changed = [k for k in ("model", "profile_hash", "tool_hash") if old.get(k) != meta[k]]
         if changed:
             raise ValueError(f"{folder} was run with a different {', '.join(changed)}; use a new run name")
@@ -164,7 +149,7 @@ async def run(model: ModelConfig, profile: Profile, tasks: list[Task], repeats: 
     log_path = folder / "log.jsonl"
     done = read_log(log_path)
     todo = [(t, r) for t in tasks for r in range(repeats)
-            if (t.id, r) not in done or (retry_failed and done[(t.id, r)].get("error_kind") in ("provider", "network"))]
+            if (t.id, r) not in done or (retry_failed and done[(t.id, r)].get("error_kind") in OUTAGE)]
     progress(f"{model.name}: {len(todo)} task runs to do ({len(tasks) * repeats - len(todo)} already in the log)")
     api_key = model.api_key()
     sem = asyncio.Semaphore(model.concurrency)

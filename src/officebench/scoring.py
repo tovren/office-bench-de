@@ -3,7 +3,7 @@
     obench score RUN_FOLDER...      writes results.jsonl into every model folder
 
 As a module: score_run(model_folder) -> [Result]; write_results(folder, results); load_results(folder) (scores again
-when results.jsonl is missing or older than the log); model_folders(paths) finds the model folders of run folders.
+when results.jsonl is missing or older than the log).
 
 Definitions (used by the report; for users explained in docs/scoring.md):
 - office call: a call whose name is not one of the task's extra tools, also a misspelt function name (the model
@@ -59,7 +59,7 @@ from officebench.checks.content import check_files
 from officebench.checks.registry import REPLY_CHECKS
 from officebench.checks.reply import check_behavior, reply_defects
 from officebench.checks.text import forbidden_found, missing_topics
-from officebench.harness.runner import MAX_LOGGED_TEXT, read_log
+from officebench.runs import MAX_LOGGED_TEXT, OUTAGE, model_folders, read_jsonl, read_log, read_meta
 from officebench.tasks import Task, extra_tool, load_tasks
 
 RESULTS = "results.jsonl"
@@ -68,7 +68,6 @@ CATEGORIES = {
     "validation": "tool's content validation", "wrong_function": "wrong function", "not_object": "not a JSON object",
     "exception": "exception in the tool", "other": "other",
 }
-OUTAGE = {"provider", "network"}  # failures the model cannot help; server errors count against the model setup
 
 # The conversations are German: a sentence claims a file if it names one and says it is ready; negations and
 # conditions mark admitted failures or promises.
@@ -399,13 +398,13 @@ def settle(r: Result) -> None:
 def score_run(folder: Path) -> list[Result]:
     """Results of a model folder (runs/<run>/<model>/); one content-check call for all delivered files."""
     folder = Path(folder)
-    meta = json.loads((folder / "meta.json").read_text(encoding="utf-8"))
+    meta = read_meta(folder)
     log = read_log(folder / "log.jsonl")
     tasks = load_tasks()
     today = (meta.get("profile") or {}).get("today")
     model = (meta.get("model") or {}).get("name") or folder.name
     wanted = [(t, rep) for t in meta.get("tasks") or [] for rep in range(int(meta.get("repeats") or 0))]
-    keys = sorted(set(log) | set(wanted), key=lambda k: (k[0], k[1]))
+    keys = sorted(set(log) | set(wanted))
     results = []
     for task_id, rep in keys:
         r = Result(run=folder.parent.name, model=model, task=task_id, rep=rep, today=today)
@@ -460,19 +459,7 @@ def load_results(folder: Path, rescore: bool = False) -> list[Result]:
         results = score_run(folder)
         write_results(folder, results)
         return results
-    return [Result.from_dict(json.loads(line)) for line in path.read_text(encoding="utf-8").splitlines() if line]
-
-
-def model_folders(paths) -> list[Path]:
-    """Model folders (with meta.json) among the paths: each path is a model folder or a run folder holding them."""
-    out = []
-    for p in map(Path, paths):
-        found = [p] if (p / "meta.json").is_file() else sorted(
-            q for q in p.iterdir() if (q / "meta.json").is_file()) if p.is_dir() else []
-        if not found:
-            raise FileNotFoundError(f"{p}: neither a model folder (meta.json) nor a run folder with model folders")
-        out += found
-    return list(dict.fromkeys(out))
+    return [Result.from_dict(d) for d in read_jsonl(path)]
 
 
 def main(paths: list[str]) -> int:

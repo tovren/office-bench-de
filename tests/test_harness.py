@@ -8,7 +8,8 @@ import pytest
 
 from officebench.config import ModelConfig, load_profile
 from officebench.harness.client import ConfigError, complete, is_local
-from officebench.harness.runner import read_log, run_task
+from officebench.harness.runner import run_task
+from officebench.runs import read_log
 from officebench.tasks import load_tasks
 
 

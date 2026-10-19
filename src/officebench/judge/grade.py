@@ -29,6 +29,7 @@ import httpx
 
 from officebench.config import ModelConfig
 from officebench.harness.client import complete
+from officebench.runs import OUTAGE, delivered_files, read_log, read_meta
 from officebench.tasks import Task, load_tasks
 
 from .render import neutral_copy, render_images, render_texts
@@ -36,7 +37,6 @@ from .render import neutral_copy, render_images, render_texts
 HERE = Path(__file__).resolve().parent
 CRITERIA = tomllib.loads((HERE / "criteria.toml").read_text(encoding="utf-8"))["criterion"]
 CRITERIA_IDS = tuple(c["id"] for c in CRITERIA)
-FILE_NAME = re.compile(r"^(?P<task>[a-z][a-z0-9_]*)-(?P<rep>\d+)__r(?P<round>\d+)c(?P<index>\d+)__(?P<name>.+)$")
 FILE_KINDS = {"docx": "Word document", "xlsx": "Excel workbook", "pptx": "PowerPoint presentation"}
 WEEKDAYS = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 MAX_IMAGES = 12
@@ -159,38 +159,22 @@ def parse_grades(text: str) -> dict | None:
     return None
 
 
-def delivered(folder: Path) -> dict[tuple[str, int], Path]:
-    """Per (task, rep) the file the user ended up with: the highest (round, index) the tool built."""
-    best: dict[tuple[str, int], tuple] = {}
-    for p in (folder / "files").iterdir() if (folder / "files").is_dir() else []:
-        m = FILE_NAME.match(p.name)
-        if m and p.suffix.lower() in (".docx", ".xlsx", ".pptx"):
-            key, rank = (m["task"], int(m["rep"])), (int(m["round"]), int(m["index"]))
-            if key not in best or rank > best[key][0]:
-                best[key] = (rank, p)
-    return {k: v[1] for k, v in best.items()}
-
-
 def select_items(folders: list[Path], samples: int, tasks: dict[str, Task] | None = None) -> list[Item]:
     """Per model folder and task: the first `samples` runs that delivered something to grade."""
     tasks = tasks or load_tasks()
     items = []
     for folder in folders:
-        meta = json.loads((folder / "meta.json").read_text(encoding="utf-8"))
+        meta = read_meta(folder)
         model, today = meta["model"]["name"], str(meta["profile"]["today"])
-        logs = {}
-        for line in (folder / "log.jsonl").read_text(encoding="utf-8").splitlines():
-            if line.strip():
-                rec = json.loads(line)
-                logs[(rec["task"], rec["rep"])] = rec
-        files = delivered(folder)
+        logs = read_log(folder / "log.jsonl")
+        files = delivered_files(folder)
         for task_id in meta["tasks"]:
             task = tasks.get(task_id)
             if task is None:
                 continue
             found = []
             for (tid, rep), rec in sorted(logs.items()):
-                if tid != task_id or rec.get("error_kind") in ("provider", "network"):
+                if tid != task_id or rec.get("error_kind") in OUTAGE:
                     continue
                 if task.expects_file and (tid, rep) in files:
                     found.append(Item(model, task, rep, files[(tid, rep)], today=today))

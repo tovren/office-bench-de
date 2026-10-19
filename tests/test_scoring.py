@@ -10,7 +10,7 @@ import pytest
 from officebench import scoring
 from officebench.checks.core import Defect, Findings
 from officebench.cli import main as cli
-from officebench.harness.runner import MAX_LOGGED_TEXT
+from officebench.runs import MAX_LOGGED_TEXT, model_folders
 from officebench.tasks import load_tasks
 from officebench.tool import build
 
@@ -299,10 +299,10 @@ def test_results_file_and_cli(tmp_path, fake_check, capsys):
     folder = make_run(tmp_path, [rec("aushang", 0, [rnd([office("aushang-0__r0c0__A.docx")]),
                                                     rnd(content="Fertig.")])], ["aushang-0__r0c0__A.docx"])
     make_run(tmp_path, [rec("bahncard", 0, [rnd(content=BAHNCARD)])], name="n")
-    assert scoring.model_folders([folder.parent]) == [folder, folder.parent / "n"]
-    assert scoring.model_folders([folder]) == [folder]
+    assert model_folders([folder.parent]) == [folder, folder.parent / "n"]
+    assert model_folders([folder]) == [folder]
     with pytest.raises(FileNotFoundError):
-        scoring.model_folders([tmp_path])
+        model_folders([tmp_path])
     assert cli(["score", str(folder.parent)]) == 0
     assert "1 task runs, 1 scored, 1 successful" in capsys.readouterr().out
     lines = [json.loads(x) for x in (folder / scoring.RESULTS).read_text().splitlines()]

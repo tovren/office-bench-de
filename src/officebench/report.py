@@ -13,14 +13,14 @@ a file counts once (mean over judges), the model mean is the mean over tasks wit
 
 from __future__ import annotations
 
-import json
 import statistics
 import sys
 from collections import Counter, defaultdict
 from datetime import date
 from pathlib import Path
 
-from officebench.scoring import CATEGORIES, OUTAGE, Result, load_results, model_folders, reply_ok
+from officebench.runs import OUTAGE, model_folders, read_jsonl, read_meta
+from officebench.scoring import CATEGORIES, Result, load_results, reply_ok
 from officebench.stats import cluster_bootstrap, paired_comparison, pass_k, wilson
 
 # (field, heading, only file tasks)
@@ -269,12 +269,7 @@ def section_compare(groups: dict, a: str, b: str) -> list[str]:
 # -------------------------------------------------------------------------------------------------- grades --
 
 def read_grades(paths) -> list[dict]:
-    out = []
-    for path in paths:
-        for line in Path(path).read_text(encoding="utf-8").splitlines():
-            if line.strip().startswith("{"):
-                out.append(json.loads(line))
-    return out
+    return [g for path in paths for g in read_jsonl(path)]
 
 
 def _grade(g: dict, criterion: str | None):
@@ -341,7 +336,7 @@ def load_groups(paths, rescore: bool = False) -> tuple[dict, list[tuple[Path, di
     """{model key: [Result]} and the (folder, meta) list; the key is the model name, "run/model" if two folders of
     the report have the same model name, the folder path if that is not unique either."""
     folders = model_folders(paths)
-    metas = [(f, json.loads((f / "meta.json").read_text(encoding="utf-8"))) for f in folders]
+    metas = [(f, read_meta(f)) for f in folders]
     names = Counter(f.name for f in folders)
     runs = Counter((f.parent.name, f.name) for f in folders)
     groups = {}

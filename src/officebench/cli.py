@@ -78,16 +78,14 @@ def _judge(args) -> int:
 
     from officebench.config import load_model
     from officebench.judge import grade
+    from officebench.runs import model_folders
 
     if args.import_dir:
         r = grade.import_grades(Path(args.import_dir), Path(args.out), args.judge_name)
         print(f"imported {r['imported']}, missing {len(r['missing'])}, invalid {len(r['invalid'])}: "
               f"{', '.join(r['missing'] + r['invalid'])[:500]}")
         return 0 if not r["invalid"] else 1
-    folders = []
-    for f in map(Path, args.runs):
-        folders += [f] if (f / "meta.json").exists() else sorted(p.parent for p in f.glob("*/meta.json"))
-    items = grade.select_items(folders, args.samples)
+    items = grade.select_items(model_folders(args.runs), args.samples)
     if args.export:
         r = grade.export_items(items, Path(args.export), args.package_size)
         print(f"exported {r['items']} items in {r['packages']} packages to {args.export}")
