@@ -8,15 +8,15 @@ from pathlib import Path
 from officebench import tasks as task_registry
 
 
+def _progress(message: str) -> None:
+    print(message, flush=True)
+
+
 def _tasks(args) -> int:
     if args.action == "schema":
         print(json.dumps(task_registry.json_schema(), indent=2, ensure_ascii=False))
         return 0
-    try:
-        selected = task_registry.select(args.select, Path(args.dir))
-    except task_registry.TaskError as e:
-        print(f"error: {e}", file=sys.stderr)
-        return 1
+    selected = task_registry.select(args.select, Path(args.dir))
     if args.action == "list":
         for t in selected:
             s = t.spec
@@ -39,7 +39,7 @@ def _run(args) -> int:
         model = load_model(path)
         try:
             folder = run_sync(model, profile, tasks, repeats, Path(args.out), retry_failed=args.retry_failed,
-                              progress=lambda m: print(m, flush=True))
+                              progress=_progress)
         except ConfigError as e:
             print(f"error: {model.name}: {e}", file=sys.stderr)
             return 2
@@ -56,21 +56,13 @@ def _check(args) -> int:
 def _score(args) -> int:
     from officebench.scoring import main as score_main
 
-    try:
-        return score_main(args.folders)
-    except FileNotFoundError as e:
-        print(f"error: {e}", file=sys.stderr)
-        return 1
+    return score_main(args.folders)
 
 
 def _report(args) -> int:
     from officebench.report import main as report_main
 
-    try:
-        return report_main(args.folders, args.compare, args.grades, args.rescore)
-    except FileNotFoundError as e:
-        print(f"error: {e}", file=sys.stderr)
-        return 1
+    return report_main(args.folders, args.compare, args.grades, args.rescore)
 
 
 def _judge(args) -> int:
@@ -85,6 +77,9 @@ def _judge(args) -> int:
         print(f"imported {r['imported']}, missing {len(r['missing'])}, invalid {len(r['invalid'])}: "
               f"{', '.join(r['missing'] + r['invalid'])[:500]}")
         return 0 if not r["invalid"] else 1
+    if not args.runs:
+        print("error: give run folders (or --import DIR)", file=sys.stderr)
+        return 2
     items = grade.select_items(model_folders(args.runs), args.samples)
     if args.export:
         r = grade.export_items(items, Path(args.export), args.package_size)
@@ -93,8 +88,7 @@ def _judge(args) -> int:
     if not args.judge:
         print("error: give --judge CONFIG, --export DIR or --import DIR", file=sys.stderr)
         return 2
-    progress = lambda m: print(m, flush=True)  # noqa: E731
-    asyncio.run(grade.judge_items(items, load_model(args.judge), Path(args.out), progress=progress))
+    asyncio.run(grade.judge_items(items, load_model(args.judge), Path(args.out), progress=_progress))
     return 0
 
 
@@ -145,7 +139,11 @@ def main(argv: list[str] | None = None) -> int:
     p.set_defaults(func=_judge)
 
     args = parser.parse_args(argv)
-    return args.func(args)
+    try:
+        return args.func(args)
+    except (FileNotFoundError, ValueError) as e:  # bad folder, task selection, config file or changed run folder
+        print(f"error: {e}", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
