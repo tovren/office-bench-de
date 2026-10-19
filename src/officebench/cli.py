@@ -73,6 +73,33 @@ def _report(args) -> int:
         return 1
 
 
+def _judge(args) -> int:
+    import asyncio
+
+    from officebench.config import load_model
+    from officebench.judge import grade
+
+    if args.import_dir:
+        r = grade.import_grades(Path(args.import_dir), Path(args.out), args.judge_name)
+        print(f"imported {r['imported']}, missing {len(r['missing'])}, invalid {len(r['invalid'])}: "
+              f"{', '.join(r['missing'] + r['invalid'])[:500]}")
+        return 0 if not r["invalid"] else 1
+    folders = []
+    for f in map(Path, args.runs):
+        folders += [f] if (f / "meta.json").exists() else sorted(p.parent for p in f.glob("*/meta.json"))
+    items = grade.select_items(folders, args.samples)
+    if args.export:
+        r = grade.export_items(items, Path(args.export), args.package_size)
+        print(f"exported {r['items']} items in {r['packages']} packages to {args.export}")
+        return 0
+    if not args.judge:
+        print("error: give --judge CONFIG, --export DIR or --import DIR", file=sys.stderr)
+        return 2
+    progress = lambda m: print(m, flush=True)  # noqa: E731
+    asyncio.run(grade.judge_items(items, load_model(args.judge), Path(args.out), progress=progress))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="obench", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -107,6 +134,17 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--grades", nargs="+", type=Path, help="JSONL file(s) with judge grades")
     p.add_argument("--rescore", action="store_true", help="score again even if results.jsonl is up to date")
     p.set_defaults(func=_report)
+
+    p = sub.add_parser("judge", help="grade delivered files with an LLM judge (API, or export/import for agents)")
+    p.add_argument("runs", nargs="*", help="run folders (a model folder or a folder with model subfolders)")
+    p.add_argument("--judge", help="judge config, e.g. configs/judges/claude-sonnet-5.5.toml")
+    p.add_argument("--samples", type=int, default=2, help="graded runs per model and task (default 2)")
+    p.add_argument("--out", default="grades.jsonl", help="grades file (appended; default grades.jsonl)")
+    p.add_argument("--export", help="write the prompts for agent graders to this folder instead of calling an API")
+    p.add_argument("--package-size", type=int, default=8, help="items per agent package (with --export)")
+    p.add_argument("--import", dest="import_dir", help="read agent grades from an export folder")
+    p.add_argument("--judge-name", default="agent", help="judge name for imported grades")
+    p.set_defaults(func=_judge)
 
     args = parser.parse_args(argv)
     return args.func(args)

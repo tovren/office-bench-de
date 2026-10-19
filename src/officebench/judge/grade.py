@@ -252,3 +252,105 @@ async def judge_items(items: list[Item], judge: ModelConfig, out: Path, progress
         timeout = httpx.Timeout(connect=30, read=900, write=60, pool=None)
         async with httpx.AsyncClient(timeout=timeout) as http:
             await asyncio.gather(*(one(http, i) for i in todo))
+
+
+# ------------------------------------------------------------------------------- grading by agent sessions --
+# The same prompt can be graded by coding agents instead of an API call (e.g. Claude Code subagents, which can also
+# check calculations with small scripts). export_items writes one folder per item under neutral ids, the mapping to
+# models apart; import_grades reads the agents' grade.json files back into the grades format.
+
+AGENT_INSTRUCTIONS = """# Grading package {package}
+
+You are a reviewer in a blind review. Grade each item below on its own. For each item id:
+
+1. Read `material/<id>/prompt.md` completely: it holds your instructions, the task, the checklist, the criteria and
+   the file as text. Look at the page images in `material/<id>/` (`page-*.png`) if there are any; the delivered file
+   itself is there too (`file.*`) if you want to inspect it.
+2. Check calculations, dates and weekdays yourself; small Python scripts are welcome — save them in
+   `material/<id>/checks/` so the grading can be traced.
+3. Write `material/<id>/grade.json`: exactly the JSON object asked for at the end of prompt.md.
+
+Do not open `mapping.json` or other packages, and do not guess which model made a file.
+
+Items: {items}
+"""
+
+
+def export_items(items: list[Item], out: Path, package_size: int = 8, seed: int = 20261019) -> dict:
+    """Write material/<id>/ (prompt.md, page images, neutral file copy), packages/<p>.md and mapping.json."""
+    import random
+    import shutil
+
+    rng = random.Random(seed)
+    order = list(items)
+    rng.shuffle(order)
+    out.mkdir(parents=True, exist_ok=True)
+    mapping, by_task = {}, {}
+    with tempfile.TemporaryDirectory(prefix="obench-export-") as tmp:
+        tmp = Path(tmp)
+        copies = {}
+        for n, item in enumerate(order):
+            if item.file is not None:
+                copies[n] = tmp / f"f{n:05d}{item.file.suffix}"
+                neutral_copy(item.file, copies[n])
+        images = render_images(list(copies.values()), tmp / "images") if copies else {}
+        texts = render_texts(list(copies.values())) if copies else {}
+        for n, item in enumerate(order):
+            item_id = f"J{n + 1:04d}"
+            folder = out / "material" / item_id
+            folder.mkdir(parents=True, exist_ok=True)
+            copy = copies.get(n)
+            pngs = images.get(copy, [])[:MAX_IMAGES] if copy else []
+            messages = build_messages(item, texts.get(copy, "") if copy else "", [])
+            note = f"\n\nPage images: {', '.join(f'page-{i}.png' for i in range(1, len(pngs) + 1))}" if pngs else ""
+            (folder / "prompt.md").write_text(f"# Instructions\n\n{messages[0]['content']}\n\n"
+                                              f"{messages[1]['content'][0]['text']}{note}\n", encoding="utf-8")
+            for i, png in enumerate(pngs, 1):
+                shutil.copyfile(png, folder / f"page-{i}.png")
+            if copy:
+                shutil.copyfile(copy, folder / f"file{copy.suffix}")
+            mapping[item_id] = {"model": item.model, "task": item.task.id, "rep": item.rep,
+                                "file": item.file.name if item.file else None}
+            by_task.setdefault(item.task.id, []).append(item_id)
+    packages, current = [], []
+    for task_id in sorted(by_task):  # packages of one task where possible: the reviewer reads the task once
+        for item_id in by_task[task_id]:
+            current.append(item_id)
+            if len(current) == package_size:
+                packages.append(current)
+                current = []
+    if current:
+        packages.append(current)
+    (out / "packages").mkdir(exist_ok=True)
+    for p, ids in enumerate(packages, 1):
+        (out / "packages" / f"P{p:03d}.md").write_text(
+            AGENT_INSTRUCTIONS.format(package=f"P{p:03d}", items=", ".join(ids)), encoding="utf-8")
+    (out / "mapping.json").write_text(json.dumps(mapping, ensure_ascii=False, indent=1), encoding="utf-8")
+    return {"items": len(mapping), "packages": len(packages)}
+
+
+def import_grades(folder: Path, out: Path, judge_name: str) -> dict:
+    """Append the agents' grades (material/<id>/grade.json) to out; returns counts of imported and missing items."""
+    mapping = json.loads((folder / "mapping.json").read_text(encoding="utf-8"))
+    done = set()
+    if out.exists():
+        done = {(r["model"], r["task"], r["rep"]) for r in map(json.loads, out.read_text().splitlines())
+                if r.get("judge") == judge_name}
+    imported, missing, invalid = 0, [], []
+    with out.open("a", encoding="utf-8") as f:
+        for item_id, m in sorted(mapping.items()):
+            if (m["model"], m["task"], m["rep"]) in done:
+                continue
+            path = folder / "material" / item_id / "grade.json"
+            if not path.exists():
+                missing.append(item_id)
+                continue
+            parsed = parse_grades(path.read_text(encoding="utf-8"))
+            if not parsed:
+                invalid.append(item_id)
+                continue
+            g = parsed["grades"]
+            f.write(json.dumps({**m, "judge": judge_name, "grades": g, "mean": round(sum(g.values()) / len(g), 3),
+                                "reasons": parsed["reasons"], "item": item_id}, ensure_ascii=False) + "\n")
+            imported += 1
+    return {"imported": imported, "missing": missing, "invalid": invalid}
