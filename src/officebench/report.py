@@ -305,10 +305,11 @@ def section_grades(grades: list[dict], models: set | None) -> list[str]:
         means = [statistics.fmean(v) for v in values.values() if v]
         return num(statistics.fmean(means), 2) if means else "–"
 
-    ranked = sorted(overall, key=lambda m: -cluster_bootstrap(overall[m])[0])
+    boot = {m: cluster_bootstrap(v) for m, v in overall.items()}
+    ranked = sorted(overall, key=lambda m: -boot[m][0])
     rows = []
     for m in ranked:
-        point, lo, hi = cluster_bootstrap(overall[m])
+        point, lo, hi = boot[m]
         rows.append([m, sum(len(v) for v in overall[m].values()), len(overall[m]),
                      f"{num(point)} ({num(lo)}–{num(hi)})",
                      *(mean_of_means(per_criterion[k].get(m, {})) for k in CRITERIA)])
