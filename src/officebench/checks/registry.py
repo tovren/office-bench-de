@@ -100,7 +100,7 @@ TASK_CHECKS: dict[str, TaskCheck] = {
     "count": TaskCheck("too few matches", HARD, _ALL),
     "words_min": TaskCheck("very short", HARD, _ALL),
     "words_max": TaskCheck("too long", SOFT, _ALL),
-    "tables_min": TaskCheck("no table", HARD, _ALL),
+    "tables_min": TaskCheck("no table", HARD, ("docx", "pptx")),  # an xlsx has no tables in this sense
     "forbidden": TaskCheck("forbidden content", HARD, _ALL),
     "values_present": TaskCheck("missing value", HARD, _ALL),
     "retained": TaskCheck("content not retained", HARD, _ALL),
