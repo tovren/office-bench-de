@@ -18,7 +18,9 @@ from __future__ import annotations
 import asyncio
 import base64
 import json
+import random
 import re
+import shutil
 import tempfile
 import tomllib
 from dataclasses import dataclass
@@ -27,9 +29,10 @@ from pathlib import Path
 
 import httpx
 
+from officebench.checks.core import REFERENCE_DATE
 from officebench.config import ModelConfig
 from officebench.harness.client import complete
-from officebench.runs import OUTAGE, delivered_files, read_log, read_meta
+from officebench.runs import OUTAGE, delivered_files, read_jsonl, read_log, read_meta
 from officebench.tasks import Task, load_tasks
 
 from .render import neutral_copy, render_images, render_texts
@@ -61,7 +64,7 @@ class Item:
     rep: int
     file: Path | None  # None: final answer of a task without a file
     answer: str | None = None
-    today: str = "2026-10-13"
+    today: str = REFERENCE_DATE.isoformat()
 
     @property
     def key(self) -> tuple:
@@ -184,45 +187,53 @@ def select_items(folders: list[Path], samples: int, tasks: dict[str, Task] | Non
     return items
 
 
+def _graded(out: Path, judge_name: str) -> set[tuple]:
+    """(model, task, rep) already in the grades file for this judge: a rerun resumes."""
+    return {(r["model"], r["task"], r["rep"]) for r in (read_jsonl(out) if out.exists() else [])
+            if r.get("judge") == judge_name}
+
+
+def _graded_fields(parsed: dict) -> dict:
+    g = parsed["grades"]
+    return {"grades": g, "mean": round(sum(g.values()) / len(g), 3), "reasons": parsed["reasons"]}
+
+
+def _render(items: list[Item], tmp: Path) -> list[tuple[Path | None, str, list[Path]]]:
+    """Per item (neutral copy, text, page images); (None, "", []) for a final answer. The files are copied under
+    neutral names first, then rendered together (one LibreOffice run for the images, one to recalculate the xlsx)."""
+    copies = {}
+    for n, item in enumerate(items):
+        if item.file is not None:
+            copies[n] = tmp / f"f{n:05d}{item.file.suffix}"
+            neutral_copy(item.file, copies[n])
+    images = render_images(list(copies.values()), tmp / "images") if copies else {}
+    texts = render_texts(list(copies.values())) if copies else {}
+    return [(c, texts.get(c, ""), images.get(c, [])) if (c := copies.get(n)) else (None, "", [])
+            for n in range(len(items))]
+
+
 async def judge_items(items: list[Item], judge: ModelConfig, out: Path, progress=print) -> None:
-    done = set()
-    if out.exists():
-        for line in out.read_text(encoding="utf-8").splitlines():
-            if line.strip():
-                r = json.loads(line)
-                if r.get("judge") == judge.name:
-                    done.add((r["model"], r["task"], r["rep"]))
+    done = _graded(out, judge.name)
     todo = [i for i in items if i.key not in done]
     progress(f"judge {judge.name}: {len(todo)} items to grade ({len(items) - len(todo)} already graded)")
     if not todo:
         return
     api_key = judge.api_key()
     with tempfile.TemporaryDirectory(prefix="obench-judge-") as tmp:
-        tmp = Path(tmp)
-        copies = {}
-        for n, item in enumerate(todo):
-            if item.file is not None:
-                copies[item.key] = tmp / f"f{n:05d}{item.file.suffix}"
-                neutral_copy(item.file, copies[item.key])
-        images = render_images(list(copies.values()), tmp / "images") if copies else {}
-        texts = render_texts(list(copies.values())) if copies else {}  # xlsx recalculated in one LibreOffice run
+        rendered = _render(todo, Path(tmp))
         sem, lock = asyncio.Semaphore(judge.concurrency), asyncio.Lock()
         counter = {"n": 0}
 
-        async def one(http, item):
+        async def one(http, item, text, images):
             async with sem:
-                copy = copies.get(item.key)
-                rendered = texts.get(copy, "") if copy else ""
-                messages = build_messages(item, rendered, images.get(copy, []) if copy else [])
-                body = {"model": judge.model, "messages": messages, **judge.params}
+                body = {"model": judge.model, "messages": build_messages(item, text, images), **judge.params}
                 c = await complete(http, judge.base_url, api_key, body, on_retry=lambda m: progress(f"  {m}"))
                 parsed = parse_grades(c.content) if not c.error else None
                 rec = {"model": item.model, "task": item.task.id, "rep": item.rep,
                        "file": item.file.name if item.file else None, "judge": judge.name,
                        "usage": c.usage, "cost": c.cost}
                 if parsed:
-                    g = parsed["grades"]
-                    rec.update(grades=g, mean=round(sum(g.values()) / len(g), 3), reasons=parsed["reasons"])
+                    rec.update(_graded_fields(parsed))
                 else:
                     rec.update(error=c.error or "no valid grades in the answer", answer=c.content[-2000:])
                 async with lock:
@@ -235,7 +246,8 @@ async def judge_items(items: list[Item], judge: ModelConfig, out: Path, progress
 
         timeout = httpx.Timeout(connect=30, read=900, write=60, pool=None)
         async with httpx.AsyncClient(timeout=timeout) as http:
-            await asyncio.gather(*(one(http, i) for i in todo))
+            await asyncio.gather(*(one(http, item, text, images)
+                                   for item, (_, text, images) in zip(todo, rendered, strict=True)))
 
 
 # ------------------------------------------------------------------------------- grading by agent sessions --
@@ -262,30 +274,18 @@ Items: {items}
 
 def export_items(items: list[Item], out: Path, package_size: int = 8, seed: int = 20261019) -> dict:
     """Write material/<id>/ (prompt.md, page images, neutral file copy), packages/<p>.md and mapping.json."""
-    import random
-    import shutil
-
     rng = random.Random(seed)
     order = list(items)
     rng.shuffle(order)
     out.mkdir(parents=True, exist_ok=True)
     mapping, by_task = {}, {}
     with tempfile.TemporaryDirectory(prefix="obench-export-") as tmp:
-        tmp = Path(tmp)
-        copies = {}
-        for n, item in enumerate(order):
-            if item.file is not None:
-                copies[n] = tmp / f"f{n:05d}{item.file.suffix}"
-                neutral_copy(item.file, copies[n])
-        images = render_images(list(copies.values()), tmp / "images") if copies else {}
-        texts = render_texts(list(copies.values())) if copies else {}
-        for n, item in enumerate(order):
+        for n, (item, (copy, text, images)) in enumerate(zip(order, _render(order, Path(tmp)), strict=True)):
             item_id = f"J{n + 1:04d}"
             folder = out / "material" / item_id
             folder.mkdir(parents=True, exist_ok=True)
-            copy = copies.get(n)
-            pngs = images.get(copy, [])[:MAX_IMAGES] if copy else []
-            messages = build_messages(item, texts.get(copy, "") if copy else "", [])
+            pngs = images[:MAX_IMAGES]
+            messages = build_messages(item, text, [])
             note = f"\n\nPage images: {', '.join(f'page-{i}.png' for i in range(1, len(pngs) + 1))}" if pngs else ""
             (folder / "prompt.md").write_text(f"# Instructions\n\n{messages[0]['content']}\n\n"
                                               f"{messages[1]['content'][0]['text']}{note}\n", encoding="utf-8")
@@ -316,10 +316,7 @@ def export_items(items: list[Item], out: Path, package_size: int = 8, seed: int 
 def import_grades(folder: Path, out: Path, judge_name: str) -> dict:
     """Append the agents' grades (material/<id>/grade.json) to out; returns counts of imported and missing items."""
     mapping = json.loads((folder / "mapping.json").read_text(encoding="utf-8"))
-    done = set()
-    if out.exists():
-        done = {(r["model"], r["task"], r["rep"]) for r in map(json.loads, out.read_text().splitlines())
-                if r.get("judge") == judge_name}
+    done = _graded(out, judge_name)
     imported, missing, invalid = 0, [], []
     with out.open("a", encoding="utf-8") as f:
         for item_id, m in sorted(mapping.items()):
@@ -333,8 +330,7 @@ def import_grades(folder: Path, out: Path, judge_name: str) -> dict:
             if not parsed:
                 invalid.append(item_id)
                 continue
-            g = parsed["grades"]
-            f.write(json.dumps({**m, "judge": judge_name, "grades": g, "mean": round(sum(g.values()) / len(g), 3),
-                                "reasons": parsed["reasons"], "item": item_id}, ensure_ascii=False) + "\n")
+            f.write(json.dumps({**m, "judge": judge_name, **_graded_fields(parsed), "item": item_id},
+                               ensure_ascii=False) + "\n")
             imported += 1
     return {"imported": imported, "missing": missing, "invalid": invalid}
