@@ -98,19 +98,21 @@ async def run_task(http: httpx.AsyncClient, model: ModelConfig, api_key: str | N
                 end = "error"
                 break
             assistant: dict = {"role": "assistant", "content": c.content or None}
-            if c.tool_calls:
-                assistant["tool_calls"] = [{"id": tc.id, "type": "function",
-                                            "function": {"name": tc.name, "arguments": tc.arguments}}
-                                           for tc in c.tool_calls]
-            messages.append(assistant)
             if not c.tool_calls:
+                messages.append(assistant)
                 end = "answer"
                 break
             if tool_rounds >= profile.max_rounds:  # limit reached: calls are not executed, no final answer
                 entry["not_executed"] = [{"name": tc.name, "arguments_chars": len(tc.arguments)}
                                          for tc in c.tool_calls]
+                if c.content:  # the unexecuted calls stay out of the history: calls without results are invalid
+                    messages.append(assistant)
                 end = "round_limit"
                 break
+            assistant["tool_calls"] = [{"id": tc.id, "type": "function",
+                                        "function": {"name": tc.name, "arguments": tc.arguments}}
+                                       for tc in c.tool_calls]
+            messages.append(assistant)
             tool_rounds += 1
             for index, tc in enumerate(c.tool_calls):
                 prefix = f"{tag}__r{round_no}c{index}__"

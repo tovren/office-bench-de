@@ -267,3 +267,14 @@ def test_read_log_keeps_last_line(tmp_path):
     log = tmp_path / "log.jsonl"
     log.write_text('{"task": "a", "rep": 0, "outcome": "error"}\n{"task": "a", "rep": 0, "outcome": "answer"}\n')
     assert read_log(log)[("a", 0)]["outcome"] == "answer"
+
+
+def test_round_limit_in_first_turn_keeps_history_valid(tmp_path):
+    profile = load_profile().model_copy(update={"max_rounds": 1})
+    loop = [{"calls": [("create_excel_file", "{}")]}, {"calls": [("create_excel_file", "{}")]}, {"text": "Ok."}]
+    rec, fake = _run_task("sparquote", loop, tmp_path, profile)
+    assert [t["end"] for t in rec["turns"]] == ["round_limit", "answer"]
+    history = fake.requests[2]["messages"]  # first request of turn 2
+    answered = {m["tool_call_id"] for m in history if m["role"] == "tool"}
+    calls = {tc["id"] for m in history if m["role"] == "assistant" for tc in m.get("tool_calls", [])}
+    assert calls == answered and history[-1]["role"] == "user"
