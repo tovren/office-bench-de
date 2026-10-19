@@ -1056,7 +1056,7 @@ def task_checks(sheets: list, charts: list, n_formulas: int, ctx: Context) -> No
 FORMATS = {"percent": "percent format", "date": "date format", "euro": "euro format"}
 
 
-def _has_format(kind: str, cell, value) -> bool:
+def _has_format(kind: str, cell) -> bool:
     from openpyxl.styles.numbers import is_date_format
 
     fmt = cell.number_format or ""
@@ -1098,7 +1098,7 @@ def _column_format(sheets, ctx):
                 if text and not (number(value) is not None or dates_in(value)):
                     continue  # a note like 'laufend' is no value
                 seen += 1
-                if text or not _has_format(kind, cell, value):
+                if text or not _has_format(kind, cell):
                     wrong.append((b, head, c, r, value, text))
         if wrong:
             b, head, c, r, value, text = wrong[0]

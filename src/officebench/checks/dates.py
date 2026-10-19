@@ -431,7 +431,7 @@ def _in_period(text: str, f: DateMatch, found: list) -> bool:
         bool(re.match(r"\s*-", text[f.end:])) or bool(re.search(r"\bvom\s*$|\d\.\s*-\s*$", text[:f.start]))
 
 
-def _week_in_heading(doc: Document, ctx: Context) -> list:
+def _week_in_heading(doc: Document) -> list:
     """'Teambesprechung – Woche 41' near the top while the document's own date (12.10.2026) is in KW 42."""
     head = doc.paragraphs[:6]
     own = next((d for _, t in head for f in dates_in(norm(t)) if f.year and (d := f.with_year(f.year))), None)
@@ -458,7 +458,7 @@ def check_dates(doc: Document, ctx: Context) -> dict:
     dates_from = ctx.dates_from if ctx.enabled("past_dates") else None
     given = _prompt_dates(ctx) if ctx.enabled("weekend") else set()
     if ctx.enabled("calendar_week"):
-        week_wrong += _week_in_heading(doc, ctx)
+        week_wrong += _week_in_heading(doc)
     before_in_row: dict[str, str] = {}  # table cells: the cells before in the same row ('Datum | 12.10.2026')
     for where, raw in doc.paragraphs:
         text = norm(raw)
