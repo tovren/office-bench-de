@@ -1,0 +1,15 @@
+name = "gemma-4-31b"
+label = "Gemma 4 31B"
+base_url = "https://ai-gateway.vercel.sh/v1"
+model = "google/gemma-4-31b-it"
+api_key_env = "AI_GATEWAY_API_KEY"
+
+[params]
+max_tokens = 16000
+temperature = 1.0  # model card
+top_p = 0.95
+top_k = 64
+
+[info]
+open_weights = true
+parameters = "31B"

@@ -1,0 +1,77 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Protokoll der Teambesprechung vom 12.10.2026",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "text": "Montag, 12. Oktober 2026, 10:00 bis 11:00 Uhr. Teilnehmer: Anna, Ben, Carla, David."
+   },
+   {
+    "type": "heading",
+    "text": "1. Projektstand",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Ben berichtet: Sprint 14 ist zu 85 % abgeschlossen, das Export-Modul folgt in Sprint 15."
+   },
+   {
+    "type": "heading",
+    "text": "2. Urlaubsplanung",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Carla sammelt die Urlaubswünsche bis Freitag, 23.10.2026. Zwischen den Jahren bleibt das Büro vom 24.12. bis 01.01.2027 geschlossen."
+   },
+   {
+    "type": "heading",
+    "text": "3. Neues Ticketsystem",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "David vergleicht Zendesk und Jira Service Management; die Testphase läuft in KW 45 (02.11.–06.11.2026)."
+   },
+   {
+    "type": "heading",
+    "text": "Beschlüsse",
+    "level": 1
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Nr.",
+      "Beschluss",
+      "Verantwortlich"
+     ],
+     [
+      "1",
+      "Export-Modul in Sprint 15",
+      "Ben"
+     ],
+     [
+      "2",
+      "Testphase Ticketsystem ab 02.11.2026",
+      "David"
+     ]
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "To-do-Liste",
+    "level": 1
+   },
+   {
+    "type": "numbered",
+    "items": [
+     "Ben: Sprint-15-Planung bis Mittwoch, 14.10.2026",
+     "Carla: Urlaubsliste bis Freitag, 23.10.2026",
+     "David: Testzugang bis Montag, 02.11.2026"
+    ]
+   }
+  ]
+ }
+}

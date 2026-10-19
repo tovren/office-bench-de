@@ -1,0 +1,417 @@
+[
+ {
+  "type": "function",
+  "function": {
+   "name": "create_excel_file",
+   "description": "\n        Create an Excel workbook (.xlsx) and attach it to the answer. Use it when the user wants an Excel file or a\n        spreadsheet, e.g. a list, budget, plan or calculation. Numbers are real numbers; formulas, total rows and\n        charts are possible.\n        The file only exists once this tool has answered with 'Done'; never say it was created otherwise.\n        ",
+   "parameters": {
+    "properties": {
+     "sheets": {
+      "description": "One or more sheets, e.g. [{\"name\": \"Budget\", \"columns\": [{\"header\": \"Item\"}, {\"header\": \"Amount\", \"type\": \"currency\", \"total\": \"sum\"}], \"rows\": [[\"Rent\", 1200], [\"Travel\", 350.5]]}].",
+      "items": {
+       "properties": {
+        "name": {
+         "default": "",
+         "description": "Sheet name, at most 31 characters.",
+         "type": "string"
+        },
+        "columns": {
+         "description": "Columns from left to right.",
+         "items": {
+          "properties": {
+           "header": {
+            "description": "Column header.",
+            "type": "string"
+           },
+           "type": {
+            "default": "text",
+            "description": "Value type. percent: 12.5 means 12.5 %. date: YYYY-MM-DD.",
+            "enum": [
+             "text",
+             "number",
+             "integer",
+             "currency",
+             "percent",
+             "date"
+            ],
+            "type": "string"
+           },
+           "formula": {
+            "default": "",
+            "description": "Optional formula filled into every data row, e.g. '=B{row}*C{row}' ({row} is the current row; data starts in row 2). English function names (SUM, AVERAGE, MIN, MAX, COUNT, IF, ROUND, IFERROR ...), commas between arguments. Cells of another sheet: 'Rates'!$B$3 (one fixed cell) or 'Rates'!B{row}. Put null in the rows for this column.",
+            "type": "string"
+           },
+           "total": {
+            "default": "none",
+            "description": "Adds a total row below the data with this function for the column.",
+            "enum": [
+             "none",
+             "sum",
+             "average",
+             "min",
+             "max",
+             "count"
+            ],
+            "type": "string"
+           }
+          },
+          "required": [
+           "header"
+          ],
+          "type": "object"
+         },
+         "type": "array"
+        },
+        "rows": {
+         "default": [],
+         "description": "Data rows. Each row has one value per column, in column order. Use JSON numbers for numbers and null for empty cells and formula columns.",
+         "items": {
+          "items": {
+           "anyOf": [
+            {
+             "type": "string"
+            },
+            {
+             "type": "number"
+            }
+           ]
+          },
+          "type": "array"
+         },
+         "type": "array"
+        },
+        "chart": {
+         "description": "Optional chart next to the table.",
+         "properties": {
+          "type": {
+           "default": "column",
+           "description": "Chart type.",
+           "enum": [
+            "column",
+            "bar",
+            "line",
+            "pie"
+           ],
+           "title": "Type",
+           "type": "string"
+          },
+          "title": {
+           "default": "",
+           "description": "Chart title.",
+           "title": "Title",
+           "type": "string"
+          },
+          "category_column": {
+           "default": "",
+           "description": "Header of the column with the labels (x axis or pie slices). Not used with series_rows.",
+           "title": "Category Column",
+           "type": "string"
+          },
+          "value_columns": {
+           "default": [],
+           "description": "Headers of the numeric columns to plot (pie: only one). With series_rows: the columns that form the x axis, next to each other; default: the number columns after the first column.",
+           "items": {
+            "type": "string"
+           },
+           "title": "Value Columns",
+           "type": "array"
+          },
+          "series_rows": {
+           "default": [],
+           "description": "Only when each data series is a row, e.g. months as columns: the labels in the first column of the rows to plot, e.g. [\"Income\", \"Expenses\"].",
+           "items": {
+            "type": "string"
+           },
+           "title": "Series Rows",
+           "type": "array"
+          }
+         },
+         "title": "ExcelChart",
+         "type": "object"
+        }
+       },
+       "required": [
+        "columns"
+       ],
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "title": {
+      "default": "",
+      "description": "Readable title of the workbook with spaces, used as the file name.",
+      "type": "string"
+     }
+    },
+    "required": [
+     "sheets"
+    ],
+    "type": "object"
+   }
+  }
+ },
+ {
+  "type": "function",
+  "function": {
+   "name": "create_powerpoint_file",
+   "description": "\n        Create a PowerPoint presentation (.pptx, 16:9) and attach it to the answer. Use it when the user wants\n        slides or a presentation. Start with a 'title' slide, keep bullets short (at most 6 per slide), and put\n        details into the speaker notes.\n        The file only exists once this tool has answered with 'Done'; never say it was created otherwise.\n        ",
+   "parameters": {
+    "properties": {
+     "slides": {
+      "description": "The slides in order, e.g. [{\"layout\": \"title\", \"title\": \"...\", \"subtitle\": \"...\"}, {\"layout\": \"bullets\", \"title\": \"...\", \"bullets\": [\"...\", \"- sub point\"], \"notes\": \"...\"}, {\"layout\": \"chart\", \"title\": \"...\", \"chart\": {\"type\": \"column\", \"categories\": [\"Q1\", \"Q2\"], \"series\": [{\"name\": \"Sales\", \"values\": [10, 12]}]}}].",
+      "items": {
+       "properties": {
+        "layout": {
+         "description": "title: opening slide with title and subtitle. section: divider between parts. bullets: title with a list. two_columns: two lists side by side. table: title with a table. chart: title with a chart.",
+         "enum": [
+          "title",
+          "section",
+          "bullets",
+          "two_columns",
+          "table",
+          "chart"
+         ],
+         "type": "string"
+        },
+        "title": {
+         "description": "Slide title.",
+         "type": "string"
+        },
+        "subtitle": {
+         "default": "",
+         "description": "Subtitle, only for title and section slides.",
+         "type": "string"
+        },
+        "bullets": {
+         "default": [],
+         "description": "Items for a bullets slide, short phrases rather than sentences. Start an item with '- ' to indent it.",
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        "left": {
+         "default": [],
+         "description": "Items of the left column (two_columns).",
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        "right": {
+         "default": [],
+         "description": "Items of the right column (two_columns).",
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        "left_heading": {
+         "default": "",
+         "description": "Optional heading above the left column.",
+         "type": "string"
+        },
+        "right_heading": {
+         "default": "",
+         "description": "Optional heading above the right column.",
+         "type": "string"
+        },
+        "table": {
+         "default": [],
+         "description": "Table rows for a table slide; the first row is the header.",
+         "items": {
+          "items": {
+           "type": "string"
+          },
+          "type": "array"
+         },
+         "type": "array"
+        },
+        "chart": {
+         "description": "Chart data for a chart slide.",
+         "properties": {
+          "type": {
+           "default": "column",
+           "description": "Chart type.",
+           "enum": [
+            "column",
+            "bar",
+            "line",
+            "pie"
+           ],
+           "title": "Type",
+           "type": "string"
+          },
+          "categories": {
+           "description": "Category labels (x axis or pie slices).",
+           "items": {
+            "type": "string"
+           },
+           "title": "Categories",
+           "type": "array"
+          },
+          "series": {
+           "description": "Data series (pie: only one).",
+           "items": {
+            "properties": {
+             "name": {
+              "description": "Series name, shown in the legend.",
+              "title": "Name",
+              "type": "string"
+             },
+             "values": {
+              "description": "One number per category.",
+              "items": {
+               "type": "number"
+              },
+              "title": "Values",
+              "type": "array"
+             }
+            },
+            "required": [
+             "name",
+             "values"
+            ],
+            "title": "ChartSeries",
+            "type": "object"
+           },
+           "title": "Series",
+           "type": "array"
+          },
+          "unit": {
+           "default": "",
+           "description": "Unit of the values, e.g. 'hours per week'; shown at the value axis.",
+           "title": "Unit",
+           "type": "string"
+          }
+         },
+         "required": [
+          "categories",
+          "series"
+         ],
+         "title": "SlideChart",
+         "type": "object"
+        },
+        "notes": {
+         "default": "",
+         "description": "Optional speaker notes.",
+         "type": "string"
+        }
+       },
+       "required": [
+        "layout",
+        "title"
+       ],
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "title": {
+      "default": "",
+      "description": "Readable title of the presentation with spaces, used as the file name.",
+      "type": "string"
+     }
+    },
+    "required": [
+     "slides"
+    ],
+    "type": "object"
+   }
+  }
+ },
+ {
+  "type": "function",
+  "function": {
+   "name": "create_word_file",
+   "description": "\n        Create a Word document (.docx) and attach it to the answer. Use it when the user wants a Word file or a\n        document to download, e.g. a report, letter, minutes or concept. Write the complete text yourself.\n        The file only exists once this tool has answered with 'Done'; never say it was created otherwise.\n        ",
+   "parameters": {
+    "properties": {
+     "blocks": {
+      "description": "The content in reading order, e.g. [{\"type\": \"heading\", \"text\": \"Introduction\", \"level\": 1}, {\"type\": \"paragraph\", \"text\": \"...\"}, {\"type\": \"bullets\", \"items\": [\"...\", \"- sub item\"]}, {\"type\": \"table\", \"rows\": [[\"Header A\", \"Header B\"], [\"a\", \"b\"]]}].",
+      "items": {
+       "properties": {
+        "type": {
+         "description": "Kind of block.",
+         "enum": [
+          "heading",
+          "paragraph",
+          "bullets",
+          "numbered",
+          "table",
+          "quote",
+          "page_break",
+          "table_of_contents"
+         ],
+         "type": "string"
+        },
+        "text": {
+         "default": "",
+         "description": "Text of a heading, paragraph or quote. Inline **bold**, *italic* and [label](https://...) links are allowed.",
+         "type": "string"
+        },
+        "level": {
+         "default": 1,
+         "description": "Heading level: 1, 2 or 3.",
+         "type": "integer"
+        },
+        "items": {
+         "default": [],
+         "description": "Items of a bullets or numbered list. Start an item with '- ' to indent it one level.",
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        "rows": {
+         "default": [],
+         "description": "Table rows as lists of cell texts. The first row is the header row.",
+         "items": {
+          "items": {
+           "type": "string"
+          },
+          "type": "array"
+         },
+         "type": "array"
+        }
+       },
+       "required": [
+        "type"
+       ],
+       "type": "object"
+      },
+      "type": "array"
+     },
+     "title": {
+      "default": "",
+      "description": "Readable document title with spaces, e.g. \"Minutes of the team meeting on 12 October 2026\". It is shown at the top and used as the file name, so do not repeat it as the first heading.",
+      "type": "string"
+     },
+     "subtitle": {
+      "default": "",
+      "description": "Optional subtitle below the title.",
+      "type": "string"
+     },
+     "header_text": {
+      "default": "",
+      "description": "Optional text in the page header, e.g. company or project name.",
+      "type": "string"
+     },
+     "table_of_contents": {
+      "default": false,
+      "description": "Add a table of contents (useful for long documents with several headings).",
+      "type": "boolean"
+     },
+     "landscape": {
+      "default": false,
+      "description": "Use landscape pages (for wide tables).",
+      "type": "boolean"
+     }
+    },
+    "required": [
+     "blocks"
+    ],
+    "type": "object"
+   }
+  }
+ }
+]

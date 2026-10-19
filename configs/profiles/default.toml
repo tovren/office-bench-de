@@ -1,0 +1,19 @@
+name = "default"
+description = "Fixed German system prompt with the reference date, attachments as text in front of the message."
+today = 2026-10-13
+system_prompt = "Heute ist Dienstag, 13. Oktober 2026. Antworte auf Deutsch."
+max_rounds = 8
+
+# Attachments: the extracted text of each uploaded file goes in front of the user's message, as chat front ends do.
+# No citation instructions: asking for source markers like [1] makes models write them into documents and e-mails.
+attachment_message = """Angehängte Dateien (extrahierter Text):
+
+{files}
+
+{message}"""
+attachment_file = """<file name="{name}">
+{text}
+</file>"""
+
+[valves]
+language = "de"

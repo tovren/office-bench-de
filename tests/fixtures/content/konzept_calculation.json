@@ -1,0 +1,108 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Konzept Ticketsystem",
+  "table_of_contents": true,
+  "blocks": [
+   {
+    "type": "paragraph",
+    "text": "Stand: 13.10.2026"
+   },
+   {
+    "type": "heading",
+    "text": "Zeitplan",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Der Start ist für KW 19/2026 vorgesehen. Die Umsetzung läuft von 01.10.2026 bis 31.03.2027."
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Phase",
+      "Zeitraum"
+     ],
+     [
+      "Auswahl",
+      "KW 45-48 (November 2026)"
+     ],
+     [
+      "Umsetzung",
+      "KW 1-6 (Dezember 2026 - Januar 2027)"
+     ],
+     [
+      "Pilot",
+      "KW 52-1 (Dezember 2026 - Januar 2027)"
+     ]
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Kosten",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Lizenzen für Bearbeiter: 8 × 35 € × 12 = 3.360 €. Alle Mitarbeiter: 80 × 8 € × 12 = 7.860 €."
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Position",
+      "Berechnung",
+      "Betrag (€)"
+     ],
+     [
+      "Beratung",
+      "6 Tage × 1.200 €",
+      "7.200"
+     ],
+     [
+      "Wartung",
+      "0,2 PT/Woche × 48 × 85 EUR",
+      "4.080"
+     ],
+     [
+      "Lizenzen",
+      "8 Agenten à 29 EUR pro Monat",
+      "2.784"
+     ],
+     [
+      "Schulung",
+      "pauschal",
+      "1.500"
+     ],
+     [
+      "Summe",
+      "",
+      "16.564"
+     ]
+    ]
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Kostenart",
+      "Schätzung (EUR)"
+     ],
+     [
+      "Lizenzen",
+      "30.000 bis 72.000"
+     ],
+     [
+      "Einrichtung",
+      "24.000 bis 32.000"
+     ],
+     [
+      "Gesamtkosten",
+      "54.000 bis 94.000"
+     ]
+    ]
+   }
+  ]
+ }
+}

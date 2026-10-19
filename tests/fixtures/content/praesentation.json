@@ -1,0 +1,77 @@
+{
+ "function": "create_powerpoint_file",
+ "arguments": {
+  "title": "KI-Assistenten",
+  "slides": [
+   {
+    "layout": "title",
+    "title": "KI-Assistenten im Unternehmen",
+    "subtitle": "Stand: 13.10.2026"
+   },
+   {
+    "layout": "bullets",
+    "title": "Ziele",
+    "bullets": [
+     "Routineaufgaben schneller erledigen",
+     "Wissen leichter finden"
+    ]
+   },
+   {
+    "layout": "two_columns",
+    "title": "Chancen und Risiken",
+    "left_heading": "Chancen",
+    "left": [
+     "Zeitersparnis"
+    ],
+    "right_heading": "Risiken",
+    "right": [
+     "Datenschutz"
+    ]
+   },
+   {
+    "layout": "table",
+    "title": "Zeitplan",
+    "table": [
+     [
+      "Phase",
+      "Zeitraum",
+      ""
+     ],
+     [
+      "Pilot",
+      "KW 45-48 2026",
+      "Vertrieb"
+     ],
+     [
+      "Rollout",
+      "ab 04.01.2027",
+      "alle"
+     ]
+    ]
+   },
+   {
+    "layout": "chart",
+    "title": "Zeitersparnis",
+    "chart": {
+     "type": "line",
+     "categories": [
+      "Vertrieb",
+      "IT",
+      "HR"
+     ],
+     "series": [
+      {
+       "name": "Stunden pro Woche",
+       "values": [
+        4,
+        6,
+        2
+       ]
+      }
+     ],
+     "unit": "Stunden pro Woche"
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Protokoll der Teambesprechung vom 12.10.2026",
+  "header_text": "Team Nord",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "text": "Datum: Dienstag, 12. Oktober 2026, 10:00 Uhr. Teilnehmer: Anna, Ben, Carla, David."
+   },
+   {
+    "type": "heading",
+    "text": "1. Projektstand",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Der Projektstand wurde besprochen. Die Einführung von System X ist für Dezember geplant."
+   },
+   {
+    "type": "heading",
+    "text": "2. Urlaubsplanung",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Die Urlaubsplanung erfolgt bis Mo., 19.10. Protokoll: [Name eintragen]. Rückmeldung bis Fr., 21.10."
+   },
+   {
+    "type": "heading",
+    "text": "3. Neues Ticketsystem",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Das Ticketsystem bringt eine直观e Bedienung."
+   },
+   {
+    "type": "heading",
+    "text": "Beschlüsse",
+    "level": 1
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Thema",
+      "Beschluss"
+     ]
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Termine",
+    "level": 1
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Aufgabe",
+      "Wochentag",
+      "Datum",
+      "KW"
+     ],
+     [
+      "Testphase",
+      "Di",
+      "26.10.2026",
+      "KW 44"
+     ],
+     [
+      "Abnahme",
+      "Fr",
+      "06.11.2026",
+      "KW 46"
+     ]
+    ]
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Ben: Testumgebung aufsetzen",
+     "Carla: Schulung planen"
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,71 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Reisekosten Oktober 2026",
+  "sheets": [
+   {
+    "name": "Fahrten",
+    "columns": [
+     {
+      "header": "Datum",
+      "type": "date"
+     },
+     {
+      "header": "Ziel"
+     },
+     {
+      "header": "Anlass"
+     },
+     {
+      "header": "Kilometer",
+      "type": "number",
+      "total": "sum"
+     },
+     {
+      "header": "Erstattung (€)",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Bewertung",
+      "type": "integer"
+     }
+    ],
+    "rows": [
+     [
+      "2026-10-05",
+      "Stuttgart",
+      "Kunde A",
+      120,
+      36,
+      4
+     ],
+     [
+      "2026-10-07",
+      "Ulm",
+      "Messe",
+      90,
+      27,
+      5
+     ],
+     [
+      "2026-10-12",
+      "Karlsruhe",
+      "Schulung",
+      80,
+      30,
+      3
+     ],
+     [
+      "2026-11-02",
+      "Mannheim",
+      "Kunde B",
+      140,
+      42,
+      7
+     ]
+    ]
+   }
+  ]
+ }
+}

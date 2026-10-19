@@ -29,6 +29,7 @@ from pydantic import (
     ConfigDict,
     Field,
     StrictBool,
+    StrictFloat,
     StrictInt,
     ValidationError,
     field_validator,
@@ -48,6 +49,7 @@ Kind = Literal["file", "follow_up", "no_file"]
 Expect = Literal["file", "no_file", "any"]
 NonNegInt = Annotated[StrictInt, Field(ge=0)]
 Number = int | float
+StrictNumber = StrictInt | StrictFloat  # no "2" or true where a task file needs a number
 
 
 class TaskError(ValueError):
@@ -237,7 +239,7 @@ class Checks(_Model):
     tables_min: NonNegInt | None = None
     forbidden: Topics | None = None
     # a number per entry; a list inside is a set of alternatives ([-2.5, 2.5])
-    values_present: Annotated[list[Number | Annotated[list[Number], Field(min_length=1)]],
+    values_present: Annotated[list[StrictNumber | Annotated[list[StrictNumber], Field(min_length=1)]],
                               Field(min_length=1)] | None = None
     retained: Annotated[Number, Field(ge=0, le=1)] | HardSoft | None = None
     numbers_sourced: StrictBool | None = None

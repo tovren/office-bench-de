@@ -1,0 +1,1403 @@
+[
+ {
+  "name": "s1_budget_cumulative",
+  "task": "budget",
+  "function": "create_excel_file",
+  "arguments": {
+   "title": "Haushaltsbudget Januar bis Juni 2026",
+   "sheets": [
+    {
+     "name": "Budget 2026",
+     "columns": [
+      {
+       "header": "Monat"
+      },
+      {
+       "header": "Einnahmen",
+       "type": "currency",
+       "total": "sum"
+      },
+      {
+       "header": "Ausgaben",
+       "type": "currency",
+       "total": "sum"
+      },
+      {
+       "header": "Saldo",
+       "type": "currency",
+       "formula": "=B{row}-C{row}",
+       "total": "sum"
+      },
+      {
+       "header": "Saldo kumuliert",
+       "type": "currency",
+       "formula": "=SUM(D$2:D{row})"
+      }
+     ],
+     "rows": [
+      [
+       "Januar 2026",
+       3200,
+       2700,
+       null,
+       null
+      ],
+      [
+       "Februar 2026",
+       3200,
+       2650,
+       null,
+       null
+      ],
+      [
+       "März 2026",
+       3300,
+       2900,
+       null,
+       null
+      ],
+      [
+       "April 2026",
+       3200,
+       2800,
+       null,
+       null
+      ],
+      [
+       "Mai 2026",
+       3400,
+       2950,
+       null,
+       null
+      ],
+      [
+       "Juni 2026",
+       3900,
+       3100,
+       null,
+       null
+      ]
+     ],
+     "chart": {
+      "type": "column",
+      "title": "Einnahmen und Ausgaben",
+      "category_column": "Monat",
+      "value_columns": [
+       "Einnahmen",
+       "Ausgaben"
+      ]
+     }
+    }
+   ]
+  }
+ },
+ {
+  "name": "s2_vergleich_notebook",
+  "task": "vergleich",
+  "function": "create_excel_file",
+  "arguments": {
+   "title": "Vergleich Firmen-Laptops",
+   "sheets": [
+    {
+     "name": "Vergleich",
+     "columns": [
+      {
+       "header": "Angebot"
+      },
+      {
+       "header": "Preis pro Notebook",
+       "type": "currency"
+      },
+      {
+       "header": "Garantie (Jahre)",
+       "type": "integer"
+      },
+      {
+       "header": "Gewicht (kg)",
+       "type": "number"
+      },
+      {
+       "header": "Akkulaufzeit (h)",
+       "type": "number"
+      },
+      {
+       "header": "Bewertung (1-5)",
+       "type": "integer"
+      },
+      {
+       "header": "Kosten 25 Geräte",
+       "type": "currency",
+       "formula": "=B{row}*25"
+      }
+     ],
+     "rows": [
+      [
+       "Lenovo ThinkPad T14",
+       1249,
+       3,
+       1.4,
+       12,
+       5,
+       null
+      ],
+      [
+       "Dell Latitude 5450",
+       1099,
+       3,
+       1.5,
+       10,
+       4,
+       null
+      ],
+      [
+       "HP EliteBook 840",
+       1189,
+       3,
+       1.4,
+       11,
+       4,
+       null
+      ],
+      [
+       "Fujitsu Lifebook U7",
+       979,
+       2,
+       1.6,
+       9,
+       3,
+       null
+      ]
+     ],
+     "chart": {
+      "type": "bar",
+      "title": "Preis pro Gerät",
+      "category_column": "Angebot",
+      "value_columns": [
+       "Preis pro Notebook"
+      ]
+     }
+    }
+   ]
+  }
+ },
+ {
+  "name": "s3_reisekosten_hotel_zero",
+  "task": "reisekosten",
+  "function": "create_excel_file",
+  "arguments": {
+   "title": "Reisekostenabrechnung Oktober 2026",
+   "sheets": [
+    {
+     "name": "Oktober 2026",
+     "columns": [
+      {
+       "header": "Datum",
+       "type": "date"
+      },
+      {
+       "header": "Ziel"
+      },
+      {
+       "header": "Anlass"
+      },
+      {
+       "header": "Kilometer",
+       "type": "integer",
+       "total": "sum"
+      },
+      {
+       "header": "Erstattung (0,30 €/km)",
+       "type": "currency",
+       "formula": "=D{row}*0.3",
+       "total": "sum"
+      },
+      {
+       "header": "Verpflegungspauschale",
+       "type": "currency",
+       "total": "sum"
+      },
+      {
+       "header": "Übernachtung",
+       "type": "currency",
+       "total": "sum"
+      }
+     ],
+     "rows": [
+      [
+       "2026-10-05",
+       "Stuttgart",
+       "Kundentermin",
+       84,
+       null,
+       14,
+       0
+      ],
+      [
+       "2026-10-08",
+       "Ulm",
+       "Messe",
+       180,
+       null,
+       14,
+       0
+      ],
+      [
+       "2026-10-13",
+       "Heilbronn",
+       "Lieferantengespräch",
+       110,
+       null,
+       14,
+       0
+      ],
+      [
+       "2026-10-19",
+       "Karlsruhe",
+       "Schulung",
+       160,
+       null,
+       14,
+       0
+      ],
+      [
+       "2026-10-22",
+       "Pforzheim",
+       "Wartung",
+       96,
+       null,
+       14,
+       0
+      ],
+      [
+       "2026-10-28",
+       "Reutlingen",
+       "Kundentermin",
+       72,
+       null,
+       14,
+       0
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "s4_reisekosten_purpose_date",
+  "task": "reisekosten",
+  "function": "create_excel_file",
+  "arguments": {
+   "title": "Reisekostenabrechnung Oktober 2026",
+   "sheets": [
+    {
+     "name": "Oktober 2026",
+     "columns": [
+      {
+       "header": "Datum",
+       "type": "date"
+      },
+      {
+       "header": "Ziel"
+      },
+      {
+       "header": "Anlass"
+      },
+      {
+       "header": "Kilometer",
+       "type": "integer",
+       "total": "sum"
+      },
+      {
+       "header": "Erstattung (0,30 €/km)",
+       "type": "currency",
+       "formula": "=D{row}*0.3",
+       "total": "sum"
+      },
+      {
+       "header": "Verpflegungspauschale",
+       "type": "currency",
+       "total": "sum"
+      }
+     ],
+     "rows": [
+      [
+       "2026-10-05",
+       "Stuttgart",
+       "Kundentermin",
+       84,
+       null,
+       14
+      ],
+      [
+       "2026-10-08",
+       "Ulm",
+       "Messe",
+       180,
+       null,
+       14
+      ],
+      [
+       "2026-10-13",
+       "Heilbronn",
+       "Lieferantengespräch",
+       110,
+       null,
+       14
+      ],
+      [
+       "2026-10-19",
+       "Karlsruhe",
+       "Schulung",
+       160,
+       null,
+       14
+      ],
+      [
+       "2026-10-22",
+       "Pforzheim",
+       "Wartung",
+       96,
+       null,
+       14
+      ],
+      [
+       "2026-10-28",
+       "Reutlingen",
+       "Vorbereitung Kundentag am 05.11.2026",
+       72,
+       null,
+       14
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "s5_inventar_warranty_until",
+  "task": "inventar",
+  "function": "create_excel_file",
+  "arguments": {
+   "title": "IT-Inventar",
+   "sheets": [
+    {
+     "name": "Inventar",
+     "columns": [
+      {
+       "header": "Inventarnummer"
+      },
+      {
+       "header": "Gerätetyp"
+      },
+      {
+       "header": "Hersteller und Modell"
+      },
+      {
+       "header": "Seriennummer"
+      },
+      {
+       "header": "Standort"
+      },
+      {
+       "header": "Mitarbeiter"
+      },
+      {
+       "header": "Kaufdatum",
+       "type": "date"
+      },
+      {
+       "header": "Kaufpreis",
+       "type": "currency",
+       "total": "sum"
+      },
+      {
+       "header": "Garantie bis",
+       "type": "date"
+      }
+     ],
+     "rows": [
+      [
+       "INV-000",
+       "Laptop",
+       "Dell Latitude 5440",
+       "SN000000",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-01-10",
+       899,
+       "2027-01-10"
+      ],
+      [
+       "INV-001",
+       "Monitor",
+       "Dell Latitude 5440",
+       "SN000001",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-02-11",
+       899,
+       "2027-02-11"
+      ],
+      [
+       "INV-002",
+       "Dockingstation",
+       "Dell Latitude 5440",
+       "SN000002",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-03-12",
+       899,
+       "2027-03-12"
+      ],
+      [
+       "INV-003",
+       "Drucker",
+       "Dell Latitude 5440",
+       "SN000003",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-04-13",
+       899,
+       "2027-04-13"
+      ],
+      [
+       "INV-004",
+       "Telefon",
+       "Dell Latitude 5440",
+       "SN000004",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-05-14",
+       899,
+       "2027-05-14"
+      ],
+      [
+       "INV-005",
+       "Laptop",
+       "Dell Latitude 5440",
+       "SN000005",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-06-15",
+       899,
+       "2027-06-15"
+      ],
+      [
+       "INV-006",
+       "Monitor",
+       "Dell Latitude 5440",
+       "SN000006",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-07-16",
+       899,
+       "2027-07-16"
+      ],
+      [
+       "INV-007",
+       "Dockingstation",
+       "Dell Latitude 5440",
+       "SN000007",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-08-17",
+       899,
+       "2027-08-17"
+      ],
+      [
+       "INV-008",
+       "Drucker",
+       "Dell Latitude 5440",
+       "SN000008",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-09-18",
+       899,
+       "2027-09-18"
+      ],
+      [
+       "INV-009",
+       "Telefon",
+       "Dell Latitude 5440",
+       "SN000009",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-01-10",
+       899,
+       "2027-01-10"
+      ],
+      [
+       "INV-010",
+       "Laptop",
+       "Dell Latitude 5440",
+       "SN000010",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-02-11",
+       899,
+       "2027-02-11"
+      ],
+      [
+       "INV-011",
+       "Monitor",
+       "Dell Latitude 5440",
+       "SN000011",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-03-12",
+       899,
+       "2027-03-12"
+      ],
+      [
+       "INV-012",
+       "Dockingstation",
+       "Dell Latitude 5440",
+       "SN000012",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-04-13",
+       899,
+       "2027-04-13"
+      ],
+      [
+       "INV-013",
+       "Drucker",
+       "Dell Latitude 5440",
+       "SN000013",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-05-14",
+       899,
+       "2027-05-14"
+      ],
+      [
+       "INV-014",
+       "Telefon",
+       "Dell Latitude 5440",
+       "SN000014",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-06-15",
+       899,
+       "2027-06-15"
+      ],
+      [
+       "INV-015",
+       "Laptop",
+       "Dell Latitude 5440",
+       "SN000015",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-07-16",
+       899,
+       "2027-07-16"
+      ],
+      [
+       "INV-016",
+       "Monitor",
+       "Dell Latitude 5440",
+       "SN000016",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-08-17",
+       899,
+       "2027-08-17"
+      ],
+      [
+       "INV-017",
+       "Dockingstation",
+       "Dell Latitude 5440",
+       "SN000017",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-09-18",
+       899,
+       "2027-09-18"
+      ],
+      [
+       "INV-018",
+       "Drucker",
+       "Dell Latitude 5440",
+       "SN000018",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-01-10",
+       899,
+       "2027-01-10"
+      ],
+      [
+       "INV-019",
+       "Telefon",
+       "Dell Latitude 5440",
+       "SN000019",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-02-11",
+       899,
+       "2027-02-11"
+      ],
+      [
+       "INV-020",
+       "Laptop",
+       "Dell Latitude 5440",
+       "SN000020",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-03-12",
+       899,
+       "2027-03-12"
+      ],
+      [
+       "INV-021",
+       "Monitor",
+       "Dell Latitude 5440",
+       "SN000021",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-04-13",
+       899,
+       "2027-04-13"
+      ],
+      [
+       "INV-022",
+       "Dockingstation",
+       "Dell Latitude 5440",
+       "SN000022",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-05-14",
+       899,
+       "2027-05-14"
+      ],
+      [
+       "INV-023",
+       "Drucker",
+       "Dell Latitude 5440",
+       "SN000023",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-06-15",
+       899,
+       "2027-06-15"
+      ],
+      [
+       "INV-024",
+       "Telefon",
+       "Dell Latitude 5440",
+       "SN000024",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-07-16",
+       899,
+       "2027-07-16"
+      ],
+      [
+       "INV-025",
+       "Laptop",
+       "Dell Latitude 5440",
+       "SN000025",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-08-17",
+       899,
+       "2027-08-17"
+      ],
+      [
+       "INV-026",
+       "Monitor",
+       "Dell Latitude 5440",
+       "SN000026",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-09-18",
+       899,
+       "2027-09-18"
+      ],
+      [
+       "INV-027",
+       "Dockingstation",
+       "Dell Latitude 5440",
+       "SN000027",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-01-10",
+       899,
+       "2027-01-10"
+      ],
+      [
+       "INV-028",
+       "Drucker",
+       "Dell Latitude 5440",
+       "SN000028",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-02-11",
+       899,
+       "2027-02-11"
+      ],
+      [
+       "INV-029",
+       "Telefon",
+       "Dell Latitude 5440",
+       "SN000029",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-03-12",
+       899,
+       "2027-03-12"
+      ],
+      [
+       "INV-030",
+       "Laptop",
+       "Dell Latitude 5440",
+       "SN000030",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-04-13",
+       899,
+       "2027-04-13"
+      ],
+      [
+       "INV-031",
+       "Monitor",
+       "Dell Latitude 5440",
+       "SN000031",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-05-14",
+       899,
+       "2027-05-14"
+      ],
+      [
+       "INV-032",
+       "Dockingstation",
+       "Dell Latitude 5440",
+       "SN000032",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-06-15",
+       899,
+       "2027-06-15"
+      ],
+      [
+       "INV-033",
+       "Drucker",
+       "Dell Latitude 5440",
+       "SN000033",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-07-16",
+       899,
+       "2027-07-16"
+      ],
+      [
+       "INV-034",
+       "Telefon",
+       "Dell Latitude 5440",
+       "SN000034",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-08-17",
+       899,
+       "2027-08-17"
+      ],
+      [
+       "INV-035",
+       "Laptop",
+       "Dell Latitude 5440",
+       "SN000035",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-09-18",
+       899,
+       "2027-09-18"
+      ],
+      [
+       "INV-036",
+       "Monitor",
+       "Dell Latitude 5440",
+       "SN000036",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-01-10",
+       899,
+       "2027-01-10"
+      ],
+      [
+       "INV-037",
+       "Dockingstation",
+       "Dell Latitude 5440",
+       "SN000037",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-02-11",
+       899,
+       "2027-02-11"
+      ],
+      [
+       "INV-038",
+       "Drucker",
+       "Dell Latitude 5440",
+       "SN000038",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-03-12",
+       899,
+       "2027-03-12"
+      ],
+      [
+       "INV-039",
+       "Telefon",
+       "Dell Latitude 5440",
+       "SN000039",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-04-13",
+       899,
+       "2027-04-13"
+      ],
+      [
+       "INV-040",
+       "Laptop",
+       "Dell Latitude 5440",
+       "SN000040",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-05-14",
+       899,
+       "2027-05-14"
+      ],
+      [
+       "INV-041",
+       "Monitor",
+       "Dell Latitude 5440",
+       "SN000041",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-06-15",
+       899,
+       "2027-06-15"
+      ],
+      [
+       "INV-042",
+       "Dockingstation",
+       "Dell Latitude 5440",
+       "SN000042",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-07-16",
+       899,
+       "2027-07-16"
+      ],
+      [
+       "INV-043",
+       "Drucker",
+       "Dell Latitude 5440",
+       "SN000043",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-08-17",
+       899,
+       "2027-08-17"
+      ],
+      [
+       "INV-044",
+       "Telefon",
+       "Dell Latitude 5440",
+       "SN000044",
+       "Esslingen EG",
+       "A. Yilmaz",
+       "2024-09-18",
+       899,
+       "2027-09-18"
+      ]
+     ]
+    },
+    {
+     "name": "Übersicht",
+     "columns": [
+      {
+       "header": "Gerätetyp"
+      },
+      {
+       "header": "Anzahl",
+       "type": "integer"
+      },
+      {
+       "header": "Gesamtwert",
+       "type": "currency"
+      }
+     ],
+     "rows": [
+      [
+       "Laptop",
+       9,
+       8091
+      ],
+      [
+       "Monitor",
+       9,
+       8091
+      ],
+      [
+       "Dockingstation",
+       9,
+       8091
+      ],
+      [
+       "Drucker",
+       9,
+       8091
+      ],
+      [
+       "Telefon",
+       9,
+       8091
+      ]
+     ],
+     "chart": {
+      "type": "pie",
+      "title": "Wert je Gerätetyp",
+      "category_column": "Gerätetyp",
+      "value_columns": [
+       "Gesamtwert"
+      ]
+     }
+    }
+   ]
+  }
+ },
+ {
+  "name": "s6_projektplan_good",
+  "task": "projektplan",
+  "function": "create_excel_file",
+  "arguments": {
+   "title": "Projektplan Büroumzug",
+   "sheets": [
+    {
+     "name": "Projektplan",
+     "columns": [
+      {
+       "header": "Arbeitspaket"
+      },
+      {
+       "header": "Verantwortlich"
+      },
+      {
+       "header": "Start",
+       "type": "date",
+       "total": "none"
+      },
+      {
+       "header": "Dauer (Kalendertage)",
+       "type": "integer",
+       "total": "none"
+      },
+      {
+       "header": "Ende",
+       "type": "date",
+       "formula": "=C{row}+D{row}-1",
+       "total": "none"
+      },
+      {
+       "header": "Fortschritt",
+       "type": "percent",
+       "total": "none"
+      }
+     ],
+     "rows": [
+      [
+       "Projektauftrag und Planung",
+       "Verwaltungsleitung",
+       "2026-10-19",
+       12,
+       null,
+       0
+      ],
+      [
+       "Umzugsfirma beauftragen",
+       "Einkauf",
+       "2026-11-02",
+       12,
+       null,
+       0
+      ],
+      [
+       "Möbel und Raumplanung",
+       "Facility",
+       "2026-11-09",
+       26,
+       null,
+       0
+      ],
+      [
+       "IT und Telefonie",
+       "IT",
+       "2026-11-16",
+       40,
+       null,
+       0
+      ],
+      [
+       "Mitarbeiter informieren",
+       "Personal",
+       "2026-11-23",
+       5,
+       null,
+       0
+      ],
+      [
+       "Akten sichten und packen",
+       "alle Abteilungen",
+       "2026-12-01",
+       31,
+       null,
+       0
+      ],
+      [
+       "Umzug Möbel und Akten",
+       "Umzugsfirma",
+       "2027-01-11",
+       5,
+       null,
+       0
+      ],
+      [
+       "IT-Umzug und Test",
+       "IT",
+       "2027-01-16",
+       3,
+       null,
+       0
+      ],
+      [
+       "Nacharbeiten und Mängel",
+       "Facility",
+       "2027-01-19",
+       11,
+       null,
+       0
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "s7_projektplan_min_max",
+  "task": "projektplan",
+  "function": "create_excel_file",
+  "arguments": {
+   "title": "Projektplan Büroumzug",
+   "sheets": [
+    {
+     "name": "Projektplan",
+     "columns": [
+      {
+       "header": "Arbeitspaket"
+      },
+      {
+       "header": "Verantwortlich"
+      },
+      {
+       "header": "Start",
+       "type": "date",
+       "total": "min"
+      },
+      {
+       "header": "Dauer (Kalendertage)",
+       "type": "integer",
+       "total": "sum"
+      },
+      {
+       "header": "Ende",
+       "type": "date",
+       "formula": "=C{row}+D{row}-1",
+       "total": "max"
+      },
+      {
+       "header": "Fortschritt",
+       "type": "percent",
+       "total": "none"
+      }
+     ],
+     "rows": [
+      [
+       "Projektauftrag und Planung",
+       "Verwaltungsleitung",
+       "2026-10-19",
+       12,
+       null,
+       0
+      ],
+      [
+       "Umzugsfirma beauftragen",
+       "Einkauf",
+       "2026-11-02",
+       12,
+       null,
+       0
+      ],
+      [
+       "Möbel und Raumplanung",
+       "Facility",
+       "2026-11-09",
+       26,
+       null,
+       0
+      ],
+      [
+       "IT und Telefonie",
+       "IT",
+       "2026-11-16",
+       40,
+       null,
+       0
+      ],
+      [
+       "Mitarbeiter informieren",
+       "Personal",
+       "2026-11-23",
+       5,
+       null,
+       0
+      ],
+      [
+       "Akten sichten und packen",
+       "alle Abteilungen",
+       "2026-12-01",
+       31,
+       null,
+       0
+      ],
+      [
+       "Umzug Möbel und Akten",
+       "Umzugsfirma",
+       "2027-01-11",
+       5,
+       null,
+       0
+      ],
+      [
+       "IT-Umzug und Test",
+       "IT",
+       "2027-01-16",
+       3,
+       null,
+       0
+      ],
+      [
+       "Nacharbeiten und Mängel",
+       "Facility",
+       "2027-01-19",
+       11,
+       null,
+       0
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "s8_projektplan_progress_sum",
+  "task": "projektplan",
+  "function": "create_excel_file",
+  "arguments": {
+   "title": "Projektplan Büroumzug",
+   "sheets": [
+    {
+     "name": "Projektplan",
+     "columns": [
+      {
+       "header": "Arbeitspaket"
+      },
+      {
+       "header": "Verantwortlich"
+      },
+      {
+       "header": "Start",
+       "type": "date",
+       "total": "none"
+      },
+      {
+       "header": "Dauer (Kalendertage)",
+       "type": "integer",
+       "total": "sum"
+      },
+      {
+       "header": "Ende",
+       "type": "date",
+       "formula": "=C{row}+D{row}-1",
+       "total": "none"
+      },
+      {
+       "header": "Fortschritt",
+       "type": "percent",
+       "total": "sum"
+      }
+     ],
+     "rows": [
+      [
+       "Projektauftrag und Planung",
+       "Verwaltungsleitung",
+       "2026-10-19",
+       12,
+       null,
+       0
+      ],
+      [
+       "Umzugsfirma beauftragen",
+       "Einkauf",
+       "2026-11-02",
+       12,
+       null,
+       0
+      ],
+      [
+       "Möbel und Raumplanung",
+       "Facility",
+       "2026-11-09",
+       26,
+       null,
+       0
+      ],
+      [
+       "IT und Telefonie",
+       "IT",
+       "2026-11-16",
+       40,
+       null,
+       0
+      ],
+      [
+       "Mitarbeiter informieren",
+       "Personal",
+       "2026-11-23",
+       5,
+       null,
+       0
+      ],
+      [
+       "Akten sichten und packen",
+       "alle Abteilungen",
+       "2026-12-01",
+       31,
+       null,
+       0
+      ],
+      [
+       "Umzug Möbel und Akten",
+       "Umzugsfirma",
+       "2027-01-11",
+       5,
+       null,
+       0
+      ],
+      [
+       "IT-Umzug und Test",
+       "IT",
+       "2027-01-16",
+       3,
+       null,
+       0
+      ],
+      [
+       "Nacharbeiten und Mängel",
+       "Facility",
+       "2027-01-19",
+       11,
+       null,
+       0
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "s9_anweisung_unc_path",
+  "task": "anweisung",
+  "function": "create_word_file",
+  "arguments": {
+   "title": "Arbeitsanweisung Datensicherung",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "1. Zweck",
+     "level": 1
+    },
+    {
+     "type": "paragraph",
+     "text": "Diese Anweisung regelt die monatliche Datensicherung auf das NAS."
+    },
+    {
+     "type": "heading",
+     "text": "2. Zuständigkeiten",
+     "level": 1
+    },
+    {
+     "type": "table",
+     "rows": [
+      [
+       "Rolle",
+       "Aufgabe"
+      ],
+      [
+       "IT-Administrator",
+       "führt die Sicherung durch"
+      ],
+      [
+       "IT-Leitung",
+       "prüft das Protokoll"
+      ]
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "3. Ablauf",
+     "level": 1
+    },
+    {
+     "type": "numbered",
+     "items": [
+      "Sicherungsjob starten (Ziel: \\\\nas01\\backup\\monatlich).",
+      "Protokoll unter \\\\nas01\\backup\\logs ablegen.",
+      "Stichprobe zurücksichern."
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "4. Fehlerfall",
+     "level": 1
+    },
+    {
+     "type": "paragraph",
+     "text": "Bei einem Fehler sofort die IT-Leitung informieren."
+    },
+    {
+     "type": "heading",
+     "text": "5. Checkliste",
+     "level": 1
+    },
+    {
+     "type": "bullets",
+     "items": [
+      "☐ Sicherung gelaufen",
+      "☐ Protokoll abgelegt"
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "name": "s10_einladung_time",
+  "task": "einladung",
+  "function": "create_word_file",
+  "arguments": {
+   "title": "Einladung zur Weihnachtsfeier",
+   "header_text": "Brenner Haustechnik GmbH",
+   "blocks": "[{\"type\": \"paragraph\", \"text\": \"Liebe Kolleginnen und Kollegen, wir laden euch herzlich zu unserer Weihnachtsfeier ein.\"}, {\"type\": \"paragraph\", \"text\": \"Wann: Freitag, 11.12. 17:00 Uhr\"}, {\"type\": \"paragraph\", \"text\": \"Wo: Gasthaus Krone, Esslingen\"}, {\"type\": \"table\", \"rows\": [[\"Uhrzeit\", \"Programm\"], [\"17:00\", \"Empfang mit Glühwein\"], [\"18:30\", \"Abendessen\"], [\"20:00\", \"Wichteln\"]]}, {\"type\": \"paragraph\", \"text\": \"Bitte meldet euch bis Freitag, 27.11. 12 Uhr bei Frau Yilmaz an.\"}]"
+  }
+ }
+]

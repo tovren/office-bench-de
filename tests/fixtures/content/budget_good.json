@@ -1,0 +1,78 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Budget",
+  "sheets": [
+   {
+    "name": "Budget",
+    "columns": [
+     {
+      "header": "Monat"
+     },
+     {
+      "header": "Einnahmen (€)",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Ausgaben (€)",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Saldo (€)",
+      "type": "currency",
+      "formula": "=B{row}-C{row}",
+      "total": "sum"
+     }
+    ],
+    "rows": [
+     [
+      "Januar 2026",
+      3000,
+      2200,
+      null
+     ],
+     [
+      "Februar 2026",
+      3100,
+      2500,
+      null
+     ],
+     [
+      "März 2026",
+      3000,
+      2400,
+      null
+     ],
+     [
+      "April 2026",
+      3200,
+      2300,
+      null
+     ],
+     [
+      "Mai 2026",
+      3000,
+      2600,
+      null
+     ],
+     [
+      "Juni 2026",
+      3300,
+      2500,
+      null
+     ]
+    ],
+    "chart": {
+     "type": "column",
+     "category_column": "Monat",
+     "value_columns": [
+      "Einnahmen (€)",
+      "Ausgaben (€)"
+     ]
+    }
+   }
+  ]
+ }
+}

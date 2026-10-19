@@ -1,0 +1,16 @@
+name = "qwen3.8-flash-medium"
+label = "Qwen3.8-Flash, thinking medium"
+base_url = "https://ai-gateway.vercel.sh/v1"
+model = "alibaba/qwen3.8-flash"
+api_key_env = "AI_GATEWAY_API_KEY"
+
+[params]
+max_tokens = 32000
+reasoning = { effort = "medium" }
+temperature = 1.0
+top_p = 0.95
+top_k = 20
+
+[info]
+open_weights = false  # API model; the open checkpoint Qwen3.8-Flash-Next (125B-A6B) is not on the gateway
+parameters = "125B-A6B"

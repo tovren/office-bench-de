@@ -1,0 +1,49 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Projektplan",
+  "sheets": [
+   {
+    "name": "Plan",
+    "columns": [
+     {
+      "header": "Arbeitspaket"
+     },
+     {
+      "header": "Start",
+      "type": "date"
+     },
+     {
+      "header": "Dauer (Tage)",
+      "type": "integer"
+     },
+     {
+      "header": "Ende",
+      "type": "date",
+      "formula": "=B{row}+C{row}-1"
+     },
+     {
+      "header": "Fortschritt",
+      "type": "percent"
+     }
+    ],
+    "rows": [
+     [
+      "Planung",
+      "2026-10-19",
+      12,
+      null,
+      50
+     ],
+     [
+      "Umzug",
+      "2026-11-02",
+      5,
+      null,
+      0
+     ]
+    ]
+   }
+  ]
+ }
+}

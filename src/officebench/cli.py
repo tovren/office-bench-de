@@ -25,6 +25,34 @@ def _tasks(args) -> int:
     return 0
 
 
+def _run(args) -> int:
+    from officebench.config import load_model, load_profile
+    from officebench.harness.client import ConfigError
+    from officebench.harness.runner import run_sync
+
+    profile = load_profile(args.profile)
+    tasks = task_registry.select(args.tasks)
+    repeats = args.repeats
+    if args.probe:
+        tasks, repeats = tasks[:2], 1
+    for path in args.model:
+        model = load_model(path)
+        try:
+            folder = run_sync(model, profile, tasks, repeats, Path(args.out), retry_failed=args.retry_failed,
+                              progress=lambda m: print(m, flush=True))
+        except ConfigError as e:
+            print(f"error: {model.name}: {e}", file=sys.stderr)
+            return 2
+        print(f"{model.name}: done, see {folder}")
+    return 0
+
+
+def _check(args) -> int:
+    from officebench.checks.content import main as check_main
+
+    return check_main(args.rest)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="obench", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -34,6 +62,20 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--select", default="all", help='"all", ids, "tag:<tag>", "type:<docx|xlsx|pptx>", "kind:<kind>"')
     p.add_argument("--dir", default=str(task_registry.TASKS_DIR), help="tasks folder")
     p.set_defaults(func=_tasks)
+
+    p = sub.add_parser("run", help="run tasks against one or more models")
+    p.add_argument("model", nargs="+", help="model config(s), e.g. configs/models/qwen3.8-27b-medium.toml")
+    p.add_argument("--tasks", default="all", help="task selection (see `obench tasks list --help`)")
+    p.add_argument("--repeats", type=int, default=3, help="runs per task (default 3)")
+    p.add_argument("--profile", default="default", help="profile name or path (default: configs/profiles/default)")
+    p.add_argument("--out", default="runs/latest", help="run folder; one subfolder per model (default runs/latest)")
+    p.add_argument("--probe", action="store_true", help="quick probe: the first 2 selected tasks, 1 run each")
+    p.add_argument("--retry-failed", action="store_true", help="rerun task runs that ended in a provider/network error")
+    p.set_defaults(func=_run)
+
+    p = sub.add_parser("check", help="content check of files (see `obench check -- --help`)", add_help=False)
+    p.add_argument("rest", nargs=argparse.REMAINDER)
+    p.set_defaults(func=_check)
 
     args = parser.parse_args(argv)
     return args.func(args)

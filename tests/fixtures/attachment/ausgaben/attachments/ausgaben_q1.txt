@@ -1,0 +1,7 @@
+Ausgaben Q1 – Notizen
+
+Januar: 100 €
+Februar: 200,50 €
+März: noch offen (Rechnung kommt)
+
+Code-Beispiel: ```summe```

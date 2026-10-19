@@ -1,0 +1,13 @@
+# Fixture for runner tests: a task with an attached file (turns.attachments, docs/task-format.md)
+id = "ausgaben"
+title = "Expenses from notes (attachment)"
+version = 1
+kind = "file"
+file_type = "xlsx"
+
+[[turns]]
+text = "Im Anhang sind meine Notizen zu den Ausgaben. Mach mir daraus bitte eine Excel-Tabelle mit Summe."
+attachments = [{ name = "Ausgaben Q1 (Notizen).docx", file = "ausgaben_q1.txt" }]
+
+[judge]
+checklist = ["alle drei Monate aus dem Anhang mit den Beträgen 100 € und 200,50 €", "Summe 300,50 €"]

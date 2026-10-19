@@ -501,8 +501,11 @@ def _date_text(b: Sheet, ctx: Context) -> None:
 # but not by a factor of ten; changes and target attainment (Veränderung +150 %, Zielerreichung 105 %) are left out.
 SHARE_HEADER = re.compile(r"anteil|quote|verteilung", re.I)
 PERCENT_HEADER = re.compile(r"auslastung|belegung|prozent|%", re.I)
-NO_SHARE_HEADER = re.compile(r"veränder|änderung|abweich|wachstum|zuwachs|steiger|delta|differenz|diff|vorjahr|"
-                             r"erfüll|erreich|ziel|plan|soll|ist|vs|index|\+/-|±", re.I)
+# The old checker had „\bdiff\b|\bplan\b|\bsoll\b|\bist\b|\bvs\b“ here with literal backspace characters (0x08)
+# instead of word boundaries, so those alternatives never matched; left out to keep the verdicts identical (with them
+# „Anteil verplant“ or „Quote Liste“ would no longer be checked).
+NO_SHARE_HEADER = re.compile(r"veränder|änderung|abweich|wachstum|zuwachs|steiger|delta|differenz|vorjahr|"
+                             r"erfüll|erreich|ziel|index|\+/-|±", re.I)
 
 
 def _share_over_100(b: Sheet, ctx: Context) -> None:

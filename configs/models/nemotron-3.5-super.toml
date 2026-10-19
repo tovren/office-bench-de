@@ -1,0 +1,16 @@
+name = "nemotron-3.5-super"
+label = "Nemotron 3.5 Super VL, thinking on"
+base_url = "https://ai-gateway.vercel.sh/v1"
+model = "nvidia/nemotron-3.5-super-vl"
+api_key_env = "AI_GATEWAY_API_KEY"
+
+[params]
+max_tokens = 32000
+reasoning = { effort = "high" }
+temperature = 1.0
+top_p = 0.95
+providerOptions = { gateway = { order = ["baseten"] } }  # preferred provider; falls back when at capacity
+
+[info]
+open_weights = true
+parameters = "120B-A12B"

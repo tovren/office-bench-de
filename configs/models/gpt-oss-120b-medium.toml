@@ -1,0 +1,16 @@
+name = "gpt-oss-120b-medium"
+label = "gpt-oss-120b, reasoning medium"
+base_url = "https://ai-gateway.vercel.sh/v1"
+model = "openai/gpt-oss-120b"
+api_key_env = "AI_GATEWAY_API_KEY"
+
+[params]
+max_tokens = 32000
+reasoning = { effort = "medium" }
+temperature = 1.0  # github.com/openai/gpt-oss
+top_p = 1.0
+
+[info]
+open_weights = true
+parameters = "117B-A5.1B"
+weights_gb = 65

@@ -1,0 +1,9 @@
+# Example for a local OpenAI-compatible server (llama.cpp llama-server, vLLM, LM Studio, Ollama).
+name = "local-example"
+label = "Local model (example)"
+base_url = "http://127.0.0.1:8080/v1"
+model = "local-model"
+concurrency = 1
+
+[params]
+max_tokens = 16000
