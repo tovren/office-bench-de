@@ -145,7 +145,6 @@ class Result:
     notes: list = field(default_factory=list)
     file_path: Path | None = field(default=None, metadata=INTERNAL)
     previous_path: Path | None = field(default=None, metadata=INTERNAL)
-    answer_text: str = field(default="", metadata=INTERNAL)
     file_lost: bool = field(default=False, metadata=INTERNAL)  # the file of the last done call is not in files/
     unknown_task: bool = field(default=False, metadata=INTERNAL)
 
@@ -333,7 +332,6 @@ def _from_log(r: Result, rec: dict, task: Task, files_dir: Path) -> None:
             r.invented_links += [u for u in links(x) if u not in r.invented_links]
     answer = (rec.get("final_answer") or "").strip() if r.outcome == "answer" else ""
     r.final_answer = bool(answer)
-    r.answer_text = answer
     r.reply_truncated = r.final_answer and len(rec.get("final_answer") or "") >= MAX_LOGGED_TEXT
     r.round_limit = r.outcome == "round_limit"
     for t, end in enumerate(rec.get("turns") or []):

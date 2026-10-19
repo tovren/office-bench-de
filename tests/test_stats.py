@@ -27,8 +27,6 @@ def test_wilson_bounds():
         for k in range(n + 1):
             lo, hi = stats.wilson(k, n)
             assert 0.0 <= lo <= k / n + 1e-12 and k / n - 1e-12 <= hi <= 1.0
-    assert stats.rate_text(17, 20) == "17/20 (64–95 %)"
-    assert stats.rate_text(0, 0) == "–"
 
 
 def test_bootstrap_estimate_is_mean_of_task_means():
@@ -60,12 +58,6 @@ def test_bootstrap_wider_than_independent_runs():
     _, lo, hi = stats.cluster_bootstrap(values)
     w_lo, w_hi = stats.wilson(15, 30)
     assert hi - lo > 0.8 * (w_hi - w_lo)
-
-
-def test_bootstrap_text():
-    assert stats.bootstrap_text({"a": [1, 1], "b": [1]}) == "100 % (100–100)"
-    assert stats.bootstrap_text({"a": [4.0, 4.0], "b": [3.0]}, percent=False) == "3.50 (3.00–4.00)"
-    assert stats.bootstrap_text({}) == "–"
 
 
 def test_pass_k():

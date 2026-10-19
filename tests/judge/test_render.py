@@ -221,8 +221,6 @@ def test_render_images(tmp_path):
     assert all(max(Image.open(p).size) == R.XLSX_SIZE for p in out[xlsx])
     assert {p.parent for ps in out.values() for p in ps} == {tmp_path / "png"}
     assert not [p for p in (tmp_path / "png").iterdir() if "file" in p.name or p.suffix != ".png"]
-    R.combine_pages(out[pptx], tmp_path / "slides.png", R.COLUMNS[".pptx"])
-    assert Image.open(tmp_path / "slides.png").size == (3 * 608 + 8, 2 * 346 + 8)
 
 
 @pytest.mark.slow
@@ -244,15 +242,6 @@ def test_render_images_page_limits(tmp_path):
     Document().save(short)
     assert len(R.render_images([short], tmp_path / "png")[short]) == 1
     assert len(list((tmp_path / "png").glob("f00000-*.png"))) == 1
-
-
-def test_combine_pages(tmp_path):
-    pages = []
-    for n, size in enumerate([(30, 40), (30, 40), (20, 50)]):
-        pages.append(tmp_path / f"{n}.png")
-        Image.new("RGB", size, (255, 255, 255)).save(pages[-1])
-    R.combine_pages(pages, tmp_path / "all.png", 2)
-    assert Image.open(tmp_path / "all.png").size == (2 * 38 + 8, 2 * 58 + 8)
 
 
 # -------------------------------------------------------------------------------------------------- neutral copies

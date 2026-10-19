@@ -29,11 +29,6 @@ def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
     return (0.0 if k == 0 else max(0.0, centre - half)), (1.0 if k == n else min(1.0, centre + half))
 
 
-def rate_text(k: int, n: int) -> str:
-    lo, hi = wilson(k, n)
-    return f"{k}/{n} ({100 * lo:.0f}–{100 * hi:.0f} %)" if n else "–"
-
-
 def _mean_of_means(groups: list[list[float]]) -> float:
     return statistics.fmean(statistics.fmean(g) for g in groups)
 
@@ -57,15 +52,6 @@ def cluster_bootstrap(values: dict, n: int = 4000, seed: int = SEED, level: floa
     samples.sort()
     a = (1 - level) / 2
     return point, samples[int(a * (n - 1))], samples[int((1 - a) * (n - 1))]
-
-
-def bootstrap_text(values: dict, percent: bool = True, **kw) -> str:
-    point, lo, hi = cluster_bootstrap(values, **kw)
-    if math.isnan(point):
-        return "–"
-    if percent:
-        return f"{100 * point:.0f} % ({100 * lo:.0f}–{100 * hi:.0f})"
-    return f"{point:.2f} ({lo:.2f}–{hi:.2f})"
 
 
 def pass_k(successes: dict, k: int) -> float:

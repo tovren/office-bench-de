@@ -36,7 +36,7 @@ from pydantic import (
     model_validator,
 )
 
-from officebench.checks.registry import CHART_TYPES, GENERAL_CHECKS, task_checks_for
+from officebench.checks.registry import CHART_TYPES, COLUMN_FORMATS, GENERAL_CHECKS, task_checks_for
 
 ROOT = Path(__file__).resolve().parents[2]
 TASKS_DIR = ROOT / "tasks"
@@ -265,7 +265,7 @@ class Checks(_Model):
     value_ranges: list[ValueRange] | None = None
     sorted: Sorted | None = None
     groups: list[Group] | None = None
-    column_format: dict[Regex, Literal["percent", "date", "euro"]] | None = None
+    column_format: dict[Regex, Literal[COLUMN_FORMATS]] | None = None
     workdays: StrictBool | Literal["BW"] | None = None  # "BW": also no public holidays in Baden-Württemberg
     # xlsx and pptx
     chart: StrictBool | None = None

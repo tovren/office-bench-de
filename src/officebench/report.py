@@ -31,8 +31,7 @@ RATES = (
     ("clean", "clean", True),
     ("success", "success", False),
 )
-CRITERIA = {"language": "language", "content": "content", "completeness": "completeness", "structure": "structure",
-            "usefulness": "usefulness"}
+CRITERIA = ("language", "content", "completeness", "structure", "usefulness")  # ids in judge/criteria.toml
 FOOTNOTE = (
     "Rates: estimate = mean over tasks of the per-task rate, 95 % interval from a cluster bootstrap over tasks (runs "
     "of one task are not independent), then the raw count. When the interval has zero width (all values equal), the "
@@ -313,7 +312,7 @@ def section_grades(grades: list[dict], models: set | None) -> list[str]:
         rows.append([m, sum(len(v) for v in overall[m].values()), len(overall[m]),
                      f"{num(point)} ({num(lo)}–{num(hi)})",
                      *(mean_of_means(per_criterion[k].get(m, {})) for k in CRITERIA)])
-    out = table(["model", "files", "tasks", "mean (95 %, bootstrap over tasks)", *CRITERIA.values()], rows)
+    out = table(["model", "files", "tasks", "mean (95 %, bootstrap over tasks)", *CRITERIA], rows)
     gaps = []
     for a, b in zip(ranked, ranked[1:], strict=False):
         v = paired_comparison(overall[a], overall[b])

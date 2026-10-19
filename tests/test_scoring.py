@@ -307,7 +307,7 @@ def test_results_file_and_cli(tmp_path, fake_check, capsys):
     assert "1 task runs, 1 scored, 1 successful" in capsys.readouterr().out
     lines = [json.loads(x) for x in (folder / scoring.RESULTS).read_text().splitlines()]
     assert len(lines) == 1 and {"task", "success", "rejections", "turns", "defects"} <= set(lines[0])
-    assert not {"file_path", "previous_path", "answer_text", "file_lost", "unknown_task"} & set(lines[0])
+    assert not {"file_path", "previous_path", "file_lost", "unknown_task"} & set(lines[0])
     loaded = scoring.load_results(folder)
     assert loaded[0].to_dict() == lines[0] and len(fake_check) == 2  # read back, not scored again
     (folder / "log.jsonl").touch()  # a newer log: scored again

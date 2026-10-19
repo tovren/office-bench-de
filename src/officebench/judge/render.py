@@ -3,7 +3,6 @@
     render_text(path, recalculated=None) -> str     Markdown of a docx/xlsx/pptx (no LibreOffice)
     render_texts(paths) -> {path: str}              many files; all xlsx recalculated in one LibreOffice run
     render_images(paths, out_dir) -> {path: [png]}  page images via LibreOffice -> PDF -> pdftoppm
-    combine_pages(pngs, dst, columns)               the pages of one file as one image
     neutral_copy(path, dst)                         copy without build times (ZIP entries, core.xml, embedded workbooks)
 
 The text gives the judge what an image cannot show reliably: formulas next to their results, numbers stored as text,
@@ -54,7 +53,6 @@ FILE_TYPES = (".docx", ".xlsx", ".pptx")
 DPI = 45
 XLSX_SIZE = 1100
 MAX_PAGES = {".docx": 8, ".pptx": 12, ".xlsx": 12}  # Word pages, slides, sheets
-COLUMNS = {".docx": 4, ".pptx": 3, ".xlsx": 1}  # combine_pages: pages per row
 # Calc's PDF export with one page per sheet, so no chart is cut in half by a page break.
 XLSX_PDF = 'pdf:calc_pdf_Export:{"SinglePageSheets":{"type":"boolean","value":"true"}}'
 
@@ -943,17 +941,3 @@ def render_images(paths, out_dir, dpi: int = DPI, xlsx_size: int = XLSX_SIZE,
                            check=False, capture_output=True, timeout=600)
             out[p] = sorted(out_dir.glob(f"{copy.stem}-*.png"))
     return out
-
-
-def combine_pages(images: list[Path], dst: Path, columns: int) -> None:
-    """The pages of one file side by side on a grey background (COLUMNS per file type), so the judge gets one image
-    per file. Saved with 256 colours: looks the same, about 60 % smaller. Pillow comes with python-pptx."""
-    from PIL import Image
-
-    pages = [Image.open(p).convert("RGB") for p in images]
-    w, h = max(i.width for i in pages), max(i.height for i in pages)
-    rows, columns = (len(pages) + columns - 1) // columns, min(columns, len(pages))
-    canvas = Image.new("RGB", (columns * (w + 8) + 8, rows * (h + 8) + 8), (140, 140, 140))
-    for n, page in enumerate(pages):
-        canvas.paste(page, (8 + (n % columns) * (w + 8), 8 + (n // columns) * (h + 8)))
-    canvas.quantize(256).save(dst, optimize=True)
