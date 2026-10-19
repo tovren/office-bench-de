@@ -259,9 +259,17 @@ def _resolver(sheets: list):
     return resolve
 
 
-def _run_soffice(command: list, timeout: float) -> None:
-    """Run LibreOffice in its own process group; on timeout kill the whole group (soffice.bin, not only oosplash),
-    else a hanging soffice.bin keeps the profile locked and blocks the retry."""
+def require_soffice(soffice: str = SOFFICE, purpose: str = "") -> None:
+    if not Path(soffice).exists() and not shutil.which(soffice):
+        raise RuntimeError(f"LibreOffice not found ({soffice})" + (f"; {purpose}" if purpose else ""))
+
+
+def run_soffice(args: list, profile: Path, timeout: float, soffice: str = SOFFICE) -> None:
+    """LibreOffice headless with `args` and the profile folder `profile` (fresh_profile), in its own process group;
+    on timeout kill the whole group (soffice.bin, not only oosplash), else a hanging soffice.bin keeps the profile
+    locked and blocks the retry."""
+    command = [soffice, f"-env:UserInstallation={profile.as_uri()}", "--headless", "--norestore", "--nologo",
+               "--nodefault", *map(str, args)]
     proc = subprocess.Popen(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
     try:
         proc.wait(timeout=timeout)
@@ -273,7 +281,7 @@ def _run_soffice(command: list, timeout: float) -> None:
         proc.wait()
 
 
-def _profile(folder: Path) -> Path:
+def fresh_profile(folder: Path) -> Path:
     """A fresh LibreOffice profile that recalculates formulas when loading xlsx (OOXMLRecalcMode 0 = always); the
     user's own profile would keep cached results and must not be touched or locked."""
     (folder / "user").mkdir(parents=True, exist_ok=True)
@@ -291,8 +299,7 @@ def recalculate(paths: list, tmp: Path, soffice: str = SOFFICE, timeout: float =
     with a fresh profile in smaller batches. Profiles and copies live below `tmp` (a temp dir of the caller)."""
     if not paths:
         return {}
-    if not Path(soffice).exists() and not shutil.which(soffice):
-        raise RuntimeError(f"LibreOffice not found ({soffice}); xlsx files cannot be recalculated")
+    require_soffice(soffice, "xlsx files cannot be recalculated")
     src, out = tmp / "in", tmp / "out"
     for d in (src, out):
         d.mkdir(parents=True, exist_ok=True)
@@ -305,14 +312,13 @@ def recalculate(paths: list, tmp: Path, soffice: str = SOFFICE, timeout: float =
 
     def convert(files: list, per_call: int, profile: Path):
         for start in range(0, len(files), per_call):
-            _run_soffice([soffice, f"-env:UserInstallation={profile.as_uri()}", "--headless", "--norestore",
-                          "--nologo", "--nodefault", "--convert-to", "xlsx", "--outdir", str(out),
-                          *map(str, files[start:start + per_call])], timeout)
+            run_soffice(["--convert-to", "xlsx", "--outdir", out, *files[start:start + per_call]], profile, timeout,
+                        soffice)
 
-    convert(copies, 300, _profile(tmp / "profile"))
+    convert(copies, 300, fresh_profile(tmp / "profile"))
     missing = [k for k in copies if not (out / k.name).exists()]
     if missing:
-        convert(missing, 20, _profile(tmp / "profile2"))
+        convert(missing, 20, fresh_profile(tmp / "profile2"))
     return {p: (q if q.exists() else None) for p, q in mapping.items()}
 
 

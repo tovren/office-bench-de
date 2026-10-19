@@ -23,7 +23,6 @@ What the text contains:
 import io
 import posixpath
 import re
-import shutil
 import subprocess
 import tempfile
 import zipfile
@@ -33,7 +32,7 @@ from pathlib import Path
 from lxml import etree
 from openpyxl.utils import get_column_letter
 
-from officebench.checks.xlsx import SOFFICE, _profile, _run_soffice, recalculate
+from officebench.checks.xlsx import fresh_profile, recalculate, require_soffice, run_soffice
 
 NS = {
     "w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main",
@@ -894,11 +893,8 @@ def neutral_copy(path, dst) -> None:
 def _soffice(args: list[str], folder: Path, timeout: float) -> None:
     """LibreOffice headless with a fresh profile in folder/profile that recalculates xlsx when loading (so the PDF
     shows formula results, which openpyxl files do not carry), via the content check's process-group runner."""
-    if not (Path(SOFFICE).exists() or shutil.which(SOFFICE)):
-        raise RuntimeError(f"LibreOffice not found ({SOFFICE})")
-    profile = _profile(folder / "profile")
-    _run_soffice([SOFFICE, f"-env:UserInstallation={profile.as_uri()}", "--headless", "--norestore", "--nologo",
-                  "--nodefault", *args], timeout)
+    require_soffice()
+    run_soffice(args, fresh_profile(folder / "profile"), timeout)
 
 
 def render_images(paths, out_dir, dpi: int = DPI, xlsx_size: int = XLSX_SIZE,
