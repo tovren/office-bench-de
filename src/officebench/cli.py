@@ -47,12 +47,6 @@ def _run(args) -> int:
     return 0
 
 
-def _check(args) -> int:
-    from officebench.checks.content import main as check_main
-
-    return check_main(args.rest)
-
-
 def _score(args) -> int:
     from officebench.scoring import main as score_main
 
@@ -112,9 +106,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--retry-failed", action="store_true", help="rerun task runs that ended in a provider/network error")
     p.set_defaults(func=_run)
 
-    p = sub.add_parser("check", help="content check of files (see `obench check -- --help`)", add_help=False)
-    p.add_argument("rest", nargs=argparse.REMAINDER)
-    p.set_defaults(func=_check)
+    sub.add_parser("check", help="content check of files (see `obench check --help`)", add_help=False)
 
     p = sub.add_parser("score", help="score runs: write results.jsonl into every model folder")
     p.add_argument("folders", nargs="+", help="model folder(s) runs/<run>/<model> or run folder(s) holding them")
@@ -138,8 +130,13 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--judge-name", default="agent", help="judge name for imported grades")
     p.set_defaults(func=_judge)
 
-    args = parser.parse_args(argv)
+    argv = sys.argv[1:] if argv is None else list(argv)
     try:
+        if argv[:1] == ["check"]:  # its own parser (officebench.checks.content), so `obench check --help` lists it
+            from officebench.checks.content import main as check_main
+
+            return check_main(argv[2:] if argv[1:2] == ["--"] else argv[1:])
+        args = parser.parse_args(argv)
         return args.func(args)
     except (FileNotFoundError, ValueError) as e:  # bad folder, task selection, config file or changed run folder
         print(f"error: {e}", file=sys.stderr)
