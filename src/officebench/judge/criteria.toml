@@ -1,0 +1,42 @@
+# Criteria of the quality judge, each graded as a whole number 1–5 (5 = very good). The descriptions for 1, 3 and 5
+# are anchors; 2 and 4 lie in between. The file's grade is the mean of the five.
+
+[[criterion]]
+id = "language"
+name = "Language"
+question = "Is the German correct, natural and in a fitting tone?"
+grade_5 = "flawless, natural German in a fitting tone; no foreign words, foreign characters or control tokens"
+grade_3 = "understandable, but several errors (grammar, gender, typos), noticeable Denglisch or clumsy translations"
+grade_1 = "hard to understand, many errors, passages in another language, foreign characters or control tokens"
+
+[[criterion]]
+id = "content"
+name = "Content and calculations"
+question = "Is what it says correct: numbers, formulas, dates, weekdays, logic, plausibility?"
+grade_5 = "concrete and plausible; all calculations, formulas, dates and weekdays are right; no contradictions"
+grade_3 = "right at the core, but single errors (wrong weekday, calculation error, contradiction, filler instead of content, placeholders)"
+grade_1 = "mostly wrong, empty or invented and contradictory; formulas do not calculate (e.g. stored as text)"
+
+[[criterion]]
+id = "completeness"
+name = "Completeness"
+question = "Is everything there that the task asks for (see the checklist)?"
+grade_5 = "all requested parts are there and worked out"
+grade_3 = "one or two requested parts are missing or only hinted at"
+grade_1 = "most of it is missing; the file is nearly empty or cut off"
+
+[[criterion]]
+id = "structure"
+name = "Structure and form"
+question = "Outline, formatting, layout: is it easy to read and to work on?"
+grade_5 = "clear outline with real headings, lists and tables; clean layout (no empty pages, no text over the edge); fitting number formats"
+grade_3 = "recognisable structure, but flaws of form (headings as body text, needless page breaks, missing formats, overloaded slides)"
+grade_1 = "hardly any structure or an unusable layout (empty tables, overlapping or cut-off content)"
+
+[[criterion]]
+id = "usefulness"
+name = "Usefulness"
+question = "How much rework does it need before it can be used in a company?"
+grade_5 = "usable right away, at most small things (under 5 minutes)"
+grade_3 = "a good basis, but noticeable rework (about 15–30 minutes: fixing errors, adding parts)"
+grade_1 = "unusable; doing it anew is faster"

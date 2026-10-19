@@ -1,0 +1,10 @@
+name = "gemini-3-flash"
+label = "Gemini 3 Flash (judge)"
+base_url = "https://ai-gateway.vercel.sh/v1"
+model = "google/gemini-3-flash"
+api_key_env = "AI_GATEWAY_API_KEY"
+concurrency = 6
+
+[params]
+max_tokens = 16000
+reasoning = { effort = "high" }

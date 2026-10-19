@@ -53,6 +53,26 @@ def _check(args) -> int:
     return check_main(args.rest)
 
 
+def _score(args) -> int:
+    from officebench.scoring import main as score_main
+
+    try:
+        return score_main(args.folders)
+    except FileNotFoundError as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 1
+
+
+def _report(args) -> int:
+    from officebench.report import main as report_main
+
+    try:
+        return report_main(args.folders, args.compare, args.grades, args.rescore)
+    except FileNotFoundError as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 1
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="obench", description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -76,6 +96,17 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("check", help="content check of files (see `obench check -- --help`)", add_help=False)
     p.add_argument("rest", nargs=argparse.REMAINDER)
     p.set_defaults(func=_check)
+
+    p = sub.add_parser("score", help="score runs: write results.jsonl into every model folder")
+    p.add_argument("folders", nargs="+", help="model folder(s) runs/<run>/<model> or run folder(s) holding them")
+    p.set_defaults(func=_score)
+
+    p = sub.add_parser("report", help="Markdown report of scored runs (stdout)")
+    p.add_argument("folders", nargs="+", help="model folder(s) or run folder(s); scored first if needed")
+    p.add_argument("--compare", nargs=2, metavar=("A", "B"), help="paired comparison of two models (names as shown)")
+    p.add_argument("--grades", nargs="+", type=Path, help="JSONL file(s) with judge grades")
+    p.add_argument("--rescore", action="store_true", help="score again even if results.jsonl is up to date")
+    p.set_defaults(func=_report)
 
     args = parser.parse_args(argv)
     return args.func(args)
