@@ -1,0 +1,172 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Wartungsvertrag Kerner IT: Pflichten, Fristen und Kosten",
+  "subtitle": "Übersicht für Geschäftsführung und Büro",
+  "header_text": "Brenner Haustechnik GmbH",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "text": "Rahmenvertrag über Wartung und IT-Service mit der Kerner IT-Systemhaus GmbH, Stuttgart (Vertragsnummer RV-2026-0147), von uns unterschrieben am 13.10.2026. Leistungsbeginn ist der 1. November 2026, die feste Mindestlaufzeit geht bis 31.12.2028. Danach verlängert sich der Vertrag automatisch um jeweils zwölf Monate, wenn niemand kündigt."
+   },
+   {
+    "type": "paragraph",
+    "text": "**Wichtig:** Die Besonderen Vereinbarungen in § 19 gehen allen anderen Regelungen vor. Sie ändern die Kündigungsfrist (sechs statt drei Monate) und den Preis je Arbeitsplatz (38,00 € statt 42,00 € nach dem Preisblatt)."
+   },
+   {
+    "type": "heading",
+    "text": "Was wir als Auftraggeber tun müssen",
+    "level": 1
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Ansprechpartner und Stellvertreter benennen und dem Systemhaus zusammen mit der vollständigen Geräteliste nach dem Muster in Anlage 3 in Textform schicken (§ 9.1, § 9.2). Bis die Liste da ist, gelten die Reaktionszeiten nicht.",
+     "Einen dauerhaften, gesicherten Fernwartungszugang bereitstellen und funktionsfähig halten (§ 9.3).",
+     "Änderungen am Gerätebestand (neue, getauschte oder stillgelegte Geräte) innerhalb von 14 Tagen in Textform melden (§ 9.4).",
+     "Keine eigenen Eingriffe in Server, Firewall oder Telefonanlage und keine Änderung der Administrator-Kennwörter ohne Abstimmung mit Kerner (§ 9.4).",
+     "Störungen über das Ticketportal oder die Service-Hotline melden, mit betroffenem System, Beschreibung und Zeitpunkt; Störungen der Priorität 1 zusätzlich immer telefonisch (§ 9.5).",
+     "Sicherungsmedien regelmäßig wechseln, mindestens einen aktuellen Sicherungsstand außer Haus aufbewahren und die wöchentlichen Sicherungsberichte prüfen (§ 9.6).",
+     "Den Technikern nach Ankündigung während der Servicezeiten Zutritt zu den Räumen gewähren und für Arbeiten vor Ort einen Arbeitsplatz stellen (§ 9.7).",
+     "Leistungsnachweise prüfen und Einwände innerhalb von 10 Tagen nach Zugang in Textform erheben, sonst gelten sie als genehmigt (§ 10.2).",
+     "Rechnungen innerhalb von 14 Tagen nach Rechnungsdatum ohne Abzug bezahlen (§ 17.4).",
+     "Zusatzleistungen dürfen nur die benannten Ansprechpartner anfordern; ab voraussichtlich mehr als acht Stunden Aufwand kommt vorher ein Kostenvoranschlag, den wir freigeben müssen (§ 7.1)."
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Fristen",
+    "level": 1
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Was",
+      "Frist laut Vertrag",
+      "Konkretes Datum",
+      "Grundlage"
+     ],
+     [
+      "Ansprechpartner, Stellvertreter und vollständige Geräteliste übermitteln (Textform)",
+      "4 Wochen nach Unterzeichnung",
+      "Dienstag, 10.11.2026",
+      "§ 9.2; bei Einhaltung halbe Einrichtungspauschale (§ 19.3)"
+     ],
+     [
+      "Änderungen am Gerätebestand melden",
+      "14 Tage nach der Änderung",
+      "laufend",
+      "§ 9.4"
+     ],
+     [
+      "Einwände gegen Leistungsnachweise",
+      "10 Tage nach Zugang",
+      "monatlich mit der Rechnung",
+      "§ 10.2"
+     ],
+     [
+      "Rechnungen bezahlen",
+      "14 Tage nach Rechnungsdatum",
+      "monatlich, Pauschale im Voraus",
+      "§ 17.1, § 17.4"
+     ],
+     [
+      "Kündigung zum Ende der Mindestlaufzeit (31.12.2028), schriftlich, Zugang beim Systemhaus",
+      "6 Monate vor Ablauf",
+      "Freitag, 30.06.2028",
+      "§ 19.1 (ersetzt die drei Monate aus § 4.2), § 4.4"
+     ],
+     [
+      "Kündigung eines Verlängerungsjahres",
+      "6 Monate vor dessen Ablauf",
+      "jeweils sechs Monate vor Jahresende",
+      "§ 19.1, § 4.1"
+     ]
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Eine Kündigung per E-Mail reicht nicht, sie muss eigenhändig unterschrieben sein. Wer die Frist verpasst, ist ein weiteres Jahr gebunden."
+   },
+   {
+    "type": "heading",
+    "text": "Was der Vertrag kostet",
+    "level": 1
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Position",
+      "Anzahl",
+      "Preis je Monat",
+      "Summe je Monat"
+     ],
+     [
+      "Arbeitsplätze (Preis nach § 19.2)",
+      "24",
+      "38,00 €",
+      "912,00 €"
+     ],
+     [
+      "Server",
+      "2",
+      "95,00 €",
+      "190,00 €"
+     ],
+     [
+      "Telefonanlage mit Endgeräten",
+      "1",
+      "120,00 €",
+      "120,00 €"
+     ],
+     [
+      "Pauschale insgesamt",
+      "",
+      "",
+      "1.222,00 €"
+     ]
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Die Pauschale beträgt also 1.222,00 € netto im Monat zuzüglich Umsatzsteuer, im Jahr 14.664,00 €. Sie richtet sich nach dem Bestand am Monatsersten und ändert sich, wenn wir Geräte hinzufügen oder abmelden."
+   },
+   {
+    "type": "paragraph",
+    "text": "Zusätzlich abgerechnet werden (alle Preise netto):"
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Einrichtungspauschale einmalig 1.450,00 €; nur die Hälfte, wenn wir Geräteliste und Ansprechpartner fristgerecht schicken (§ 19.3).",
+     "Zusatzleistungen nach Aufwand mit 98,00 € je Stunde, abgerechnet je angefangene Viertelstunde, z. B. neue Arbeitsplätze, Umzüge, Projekte, Datenwiederherstellung nach Bedienfehlern, Schulungen.",
+     "Auf unseren ausdrücklichen Wunsch außerhalb der Servicezeiten: 50 % Zuschlag auf den Stundensatz.",
+     "Anfahrtspauschale 45,00 € je Einsatz vor Ort, der nicht zu den Grundleistungen gehört. Fährt ein Techniker wegen einer Störung raus, die sich per Fernwartung nicht beheben lässt, ist das in der Pauschale enthalten.",
+     "Anwenderunterstützung über zehn Stunden im Monat hinaus zum Stundensatz.",
+     "Hardware, Lizenzen und Verbrauchsmaterial nach gesondertem Angebot."
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Preiserhöhungen sind frühestens zum 1. Januar 2028 möglich, danach höchstens einmal in zwölf Monaten, und jeweils um höchstens 3 %. Kerner muss sie mindestens drei Monate vorher in Textform ankündigen und begründen. Liegt die Erhöhung über der Hälfte dieser Grenze, dürfen wir mit einem Monat Frist zum Inkrafttreten kündigen (Anlage 2 Ziffer 4)."
+   },
+   {
+    "type": "heading",
+    "text": "Servicezeiten und Reaktionszeiten",
+    "level": 1
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Servicezeiten: Montag bis Freitag 7:30 bis 17:00 Uhr, nicht an Feiertagen in Baden-Württemberg und nicht am 24. und 31. Dezember.",
+     "Priorität 1 (Server oder Telefonanlage ausgefallen, mehrere Arbeitsplätze betroffen): Reaktion innerhalb von 2 Stunden, Wiederherstellung angestrebt in acht Stunden.",
+     "Priorität 2 (einzelner Arbeitsplatz ohne Ersatzgerät): Reaktion innerhalb von 4 Stunden.",
+     "Priorität 3 (sonstige Störungen und Anfragen): Reaktion bis zum Ende des nächsten Arbeitstags.",
+     "Die Zeiten laufen nur innerhalb der Servicezeiten. Überschreitet Kerner die Reaktionszeit bei Priorität 1, bekommen wir je volle Stunde 50,00 € gutgeschrieben, höchstens 500,00 € im Monat."
+    ]
+   }
+  ]
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "function": "create_powerpoint_file",
+ "arguments": {
+  "title": "Phishing erkennen und richtig reagieren",
+  "slides": [
+   {
+    "layout": "title",
+    "title": "Phishing erkennen und richtig reagieren",
+    "subtitle": "Kurzschulung für alle Kolleginnen und Kollegen",
+    "notes": "Kurz begrüßen und das Ziel nennen: In den nächsten 20 Minuten geht es darum, woran man Phishing-Mails erkennt und was man tut, wenn man doch einmal draufgeklickt hat. Fragen gerne jederzeit zwischendurch."
+   },
+   {
+    "layout": "chart",
+    "title": "Gemeldete Phishing-Mails bei uns",
+    "chart": {
+     "type": "column",
+     "categories": [
+      "2023",
+      "2024",
+      "2025",
+      "2026 (bis September)"
+     ],
+     "series": [
+      {
+       "name": "Gemeldete Phishing-Mails",
+       "values": [
+        45,
+        78,
+        130,
+        112
+       ]
+      }
+     ],
+     "unit": "Anzahl Meldungen"
+    },
+    "notes": "Die Zahl der gemeldeten Phishing-Mails ist von 45 im Jahr 2023 auf 130 im Jahr 2025 gestiegen, hat sich also fast verdreifacht. 2026 sind es bis Ende September schon 112, das Jahr ist also noch nicht vorbei. Die Angriffe werden häufiger und besser gemacht – deshalb diese Schulung."
+   },
+   {
+    "layout": "section",
+    "title": "Woran erkenne ich Phishing?",
+    "subtitle": "Die typischen Merkmale",
+    "notes": "Jetzt schauen wir uns an, woran man eine Phishing-Mail erkennt. Meist ist es nicht ein einzelnes Merkmal, sondern die Kombination."
+   },
+   {
+    "layout": "bullets",
+    "title": "Typische Merkmale einer Phishing-Mail",
+    "bullets": [
+     "Absendername passt, Adresse oder Domain nicht",
+     "Zeitdruck oder Drohung („Konto wird gesperrt“)",
+     "Links führen auf fremde Seiten",
+     "Unerwartete Anhänge, z. B. ZIP oder Rechnung",
+     "Unpersönliche Anrede, ungewohnte Sprache",
+     "Bitte um Passwort, Zahlung oder Bankdaten"
+    ],
+    "notes": "Diese sechs Punkte sind die häufigsten Warnzeichen. Besonders wichtig ist der Absender: Der angezeigte Name kann frei gewählt werden, entscheidend ist die Adresse dahinter. Und: Keine seriöse Stelle fragt per Mail nach Passwörtern."
+   },
+   {
+    "layout": "bullets",
+    "title": "Absender und Links prüfen",
+    "bullets": [
+     "Absenderadresse aufklappen, nicht nur den Namen lesen",
+     "Maus über den Link halten und Ziel lesen",
+     "Auf die Domain achten: brenner-haustechnik.de.login-check.com ist fremd",
+     "Im Zweifel beim Absender über die bekannte Nummer anrufen",
+     "Nie Zugangsdaten über einen Link aus einer Mail eingeben"
+    ],
+    "notes": "Hier am besten kurz live in Outlook zeigen, wie man die Absenderadresse aufklappt und wie man mit der Maus über einen Link fährt, ohne zu klicken. Das Beispiel mit der Domain erklären: Entscheidend ist der Teil direkt vor der ersten Schrägstrich-Stelle."
+   },
+   {
+    "layout": "two_columns",
+    "title": "Was Sie tun und was Sie lassen sollten",
+    "left_heading": "Das sollten Sie tun",
+    "left": [
+     "Verdächtige Mails mit „Phishing melden“ an die IT schicken",
+     "Bei Zweifeln nachfragen",
+     "Bildschirm sperren, wenn Sie den Platz verlassen",
+     "Updates zulassen, wenn die IT sie verteilt"
+    ],
+    "right_heading": "Das sollten Sie lassen",
+    "right": [
+     "Links oder Anhänge aus unerwarteten Mails öffnen",
+     "Passwörter am Telefon oder per Mail nennen",
+     "Makros in Office-Dateien aktivieren",
+     "Verdächtige Mails einfach löschen und schweigen"
+    ],
+    "notes": "Links stehen die Dinge, die wir uns von allen wünschen, rechts die typischen Fehler. Besonders der letzte Punkt rechts ist wichtig: Wer eine verdächtige Mail nur löscht, schützt sich selbst, aber nicht die Kolleginnen und Kollegen, die dieselbe Mail bekommen haben."
+   },
+   {
+    "layout": "bullets",
+    "title": "Draufgeklickt – was jetzt?",
+    "bullets": [
+     "Ruhe bewahren und nichts verschweigen",
+     "Sofort die IT anrufen: Durchwahl 300",
+     "Keine weiteren Eingaben, Fenster schließen",
+     "Gerät nur nach Anweisung der IT vom Netz trennen",
+     "Passwort ändern, wenn Zugangsdaten eingegeben wurden"
+    ],
+    "notes": "Das Wichtigste auf dieser Folie: Wer geklickt hat, meldet sich sofort. Niemand bekommt deswegen Ärger. Jede Minute zählt, denn je früher die IT Bescheid weiß, desto eher kann sie das Konto sperren oder den Rechner prüfen."
+   },
+   {
+    "layout": "bullets",
+    "title": "Melden statt löschen",
+    "bullets": [
+     "Button „Phishing melden“ in Outlook nutzen",
+     "Die IT warnt dann alle Kolleginnen und Kollegen",
+     "Lieber einmal zu oft melden als einmal zu wenig",
+     "Jede Meldung hilft – 2026 schon 112 bis September"
+    ],
+    "notes": "Zum Schluss zeigen, wo der Button „Phishing melden“ in Outlook sitzt. Betonen, dass die steigenden Zahlen auch ein gutes Zeichen sind: Es wird mehr gemeldet, weil alle aufmerksamer sind."
+   },
+   {
+    "layout": "bullets",
+    "title": "Das Wichtigste in Kürze",
+    "bullets": [
+     "Absender und Link-Ziel prüfen, bevor Sie klicken",
+     "Bei Zeitdruck und ungewöhnlichen Bitten misstrauisch werden",
+     "Verdächtige Mails melden, nicht nur löschen",
+     "Geklickt? Sofort die IT anrufen"
+    ],
+    "notes": "Die vier Punkte noch einmal zusammenfassen und auf Fragen eingehen. Hinweis, dass die Folien im Intranet liegen und dass die IT unter Durchwahl 300 jederzeit erreichbar ist."
+   }
+  ]
+ }
+}

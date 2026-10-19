@@ -1,0 +1,54 @@
+id = "bueromaterial"
+title = "Office supplies order list (follow-up)"
+version = 1
+kind = "follow_up"
+file_type = "xlsx"
+difficulty = "medium"
+tags = ["follow_up", "change_request", "retain", "formula", "total_row", "sumif"]
+
+# Turn 1: total 1,060.20 €. Turn 2: paper 40 × 4.49 = 179.60 €, toner removed: total 724.20 €; cost centre 4100
+# (paper 179.60 + envelopes 131.40) = 311.00 €, 4200 (binders 149.40, pens 82.80, sticky notes 85.00,
+# highlighters 72.00, staples 24.00) = 413.20 €. A toner row with quantity 0 is not a hard defect (the total is right);
+# if the toner stays in with 4 pieces, 724.20 is missing. retained compares with the first file.
+# numbers_sourced (soft): all numbers come from the prompt (the order list); it reports numbers, times and dates that
+# do not appear there and do not simply follow from it.
+[[turns]]
+text = """Mach mir bitte eine Bestellliste für Büromaterial als Excel, mit Gesamtpreis je Position als Formel und der Summe unten:
+
+Kopierpapier A4, 500 Blatt: 40 Pakete à 3,99 €
+Ordner breit: 60 Stück à 2,49 €
+Kugelschreiber blau, 10er-Pack: 12 Packungen à 6,90 €
+Haftnotizen gelb, 12 Blöcke: 10 Packungen à 8,50 €
+Toner HP 59A: 4 Stück à 89,00 €
+Briefumschläge DIN lang, 500 Stück: 6 Kartons à 21,90 €
+Textmarker, 4er-Set: 15 Sets à 4,80 €
+Heftklammern 24/6, 1.000 Stück: 20 Packungen à 1,20 €"""
+
+[[turns]]
+text = "Der Lieferant hat sich gemeldet: Das Kopierpapier kostet jetzt 4,49 € statt 3,99 €, und den Toner bestellen wir doch nicht, davon haben wir noch genug. Füg bitte außerdem eine Spalte Kostenstelle hinzu: Kopierpapier und Briefumschläge gehen auf 4100, alles andere auf 4200. Und unten bitte zusätzlich die Summe je Kostenstelle. Sonst bleibt alles, wie es ist."
+
+[checks]
+numbers_sourced = true
+data_rows_min = 7
+columns = ['artikel|bezeichnung|produkt|material|position', 'menge|anzahl', 'einzelpreis|stückpreis|preis', 'gesamt|summe|betrag', 'kostenstelle|\bkst\b']
+line_item_formula = true
+total_row = true
+values_present = [4.49, 179.6, 724.2, 311, 413.2]
+retained = { hard = 0.6, soft = 0.8 }
+
+[checks.topics]
+Ordner = 'ordner'
+Kugelschreiber = 'kugelschreiber'
+Haftnotizen = 'haftnotiz'
+"Briefumschläge" = 'umschl'
+Textmarker = 'textmarker'
+Heftklammern = 'heftklammer'
+
+[judge]
+checklist = [
+  "zweite Fassung: Kopierpapier 4,49 € (Gesamt 179,60 €), Toner nicht mehr bestellt (Zeile weg oder eindeutig mit Menge 0), alle übrigen Positionen unverändert",
+  "Spalte Kostenstelle richtig belegt: Papier und Umschläge 4100, der Rest 4200",
+  "Gesamtpreis je Position als Formel, Summe 724,20 € als Formel",
+  "Summe je Kostenstelle: 4100 = 311,00 €, 4200 = 413,20 € (am besten mit SUMMEWENN)",
+  "Euro-Format, lesbare Spalten, keine Reste der ersten Fassung (alte Summe 1.060,20 €, alter Papierpreis)",
+]

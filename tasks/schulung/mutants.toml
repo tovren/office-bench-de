@@ -1,0 +1,56 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+# Checklist: „keine stille Hochrechnung“; observed in an earlier run (a model silently extrapolates to the full year)
+[[mutant]]
+name = "silent_extrapolation_in_chart"
+defect = "2026 silently extrapolated to the full year in the chart (149 instead of the 112 reported up to September)"
+number = [[112, 149]]
+set = [["slides.1.chart.categories.3", "2026"]]
+expected = ["chart_values"]
+
+# observed twice in earlier runs: only „2026*“ without a footnote on the slide
+[[mutant]]
+name = "partial_year_not_marked"
+defect = "category „2026*“ without explanation: nowhere on the slide does it say that 2026 only counts up to September"
+set = [["slides.1.chart.categories.3", "2026*"]]
+expected = ["topics", "chart_values"]
+gap = "chart_values checks only the values, not the categories; a topic 'bis (ende )?sep|jan.{0,4}sep|bis 30\\.0?9' on the slide text without notes (or on the chart categories) would find the missing marking (the notes say „bis Ende September“, so a topic on the whole text is not enough)"
+
+# observed in earlier runs („fast eine Verdopplung“, once for +73 %)
+[[mutant]]
+name = "doubled_instead_of_tripled"
+defect = "note: rise from 45 to 130 „fast verdoppelt“, actually 2.89 times"
+replace = [["hat sich also fast verdreifacht", "hat sich also fast verdoppelt"]]
+expected = ["text_arithmetic"]
+severity = "soft"
+gap = "text_arithmetic checks only written-out calculations (a × b = c, total rows); factor words like „verdoppelt/verdreifacht“ between two numbers of a paragraph (von 45 … auf 130) are checked by nothing"
+
+# observed in earlier runs (chart slide without notes; title slide without notes)
+[[mutant]]
+name = "notes_missing"
+defect = "title, chart and section slide without speaker notes (only 6 slides with notes)"
+remove = ["slides.0.notes", "slides.1.notes", "slides.2.notes"]
+expected = ["notes_min"]
+
+# observed in an earlier run: do and don't as alternating bullet points instead of side by side
+[[mutant]]
+name = "do_dont_as_list"
+defect = "do and don't not set side by side but mixed in one list"
+set = [["slides.5", { layout = "bullets", title = "Was Sie tun und was Sie lassen sollten", bullets = [
+  "Verdächtige Mails mit „Phishing melden“ an die IT schicken",
+  "Keine Links oder Anhänge aus unerwarteten Mails öffnen",
+  "Bei Zweifeln nachfragen",
+  "Passwörter nie am Telefon oder per Mail nennen",
+  "Bildschirm sperren, wenn Sie den Platz verlassen",
+  "Makros in Office-Dateien nicht aktivieren",
+], notes = "Hier die wichtigsten Regeln für den Alltag. Besonders wichtig: Wer eine verdächtige Mail nur löscht, schützt sich selbst, aber nicht die Kolleginnen und Kollegen." }]]
+expected = ["side_by_side"]
+severity = "soft"
+
+# observed in several earlier runs: placeholder „IT-Desk 0000“
+[[mutant]]
+name = "placeholder_extension"
+defect = "placeholder „IT-Desk 0000“ instead of a real extension number"
+replace = [["Durchwahl 300", "IT-Desk 0000"]]
+expected = ["placeholders"]
+severity = "soft"

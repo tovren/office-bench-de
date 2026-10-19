@@ -1,0 +1,105 @@
+{
+ "function": "create_powerpoint_file",
+ "arguments": {
+  "title": "Strategieworkshop Vertrieb",
+  "slides": [
+   {
+    "layout": "title",
+    "title": "Strategieworkshop Vertrieb",
+    "subtitle": "Donnerstag, 19. November 2026 · Hotel Linde, Nürtingen"
+   },
+   {
+    "layout": "bullets",
+    "title": "Ziele des Tages",
+    "bullets": [
+     "Rückblick auf 2026: Was lief gut, was nicht?",
+     "Ideen für mehr Neukunden sammeln",
+     "Maßnahmenplan 2027 mit Verantwortlichen beschließen"
+    ],
+    "notes": "Am Ende des Tages wollen wir einen Maßnahmenplan haben, bei dem für jede Maßnahme feststeht, wer sie bis wann umsetzt."
+   },
+   {
+    "layout": "table",
+    "title": "Agenda",
+    "table": [
+     [
+      "Uhrzeit",
+      "Block",
+      "Dauer"
+     ],
+     [
+      "09:00–09:20",
+      "Begrüßung und Ziele",
+      "20 Min."
+     ],
+     [
+      "09:20–10:05",
+      "Rückblick 2026",
+      "45 Min."
+     ],
+     [
+      "10:05–10:20",
+      "Kaffeepause",
+      "15 Min."
+     ],
+     [
+      "10:20–11:20",
+      "Ergebnisse der Kundenumfrage",
+      "60 Min."
+     ],
+     [
+      "11:20–12:30",
+      "Ideensammlung",
+      "70 Min."
+     ],
+     [
+      "12:30–13:30",
+      "Mittagessen",
+      "60 Min."
+     ],
+     [
+      "13:30–14:45",
+      "Arbeitsgruppen",
+      "75 Min."
+     ],
+     [
+      "14:45–15:00",
+      "Kaffeepause",
+      "15 Min."
+     ],
+     [
+      "15:00–15:50",
+      "Vorstellung der Ergebnisse",
+      "50 Min."
+     ],
+     [
+      "15:50–16:30",
+      "Maßnahmenplan und Abschluss",
+      "40 Min."
+     ]
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Spielregeln",
+    "bullets": [
+     "Handys lautlos, Laptops zu",
+     "Ausreden lassen, kurz fassen",
+     "Jede Idee zählt, Kritik erst später",
+     "Pausen und Zeiten einhalten",
+     "Ergebnisse gehören dem ganzen Team"
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Organisatorisches",
+    "bullets": [
+     "Hotel Linde, Nürtingen",
+     "Beginn 9:00 Uhr, Ende 16:30 Uhr",
+     "Kaffeepausen 10:05 und 14:45 Uhr, Mittagessen 12:30 Uhr",
+     "Ergebnisse kommen als Fotoprotokoll per Mail"
+    ]
+   }
+  ]
+ }
+}

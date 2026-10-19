@@ -1,0 +1,59 @@
+id = "rufbereitschaft"
+title = "On-call rota November/December (holidays, substitute)"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "hard"
+tags = ["dates", "calendar", "holidays", "rotation", "two_sheets", "sumif", "arithmetic"]
+dates_from = "2026-10-13"
+
+# Weekly rotation Keller, Brandt, Öztürk, Lehmann from Monday, 02.11.2026; on call only Mon–Fri, excluding public
+# holidays in Baden-Württemberg (24.12. and 31.12. are working days, the prompt says so). Result (weekdays and
+# holidays checked with Python, holidays as in the workdays check):
+#   week 45 02.11.–06.11. Keller 5 · week 46 09.11.–13.11. Brandt 5 · week 47 16.11.–20.11. Öztürk 5 ·
+#   week 48 23.11.–27.11. Lehmann 5 · week 49 30.11.–04.12. Keller 5 · week 50 07.12.–11.12. Öztürk 5 (for Brandt,
+#   on leave) · week 51 14.12.–18.12. Öztürk 5 · week 52 21.12.–24.12. Lehmann 4 (Fri 25.12. is Christmas Day) ·
+#   week 53 28.12.–31.12. Keller 4 (Fri 01.01.2027 is New Year's Day, and no longer in December).
+# Days per person: Keller 14, Brandt 5, Öztürk 15, Lehmann 9, 43 in total; allowance €30 per day: 420 / 150 / 450 /
+# 270 €, 1,290 € in total (grand totals are not asked for, checklist only). Typical errors: 25.12. counted
+# (Lehmann 10 → 300); substitution forgotten (Brandt and Öztürk 10 each → 300); rotation shifted after the
+# substitution (Öztürk 10, Lehmann 10, Keller 14, Brandt 9); 24./31.12. off (Lehmann 8, Keller 13); Buß- und Bettag
+# 18.11. as a holiday (only in Saxony; Öztürk 14). Each of these errors changes a value in values_present.
+# groups checks whether sheet 2 matches sheet 1 (days per person); the totals check which person has which week.
+# dates_between applies hard only to columns with Datum/Beginn/Ende in the header (not „bis“); workdays (soft) finds
+# e.g. „bis 25.12.2026“ or „bis 01.01.2027“.
+[[turns]]
+text = "Mach mir bitte eine Excel mit dem Plan für die Rufbereitschaft im Kundendienst für November und Dezember. Die Bereitschaft wechselt jede Woche, in dieser Reihenfolge: Jonas Keller, Miriam Brandt, Deniz Öztürk, Felix Lehmann, dann wieder von vorn. Los geht es mit Herrn Keller in der Woche ab Montag, 2. November. Bereitschaft gibt es nur an Arbeitstagen, also Montag bis Freitag; an Wochenenden und gesetzlichen Feiertagen in Baden-Württemberg übernimmt die Notdienstzentrale des Herstellers. Heiligabend und Silvester sind bei uns normale Arbeitstage. Frau Brandt ist vom 7. bis 11. Dezember im Urlaub, ihre Woche übernimmt Herr Öztürk zusätzlich; sonst bleibt die Reihenfolge, wie sie ist. Auf das erste Blatt bitte eine Zeile je Woche: Kalenderwoche, erster und letzter Bereitschaftstag als Datum, Name und Zahl der Bereitschaftstage. Auf ein zweites Blatt je Person die Bereitschaftstage insgesamt und die Pauschale, die gibt es mit 30 € je Bereitschaftstag."
+
+[checks]
+sheets_min = 2
+data_rows_min = 9
+columns = ['kw|kalenderwoche|woche', 'name|bereitschaft|mitarbeit|person|wer\b', 'tage', 'pauschale|betrag|vergütung']
+dates_between = ["2026-11-02", "2026-12-31"]
+workdays = "BW"
+values_present = [420, 150, 450, 270]
+
+[[checks.groups]]
+name = "Bereitschaftstage je Person"
+source = { sheet = 1, group = 'name|bereitschaft|mitarbeit|person|wer\b', value = 'tage' }
+target = { sheet = 2, group = 'name|bereitschaft|mitarbeit|person|wer\b', value = 'tage' }
+
+[[checks.calculations]]
+name = "Pauschale = Tage × 30 €"
+columns = { tage = 'tage', pauschale = 'pauschale|betrag|vergütung' }
+formula = "tage * 30"
+result = "pauschale"
+
+[checks.topics]
+Keller = 'keller'
+Brandt = 'brandt'
+"Öztürk" = 'öztürk|oztürk|oeztuerk'
+Lehmann = 'lehmann'
+
+[judge]
+checklist = [
+  "neun Wochen KW 45 bis KW 53 mit erstem und letztem Bereitschaftstag als Datum: KW 52 nur 21.–24.12. (25.12. ist Feiertag), KW 53 nur 28.–31.12.; keine Wochenenden, kein Feiertag, nichts nach dem 31.12.",
+  "Reihenfolge richtig: Keller (45, 49, 53), Brandt (46), Öztürk (47, 50 als Vertretung für Frau Brandt, 51), Lehmann (48, 52); die Vertretung ist erkennbar vermerkt",
+  "Blatt 2 je Person: Keller 14 Tage / 420 €, Brandt 5 / 150 €, Öztürk 15 / 450 €, Lehmann 9 / 270 €, zusammen 43 Tage / 1.290 €; am besten mit SUMMEWENN aus Blatt 1 und Pauschale als Formel",
+  "Kalenderwochen stimmen (KW 53 gibt es 2026), Datums- und Euroformat, lesbar zum Aushängen",
+]

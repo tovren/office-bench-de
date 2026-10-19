@@ -1,0 +1,61 @@
+id = "jahresbericht"
+title = "Slides from a long annual report with correction (attachment)"
+version = 1
+kind = "file"
+file_type = "pptx"
+difficulty = "hard"
+tags = ["attachment", "long", "chart", "given_numbers", "summarize", "correction"]
+
+# The report (attachment, PDF text, about 20,500 characters, 10 pages) gives the draft figures in the summary, the
+# quarterly table and the division table; the addendum of 9.10. at the very end replaces them (final invoice of
+# 78 k€ booked later, subcontractor 26 k€). Only the corrected figures are right, and the addendum states all of them:
+# quarters in k€: Q1 1,486, Q2 1,322, Q3 1,394, Q4 1,584 (draft 1,506); total 5,786 (draft 5,708, previous year
+# 1,402 + 1,251 + 1,296 + 1,361 = 5,310). Change 5,786 / 5,310 = +8.96 % ≈ +9.0 % (draft 5,708 / 5,310 = +7.5 %).
+# EBIT 411 + 78 − 26 = 463 k€, margin 463 / 5,786 = 8.0 % (draft 411 / 5,708 = 7.2 %; previous year 345 / 5,310 = 6.5 %).
+# Unchanged: maintenance contracts 1,712 + 241 − 107 = 1,846, staff 41 + 9 + 14 = 64, investment budget
+# 2026/27 176 + 95 + 84 + 65 = 420 k€ (outlook: revenue 6.1 M€, EBIT 520 k€, margin about 8.5 %).
+# The advisory board meeting on 5 November 2026 is a Thursday (not stated in the prompt).
+# Chart: exactly the four corrected quarters; in M€ (1.486 … 1.584, also rounded to two places) it counts as well.
+# The draft series has almost the same total (5,708 instead of 5,786), so it is compared exactly in the same unit and
+# fails. „9 %“ and „8,0 %“ appear in the report only in the addendum (elsewhere 11 %, 8,1 %, 8,5 %), so the patterns
+# match no other percentage of the report.
+# The outdated revenue 5,708 k€ / 5.708 M€ (also „5,71 Mio.“) is not forbidden: a reference to the correction is not
+# an error, an outdated revenue as a key figure is. A forbidden pattern with exceptions directly after „statt“,
+# „noch“, „nicht“, „von“, „bisher“, „zuvor“, „vorher“, „ursprünglich“, „Entwurf“ still hit speaker notes in earlier
+# runs that mentioned the draft as a reference to the correction („Entwurfszahlen (Umsatz 5.708 …)“).
+# values_present checks whether the correct revenue 5,786 is on the slides.
+[[turns]]
+text = "Im Anhang ist der Jahresbericht unseres Geschäftsbereichs Wartung und Kundendienst. Mach mir daraus bitte eine PowerPoint mit 6 bis 8 Folien für die Beiratssitzung am 5. November: die Kennzahlen des Geschäftsjahrs (Umsatz mit der Veränderung zum Vorjahr, EBIT-Marge, Zahl der Wartungsverträge, Mitarbeitende), ein Säulendiagramm mit dem Umsatz der vier Quartale, die wichtigsten Risiken und den Ausblick auf 2026/27 mit dem Investitionsbudget. Die Zahlen bitte exakt aus dem Bericht."
+attachments = [{ name = "Jahresbericht Wartung und Kundendienst 2025-26 (Entwurf).pdf", file = "jahresbericht_wartung.txt" }]
+
+[checks]
+numbers_sourced = true
+slides = [6, 8]
+chart = true
+chart_type = "column"
+chart_values = [[1486, 1322, 1394, 1584]]
+values_present = [[5786, 5.786, 5.79, 5786000], 1846, 64, [420, 420000, 0.42]]
+
+[checks.topics]
+"Veränderung +9,0 %" = '(?<![\d,.])9(,0)?\s*(%|prozent)'
+"EBIT-Marge 8,0 %" = '(?<![\d,.])8(,0)?\s*(%|prozent)'
+"EBIT" = 'ebit'
+"Wartungsverträge" = 'wartungsvertr'
+"Fachkräftemangel" = 'fachkr|techniker\w*mangel|personalmangel|offene stellen'
+"Wohnbau Neckar (Großkunde)" = 'wohnbau neckar|großkunde'
+"Ausblick 2026/27" = '2026\s*/\s*(20)?27'
+
+[checks.forbidden]
+Quellenmarker = '\[\d{1,2}\]'
+"Tags der RAG-Vorlage" = '</?(source|context)\b'
+
+[judge]
+checklist = [
+  "6 bis 8 Folien mit Titelfolie (Beiratssitzung, 5.11.2026; falls ein Wochentag genannt ist, Donnerstag) und klarer Botschaft je Folie",
+  "Korrektur aus dem Nachtrag vom 9.10. übernommen: Umsatz 5.786 Tsd. € (+9,0 % zum Vorjahr 5.310 Tsd. €), EBIT 463 Tsd. €, EBIT-Marge 8,0 %; nirgends die Entwurfswerte 5.708 Tsd. €, +7,5 %, 7,2 % als gültige Zahlen",
+  "Säulendiagramm mit genau den vier Quartalen Q1 1.486, Q2 1.322, Q3 1.394, Q4 1.584 Tsd. € (Einheit genannt), höchstens mit dem Vorjahr als zweiter Reihe",
+  "weitere Kennzahlen richtig: 1.846 Wartungsverträge (Vorjahr 1.712), 64 Mitarbeitende (Vorjahr 59)",
+  "Risiken aus dem Bericht (Fachkräftemangel, Abhängigkeit von der Wohnbau Neckar eG mit rund 14 % des Umsatzes, Förderpolitik, Ersatzteile, Zahlungsmoral, IT), nichts erfunden",
+  "Ausblick 2026/27: Umsatz 6,1 Mio. €, EBIT 520 Tsd. € (Marge rund 8,5 %), 2.000 Wartungsverträge, Investitionsbudget 420 Tsd. € mit seinen vier Posten zur Entscheidung im Beirat",
+  "kurze Stichpunkte, keine Quellenmarker wie [1]",
+]

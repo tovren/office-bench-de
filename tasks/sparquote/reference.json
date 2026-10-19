@@ -1,0 +1,170 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Haushaltsbudget Januar bis Juni 2026",
+  "sheets": [
+   {
+    "name": "Haushaltsbudget 2026",
+    "columns": [
+     {
+      "header": "Monat",
+      "type": "text"
+     },
+     {
+      "header": "Einnahmen",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Ausgaben",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Saldo",
+      "type": "currency",
+      "formula": "=B{row}-C{row}",
+      "total": "sum"
+     },
+     {
+      "header": "Sparquote",
+      "type": "percent",
+      "formula": "=D{row}/B{row}"
+     }
+    ],
+    "rows": [
+     [
+      "Januar 2026",
+      3200,
+      2850,
+      null,
+      null
+     ],
+     [
+      "Februar 2026",
+      3200,
+      2700,
+      null,
+      null
+     ],
+     [
+      "März 2026",
+      3350,
+      3100,
+      null,
+      null
+     ],
+     [
+      "April 2026",
+      3200,
+      2950,
+      null,
+      null
+     ],
+     [
+      "Mai 2026",
+      3200,
+      2800,
+      null,
+      null
+     ],
+     [
+      "Juni 2026",
+      3400,
+      3250,
+      null,
+      null
+     ]
+    ],
+    "chart": {
+     "type": "line",
+     "title": "Sparquote pro Monat",
+     "category_column": "Monat",
+     "value_columns": [
+      "Sparquote"
+     ]
+    }
+   }
+  ]
+ },
+ "previous": {
+  "function": "create_excel_file",
+  "arguments": {
+   "title": "Haushaltsbudget Januar bis Juni 2026",
+   "sheets": [
+    {
+     "name": "Haushaltsbudget 2026",
+     "columns": [
+      {
+       "header": "Monat",
+       "type": "text"
+      },
+      {
+       "header": "Einnahmen",
+       "type": "currency",
+       "total": "sum"
+      },
+      {
+       "header": "Ausgaben",
+       "type": "currency",
+       "total": "sum"
+      },
+      {
+       "header": "Saldo",
+       "type": "currency",
+       "formula": "=B{row}-C{row}",
+       "total": "sum"
+      }
+     ],
+     "rows": [
+      [
+       "Januar 2026",
+       3200,
+       2850,
+       null
+      ],
+      [
+       "Februar 2026",
+       3200,
+       2700,
+       null
+      ],
+      [
+       "März 2026",
+       3350,
+       3100,
+       null
+      ],
+      [
+       "April 2026",
+       3200,
+       2950,
+       null
+      ],
+      [
+       "Mai 2026",
+       3200,
+       2800,
+       null
+      ],
+      [
+       "Juni 2026",
+       3400,
+       3250,
+       null
+      ]
+     ],
+     "chart": {
+      "type": "column",
+      "title": "Einnahmen und Ausgaben pro Monat",
+      "category_column": "Monat",
+      "value_columns": [
+       "Einnahmen",
+       "Ausgaben"
+      ]
+     }
+    }
+   ]
+  }
+ }
+}

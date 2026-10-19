@@ -1,0 +1,170 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Angebot Schreinerei Vogt Büroarbeitsplätze",
+  "sheets": [
+   {
+    "name": "Angebot",
+    "columns": [
+     {
+      "header": "Pos.",
+      "type": "integer"
+     },
+     {
+      "header": "Artikel",
+      "type": "text"
+     },
+     {
+      "header": "Menge",
+      "type": "integer"
+     },
+     {
+      "header": "Einheit",
+      "type": "text"
+     },
+     {
+      "header": "Einzelpreis",
+      "type": "currency"
+     },
+     {
+      "header": "Gesamtpreis",
+      "type": "currency"
+     }
+    ],
+    "rows": [
+     [
+      1,
+      "Laptop 14 Zoll, 16 GB RAM",
+      6,
+      "Stück",
+      1149,
+      "=C2*E2"
+     ],
+     [
+      2,
+      "Dockingstation passend zum Laptop",
+      6,
+      "Stück",
+      189,
+      "=C3*E3"
+     ],
+     [
+      3,
+      "Monitor 27 Zoll",
+      8,
+      "Stück",
+      259,
+      "=C4*E4"
+     ],
+     [
+      4,
+      "Multifunktionsdrucker",
+      1,
+      "Stück",
+      429,
+      "=C5*E5"
+     ],
+     [
+      5,
+      "Einrichtung vor Ort",
+      12,
+      "Std.",
+      95,
+      "=C6*E6"
+     ],
+     [
+      null,
+      "Hardware zusammen",
+      null,
+      null,
+      null,
+      "=F2+F3+F4+F5"
+     ],
+     [
+      null,
+      "Rabatt 5 % auf die Hardware",
+      null,
+      null,
+      null,
+      "=-ROUND(F7*0.05,2)"
+     ],
+     [
+      null,
+      "Einrichtung (ohne Rabatt)",
+      null,
+      null,
+      null,
+      "=F6"
+     ],
+     [
+      null,
+      "Netto",
+      null,
+      null,
+      null,
+      "=F7+F8+F9"
+     ],
+     [
+      null,
+      "MwSt 19 %",
+      null,
+      null,
+      null,
+      "=ROUND(F10*0.19,2)"
+     ],
+     [
+      null,
+      "Brutto",
+      null,
+      null,
+      null,
+      "=F10+F11"
+     ]
+    ]
+   },
+   {
+    "name": "Angebotsdaten",
+    "columns": [
+     {
+      "header": "Angabe",
+      "type": "text"
+     },
+     {
+      "header": "Wert",
+      "type": "text"
+     }
+    ],
+    "rows": [
+     [
+      "Kunde",
+      "Schreinerei Vogt GmbH, Herr Thomas Vogt"
+     ],
+     [
+      "Anschrift",
+      "Hauptstraße 41, 73728 Esslingen"
+     ],
+     [
+      "Ihre Anfrage",
+      "E-Mail vom 9. Oktober 2026"
+     ],
+     [
+      "Angebotsdatum",
+      "13. Oktober 2026"
+     ],
+     [
+      "Gültigkeit",
+      "vier Wochen ab Angebotsdatum"
+     ],
+     [
+      "Lieferung",
+      "bis Ende November 2026, Einrichtung nach Absprache"
+     ],
+     [
+      "Zahlungsziel",
+      "14 Tage nach Rechnungsstellung ohne Abzug"
+     ]
+    ]
+   }
+  ]
+ }
+}

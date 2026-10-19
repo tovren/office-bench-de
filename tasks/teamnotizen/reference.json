@@ -1,0 +1,140 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Protokoll der Teamrunde Vertrieb Innendienst",
+  "subtitle": "Montag, 12. Oktober 2026",
+  "blocks": [
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Angabe",
+      "Details"
+     ],
+     [
+      "Datum",
+      "Montag, 12. Oktober 2026"
+     ],
+     [
+      "Teilnehmende",
+      "Sabine Krüger (Leitung), Tobias Wendt, Aylin Demir, Marco Rossi, Jana Feldmann"
+     ],
+     [
+      "Abwesend",
+      "Peter Hahn (Urlaub)"
+     ],
+     [
+      "Protokoll",
+      "Sabine Krüger"
+     ]
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "1. Umsatz im dritten Quartal",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Der Umsatz im dritten Quartal lag bei 1,48 Mio. € und damit rund 4 % über dem Plan von 1,42 Mio. €. Der Rückstand bei den Ersatzteilen ist aufgeholt, die Lieferzeit liegt wieder bei drei Tagen. Peter Hahn ruft nach seinem Urlaub die zehn wichtigsten Kunden an."
+   },
+   {
+    "type": "heading",
+    "text": "2. Einführung des neuen CRM",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Die CRM-Schulung für alle findet am **Dienstag, 27. Oktober 2026, von 9 bis 12 Uhr in Raum 2.14** statt. Sie war zunächst für den 22. Oktober geplant und wurde verschoben. Tobias Wendt klärt bis Freitag, 16. Oktober, mit der IT die Zugänge. Aylin Demir prüft die Altdaten bis 30. Oktober auf Dubletten."
+   },
+   {
+    "type": "heading",
+    "text": "3. Messe Stuttgart im November",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Der Messestand ist gebucht, das Budget beträgt 4.500 €. Marco Rossi und Jana Feldmann betreuen den Stand. Jana Feldmann bestellt die Flyer bis 23. Oktober bei der Druckerei Maier."
+   },
+   {
+    "type": "heading",
+    "text": "4. Urlaub im Dezember",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Urlaubsanträge für Dezember gehen bis 30. Oktober an Sabine Krüger. Zwischen den Jahren sind mindestens zwei Kolleginnen oder Kollegen im Büro."
+   },
+   {
+    "type": "heading",
+    "text": "Beschlüsse",
+    "level": 1
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Kundentermine werden ab sofort nur noch im CRM eingetragen, nicht mehr in der Excel-Liste.",
+     "Angebote über 10.000 € gehen vor dem Versand an Sabine Krüger."
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Aufgaben",
+    "level": 1
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Wer",
+      "Was",
+      "Bis wann"
+     ],
+     [
+      "Tobias Wendt",
+      "Zugänge zum CRM mit der IT klären",
+      "Freitag, 16.10.2026"
+     ],
+     [
+      "Jana Feldmann",
+      "Flyer für die Messe bei der Druckerei Maier bestellen",
+      "Freitag, 23.10.2026"
+     ],
+     [
+      "Aylin Demir",
+      "Altdaten im CRM auf Dubletten prüfen",
+      "Freitag, 30.10.2026"
+     ],
+     [
+      "alle",
+      "Urlaubsanträge für Dezember an Sabine Krüger",
+      "Freitag, 30.10.2026"
+     ],
+     [
+      "Peter Hahn",
+      "Top-10-Kunden anrufen",
+      "Ende Oktober"
+     ],
+     [
+      "Marco Rossi",
+      "Service für die Kaffeemaschine anrufen",
+      "sofort"
+     ]
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Sonstiges",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Die Kaffeemaschine ist defekt, Marco Rossi ruft den Service an."
+   },
+   {
+    "type": "paragraph",
+    "text": "**Nächste Teamrunde:** Montag, 26. Oktober 2026, 10 Uhr."
+   }
+  ]
+ }
+}

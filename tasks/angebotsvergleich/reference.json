@@ -1,0 +1,113 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Entscheidungsvorlage: neue Multifunktionsdrucker",
+  "subtitle": "Vergleich der Angebote von Bürotechnik Kunz und Druckwerk Systemhaus, Stand 13. Oktober 2026",
+  "blocks": [
+   {
+    "type": "heading",
+    "text": "Ausgangslage",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Wir brauchen zwei neue A3-Multifunktionsgeräte mit Farbe. Unser Druckvolumen liegt bei etwa 8.000 Seiten schwarz-weiß und 1.500 Seiten in Farbe pro Monat. Zwei Angebote liegen vor; beide gelten nur bis **30. Oktober 2026**. Alle Beträge sind netto."
+   },
+   {
+    "type": "heading",
+    "text": "Gegenüberstellung",
+    "level": 1
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "",
+      "Bürotechnik Kunz (A-26-3318)",
+      "Druckwerk Systemhaus (2026-0917)"
+     ],
+     [
+      "Modell",
+      "Leasing, 36 Monate",
+      "Kauf"
+     ],
+     [
+      "Geräte",
+      "2 × Kunz Office MX 4500",
+      "2 × Druckwerk Color 3400 MFP"
+     ],
+     [
+      "Einmalige Kosten",
+      "keine (Lieferung und Installation inklusive)",
+      "6.900,00 € Geräte + 350,00 € Lieferung und Installation"
+     ],
+     [
+      "Monatliche Grundkosten",
+      "289,00 € Rate inkl. Wartung",
+      "79,00 € Servicevertrag"
+     ],
+     [
+      "Seitenpreis schwarz-weiß",
+      "0,8 Cent, 1.000 Seiten im Monat frei",
+      "0,6 Cent"
+     ],
+     [
+      "Seitenpreis Farbe",
+      "4,9 Cent",
+      "5,5 Cent"
+     ],
+     [
+      "Service",
+      "Techniker innerhalb von 8 Arbeitsstunden",
+      "Techniker am nächsten Werktag"
+     ],
+     [
+      "Nach 3 Jahren",
+      "Rückgabe der Geräte",
+      "Geräte gehören uns"
+     ],
+     [
+      "Gesamtkosten 3 Jahre",
+      "15.066,00 €",
+      "14.792,00 €"
+     ]
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Gesamtkosten über 3 Jahre",
+    "level": 1
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Kunz: Rate 36 × 289,00 € = 10.404,00 €; Seiten pro Monat 7.000 × 0,008 € + 1.500 × 0,049 € = 129,50 €, über 36 Monate 4.662,00 €; zusammen **15.066,00 €**",
+     "Druckwerk: Geräte und Installation 7.250,00 €; Service 36 × 79,00 € = 2.844,00 €; Seiten pro Monat 8.000 × 0,006 € + 1.500 × 0,055 € = 130,50 €, über 36 Monate 4.698,00 €; zusammen **14.792,00 €**",
+     "Druckwerk ist damit über drei Jahre um 274,00 € günstiger, also um weniger als 2 %."
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Bewertung",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Bei den Kosten liegen beide Angebote fast gleichauf. Für Druckwerk spricht, dass die Geräte nach drei Jahren uns gehören und weiter genutzt oder verkauft werden können. Dafür binden wir zu Beginn 7.250 € und tragen das Risiko für die Zeit nach dem Servicevertrag. Kunz bietet den deutlich schnelleren Service und feste monatliche Kosten ohne Anfangsinvestition."
+   },
+   {
+    "type": "heading",
+    "text": "Empfehlung",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Wir empfehlen das Angebot von **Druckwerk Systemhaus**: Es ist etwas günstiger, und die Geräte bleiben nach drei Jahren in unserem Eigentum. Weil die Reaktionszeit am nächsten Werktag liegt, sollte vor der Bestellung geklärt werden, ob Druckwerk bei einem Totalausfall ein Ersatzgerät stellt. Ist uns schneller Service wichtiger als der Preisvorteil, ist Kunz die Alternative."
+   },
+   {
+    "type": "paragraph",
+    "text": "Entscheidung bitte bis spätestens 30. Oktober 2026, damit das Angebot noch gilt."
+   }
+  ]
+ }
+}

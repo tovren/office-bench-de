@@ -1,0 +1,145 @@
+{
+ "function": "create_powerpoint_file",
+ "arguments": {
+  "title": "Wartung und Kundendienst – Geschäftsjahr 2025/26",
+  "slides": [
+   {
+    "layout": "title",
+    "title": "Wartung und Kundendienst: Geschäftsjahr 2025/26",
+    "subtitle": "Beiratssitzung am 5. November 2026 · Brenner Haustechnik GmbH"
+   },
+   {
+    "layout": "table",
+    "title": "Kennzahlen 2025/26: Umsatz +9,0 %, EBIT-Marge 8,0 %",
+    "table": [
+     [
+      "Kennzahl",
+      "2025/26",
+      "Vorjahr 2024/25"
+     ],
+     [
+      "Umsatz",
+      "5.786 Tsd. €",
+      "5.310 Tsd. €"
+     ],
+     [
+      "Veränderung zum Vorjahr",
+      "+9,0 %",
+      "–"
+     ],
+     [
+      "EBIT",
+      "463 Tsd. €",
+      "345 Tsd. €"
+     ],
+     [
+      "EBIT-Marge",
+      "8,0 %",
+      "6,5 %"
+     ],
+     [
+      "Wartungsverträge (30.09.)",
+      "1.846",
+      "1.712"
+     ],
+     [
+      "Mitarbeitende (30.09.)",
+      "64",
+      "59"
+     ]
+    ],
+    "notes": "Alle Werte nach dem Nachtrag des Controllings vom 9. Oktober: Die Schlussrechnung für die Wohnanlage Plochinger Straße ist im vierten Quartal enthalten. Der Plan von 5.650 Tsd. € wurde um 136 Tsd. € übertroffen."
+   },
+   {
+    "layout": "chart",
+    "title": "Umsatz je Quartal 2025/26",
+    "chart": {
+     "type": "column",
+     "categories": [
+      "Q1 (Okt–Dez)",
+      "Q2 (Jan–Mär)",
+      "Q3 (Apr–Jun)",
+      "Q4 (Jul–Sep)"
+     ],
+     "series": [
+      {
+       "name": "Umsatz 2025/26",
+       "values": [
+        1486,
+        1322,
+        1394,
+        1584
+       ]
+      }
+     ],
+     "unit": "Tsd. €"
+    },
+    "notes": "Typischer Jahresverlauf: stark zu Beginn der Heizperiode, schwächer im Winter, im vierten Quartal mehrere abgeschlossene Modernisierungen in Wohnanlagen."
+   },
+   {
+    "layout": "bullets",
+    "title": "Was das Jahr geprägt hat",
+    "bullets": [
+     "Wartungsverträge: 241 Neuabschlüsse, 107 Kündigungen, Kündigungsquote 6,3 %",
+     "Neu seit April: Wartungsvertrag für Wärmepumpen, bereits 38 Verträge",
+     "Mobile Auftragsabwicklung seit Februar: Rechnungen im Schnitt vier Tage früher",
+     "Kundenzufriedenheit 4,4 von 5, Reklamationen von 131 auf 96 gesunken",
+     "Auftragsbestand 1.185 Tsd. €, Wartezeit bei Modernisierungen rund sieben Wochen"
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Die wichtigsten Risiken",
+    "bullets": [
+     "Fachkräftemangel: fünf offene Stellen für Servicetechniker, Besetzung dauert rund fünf Monate",
+     "Großkunde Wohnbau Neckar eG: rund 14 % des Umsatzes, Rahmenvertrag bis 31.12.2027",
+     "Förderpolitik beim Heizungstausch trifft vor allem die Modernisierung",
+     "Ersatzteile: höhere Preise und zeitweise lange Lieferzeiten",
+     "Zahlungsmoral einzelner Hausverwaltungen und Abhängigkeit von der IT"
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Ausblick 2026/27",
+    "bullets": [
+     "Umsatz 6,1 Mio. €, EBIT 520 Tsd. €, EBIT-Marge rund 8,5 %",
+     "2.000 Wartungsverträge bis 30.09.2027",
+     "Mindestens vier zusätzliche Servicetechniker, zwei weitere Ausbildungsplätze",
+     "Wartezeit bei Modernisierungen höchstens vier Wochen, eigenes Montageteam",
+     "Mehr Wartung von Wärmepumpen"
+    ]
+   },
+   {
+    "layout": "table",
+    "title": "Zur Entscheidung: Investitionsbudget 2026/27",
+    "table": [
+     [
+      "Vorhaben",
+      "Tsd. €"
+     ],
+     [
+      "Vier elektrische Transporter mit Ausbau",
+      "176"
+     ],
+     [
+      "Regalsystem und Lagertechnik Ersatzteillager",
+      "95"
+     ],
+     [
+      "Software für die automatische Tourenplanung",
+      "84"
+     ],
+     [
+      "Schulungen Wärmepumpen und Lüftung",
+      "65"
+     ],
+     [
+      "Investitionsbudget gesamt",
+      "420"
+     ]
+    ],
+    "notes": "Der Beirat soll heute über das Budget von 420 Tsd. € entscheiden. Im abgelaufenen Jahr wurden 312 Tsd. € investiert, das Budget von 330 Tsd. € wurde eingehalten."
+   }
+  ]
+ }
+}

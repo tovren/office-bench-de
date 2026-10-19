@@ -1,0 +1,67 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+# Correct: 32 values from the email, annual total =SUM(B:E) per branch, total row per quarter (1,759,100, 1,755,760,
+# 1,822,700, 2,001,590) and grand total 7,339,150, sorted descending, bar chart of the eight annual totals.
+
+# observed in two earlier runs: the row „Summe“ only has the grand total F10, B10:E10 are empty
+[[mutant]]
+name = "quarter_totals_missing"
+defect = "total row with only the grand total, the requested quarterly totals are missing"
+remove = ["sheets.0.columns.1.total", "sheets.0.columns.2.total", "sheets.0.columns.3.total",
+          "sheets.0.columns.4.total"]
+# values_present requires the quarterly totals 1,759,100 / 1,755,760 / 1,822,700 / 2,001,590 (hard); without it this
+# is only soft (calculations: „Summenzeile unvollständig“), and total_row is satisfied with F10.
+expected = ["calculations", "total_row", "values_present"]
+
+[[mutant]]
+name = "transposed_digits_esslingen"
+defect = "Esslingen Q3 copied as 187,970 instead of 189,770"
+number = [[189770, 187970]]
+expected = ["values_present", "chart_values"]
+
+[[mutant]]
+name = "annual_total_without_q4"
+defect = "annual total =SUM(B:D) leaves out Q4"
+replace = [["=SUM(B{row}:E{row})", "=SUM(B{row}:D{row})"]]
+expected = ["calculations", "chart_values"]
+
+[[mutant]]
+name = "annual_totals_as_constants"
+defect = "annual totals as fixed numbers instead of formulas (asked for: „als Formel“)"
+set = [
+  ["sheets.0.columns.5.formula", ""],
+  ["sheets.0.rows.0.5", 1728650], ["sheets.0.rows.1.5", 1056560], ["sheets.0.rows.2.5", 908270],
+  ["sheets.0.rows.3.5", 825120], ["sheets.0.rows.4.5", 800940], ["sheets.0.rows.5.5", 730650],
+  ["sheets.0.rows.6.5", 688130], ["sheets.0.rows.7.5", 600830],
+]
+expected = ["formulas_min"]
+
+# order of the email kept instead of sorting by annual revenue
+[[mutant]]
+name = "unsorted"
+defect = "branches in the order of the email instead of descending by annual revenue"
+set = [["sheets.0.rows", [
+  ["Stuttgart", 412380, 398120, 441900, 476250, ""],
+  ["Esslingen", 198440, 205310, 189770, 231600, ""],
+  ["Ludwigsburg", 256900, 249180, 262430, 288050, ""],
+  ["Böblingen", 173220, 181640, 176310, 199480, ""],
+  ["Reutlingen", 221560, 214890, 230120, 241700, ""],
+  ["Heilbronn", 189330, 195470, 201880, 214260, ""],
+  ["Göppingen", 142760, 139920, 151340, 166810, ""],
+  ["Tübingen", 164510, 171230, 168950, 183440, ""],
+]]]
+expected = ["sorted"]
+
+[[mutant]]
+name = "line_chart"
+defect = "line chart instead of a bar chart of the annual totals"
+set = [["sheets.0.chart.type", "line"]]
+expected = ["chart_type"]
+
+# observed in an earlier run: quarters as #,##0, annual total #,##0.00, no euro
+[[mutant]]
+name = "no_euro_format"
+defect = "revenue without euro format (number format instead of currency)"
+set = [["sheets.0.columns.1.type", "number"], ["sheets.0.columns.2.type", "number"], ["sheets.0.columns.3.type", "number"],
+       ["sheets.0.columns.4.type", "number"], ["sheets.0.columns.5.type", "number"]]
+expected = ["column_format"]
+severity = "soft"

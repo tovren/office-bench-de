@@ -1,0 +1,143 @@
+{
+ "function": "create_powerpoint_file",
+ "arguments": {
+  "title": "Ergebnisse der Mitarbeiterbefragung 2026",
+  "slides": [
+   {
+    "layout": "title",
+    "title": "Ergebnisse der Mitarbeiterbefragung 2026",
+    "subtitle": "Abteilungsleiterrunde, Oktober 2026"
+   },
+   {
+    "layout": "bullets",
+    "title": "Teilnahme",
+    "bullets": [
+     "61 von 80 Kolleginnen und Kollegen haben teilgenommen",
+     "Teilnahmequote 76 % – ein sehr gutes Ergebnis",
+     "Die Ergebnisse sind damit gut belastbar"
+    ]
+   },
+   {
+    "layout": "chart",
+    "title": "Gesamtzufriedenheit",
+    "chart": {
+     "type": "pie",
+     "categories": [
+      "sehr zufrieden",
+      "zufrieden",
+      "teils/teils",
+      "unzufrieden"
+     ],
+     "series": [
+      {
+       "name": "Antworten",
+       "values": [
+        14,
+        27,
+        13,
+        7
+       ]
+      }
+     ]
+    },
+    "notes": "41 von 61, also rund zwei Drittel (67 %), sind zufrieden oder sehr zufrieden. 13 antworten mit teils/teils, 7 sind unzufrieden, das sind 11 %."
+   },
+   {
+    "layout": "bullets",
+    "title": "Unsere Stärken",
+    "bullets": [
+     "Teamzusammenhalt: gegenseitige Hilfe wird sehr geschätzt",
+     "Flexible Arbeitszeiten: Gleitzeit kommt gut an",
+     "Sichere Arbeitsplätze: hohes Vertrauen in die Firma"
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Handlungsfelder",
+    "bullets": [
+     "Interne Kommunikation: Informationen kommen spät oder gar nicht an",
+     "Weiterbildung: zu wenig Angebote und keine klare Planung",
+     "IT-Ausstattung: ältere Geräte und langsame Abläufe"
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Zusammenfassung und nächste Schritte",
+    "bullets": [
+     "Zwei Drittel zufrieden oder sehr zufrieden, 11 % unzufrieden",
+     "Stärken: Team, flexible Arbeitszeiten, sichere Arbeitsplätze",
+     "Handlungsfelder: Kommunikation, Weiterbildung, IT-Ausstattung",
+     "Ergebnisse bis 30.10.2026 in allen Abteilungen vorstellen",
+     "Workshops zu den drei Handlungsfeldern im November",
+     "Maßnahmenplan am 18.12.2026 hier beschließen"
+    ],
+    "notes": "Vorschlag für das weitere Vorgehen: Jede Abteilungsleitung stellt die Ergebnisse bis Ende Oktober im eigenen Team vor. Im November gibt es je einen Workshop pro Handlungsfeld mit Freiwilligen aus allen Bereichen, im Dezember beschließen wir hier den Maßnahmenplan."
+   }
+  ]
+ },
+ "previous": {
+  "function": "create_powerpoint_file",
+  "arguments": {
+   "title": "Ergebnisse der Mitarbeiterbefragung 2026",
+   "slides": [
+    {
+     "layout": "title",
+     "title": "Ergebnisse der Mitarbeiterbefragung 2026",
+     "subtitle": "Abteilungsleiterrunde, Oktober 2026"
+    },
+    {
+     "layout": "bullets",
+     "title": "Teilnahme",
+     "bullets": [
+      "61 von 80 Kolleginnen und Kollegen haben teilgenommen",
+      "Teilnahmequote 76 % – ein sehr gutes Ergebnis",
+      "Die Ergebnisse sind damit gut belastbar"
+     ]
+    },
+    {
+     "layout": "chart",
+     "title": "Gesamtzufriedenheit",
+     "chart": {
+      "type": "column",
+      "categories": [
+       "sehr zufrieden",
+       "zufrieden",
+       "teils/teils",
+       "unzufrieden"
+      ],
+      "series": [
+       {
+        "name": "Antworten",
+        "values": [
+         14,
+         27,
+         13,
+         7
+        ]
+       }
+      ]
+     },
+     "notes": "41 von 61, also rund zwei Drittel (67 %), sind zufrieden oder sehr zufrieden. 13 antworten mit teils/teils, 7 sind unzufrieden, das sind 11 %."
+    },
+    {
+     "layout": "bullets",
+     "title": "Unsere Stärken",
+     "bullets": [
+      "Teamzusammenhalt: gegenseitige Hilfe wird sehr geschätzt",
+      "Flexible Arbeitszeiten: Gleitzeit kommt gut an",
+      "Sichere Arbeitsplätze: hohes Vertrauen in die Firma"
+     ]
+    },
+    {
+     "layout": "bullets",
+     "title": "Handlungsfelder",
+     "bullets": [
+      "Interne Kommunikation: Informationen kommen spät oder gar nicht an",
+      "Weiterbildung: zu wenig Angebote und keine klare Planung",
+      "IT-Ausstattung: ältere Geräte und langsame Abläufe"
+     ]
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,47 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+[[mutant]]
+# observed in an earlier run („Mi, 23.10.2026“ and twice „Mi, 30.10.2026“, both Fridays)
+name = "wednesday_instead_of_friday"
+defect = "deadlines in the task table as „Mi, 23.10.2026“ and „Mi, 30.10.2026“ (both are Fridays)"
+replace = [["Freitag, 23.10.2026", "Mi, 23.10.2026"], ["Freitag, 30.10.2026", "Mi, 30.10.2026"]]
+expected = ["weekday"]
+
+[[mutant]]
+# observed in an earlier run („bis Fr“ as „Fr 17.10.“, 17.10.2026 is a Saturday)
+name = "friday_17_10"
+defect = "„bis Fr“ resolved as Fri 17.10.2026 (a Saturday; correct is Friday, 16.10.)"
+replace = [["Freitag, 16.10.2026", "Fr 17.10.2026"], ["bis Freitag, 16. Oktober,", "bis Fr 17.10."]]
+expected = ["weekday"]
+
+[[mutant]]
+# addendum at the end of the notes overlooked
+name = "addendum_ignored"
+defect = "CRM training on the old date 22.10. instead of Tuesday, 27.10."
+replace = [["am **Dienstag, 27. Oktober 2026, von 9 bis 12 Uhr in Raum 2.14** statt. Sie war zunächst für den 22. Oktober geplant und wurde verschoben.",
+            "am **Donnerstag, 22. Oktober 2026, von 9 bis 12 Uhr in Raum 2.14** statt."]]
+expected = ["topics"]
+
+[[mutant]]
+# observed in an earlier run (source marker „[1]“ in the subtitle and in the closing sentence)
+name = "source_marker"
+defect = "source marker „[1]“ from the RAG template in the subtitle"
+set = [["subtitle", "Montag, 12. Oktober 2026 [1]"]]
+expected = ["forbidden"]
+
+[[mutant]]
+# observed in earlier runs (invented meeting time „10:00 Uhr“ in the header)
+name = "meeting_time_invented"
+defect = "invented time 10:00 for the meeting on 12.10. (10 o'clock only applies to the next meeting)"
+replace = [["Montag, 12. Oktober 2026", "Montag, 12. Oktober 2026, 10:00 Uhr"]]
+expected = ["numbers_sourced"]
+severity = "soft"
+gap = "numbers_sourced only checks whether the time appears anywhere in the source (next team meeting at 10 o'clock), not in which context; only matching time and date of the same occurrence could catch it"
+
+[[mutant]]
+# observed in earlier runs („Ende Oktober“ as 31.10.2026, a Saturday)
+name = "end_of_october_saturday"
+defect = "Peter's deadline „Ende Oktober“ as 31.10.2026 (a Saturday)"
+set = [["blocks.12.rows.5.2", "31.10.2026"]]
+expected = ["weekend"]
+severity = "soft"

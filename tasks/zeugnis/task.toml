@@ -1,0 +1,64 @@
+id = "zeugnis"
+title = "Employment reference (grade good)"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "medium"
+tags = ["language", "conventions", "letter", "names"]
+
+# Reference language: „gut“ means „stets zu unserer vollen Zufriedenheit“ (also: „zu unserer vollsten Zufriedenheit“);
+# „stets zu unserer vollsten Zufriedenheit“ is „sehr gut“, „zu unserer vollen Zufriedenheit“ without „stets“ only
+# „befriedigend“. When the employee resigns, „gut“ requires regret, thanks and good wishes.
+[[turns]]
+text = "Schreib mir bitte ein qualifiziertes Arbeitszeugnis als Word-Dokument für Frau Lena Hoffmann, geboren am 14. März 1991. Sie war vom 1. April 2019 bis 31. Oktober 2026 bei uns, der Brenner Haustechnik GmbH in Esslingen, als Sachbearbeiterin in der Auftragsabwicklung angestellt und verlässt uns auf eigenen Wunsch. Ihre Aufgaben: Aufträge erfassen und terminieren, Material bei Lieferanten bestellen, die Einsätze der Monteure planen, Rechnungen vorbereiten und Kundenanfragen am Telefon beantworten. Seit 2023 hat sie außerdem unsere Auszubildenden betreut. Leistung und Verhalten insgesamt gut. Unterschreiben wird unser Geschäftsführer Thomas Brenner."
+
+# numbers_sourced (soft): all numbers come from the request (the personal details); it reports numbers, times and
+# dates that are not stated there and do not simply follow from it.
+[checks]
+numbers_sourced = true
+names = ["Hoffmann", "Brenner"]
+words_min = { hard = 200, soft = 300 }
+
+[checks.topics]
+Geburtsdatum = '(?<!\d)14\.\s*(0?3\.|märz)\s*1991'
+Eintritt = '(?<!\d)0?1\.\s*(0?4\.|april)\s*2019'
+Austritt = '(?<!\d)31\.\s*(10\.|oktober)\s*2026'
+"Aufträge" = 'auftr[äa]g'
+Lieferanten = 'lieferant|bestell'
+Monteure = 'monteur'
+Rechnungen = 'rechnung'
+Auszubildende = 'auszubildend|azubi|ausbildung'
+Verhalten = 'verhalten'
+"Leistung gut" = [
+  '(stets|immer|jederzeit)\s+zu(r|\s+unserer)\s+vollen\s+zufriedenheit',
+  '(?<!stets )(?<!immer )(?<!jederzeit )zu(r|\s+unserer)\s+vollsten\s+zufriedenheit',
+]
+"auf eigenen Wunsch" = 'eigenen?\s+wunsch'
+Bedauern = 'bedauer'
+Dank = 'dank'
+"gute Wünsche" = 'wünschen|alles gute|viel erfolg'
+
+# „Ausstellungsdatum 31.10.“: the checklist requires place and date 31.10.2026; a reference dated 13.10. in the past
+# tense (mutant issue_date_today) is otherwise not caught, because the leaving date is already in the text. Soft,
+# because the prompt does not state the date.
+[checks.topics_soft]
+"Ausstellungsdatum 31.10." = [
+  'esslingen(\s+am\s+neckar)?\s*,?\s*(den\s+)?31\.\s*(10\.|oktober)',
+  '^\s*(ort\s*(und|,|/)\s*)?(datum|ausgestellt(\s+am)?)\s*:?\s*(esslingen\s*,?\s*)?(den\s+)?31\.\s*(10\.|oktober)',
+  '^\s*(den\s+)?31\.\s*(10\.|oktober)\s*(20)?26\s*$',
+]
+
+# „vorbildlich“: the checklist names it as a formula for very good that must not appear anywhere (mutant
+# conduct_exemplary: conduct „stets vorbildlich“ next to performance good).
+[checks.forbidden]
+"Formel für sehr gut" = '(stets|immer|jederzeit)\s+zu(r|\s+unserer)\s+vollsten\s+zufriedenheit'
+"vorbildlich (sehr gut)" = 'vorbildlich'
+
+[judge]
+checklist = [
+  "Aufbau eines qualifizierten Zeugnisses: Überschrift, Personalien und Zeitraum, Firma, Aufgaben, Leistungs- und Verhaltensbeurteilung, Schlussformel, Ort, Datum (31.10.2026), Unterschrift Thomas Brenner, Geschäftsführer",
+  "alle Aufgaben aus dem Auftrag, sachlich ausformuliert, dazu die Betreuung der Auszubildenden seit 2023",
+  "durchgehend Note gut in Zeugnissprache: „stets zu unserer vollen Zufriedenheit“, Verhalten „stets einwandfrei“; nirgends Formeln für sehr gut („vollsten“ mit „stets“, „vorbildlich“) oder schwächer",
+  "Schlussformel mit Bedauern, Dank und guten Wünschen; Austritt auf eigenen Wunsch",
+  "wohlwollend, ohne versteckte negative Codes, keine Platzhalter, fehlerfreies Deutsch",
+]

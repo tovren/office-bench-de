@@ -1,0 +1,83 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Provisionsabrechnung Q3 2026",
+  "sheets": [
+   {
+    "name": "Provision Q3 2026",
+    "columns": [
+     {
+      "header": "Außendienst"
+     },
+     {
+      "header": "Umsatz Q3",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Provision (3 % bis 100.000 €, 5 % darüber)",
+      "type": "currency",
+      "formula": "=MIN(B{row},100000)*0.03+MAX(B{row}-100000,0)*0.05",
+      "total": "sum"
+     },
+     {
+      "header": "Bonus (500 € über 150.000 €)",
+      "type": "currency",
+      "formula": "=IF(B{row}>150000,500,0)",
+      "total": "sum"
+     },
+     {
+      "header": "Auszahlung",
+      "type": "currency",
+      "formula": "=C{row}+D{row}",
+      "total": "sum"
+     }
+    ],
+    "rows": [
+     [
+      "Becker",
+      84300,
+      null,
+      null,
+      null
+     ],
+     [
+      "Schulz",
+      126750,
+      null,
+      null,
+      null
+     ],
+     [
+      "Wagner",
+      151200,
+      null,
+      null,
+      null
+     ],
+     [
+      "Fischer",
+      98400,
+      null,
+      null,
+      null
+     ],
+     [
+      "Weber",
+      173900,
+      null,
+      null,
+      null
+     ],
+     [
+      "Meyer",
+      150000,
+      null,
+      null,
+      null
+     ]
+    ]
+   }
+  ]
+ }
+}

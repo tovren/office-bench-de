@@ -1,0 +1,42 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+[[mutant]]
+# observed in an earlier run
+name = "no_total_row"
+defect = "no total row under commission, bonus and payout"
+remove = ["sheets.0.columns.*.total"]
+expected = ["total_row", "values_present"]
+
+[[mutant]]
+# typical error named in the task comment: 5 % on the whole revenue instead of only on the part above €100,000
+name = "five_percent_on_everything"
+defect = "commission above €100,000 at 5 % on the whole revenue (Schulz €6,337.50 instead of €4,337.50)"
+replace = [["=MIN(B{row},100000)*0.03+MAX(B{row}-100000,0)*0.05", "=IF(B{row}>100000,B{row}*0.05,B{row}*0.03)"]]
+expected = ["values_present"]
+
+[[mutant]]
+# typical error named in the task comment: the edge case Meyer with exactly €150,000
+name = "bonus_from_150000"
+defect = "bonus from €150,000 instead of above €150,000: Meyer gets €500 (bonus €1,500, payout €29,073.50)"
+replace = [["=IF(B{row}>150000,500,0)", "=IF(B{row}>=150000,500,0)"]]
+expected = ["values_present"]
+
+[[mutant]]
+name = "payout_without_bonus"
+defect = "payout from the commission only, bonus forgotten (Wagner €5,560 instead of €6,060)"
+replace = [["=C{row}+D{row}", "=C{row}"]]
+expected = ["values_present"]
+
+[[mutant]]
+name = "commission_as_constants"
+defect = "commission entered as fixed numbers instead of as a formula (a formula was asked for)"
+remove = ["sheets.0.columns.2.formula"]
+set = [["sheets.0.rows.0.2", 2529], ["sheets.0.rows.1.2", 4337.5], ["sheets.0.rows.2.2", 5560],
+       ["sheets.0.rows.3.2", 2952], ["sheets.0.rows.4.2", 6695], ["sheets.0.rows.5.2", 5500]]
+expected = ["formulas_min"]
+
+[[mutant]]
+name = "meyer_missing"
+defect = "Meyer (exactly €150,000) is missing from the table"
+remove = ["sheets.0.rows.5"]
+expected = ["data_rows_min", "values_present"]

@@ -1,0 +1,37 @@
+id = "praesentation"
+title = "Presentation"
+version = 1
+kind = "file"
+file_type = "pptx"
+difficulty = "medium"
+tags = ["chart", "table", "side_by_side"]
+dates_from = "2026-10-13"
+
+[[turns]]
+text = "Erstelle eine PowerPoint-Präsentation (ca. 7 Folien) über die Einführung von KI-Assistenten im Unternehmen: Ziele, Chancen und Risiken gegenübergestellt, Zeitplan als Tabelle, und ein Diagramm mit der erwarteten Zeitersparnis pro Abteilung in Stunden pro Woche."
+
+# topics KI-Assistenten, Zeitersparnis and Abteilung (hard); side_by_side Chancen/Risiken (soft): on one slide in two
+# columns or a table. The unit „Stunden pro Woche“ often appears only in the chart and is therefore not checked.
+[checks]
+side_by_side = { Chancen = 'chance|vorteil|potenzial|potential|nutzen', Risiken = 'risik' }
+slides = [5, 10]
+chart = true
+tables_min = 1
+
+[checks.topics]
+"KI-Assistenten" = '\bki\b|künstliche intelligenz|\bki-|\bai\b'
+Zeitersparnis = 'zeitersparnis|zeiteinsparung|zeitgewinn|eingespart|ersparnis|einsparung|gespart'
+Abteilung = 'abteilung'
+Ziele = 'ziel(?!gruppe)'
+Chancen = 'chance|vorteil|potenzial|potential|nutzen'
+Risiken = 'risik'
+Zeitplan = 'zeitplan|meilenstein|phase|roadmap|fahrplan'
+
+[judge]
+checklist = [
+  "etwa 7 Folien, jede mit Inhalt",
+  "Chancen und Risiken gegenübergestellt (zwei Spalten oder Tabelle)",
+  "Zeitplan als Tabelle, Termine nach dem 13.10.2026",
+  "Diagramm Zeitersparnis pro Abteilung in Stunden pro Woche mit plausiblen Werten und Einheit",
+  "kein Text, der über die Folie läuft",
+]

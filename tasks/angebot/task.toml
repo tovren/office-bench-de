@@ -1,0 +1,30 @@
+id = "angebot"
+title = "Quote calculation"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "medium"
+tags = ["formula", "total_row", "two_sheets"]
+
+[[turns]]
+text = "Erstelle eine Angebotskalkulation als Excel: 5 Positionen für eine IT-Umstellung mit Menge, Einzelpreis in Euro und Gesamtpreis (Formel), dazu Netto-Summe. Auf einem zweiten Blatt die Stundensätze der Mitarbeiter."
+
+[checks]
+priced_items_min = 5
+sheets_min = 2
+line_item_formula = true
+total_row = true
+
+[[checks.calculations]]
+name = "Gesamtpreis = Menge × Einzelpreis"
+columns = { menge = 'menge|anzahl|stunden|\bstd\b|stück|\bstk\b', preis = '^(?!.*(gesamt|summe)).*(preis|satz)', gesamt = 'gesamt' }
+formula = "menge * preis"
+result = "gesamt"
+
+[judge]
+checklist = [
+  "fünf Positionen mit Menge, Einheit, Einzelpreis und Gesamtpreis als Formel",
+  "Netto-Summe als Formel, richtig beschriftet",
+  "zweites Blatt mit Stundensätzen; Einzelpreise passen zu diesen Sätzen (am besten verknüpft)",
+  "realistische Preise und Mengen für eine IT-Umstellung",
+]

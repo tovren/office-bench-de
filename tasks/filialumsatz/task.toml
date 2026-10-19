@@ -1,0 +1,64 @@
+id = "filialumsatz"
+title = "Branch revenue from an email (copying data)"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "medium"
+tags = ["copy_data", "formula", "total_row", "sorting", "chart"]
+
+# All 32 numbers must appear exactly in the table. Annual totals in descending order: Stuttgart 1,728,650, Ludwigsburg
+# 1,056,560, Reutlingen 908,270, Esslingen 825,120, Heilbronn 800,940, Böblingen 730,650, Tübingen 688,130,
+# Göppingen 600,830 (grand total 7,339,150; quarters 1,759,100, 1,755,760, 1,822,700, 2,001,590).
+# numbers_sourced (soft): all numbers come from the prompt (the email); it reports numbers, times and dates that do
+# not appear there and do not simply follow from it.
+# values_present also holds the four quarterly totals and the grand total (the prompt asks for a total row for the
+# quarters, the checklist for the grand total 7,339,150 €); otherwise a total row with only the grand total (mutant
+# quarter_totals_missing) would only be soft. column_format euro (soft) for the quarters and the annual total: the
+# checklist asks for euro format (mutant no_euro_format).
+[[turns]]
+text = """Ich hab hier die Quartalsumsätze 2026 unserer Filialen aus einer Mail kopiert (in Euro):
+
+Filiale; Q1; Q2; Q3; Q4
+Stuttgart; 412.380; 398.120; 441.900; 476.250
+Esslingen; 198.440; 205.310; 189.770; 231.600
+Ludwigsburg; 256.900; 249.180; 262.430; 288.050
+Böblingen; 173.220; 181.640; 176.310; 199.480
+Reutlingen; 221.560; 214.890; 230.120; 241.700
+Heilbronn; 189.330; 195.470; 201.880; 214.260
+Göppingen; 142.760; 139.920; 151.340; 166.810
+Tübingen; 164.510; 171.230; 168.950; 183.440
+
+Mach mir daraus bitte eine Excel-Tabelle mit der Jahressumme je Filiale als Formel, einer Summenzeile für die Quartale und einem Balkendiagramm der Jahressummen. Sortier die Filialen nach Jahresumsatz, die stärkste oben."""
+
+[checks]
+numbers_sourced = true
+data_rows_min = 8
+columns = ['filiale|standort|niederlassung', '\bq\s*1\b|1\.\s*quartal|quartal\s*1\b', '\bq\s*2\b|2\.\s*quartal|quartal\s*2\b', '\bq\s*3\b|3\.\s*quartal|quartal\s*3\b', '\bq\s*4\b|4\.\s*quartal|quartal\s*4\b', 'jahr|gesamt|summe|total']
+formulas_min = 8
+total_row = true
+chart = true
+chart_type = ["bar", "column"]
+chart_values = [[1728650, 1056560, 908270, 825120, 800940, 730650, 688130, 600830]]
+sorted = { column = 'jahr|gesamt|summe|total', descending = true }
+column_format = { '^(?!.*(%|anteil|prozent|rang|anzahl)).*(\bq\s*[1-4]\b|quartal|jahr|gesamt|summe|total)' = "euro" }
+values_present = [
+  412380, 398120, 441900, 476250, 198440, 205310, 189770, 231600, 256900, 249180, 262430, 288050,
+  173220, 181640, 176310, 199480, 221560, 214890, 230120, 241700, 189330, 195470, 201880, 214260,
+  142760, 139920, 151340, 166810, 164510, 171230, 168950, 183440,
+  1759100, 1755760, 1822700, 2001590, 7339150,
+]
+
+[[checks.calculations]]
+name = "Jahressumme = Q1 + Q2 + Q3 + Q4"
+columns = { q1 = '\bq\s*1\b|1\.\s*quartal|quartal\s*1\b', q2 = '\bq\s*2\b|2\.\s*quartal|quartal\s*2\b', q3 = '\bq\s*3\b|3\.\s*quartal|quartal\s*3\b', q4 = '\bq\s*4\b|4\.\s*quartal|quartal\s*4\b', jahr = 'jahr|gesamt|summe|total' }
+formula = "q1 + q2 + q3 + q4"
+result = "jahr"
+
+[judge]
+checklist = [
+  "alle acht Filialen mit genau den 32 Werten aus der Mail, keine Zahl verändert oder vertauscht",
+  "Jahressumme je Filiale als Formel, Summenzeile je Quartal und Gesamtsumme 7.339.150 € als Formel",
+  "nach Jahresumsatz absteigend sortiert: Stuttgart, Ludwigsburg, Reutlingen, Esslingen, Heilbronn, Böblingen, Tübingen, Göppingen",
+  "Balkendiagramm der acht Jahressummen (ohne die Gesamtsumme als eigenen Balken), sinnvoll beschriftet",
+  "Euro-Format, lesbare Spaltenbreiten",
+]

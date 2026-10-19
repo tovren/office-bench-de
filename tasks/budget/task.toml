@@ -1,0 +1,34 @@
+id = "budget"
+title = "Budget"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "easy"
+tags = ["formula", "total_row", "chart"]
+
+[[turns]]
+text = "Mach mir eine Excel-Datei mit einem Haushaltsbudget für Januar bis Juni 2026: Einnahmen und Ausgaben pro Monat, der Saldo als Formel, eine Summenzeile und ein Säulendiagramm für Einnahmen und Ausgaben."
+
+[checks]
+months = [1, 6]
+month_rows_min = 6
+chart = true
+chart_type = "column"
+chart_series_min = 2
+formulas_min = 1
+total_row = true
+
+[[checks.calculations]]
+name = "Saldo = Einnahmen − Ausgaben"
+columns = { einnahmen = '^(?!.*saldo).*einnahm', ausgaben = '^(?!.*saldo).*ausgab', saldo = 'saldo|differenz|überschuss' }
+formula = "einnahmen - ausgaben"
+result = "saldo"
+
+[judge]
+checklist = [
+  "Monate Januar bis Juni 2026",
+  "Saldo als Formel Einnahmen − Ausgaben",
+  "Summenzeile für Einnahmen, Ausgaben und Saldo",
+  "Säulendiagramm mit Einnahmen und Ausgaben je Monat (Monate auf der x-Achse)",
+  "plausible Beträge, €-Format",
+]

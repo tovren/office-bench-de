@@ -1,0 +1,154 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Umlage Gebäudekosten 2026",
+  "sheets": [
+   {
+    "name": "Umlage 2026",
+    "columns": [
+     {
+      "header": "Abteilung"
+     },
+     {
+      "header": "Fläche (m²)",
+      "type": "integer",
+      "total": "sum"
+     },
+     {
+      "header": "Flächenanteil",
+      "type": "percent",
+      "formula": "=B{row}/SUM(B$2:B$5)",
+      "total": "sum"
+     },
+     {
+      "header": "Mitarbeitende",
+      "type": "integer",
+      "total": "sum"
+     },
+     {
+      "header": "Heizung (Fläche)",
+      "type": "currency",
+      "formula": "=C{row}*'Kosten'!$B$2",
+      "total": "sum"
+     },
+     {
+      "header": "Strom (Köpfe)",
+      "type": "currency",
+      "formula": "=D{row}/SUM(D$2:D$5)*'Kosten'!$B$3",
+      "total": "sum"
+     },
+     {
+      "header": "Reinigung (Fläche)",
+      "type": "currency",
+      "formula": "=C{row}*'Kosten'!$B$4",
+      "total": "sum"
+     },
+     {
+      "header": "Hausmeister (Fläche)",
+      "type": "currency",
+      "formula": "=C{row}*'Kosten'!$B$5",
+      "total": "sum"
+     },
+     {
+      "header": "Umlage gesamt",
+      "type": "currency",
+      "formula": "=SUM(E{row}:H{row})",
+      "total": "sum"
+     }
+    ],
+    "rows": [
+     [
+      "Verwaltung",
+      220,
+      null,
+      12,
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     [
+      "Vertrieb",
+      140,
+      null,
+      8,
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     [
+      "Werkstatt",
+      380,
+      null,
+      14,
+      null,
+      null,
+      null,
+      null,
+      null
+     ],
+     [
+      "Lager",
+      260,
+      null,
+      6,
+      null,
+      null,
+      null,
+      null,
+      null
+     ]
+    ],
+    "chart": {
+     "type": "pie",
+     "title": "Gebäudekosten 2026 je Abteilung",
+     "category_column": "Abteilung",
+     "value_columns": [
+      "Umlage gesamt"
+     ]
+    }
+   },
+   {
+    "name": "Kosten",
+    "columns": [
+     {
+      "header": "Kostenart"
+     },
+     {
+      "header": "Betrag 2026",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Umlageschlüssel"
+     }
+    ],
+    "rows": [
+     [
+      "Heizung",
+      18400,
+      "Fläche"
+     ],
+     [
+      "Strom",
+      4800,
+      "Mitarbeitende"
+     ],
+     [
+      "Reinigung",
+      9600,
+      "Fläche"
+     ],
+     [
+      "Hausmeister",
+      7200,
+      "Fläche"
+     ]
+    ]
+   }
+  ]
+ }
+}

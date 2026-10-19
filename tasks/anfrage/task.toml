@@ -1,0 +1,49 @@
+id = "anfrage"
+title = "Quote for a customer inquiry (attachment)"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "medium"
+tags = ["attachment", "formula", "discount", "vat", "line_item_formula"]
+
+# Task with an attachment (email as PDF). Quantities from the attachment, prices from the prompt. Calculation:
+# hardware 6 × 1,149 + 6 × 189 + 8 × 259 + 1 × 429 = €10,529, minus 5 % = €10,002.55; setup 12 × 95 = €1,140
+# (no discount); net €11,142.55, VAT €2,117.08, gross €13,259.63. No check total = quantity × price: the discount
+# may also be included per row in the total price; values_present checks net and gross.
+[[turns]]
+text = "Im Anhang ist eine Anfrage der Schreinerei Vogt. Mach mir bitte ein Angebot als Excel mit unseren Preisen: Laptop 1.149 €, Dockingstation 189 €, Monitor 27 Zoll 259 €, Multifunktionsdrucker 429 €, Einrichtung 95 € pro Stunde. Auf die Hardware gibt es 5 % Rabatt, auf die Einrichtung nicht. Darunter Netto, 19 % MwSt und Brutto."
+attachments = [{ name = "Anfrage Schreinerei Vogt.pdf", file = "anfrage_vogt.txt" }]
+
+# numbers_sourced (soft): quantities and prices come from the attachment and the prompt; it reports numbers and
+# dates that are not there and do not follow from them (e.g. an invented validity „bis 13.11.2026“).
+# formulas_min = 8 (five items, net, VAT, gross): the checklist asks for net, VAT and gross as formulas; without it,
+# final totals as fixed amounts (mutant totals_as_constants, in real runs a summary with constants) only fail
+# when a value is wrong.
+[checks]
+numbers_sourced = true
+priced_items_min = 5
+line_item_formula = true
+formulas_min = 8
+values_present = [6, 8, 12, 1149, 189, 259, 429, 95, 11142.55, 13259.63]
+
+[checks.topics]
+Rabatt = 'rabatt|nachlass'
+MwSt = 'mwst|mehrwertsteuer|umsatzsteuer|\bust\b'
+Brutto = 'brutto'
+
+# The prompt does not ask for the customer explicitly; in an earlier run all four models wrote it only into the
+# file name (as a hard check: 0/12). If it is missing, that is a quality flaw (checklist), not a failure.
+[checks.topics_soft]
+Kunde = 'vogt'
+
+[checks.forbidden]
+Quellenmarker = '\[\d{1,2}\]'
+
+[judge]
+checklist = [
+  "alle fünf Positionen mit den Mengen aus der Anfrage (6 Laptops, 6 Dockingstationen, 8 Monitore, 1 Drucker, 12 Stunden Einrichtung) und den Preisen aus dem Auftrag",
+  "Gesamtpreis je Position als Formel; 5 % Rabatt nur auf die Hardware (526,45 €)",
+  "Netto 11.142,55 €, MwSt 19 % 2.117,08 €, Brutto 13.259,63 € als Formeln",
+  "Kunde Schreinerei Vogt GmbH mit Anschrift, Angebotsdatum, Gültigkeit und Liefertermin bis Ende November",
+  "keine Quellenmarker wie [1], keine Platzhalter",
+]

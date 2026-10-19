@@ -1,0 +1,44 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+# Vague task without review notes on real errors: typical errors from other tasks.
+
+[[mutant]]
+name = "no_dishes"
+defect = "notice about cleanliness in general, the request about the dishes is missing"
+set = [
+  ["blocks.0.text", "Damit sich alle in unserer Teeküche wohlfühlen, haben wir eine Bitte: **Hinterlasst die Küche so, wie ihr sie vorfinden möchtet.**"],
+  ["blocks.1.items", ["Arbeitsflächen nach dem Benutzen kurz abwischen", "Kaffeemaschine entkalken, wenn die Anzeige leuchtet", "Eigene Lebensmittel im Kühlschrank beschriften und freitags mitnehmen", "Essensreste in den Biomüll"]],
+]
+expected = ["topics"]
+
+# as in the checklist: „keine Platzhalter wie [Name]“
+[[mutant]]
+name = "placeholder_sender"
+defect = "placeholder „[Name/Abteilung]“ as sender"
+replace = [["Vielen Dank, dass ihr mithelft!", "Vielen Dank, dass ihr mithelft! Eure [Name/Abteilung]"]]
+expected = ["placeholders"]
+severity = "soft"
+
+[[mutant]]
+name = "english"
+defect = "notice in English"
+set = [
+  ["title", "Our Tea Kitchen – Clean for Everyone"],
+  ["blocks.0.text", "To keep the kitchen a nice place for all of us, we have one request: **please put away your own dishes after use.**"],
+  ["blocks.1.items", ["Put cups, plates and cutlery into the dishwasher", "Is the dishwasher full? Please switch it on.", "Is the dishwasher done? Take two minutes to empty it.", "Wash and dry anything that is not dishwasher safe", "Food waste goes into the organic bin, not into the sink"]],
+  ["blocks.2.text", "Thank you for your help!"],
+]
+expected = ["english", "topics"]
+
+# Chinese word in the middle of the text, as a model in an earlier run wrote in a manual („Ihr初始-Passwort“)
+[[mutant]]
+name = "chinese"
+defect = "Chinese word in the middle of a sentence („直接 in die Spülmaschine“)"
+replace = [["direkt in die Spülmaschine", "直接 in die Spülmaschine"]]
+expected = ["foreign_script"]
+
+[[mutant]]
+name = "markdown_heading"
+defect = "Markdown heading „## Vielen Dank …“ as text in a paragraph"
+set = [["blocks.2.text", "## Vielen Dank, dass ihr mithelft!"]]
+expected = ["markdown"]
+severity = "soft"

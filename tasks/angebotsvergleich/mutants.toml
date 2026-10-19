@@ -1,0 +1,59 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+# Free pages forgotten: Kunz would then come to €15,354 instead of €15,066, the gap grows.
+[[mutant]]
+name = "without_free_pages"
+defect = "Kunz calculated without the 1,000 free pages: €15,354 instead of €15,066"
+replace = [
+  ["7.000 × 0,008 € + 1.500 × 0,049 € = 129,50 €, über 36 Monate 4.662,00 €; zusammen **15.066,00 €**",
+   "8.000 × 0,008 € + 1.500 × 0,049 € = 137,50 €, über 36 Monate 4.950,00 €; zusammen **15.354,00 €**"],
+  ["15.066,00 €", "15.354,00 €"],
+  ["um 274,00 € günstiger, also um weniger als 2 %", "um 562,00 € günstiger, also um knapp 4 %"],
+]
+expected = ["values_present"]
+
+# observed in an earlier run (the cost table contradicts the model's own working)
+[[mutant]]
+name = "lease_rate_miscalculated"
+defect = "working wrong: 36 × €289.00 = €10,044.00 (correct: €10,404.00), final total still right"
+replace = [["36 × 289,00 € = 10.404,00 €", "36 × 289,00 € = 10.044,00 €"]]
+expected = ["text_arithmetic"]
+severity = "soft"
+
+# observed in three earlier runs (source markers [1]/[2] in the table headers)
+[[mutant]]
+name = "source_markers"
+defect = "source markers [1]/[2] from the RAG template in the table headers"
+replace = [
+  ["Bürotechnik Kunz (A-26-3318)", "Bürotechnik Kunz (A-26-3318) [1]"],
+  ["Druckwerk Systemhaus (2026-0917)", "Druckwerk Systemhaus (2026-0917) [2]"],
+]
+expected = ["forbidden"]
+
+# observed in earlier runs („statt einer Empfehlung nur ein Entweder-oder“; if-then without a decision)
+[[mutant]]
+name = "no_recommendation"
+defect = "no recommendation, only an either-or in the conclusion"
+set = [
+  ["blocks.8.text", "Fazit"],
+  ["blocks.9.text", "Beide Angebote haben Vor- und Nachteile. Ist schneller Service wichtiger, passt Kunz; zählt der Preis und das Eigentum an den Geräten, passt Druckwerk. Die Entscheidung liegt bei der Geschäftsführung."],
+]
+expected = ["topics"]
+
+# observed in an earlier run („Entscheidungsfrist 25.10.2026 ist ein Sonntag“), also noted in reviews
+[[mutant]]
+name = "deadline_on_sunday"
+defect = "decision deadline set to Sunday, 25.10.2026"
+replace = [["Entscheidung bitte bis spätestens 30. Oktober 2026, damit das Angebot noch gilt.",
+            "Entscheidung bitte bis spätestens 25.10.2026, damit das Angebot noch gilt."]]
+expected = ["weekend"]
+severity = "soft"
+
+# observed in an earlier run („einmalig 725,00 € statt 350 €“ in the comparison table, final totals right)
+[[mutant]]
+name = "installation_invented"
+defect = "delivery and installation in the table at €725.00 instead of €350.00"
+replace = [["+ 350,00 € Lieferung und Installation", "+ 725,00 € Lieferung und Installation"]]
+expected = ["numbers_sourced"]
+severity = "soft"
+gap = "numbers_sourced is not enabled for angebotsvergleich, values_present only checks the final totals. With numbers_sourced = true, 725 would have no source, but the check (trial on 19.10.2026) flagged correct numbers in almost all 30 real runs: calculations over three steps (7,000 × €0.008 × 36 = €2,016), the correct final totals €15,066 and €14,792 and the difference €274. The task calculates too much for „jede Zahl aus dem Auftrag kommt“; values_present with 350 does not help either (the real run mentions 350 elsewhere). Fix: numbers_sourced would have to derive products of three numbers and sums of sourced numbers in the file."

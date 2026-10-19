@@ -1,0 +1,63 @@
+# Broken variants of reference.json (format: docs/mutants.md). Follow-up over three rounds: the variant changes the
+# file from turn 3 and is compared with the unchanged one from turn 2 (previous).
+# Correct: sheet 1 with 12 rows and Werkstatt Q2 actual 61.240 €, totals 589.000 / 595.770 / 6.770 €; sheet 2 „Je
+# Kostenstelle“ with SUMIF on sheet 1: −210 / 3.900 / 2.300 / 780 €.
+
+# observed in several earlier runs: %-formulas with *100 in percent format, 1000,0 % instead of 10,0 %
+[[mutant]]
+name = "percent_times_100"
+defect = "variance in % times 100 in percent format (Vertrieb Q3 1.000 % instead of 10 %, sheet 2 354,5 % instead of 3,5 %)"
+replace = [["=E{row}/C{row}", "=E{row}/C{row}*100"], ["=D{row}/B{row}", "=D{row}/B{row}*100"]]
+expected = ["calculations"]
+
+# observed in an earlier run (the sheet asked for in message 3 is missing entirely)
+[[mutant]]
+name = "per_cost_centre_sheet_missing"
+defect = "second sheet „Je Kostenstelle“ is missing"
+remove = ["sheets.1"]
+expected = ["sheets_min", "values_present", "groups"]
+
+# observed in an earlier run (=AVERAGE(F2:F13) in the total row: 1,3 % instead of 6.770 / 589.000 = 1,1 %)
+[[mutant]]
+name = "total_percent_as_average"
+defect = "total row shows the average of the single percentages (1,3 %) instead of the overall variance (1,1 %)"
+set = [
+  ["sheets.0.columns.5", { header = "Abweichung in %", type = "percent", formula = "=E{row}/C{row}", total = "average" }],
+  ["sheets.1.columns.4", { header = "Abweichung in %", type = "percent", formula = "=D{row}/B{row}", total = "average" }],
+]
+expected = ["calculations", "sum_range"]
+severity = "soft"
+
+# observed in an earlier run (total row on sheet 1 only with the variance, plan and actual totals missing)
+[[mutant]]
+name = "plan_actual_totals_missing"
+defect = "total row on sheet 1 only with the variance; plan 589.000 € and actual 595.770 € are missing"
+remove = ["sheets.0.columns.2.total", "sheets.0.columns.3.total"]
+# Reported only as soft (calculations: „Summenzeile unvollständig“); 595.770 still appears in the total of sheet 2.
+expected = ["total_row", "values_present", "calculations"]
+severity = "soft"
+
+# Follow-up: in round 3 the model rebuilds sheet 1 from the numbers of the first message, and the correction from
+# round 2 is lost.
+[[mutant]]
+name = "correction_lost"
+defect = "Werkstatt Q2 back at 64.120 € instead of the corrected 61.240 € (actual 598.650 €, Werkstatt 176.660 €)"
+number = [[61240, 64120]]
+expected = ["values_present"]
+
+# The prompt asks on sheet 2 for „Formeln, die sich auf das erste Blatt beziehen“; here the correct totals are fixed
+# values (pattern from the tasks auftragsdaten and bueromaterial).
+[[mutant]]
+name = "sheet2_as_constants"
+defect = "sheet „Je Kostenstelle“ with fixed values instead of formulas on sheet 1"
+set = [
+  ["sheets.1.columns.1.formula", ""], ["sheets.1.columns.2.formula", ""],
+  ["sheets.1.columns.3.formula", ""], ["sheets.1.columns.4.formula", ""],
+  ["sheets.1.rows", [
+    ["4100 Verwaltung", 126000, 125790, -210, -0.17],
+    ["4200 Vertrieb", 110000, 113900, 3900, 3.55],
+    ["4300 Kundendienst", 180000, 182300, 2300, 1.28],
+    ["4400 Werkstatt", 173000, 173780, 780, 0.45],
+  ]],
+]
+expected = ["formulas_min"]

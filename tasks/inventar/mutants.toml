@@ -1,0 +1,77 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+# Reference: 50 devices on sheet „Inventar“ with a total row; sheet „Übersicht“ with count and total value per device
+# type (Laptop 16 / 20,374 €, Monitor 14 / 3,626 €, Dockingstation 10 / 2,040 €, Drucker 4 / 2,356 €, Telefon 6 /
+# 1,224 €) and a pie chart.
+
+# observed in earlier runs of several models (e.g. laptops 31,400 instead of 28,400 €): overview computed by hand
+# and wrong
+[[mutant]]
+name = "overview_value_wrong"
+defect = "total value of the laptops in the overview 23,374 instead of 20,374 €; the pie chart shows wrong shares"
+number = [[20374, 23374]]
+expected = ["groups"]
+
+# observed in an earlier run (the list ends without the sum of the purchase prices)
+[[mutant]]
+name = "no_total_row"
+defect = "sum of the purchase prices below the list is missing"
+remove = ["sheets.0.columns.7.total"]
+expected = ["total_row"]
+
+# observed in an earlier run (=COUNTA(B2:B6) in the total row of the overview: 5 instead of 50 devices)
+[[mutant]]
+name = "overview_total_counts_types"
+defect = "total row of the overview counts the device types (5) instead of summing the devices (50)"
+set = [["sheets.1.columns.1.total", "count"]]
+expected = ["sum_range"]
+severity = "soft"
+
+# observed in several earlier runs (Max Mustermann/Erika Musterfrau as employees)
+[[mutant]]
+name = "placeholder_names"
+defect = "placeholder names Max Mustermann and Erika Musterfrau instead of realistic employees"
+replace = [["Sabine Becker", "Max Mustermann"], ["Laura Hoffmann", "Erika Musterfrau"]]
+expected = ["placeholders"]
+severity = "soft"
+
+# observed in an earlier run (two rounds): extra column „Anteil am Wert (%)“ =C2/SUM(…)*100 in percent format shows
+# 6954 % instead of 70 %
+[[mutant]]
+name = "share_times_100"
+defect = "extra column share of value ×100 in percent format (6,954 % instead of 69.5 %)"
+set = [
+  ["sheets.1.columns", [
+    { header = "Gerätetyp", type = "text" },
+    { header = "Anzahl", type = "integer", total = "sum" },
+    { header = "Gesamtwert", type = "currency", total = "sum" },
+    { header = "Anteil am Wert (%)", type = "percent", formula = "=C{row}/SUM(C$2:C$6)*100" },
+  ]],
+  ["sheets.1.rows", [
+    ["Laptop", 16, 20374.0, ""],
+    ["Monitor", 14, 3626.0, ""],
+    ["Dockingstation", 10, 2040.0, ""],
+    ["Drucker", 4, 2356.0, ""],
+    ["Telefon", 6, 1224.0, ""],
+  ]],
+]
+expected = ["share_over_100", "value_ranges"]
+severity = "soft"
+
+# The prompt asks for „ein Kreisdiagramm für den Wert“. (The real error from an earlier run, a pie chart over the 50
+# single prices on sheet 1, cannot be built with `set`: it creates no new key.)
+[[mutant]]
+name = "pie_chart_count"
+defect = "pie chart of the count per device type instead of the total value"
+set = [["sheets.1.chart.value_columns", ["Anzahl"]], ["sheets.1.chart.title", "Geräte je Typ"]]
+expected = ["chart_series", "chart_values"]
+
+# observed in earlier runs (employee cells G47:G49 empty; nine printers without an employee); the checklist asks for
+# „keine leeren Zellen“
+[[mutant]]
+name = "empty_employee_cells"
+defect = "three devices without an assigned employee (empty cells)"
+set = [["sheets.0.rows.46.5", ""], ["sheets.0.rows.47.5", ""], ["sheets.0.rows.48.5", ""]]
+expected = ["empty_table"]
+severity = "soft"
+gap = """empty_table only checks Word and slide tables. Would catch it: an xlsx check for empty cells in data rows \
+of text columns that are filled everywhere else (soft)."""

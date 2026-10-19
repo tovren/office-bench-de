@@ -1,0 +1,42 @@
+id = "kundenantwort"
+title = "Reply to a complaint (attachment, no file)"
+version = 1
+kind = "no_file"
+difficulty = "medium"
+tags = ["no_file", "attachment", "email", "arithmetic"]
+
+# The text is wanted in the chat, not a document. Corrected invoice: 386.75 − 49.00 = 337.75 €. The RAG template asks
+# for source markers like [1]; they do not belong in an email meant for copying (the copy button of Open WebUI only
+# removes <details> blocks, so „[1]“ ends up in Outlook).
+# The amount 337.75 € is not required, it is only in the checklist. The prompt does not ask for it, and nowhere does
+# it say whether the 49 € on the invoice are net or gross; a model in an earlier run deliberately left it out for that
+# reason (as in the task anfrage: what is not explicitly asked for is not a failure).
+# [reply] no_markdown (soft): **, ## or table separators end up in Outlook as characters with the copy button. Soft,
+# because the rendered answer keeps its formatting when selected and copied, and the prompt does not explicitly forbid
+# Markdown.
+[[turns]]
+text = "Im Anhang ist eine Beschwerde von Frau Lindner. Formulier mir bitte eine Antwort, die ich direkt in Outlook kopieren kann. Stand bei uns: Die doppelte Anfahrt war ein Fehler, sie bekommt eine korrigierte Rechnung ohne die zweite Anfahrt. Die Verspätung kam durch einen Notfall bei einem anderen Kunden, da hätten wir sie anrufen müssen. Unser Techniker Herr Albers kommt am Donnerstag, 22. Oktober, zwischen 8 und 10 Uhr noch mal vorbei und schaut sich das Klopfgeräusch an, natürlich kostenlos."
+attachments = [{ name = "Beschwerde Lindner.pdf", file = "beschwerde_lindner.txt" }]
+
+[reply]
+no_markdown = true
+
+[reply.topics]
+Anrede = 'frau lindner'
+Entschuldigung = 'entschuldig|bedauern|tut uns (sehr )?leid'
+Termin = '(?<!\d)22\.\s*(10\.|oktober)'
+Techniker = 'albers'
+kostenlos = 'kostenlos|kostenfrei|ohne (weitere |zusätzliche )?kosten|keine (weiteren |zusätzlichen )?kosten'
+
+[reply.forbidden]
+Quellenmarker = '\[\d{1,2}\]'
+"Tags der RAG-Vorlage" = '</?(source|context)\b'
+
+[judge]
+checklist = [
+  "keine Datei, sondern ein fertiger Mailtext im Chat mit Betreff, Anrede „Sehr geehrte Frau Lindner“ und Gruß",
+  "ehrliche Entschuldigung für die Verspätung ohne Anruf (Notfall bei einem anderen Kunden) und für die doppelte Anfahrt",
+  "korrigierte Rechnung ohne die zweite Anfahrt, am besten mit Betrag (337,75 €, falls die 49,00 € brutto sind) oder einem Hinweis, dass er noch zu prüfen ist; Rechnungsnummer RE-2026-1187",
+  "Termin Donnerstag, 22.10.2026, 8–10 Uhr mit Herrn Albers, kostenlos",
+  "Ton freundlich und sachlich, nichts versprochen, was nicht im Auftrag steht; keine Quellenmarker wie [1] und kein Markdown, das in Outlook als Sternchen ankommt",
+]

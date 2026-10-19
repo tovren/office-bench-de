@@ -1,0 +1,45 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+[[mutant]]
+# observed in earlier runs: invented column „Q4 2026 (vorläufig)“ = 0
+name = "q4_with_zero"
+defect = "invented category „Q4 2026 (vorläufig)“ with value 0 in the quarterly chart"
+set = [["slides.2.chart.categories", ["Q1 2026", "Q2 2026", "Q3 2026", "Q4 2026 (vorläufig)"]],
+       ["slides.2.chart.series.0.values", [4210, 3980, 4650, 0]]]
+expected = ["chart_values"]
+
+[[mutant]]
+name = "bars_instead_of_columns"
+defect = "bar chart instead of the requested column chart"
+set = [["slides.2.chart.type", "bar"]]
+expected = ["chart_type"]
+
+[[mutant]]
+# observed in earlier runs (once in all 8 speaker notes, once in four)
+name = "source_marker_in_notes"
+defect = "source marker „[1]“ in the speaker notes"
+replace = [["Seit September sind die Zahlen wieder normal.", "Seit September sind die Zahlen wieder normal [1]."]]
+expected = ["forbidden"]
+
+[[mutant]]
+# transposed numbers between the quarters: Q1 and Q2 swapped
+name = "quarters_swapped"
+defect = "Q1 and Q2 swapped in the chart (Q1 3,980, Q2 4,210)"
+set = [["slides.2.chart.series.0.values", [3980, 4210, 4650]]]
+expected = ["chart_values"]
+
+[[mutant]]
+# previous year's value taken instead of the current one
+name = "satisfaction_previous_year"
+defect = "customer satisfaction 4.0 (previous year) instead of 4.3 out of 5"
+replace = [["Kundenzufriedenheit 4,3 von 5 (Vorjahr 4,0)", "Kundenzufriedenheit 4,0 von 5"]]
+expected = ["values_present"]
+
+[[mutant]]
+# observed in an earlier run: invented „Ziel 2027 …“
+name = "target_invented"
+defect = "invented target „Erstlösungsquote 83 % bis Ende 2027“, not in the report"
+replace = [["Erwartung: rund 20 % weniger Anfragen zum Lieferstatus", "Ziel: Erstlösungsquote 83 % bis Ende 2027"]]
+expected = ["numbers_sourced"]
+severity = "soft"
+gap = "numbers_sourced considers almost every two-digit number derivable: the report has paragraphs with many numbers (topics 34/22/18/15/11 %, key figures) whose partial sums, differences and percentage changes give 78, 80, 83, 87, 93 …; invented percentage targets thus go undetected (partial sums and percentage pairs only for numbers of the same unit, or only when the sentence in the file refers to the same thing)"

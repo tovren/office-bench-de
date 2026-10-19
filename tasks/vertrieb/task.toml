@@ -1,0 +1,41 @@
+id = "vertrieb"
+title = "Revenue by region (year-on-year)"
+version = 1
+kind = "file"
+file_type = "pptx"
+difficulty = "medium"
+tags = ["chart", "two_series", "table", "percent", "arithmetic", "given_numbers"]
+
+# Change 2026 vs. 2025: Nord +20 %, Ost +15 %, West +3 %, Mitte +8 %, Süd −2.5 %; total 2,600 → 2,795 k€, i.e.
+# +195 k€ or +7.5 %. The numbers are chosen so that all percentages come out even.
+[[turns]]
+text = "Mach mir bitte eine PowerPoint für unsere Vertriebsrunde nächste Woche, 5 bis 7 Folien. Umsatz Januar bis September in Tausend Euro, erst 2025, dann 2026: Nord 480 und 576, Ost 440 und 506, West 600 und 618, Mitte 400 und 432, Süd 680 und 663. Ich brauche ein Säulendiagramm mit beiden Jahren je Region, eine Tabelle mit der Veränderung in Prozent je Region und insgesamt, und eine Folie zu Süd: Dort haben wir im Frühjahr den Großkunden Hagemann verloren. Zum Schluss bitte drei Vorschläge, wie es weitergeht."
+
+# Süd and the total are checked via values_present with alternatives instead of a regex (−2.5 or 2.5, also
+# „2,50 %“); numbers_sourced (soft): numbers that are not in the prompt and do not follow from it, e.g. invented
+# reasons with amounts on the Süd slide.
+[checks]
+numbers_sourced = true
+values_present = [[-2.5, 2.5], 7.5]
+slides = [5, 7]
+tables_min = 1
+chart = true
+chart_type = "column"
+chart_series_min = 2
+chart_values = [[480, 440, 600, 400, 680], [576, 506, 618, 432, 663]]
+
+[checks.topics]
+"Nord +20 %" = '(?<![\d,.])20(,0)?\s*(%|prozent)'
+"Ost +15 %" = '(?<![\d,.])15(,0)?\s*(%|prozent)'
+"West +3 %" = '(?<![\d,.])3(,0)?\s*(%|prozent)'
+"Mitte +8 %" = '(?<![\d,.])8(,0)?\s*(%|prozent)'
+Hagemann = 'hagemann'
+
+[judge]
+checklist = [
+  "5 bis 7 Folien mit Titelfolie und klarer Botschaft (insgesamt +7,5 %, Süd als einzige Region im Minus)",
+  "Säulendiagramm mit zwei Reihen 2025 und 2026 je Region, genau die vorgegebenen Werte, Einheit Tsd. €",
+  "Tabelle mit den Veränderungen: Nord +20 %, Ost +15 %, West +3 %, Mitte +8 %, Süd −2,5 %, gesamt 2.600 → 2.795 Tsd. € (+7,5 %)",
+  "Folie zu Süd: Rückgang um 17 Tsd. € mit dem Verlust des Großkunden Hagemann erklärt, nichts dazuerfunden",
+  "drei konkrete, zum Material passende Vorschläge für das weitere Vorgehen",
+]

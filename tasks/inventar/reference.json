@@ -1,0 +1,602 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "IT-Inventarliste",
+  "sheets": [
+   {
+    "name": "Inventar",
+    "columns": [
+     {
+      "header": "Inventar-Nr.",
+      "type": "text"
+     },
+     {
+      "header": "Gerätetyp",
+      "type": "text"
+     },
+     {
+      "header": "Hersteller und Modell",
+      "type": "text"
+     },
+     {
+      "header": "Seriennummer",
+      "type": "text"
+     },
+     {
+      "header": "Standort",
+      "type": "text"
+     },
+     {
+      "header": "Mitarbeiter",
+      "type": "text"
+     },
+     {
+      "header": "Kaufdatum",
+      "type": "date"
+     },
+     {
+      "header": "Kaufpreis",
+      "type": "currency",
+      "total": "sum"
+     }
+    ],
+    "rows": [
+     [
+      "IT-2021-001",
+      "Dockingstation",
+      "Lenovo ThinkPad Universal USB-C Dock",
+      "ZK1Z9ME6H7",
+      "2. OG Projektleitung",
+      "Sabine Becker",
+      "2021-03-01",
+      189.0
+     ],
+     [
+      "IT-2021-002",
+      "Laptop",
+      "Lenovo ThinkPad T14 Gen 4",
+      "PF42PZNQC6",
+      "2. OG Planung",
+      "Laura Hoffmann",
+      "2021-04-19",
+      1289.0
+     ],
+     [
+      "IT-2021-003",
+      "Telefon",
+      "Snom D785",
+      "SN740X891H",
+      "2. OG Projektleitung",
+      "Markus Keller",
+      "2021-05-31",
+      219.0
+     ],
+     [
+      "IT-2021-004",
+      "Monitor",
+      "Dell P2723D",
+      "CN0CGCCB5G",
+      "2. OG Planung",
+      "Laura Hoffmann",
+      "2021-09-29",
+      289.0
+     ],
+     [
+      "IT-2021-005",
+      "Monitor",
+      "Dell P2723D",
+      "CN09PXKC0D",
+      "1. OG Personal",
+      "Selin Yilmaz",
+      "2021-10-11",
+      289.0
+     ],
+     [
+      "IT-2021-006",
+      "Telefon",
+      "Yealink SIP-T54W",
+      "YT52X99DMK",
+      "2. OG Projektleitung",
+      "Sabine Becker",
+      "2021-10-13",
+      189.0
+     ],
+     [
+      "IT-2021-007",
+      "Telefon",
+      "Snom D785",
+      "SN7HGZ75SM",
+      "EG Empfang",
+      "Jonas Brandt",
+      "2021-10-18",
+      219.0
+     ],
+     [
+      "IT-2021-008",
+      "Laptop",
+      "Dell Latitude 5440",
+      "DL5UCPUK85",
+      "1. OG Einkauf",
+      "Mehmet Demir",
+      "2021-10-22",
+      1149.0
+     ],
+     [
+      "IT-2021-009",
+      "Laptop",
+      "Dell Latitude 5440",
+      "DL5BQGRJN4",
+      "EG Empfang",
+      "Jonas Brandt",
+      "2021-11-01",
+      1149.0
+     ],
+     [
+      "IT-2021-010",
+      "Laptop",
+      "Dell Latitude 5440",
+      "DL5T40Z4LR",
+      "1. OG Einkauf",
+      "Florian Weber",
+      "2021-12-06",
+      1149.0
+     ],
+     [
+      "IT-2022-011",
+      "Dockingstation",
+      "Dell WD19S",
+      "CN4XDVQX41",
+      "2. OG Projektleitung",
+      "Markus Keller",
+      "2022-01-07",
+      219.0
+     ],
+     [
+      "IT-2022-012",
+      "Telefon",
+      "Snom D785",
+      "SN749M6T1Q",
+      "2. OG Planung",
+      "Tobias Schmid",
+      "2022-01-17",
+      219.0
+     ],
+     [
+      "IT-2022-013",
+      "Monitor",
+      "Dell P2723D",
+      "CN0G821XSL",
+      "1. OG Buchhaltung",
+      "Andrea Wolf",
+      "2022-03-14",
+      289.0
+     ],
+     [
+      "IT-2022-014",
+      "Monitor",
+      "Dell P2723D",
+      "CN0CV37YN0",
+      "1. OG Buchhaltung",
+      "Katrin Maier",
+      "2022-05-30",
+      289.0
+     ],
+     [
+      "IT-2022-015",
+      "Drucker",
+      "Brother MFC-L8690CDW",
+      "E7S3SZA6LH",
+      "EG Kundenservice",
+      "gemeinsam",
+      "2022-08-01",
+      529.0
+     ],
+     [
+      "IT-2022-016",
+      "Laptop",
+      "HP EliteBook 840 G10",
+      "5CGZ1KFA4N",
+      "EG Kundenservice",
+      "Julia Krause",
+      "2022-08-23",
+      1379.0
+     ],
+     [
+      "IT-2022-017",
+      "Drucker",
+      "HP Color LaserJet Pro MFP 4302fdw",
+      "VNB6CJD3MC",
+      "EG Empfang",
+      "gemeinsam",
+      "2022-11-17",
+      649.0
+     ],
+     [
+      "IT-2023-018",
+      "Drucker",
+      "HP Color LaserJet Pro MFP 4302fdw",
+      "VNBAXV7PH5",
+      "2. OG Planung",
+      "gemeinsam",
+      "2023-01-16",
+      649.0
+     ],
+     [
+      "IT-2023-019",
+      "Laptop",
+      "Lenovo ThinkPad T14 Gen 4",
+      "PF4F09ZBE2",
+      "2. OG Projektleitung",
+      "Thomas Richter",
+      "2023-03-30",
+      1289.0
+     ],
+     [
+      "IT-2023-020",
+      "Dockingstation",
+      "Lenovo ThinkPad Universal USB-C Dock",
+      "ZK10YYU434",
+      "EG Kundenservice",
+      "Julia Krause",
+      "2023-06-05",
+      189.0
+     ],
+     [
+      "IT-2023-021",
+      "Laptop",
+      "Lenovo ThinkPad T14 Gen 4",
+      "PF4WNPQBHW",
+      "2. OG Planung",
+      "Nina Schulz",
+      "2023-08-07",
+      1289.0
+     ],
+     [
+      "IT-2023-022",
+      "Dockingstation",
+      "Lenovo ThinkPad Universal USB-C Dock",
+      "ZK1UZEFLZ1",
+      "2. OG Planung",
+      "Laura Hoffmann",
+      "2023-09-05",
+      189.0
+     ],
+     [
+      "IT-2023-023",
+      "Laptop",
+      "Dell Latitude 5440",
+      "DL5VAK2RGC",
+      "2. OG Projektleitung",
+      "Sabine Becker",
+      "2023-10-02",
+      1149.0
+     ],
+     [
+      "IT-2023-024",
+      "Dockingstation",
+      "Lenovo ThinkPad Universal USB-C Dock",
+      "ZK14BK89X8",
+      "1. OG Buchhaltung",
+      "Andrea Wolf",
+      "2023-10-10",
+      189.0
+     ],
+     [
+      "IT-2023-025",
+      "Monitor",
+      "LG 27BK550Y",
+      "308ULMSS5W",
+      "EG Kundenservice",
+      "Daniel Fischer",
+      "2023-10-20",
+      229.0
+     ],
+     [
+      "IT-2023-026",
+      "Monitor",
+      "LG 27BK550Y",
+      "3080E964DC",
+      "1. OG Einkauf",
+      "Florian Weber",
+      "2023-10-24",
+      229.0
+     ],
+     [
+      "IT-2024-027",
+      "Monitor",
+      "LG 27BK550Y",
+      "3085ZWJX7Y",
+      "1. OG Einkauf",
+      "Mehmet Demir",
+      "2024-05-06",
+      229.0
+     ],
+     [
+      "IT-2024-028",
+      "Monitor",
+      "LG 27BK550Y",
+      "308L967VEE",
+      "2. OG Planung",
+      "Tobias Schmid",
+      "2024-06-03",
+      229.0
+     ],
+     [
+      "IT-2024-029",
+      "Monitor",
+      "Dell P2723D",
+      "CN0A2ZCRE4",
+      "2. OG Projektleitung",
+      "Sabine Becker",
+      "2024-06-25",
+      289.0
+     ],
+     [
+      "IT-2024-030",
+      "Dockingstation",
+      "Dell WD19S",
+      "CN4SABMK67",
+      "EG Kundenservice",
+      "Daniel Fischer",
+      "2024-07-29",
+      219.0
+     ],
+     [
+      "IT-2024-031",
+      "Monitor",
+      "LG 27BK550Y",
+      "308BZVQ4L1",
+      "2. OG Geschäftsführung",
+      "Stefan Wagner",
+      "2024-08-19",
+      229.0
+     ],
+     [
+      "IT-2024-032",
+      "Dockingstation",
+      "Lenovo ThinkPad Universal USB-C Dock",
+      "ZK1AC6HVT3",
+      "1. OG Personal",
+      "Selin Yilmaz",
+      "2024-08-22",
+      189.0
+     ],
+     [
+      "IT-2024-033",
+      "Monitor",
+      "LG 27BK550Y",
+      "308B5URQM3",
+      "EG Empfang",
+      "Jonas Brandt",
+      "2024-11-01",
+      229.0
+     ],
+     [
+      "IT-2024-034",
+      "Laptop",
+      "Dell Latitude 5440",
+      "DL5560CTPQ",
+      "1. OG Buchhaltung",
+      "Katrin Maier",
+      "2024-11-19",
+      1149.0
+     ],
+     [
+      "IT-2024-035",
+      "Laptop",
+      "HP EliteBook 840 G10",
+      "5CGYJWX2AX",
+      "EG Kundenservice",
+      "Elena Petrova",
+      "2024-12-23",
+      1379.0
+     ],
+     [
+      "IT-2024-036",
+      "Telefon",
+      "Yealink SIP-T54W",
+      "YT5NPYJQMZ",
+      "1. OG Buchhaltung",
+      "Andrea Wolf",
+      "2024-12-30",
+      189.0
+     ],
+     [
+      "IT-2025-037",
+      "Laptop",
+      "HP EliteBook 840 G10",
+      "5CGUTSLYTN",
+      "2. OG Geschäftsführung",
+      "Stefan Wagner",
+      "2025-01-24",
+      1379.0
+     ],
+     [
+      "IT-2025-038",
+      "Monitor",
+      "LG 27BK550Y",
+      "308RM8G5TB",
+      "2. OG Projektleitung",
+      "Markus Keller",
+      "2025-02-10",
+      229.0
+     ],
+     [
+      "IT-2025-039",
+      "Dockingstation",
+      "Dell WD19S",
+      "CN4L5UCFQQ",
+      "2. OG Planung",
+      "Tobias Schmid",
+      "2025-04-15",
+      219.0
+     ],
+     [
+      "IT-2025-040",
+      "Drucker",
+      "Brother MFC-L8690CDW",
+      "E7SN29C6KT",
+      "1. OG Buchhaltung",
+      "gemeinsam",
+      "2025-06-16",
+      529.0
+     ],
+     [
+      "IT-2025-041",
+      "Monitor",
+      "Dell P2723D",
+      "CN06LWT3H9",
+      "2. OG Planung",
+      "Nina Schulz",
+      "2025-07-10",
+      289.0
+     ],
+     [
+      "IT-2025-042",
+      "Laptop",
+      "Lenovo ThinkPad T14 Gen 4",
+      "PF4X666351",
+      "2. OG Projektleitung",
+      "Markus Keller",
+      "2025-09-09",
+      1289.0
+     ],
+     [
+      "IT-2025-043",
+      "Monitor",
+      "Dell P2723D",
+      "CN0E0L7U97",
+      "EG Kundenservice",
+      "Julia Krause",
+      "2025-12-08",
+      289.0
+     ],
+     [
+      "IT-2026-044",
+      "Laptop",
+      "HP EliteBook 840 G10",
+      "5CGE64K9B3",
+      "2. OG Planung",
+      "Tobias Schmid",
+      "2026-01-12",
+      1379.0
+     ],
+     [
+      "IT-2026-045",
+      "Laptop",
+      "Lenovo ThinkPad T14 Gen 4",
+      "PF4NW6G2DR",
+      "1. OG Personal",
+      "Selin Yilmaz",
+      "2026-02-19",
+      1289.0
+     ],
+     [
+      "IT-2026-046",
+      "Laptop",
+      "Lenovo ThinkPad T14 Gen 4",
+      "PF4E1H4WU8",
+      "EG Kundenservice",
+      "Daniel Fischer",
+      "2026-03-05",
+      1289.0
+     ],
+     [
+      "IT-2026-047",
+      "Telefon",
+      "Yealink SIP-T54W",
+      "YT5RP3503Z",
+      "1. OG Personal",
+      "Selin Yilmaz",
+      "2026-05-08",
+      189.0
+     ],
+     [
+      "IT-2026-048",
+      "Dockingstation",
+      "Dell WD19S",
+      "CN4Y3T4FZ0",
+      "1. OG Einkauf",
+      "Mehmet Demir",
+      "2026-05-21",
+      219.0
+     ],
+     [
+      "IT-2026-049",
+      "Laptop",
+      "HP EliteBook 840 G10",
+      "5CGKCJQMW1",
+      "1. OG Buchhaltung",
+      "Andrea Wolf",
+      "2026-07-01",
+      1379.0
+     ],
+     [
+      "IT-2026-050",
+      "Dockingstation",
+      "Dell WD19S",
+      "CN4FWB0ZJ1",
+      "EG Empfang",
+      "Jonas Brandt",
+      "2026-09-16",
+      219.0
+     ]
+    ]
+   },
+   {
+    "name": "Übersicht",
+    "columns": [
+     {
+      "header": "Gerätetyp",
+      "type": "text"
+     },
+     {
+      "header": "Anzahl",
+      "type": "integer",
+      "total": "sum"
+     },
+     {
+      "header": "Gesamtwert",
+      "type": "currency",
+      "total": "sum"
+     }
+    ],
+    "rows": [
+     [
+      "Laptop",
+      16,
+      20374.0
+     ],
+     [
+      "Monitor",
+      14,
+      3626.0
+     ],
+     [
+      "Dockingstation",
+      10,
+      2040.0
+     ],
+     [
+      "Drucker",
+      4,
+      2356.0
+     ],
+     [
+      "Telefon",
+      6,
+      1224.0
+     ]
+    ],
+    "chart": {
+     "type": "pie",
+     "title": "Gesamtwert je Gerätetyp",
+     "category_column": "Gerätetyp",
+     "value_columns": [
+      "Gesamtwert"
+     ]
+    }
+   }
+  ]
+ }
+}

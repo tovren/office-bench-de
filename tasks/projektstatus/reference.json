@@ -1,0 +1,132 @@
+{
+ "function": "create_powerpoint_file",
+ "arguments": {
+  "title": "Projektstatus ERP-Einführung",
+  "slides": [
+   {
+    "layout": "title",
+    "title": "Projektstatus ERP-Einführung",
+    "subtitle": "Lenkungsausschuss am Donnerstag, 15. Oktober 2026"
+   },
+   {
+    "layout": "bullets",
+    "title": "Gesamtstatus: gelb",
+    "bullets": [
+     "Go-live am 04.01.2027 noch erreichbar, aber gefährdet",
+     "Systemauswahl zwei Wochen später abgeschlossen als geplant",
+     "Test der Datenmigration seit 30.09.2026 überfällig",
+     "Kosten Ende September 21 Tsd. € (11,7 %) über Plan",
+     "Gegenmaßnahmen eingeleitet, Entscheidungen heute nötig"
+    ],
+    "notes": "Der Status ist gelb und nicht rot, weil der Go-live mit den vorgeschlagenen Maßnahmen noch zu halten ist. Ohne die Entscheidungen auf der letzten Folie würde er rot."
+   },
+   {
+    "layout": "table",
+    "title": "Meilensteine",
+    "table": [
+     [
+      "Meilenstein",
+      "Plan",
+      "Ist",
+      "Status"
+     ],
+     [
+      "Anforderungen abgeschlossen",
+      "30.06.2026",
+      "30.06.2026",
+      "erledigt"
+     ],
+     [
+      "Systemauswahl",
+      "31.07.2026",
+      "14.08.2026",
+      "erledigt, 2 Wochen später"
+     ],
+     [
+      "Test der Datenmigration",
+      "30.09.2026",
+      "offen",
+      "überfällig"
+     ],
+     [
+      "Schulungen",
+      "30.11.2026",
+      "–",
+      "geplant"
+     ],
+     [
+      "Go-live",
+      "04.01.2027",
+      "–",
+      "gefährdet"
+     ]
+    ]
+   },
+   {
+    "layout": "chart",
+    "title": "Kosten kumuliert: Plan und Ist",
+    "chart": {
+     "type": "line",
+     "categories": [
+      "Juni",
+      "Juli",
+      "August",
+      "September"
+     ],
+     "series": [
+      {
+       "name": "Plan",
+       "values": [
+        40,
+        85,
+        130,
+        180
+       ]
+      },
+      {
+       "name": "Ist",
+       "values": [
+        38,
+        90,
+        142,
+        201
+       ]
+      }
+     ],
+     "unit": "Tsd. €"
+    },
+    "notes": "Bis Juni lagen wir leicht unter Plan, seit Juli darüber. Ende September stehen 201 Tausend Euro Ist gegen 180 Tausend Euro Plan, also 21 Tausend Euro oder 11,7 Prozent mehr."
+   },
+   {
+    "layout": "bullets",
+    "title": "Ursachen der Abweichungen",
+    "bullets": [
+     "Altdaten schlechter als erwartet: Bereinigung vor dem Migrationstest",
+     "Zusätzliche Beratertage nach der verspäteten Systemauswahl",
+     "Schnittstelle zur Zeiterfassung aufwendiger als geplant"
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Größte Risiken",
+    "bullets": [
+     "Datenqualität der Kunden- und Artikelstammdaten",
+     "Key-User durch Jahresabschluss und Schulungen doppelt belastet",
+     "Go-live direkt nach dem Jahreswechsel: wenig Puffer",
+     "Weitere Kostensteigerung durch zusätzliche Beratertage"
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Entscheidungen des Lenkungsausschusses",
+    "bullets": [
+     "Budgeterhöhung um 35 Tsd. € für Migration und Beratung freigeben",
+     "Key-User im November zu 50 % vom Tagesgeschäft freistellen",
+     "Go-live 04.01.2027 bestätigen oder Ausweichtermin 01.02.2027 festlegen",
+     "Nächste Sitzung am Donnerstag, 12. November 2026"
+    ],
+    "notes": "Wir bitten heute um diese drei Entscheidungen. Der Ausweichtermin 1. Februar 2027 gäbe uns vier Wochen Puffer für den Migrationstest, kostet aber zusätzliche Lizenzmonate im Altsystem."
+   }
+  ]
+ }
+}

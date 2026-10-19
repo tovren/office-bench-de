@@ -1,0 +1,38 @@
+id = "handbuch"
+title = "Onboarding handbook (long)"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "hard"
+tags = ["long", "toc", "table", "headings", "checklist"]
+
+# Long output: this is where the JSON most likely breaks (truncated, quotes in the text, line breaks).
+[[turns]]
+text = "Wir brauchen ein ausführliches Einarbeitungshandbuch für neue Mitarbeiter als Word-Dokument, mindestens 2.000 Wörter. Wir sind die Brenner Haustechnik GmbH in Esslingen, rund 80 Leute. Inhalt: kurze Vorstellung der Firma, der erste Arbeitstag, Arbeitszeit und Gleitzeit, Urlaub und Krankmeldung, IT und Passwörter, Datenschutz, die wichtigsten Ansprechpartner als Tabelle und am Ende eine Checkliste für die ersten zwei Wochen. Mit Inhaltsverzeichnis."
+
+[checks]
+words_min = 2000
+toc = true
+headings_min = 8
+tables_min = 1
+
+[checks.topics]
+Firma = 'brenner'
+"Erster Arbeitstag" = 'erste[nrms]?\s+(arbeits)?tag|arbeitsbeginn|onboarding|einarbeitung|ankommen'
+Gleitzeit = 'gleitzeit|gleitende arbeitszeit|kernzeit'
+Urlaub = 'urlaub'
+Krankmeldung = 'krank|arbeitsunfähig'
+"IT und Passwörter" = 'passw|kennwort|zugangsdaten|anmeldedaten'
+Datenschutz = 'datenschutz'
+Ansprechpartner = 'ansprechpart|kontakt|zuständig'
+Checkliste = 'checkliste|☐|□|\[ \]'
+
+[judge]
+checklist = [
+  "mindestens 2.000 Wörter mit Substanz, keine Wiederholungen oder Füllsätze",
+  "alle acht verlangten Kapitel in sinnvoller Reihenfolge, Inhaltsverzeichnis vorhanden",
+  "Regeln plausibel für Deutschland: Krankmeldung am ersten Tag vor Arbeitsbeginn, Arbeitsunfähigkeit (eAU) spätestens ab dem vierten Kalendertag, Urlaub mindestens 20 Tage bei 5-Tage-Woche (üblich 28–30), Gleitzeit mit Kernzeit und Rahmen",
+  "Ansprechpartner als Tabelle mit Bereich, Name und Kontakt; keine Platzhalter wie „[Name]“ oder „Max Mustermann“",
+  "Passwortregeln zeitgemäß (lange Passphrasen, Zwei-Faktor-Anmeldung, nie weitergeben), Datenschutz praxisnah (Bildschirmsperre, Clean Desk, Umgang mit Kundendaten)",
+  "Checkliste für die ersten zwei Wochen zum Abhaken am Ende",
+]

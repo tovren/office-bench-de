@@ -1,0 +1,56 @@
+id = "projektstatus"
+title = "ERP project status"
+version = 1
+kind = "file"
+file_type = "pptx"
+difficulty = "medium"
+tags = ["table", "line_chart", "given_numbers", "weekday"]
+
+# Past milestones belong in a status report, hence no dates_from. „Donnerstag“ is 15.10.2026.
+[[turns]]
+text = "Bereite mir bitte eine PowerPoint für den Lenkungsausschuss am Donnerstag vor, Thema Projektstatus der Einführung unseres neuen ERP-Systems. Gesamtstatus gelb. Die Meilensteine als Tabelle mit Plan- und Ist-Termin: Anforderungen abgeschlossen (Plan 30.06., Ist 30.06.), Systemauswahl (Plan 31.07., Ist 14.08.), Test der Datenmigration (Plan 30.09., Ist noch offen), Schulungen (Plan 30.11.), Go-live (Plan 04.01.2027). Die Kosten kumuliert Plan gegen Ist als Liniendiagramm von Juni bis September: Plan 40, 85, 130 und 180 Tausend Euro, Ist 38, 90, 142 und 201 Tausend Euro. Dazu die größten Risiken und welche Entscheidungen wir vom Ausschuss brauchen. 6 bis 8 Folien."
+
+# numbers_sourced (soft): all numbers come from the prompt (the dates and costs); it reports numbers, times and dates
+# that are not there and do not simply follow from them.
+[checks]
+numbers_sourced = true
+slides = [6, 8]
+tables_min = 1
+chart = true
+chart_type = "line"
+chart_series_min = 2
+chart_values = [[40, 85, 130, 180], [38, 90, 142, 201]]
+
+# One topic per milestone with its planned date (30.06., 31.07., 30.09., 30.11., 04.01.): the prompt asks for all
+# five in the table; „Meilenstein“ and „Go-live“ alone do not catch a missing one (mutant milestone_missing). The
+# name alone is not enough, Schulungen and Migration also come up under the risks.
+[checks.topics]
+Status = 'gelb'
+Meilensteine = 'meilenstein'
+"Go-live" = 'go-?live'
+Risiken = 'risik'
+Entscheidungen = 'entscheid|beschluss|freigabe'
+"Anforderungen Plan 30.06." = ['(?<!\d)30\.\s*(0?6\.|juni)', '2026-06-30']
+"Systemauswahl Plan 31.07." = ['(?<!\d)31\.\s*(0?7\.|juli)', '2026-07-31']
+"Datenmigration Plan 30.09." = ['(?<!\d)30\.\s*(0?9\.|sep)', '2026-09-30']
+"Schulungen Plan 30.11." = ['(?<!\d)30\.\s*(11\.|nov)', '2026-11-30']
+"Go-live Plan 04.01.2027" = ['(?<!\d)0?4\.\s*(0?1\.|jan)', '2027-01-04']
+
+# „Mehrkosten 21 Tsd. € oder 11,7 %“: the checklist asks for the extra costs to be named correctly, the prompt does
+# not ask explicitly, hence soft; without it a wrong number (mutant extra_costs_11_instead_of_21) goes unnoticed.
+[checks.topics_soft]
+"Mehrkosten 21 Tsd. € oder 11,7 %" = [
+  '(?<![\d,.])\+?\s?21(\.000|\s000)?\s*(tsd|tausend|teur|t\s*€|k\s*€|k\b|€|eur\b|euro)',
+  '(?<![\d,.])\+?\s?11[,.](7|67)\d?\s*(%|prozent)',
+  '(mehrkosten|abweich|über\s+plan|überschreit|differenz|delta)[^\n]{0,60}?(?<![\d,.])\+?21(?![\d]|[,.]\d)',
+]
+
+[judge]
+checklist = [
+  "6 bis 8 Folien; Titelfolie mit Lenkungsausschuss und, falls genannt, Donnerstag, 15.10.2026",
+  "Gesamtstatus gelb deutlich sichtbar und begründet (Systemauswahl zwei Wochen später, Migrationstest überfällig, Kosten über Plan)",
+  "Meilensteintabelle mit allen fünf Meilensteinen und genau den vorgegebenen Plan- und Ist-Terminen",
+  "Liniendiagramm mit den Reihen Plan und Ist von Juni bis September, Werte wie vorgegeben, Einheit Tsd. €",
+  "Mehrkosten richtig benannt (September 201 statt 180 Tsd. €, also 21 Tsd. € oder 11,7 % über Plan)",
+  "konkrete Risiken und klar formulierte Entscheidungen, die der Ausschuss treffen soll",
+]

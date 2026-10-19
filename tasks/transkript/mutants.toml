@@ -1,0 +1,47 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+[[mutant]]
+# observed in an earlier run: „bis Ende nächster Woche“ as Fri 30.10. instead of Fri 23.10.
+name = "end_of_next_week_30_10"
+defect = "Brückner's confirmation and catering offers on Fri 30.10. instead of Fri 23.10. („bis Ende nächster Woche“)"
+replace = [["Fr, 23.10.2026", "Fr, 30.10.2026"], ["Freitag, 23.10.2026", "Freitag, 30.10.2026"]]
+expected = ["topics"]
+
+[[mutant]]
+# observed in an earlier run (twice): „Fr, 24.10.2026“, but 24.10. is a Saturday
+name = "friday_24_10"
+defect = "confirmation and catering offers on „Fr, 24.10.2026“: 24.10. is a Saturday, meant is Fri 23.10."
+replace = [["Fr, 23.10.2026", "Fr, 24.10.2026"], ["Freitag, 23.10.2026", "Freitag, 24.10.2026"]]
+expected = ["weekday", "topics"]
+
+[[mutant]]
+# observed in earlier runs: source markers from the RAG template
+name = "source_marker"
+defect = "source marker „[1]“ from the RAG template in the minutes"
+replace = [["Herr Brenner hat ein Gesamtbudget von 6.500 € freigegeben, alles inklusive.",
+            "Herr Brenner hat ein Gesamtbudget von 6.500 € freigegeben, alles inklusive [1]."]]
+expected = ["forbidden"]
+
+[[mutant]]
+# observed in an earlier run: the ad in the Amtsblatt is missing from the task table
+name = "ad_missing_from_tasks"
+defect = "task „Anzeige im Amtsblatt aufgeben, bis Mo 02.11.“ missing from the task table"
+remove = ["blocks.12.rows.7"]
+expected = ["topics"]
+gap = "The topic „Anzeigenschluss 02.11.“ already matches the decision text under advertising; nothing checks whether every deadline is also a row of the task table (extension: restrict topics to a table, e.g. topics_table)"
+
+[[mutant]]
+# observed in an earlier run: „Dennis Horn (ab ca. 09:13 Uhr)“, correct is 09:28
+name = "dennis_time_invented"
+defect = "Dennis Horn „ab ca. 9:13 Uhr“, before the meeting started; according to the transcript he arrived at 9:28"
+replace = [["Dennis Horn (später dazugekommen)", "Dennis Horn (ab ca. 9:13 Uhr)"]]
+expected = ["numbers_sourced"]
+severity = "soft"
+
+[[mutant]]
+# observed in an earlier run: deadline on Saturday 31.10.
+name = "deadline_saturday"
+defect = "order roll-ups „bis 31.10.2026“: deadline on a Saturday"
+replace = [["rechtzeitig vor dem Infotag", "31.10.2026"]]
+expected = ["weekend"]
+severity = "soft"

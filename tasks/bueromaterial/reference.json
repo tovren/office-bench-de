@@ -1,0 +1,190 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Bestellliste Büromaterial",
+  "sheets": [
+   {
+    "name": "Bestellung",
+    "columns": [
+     {
+      "header": "Artikel"
+     },
+     {
+      "header": "Menge",
+      "type": "integer"
+     },
+     {
+      "header": "Einzelpreis",
+      "type": "currency"
+     },
+     {
+      "header": "Gesamtpreis",
+      "type": "currency",
+      "formula": "=B{row}*C{row}",
+      "total": "sum"
+     },
+     {
+      "header": "Kostenstelle",
+      "type": "integer"
+     }
+    ],
+    "rows": [
+     [
+      "Kopierpapier A4, 500 Blatt",
+      40,
+      4.49,
+      null,
+      4100
+     ],
+     [
+      "Ordner breit",
+      60,
+      2.49,
+      null,
+      4200
+     ],
+     [
+      "Kugelschreiber blau, 10er-Pack",
+      12,
+      6.9,
+      null,
+      4200
+     ],
+     [
+      "Haftnotizen gelb, 12 Blöcke",
+      10,
+      8.5,
+      null,
+      4200
+     ],
+     [
+      "Briefumschläge DIN lang, 500 Stück",
+      6,
+      21.9,
+      null,
+      4100
+     ],
+     [
+      "Textmarker, 4er-Set",
+      15,
+      4.8,
+      null,
+      4200
+     ],
+     [
+      "Heftklammern 24/6, 1.000 Stück",
+      20,
+      1.2,
+      null,
+      4200
+     ]
+    ]
+   },
+   {
+    "name": "Kostenstellen",
+    "columns": [
+     {
+      "header": "Kostenstelle",
+      "type": "integer"
+     },
+     {
+      "header": "Summe",
+      "type": "currency",
+      "formula": "=SUMIF('Bestellung'!$E$2:$E$8,A{row},'Bestellung'!$D$2:$D$8)",
+      "total": "sum"
+     }
+    ],
+    "rows": [
+     [
+      4100,
+      null
+     ],
+     [
+      4200,
+      null
+     ]
+    ]
+   }
+  ]
+ },
+ "previous": {
+  "function": "create_excel_file",
+  "arguments": {
+   "title": "Bestellliste Büromaterial",
+   "sheets": [
+    {
+     "name": "Bestellung",
+     "columns": [
+      {
+       "header": "Artikel"
+      },
+      {
+       "header": "Menge",
+       "type": "integer"
+      },
+      {
+       "header": "Einzelpreis",
+       "type": "currency"
+      },
+      {
+       "header": "Gesamtpreis",
+       "type": "currency",
+       "formula": "=B{row}*C{row}",
+       "total": "sum"
+      }
+     ],
+     "rows": [
+      [
+       "Kopierpapier A4, 500 Blatt",
+       40,
+       3.99,
+       null
+      ],
+      [
+       "Ordner breit",
+       60,
+       2.49,
+       null
+      ],
+      [
+       "Kugelschreiber blau, 10er-Pack",
+       12,
+       6.9,
+       null
+      ],
+      [
+       "Haftnotizen gelb, 12 Blöcke",
+       10,
+       8.5,
+       null
+      ],
+      [
+       "Toner HP 59A",
+       4,
+       89.0,
+       null
+      ],
+      [
+       "Briefumschläge DIN lang, 500 Stück",
+       6,
+       21.9,
+       null
+      ],
+      [
+       "Textmarker, 4er-Set",
+       15,
+       4.8,
+       null
+      ],
+      [
+       "Heftklammern 24/6, 1.000 Stück",
+       20,
+       1.2,
+       null
+      ]
+     ]
+    }
+   ]
+  }
+ }
+}

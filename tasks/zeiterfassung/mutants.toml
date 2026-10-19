@@ -1,0 +1,46 @@
+# Broken variants of reference.json (format: docs/mutants.md). The task checks neither values (values_present) nor
+# calculations (calculations); that is why arithmetic errors can slip through.
+
+[[mutant]]
+# observed in several earlier runs: the formula computes Pause − Ende − Beginn, −24 h per day, total −504 instead of
+# 168 h
+name = "formula_swapped"
+defect = "working-time formula with swapped columns: start − end instead of end − start (−9 h per day, total −189 instead of 168 h)"
+replace = [["=(D{row}-C{row})*24-E{row}/60", "=(C{row}-D{row})*24-E{row}/60"]]
+expected = ["calculations", "values_present", "value_ranges"]
+
+[[mutant]]
+# observed in several earlier runs: times as fractions of a day, working time without time format shows 0.33 per day
+# and a total of 7 instead of 168 h
+name = "day_fraction_without_time_format"
+defect = "working time as a fraction of a day without time format: 0.33 per day and total 7 instead of 8 or 168 hours"
+replace = [["=(D{row}-C{row})*24-E{row}/60", "=D{row}-C{row}-E{row}/1440"]]
+expected = ["column_format", "values_present"]
+gap = "column_format only knows percent/date/euro, no hours or [h]:mm format; values_present is not set (and would have to accept 7 as an [h]:mm value). Fix: a column_format kind „hours“ (time format [h]:mm or decimal hours, i.e. values > 1 for 8-hour days) for 'arbeitszeit|stunden'"
+
+[[mutant]]
+# observed in an earlier run: a row with the date 31.11.2026, total 176 h
+name = "day_31_november"
+defect = "extra row with the non-existent date 31.11.2026 (22 instead of 21 working days, total 176 h)"
+set = [["sheets.0.rows", [["2026-11-02", "Montag", "08:00", "16:30", 30, ""], ["2026-11-03", "Dienstag", "08:00", "16:30", 30, ""], ["2026-11-04", "Mittwoch", "08:00", "16:30", 30, ""], ["2026-11-05", "Donnerstag", "08:00", "16:30", 30, ""], ["2026-11-06", "Freitag", "08:00", "16:30", 30, ""], ["2026-11-09", "Montag", "08:00", "16:30", 30, ""], ["2026-11-10", "Dienstag", "08:00", "16:30", 30, ""], ["2026-11-11", "Mittwoch", "08:00", "16:30", 30, ""], ["2026-11-12", "Donnerstag", "08:00", "16:30", 30, ""], ["2026-11-13", "Freitag", "08:00", "16:30", 30, ""], ["2026-11-16", "Montag", "08:00", "16:30", 30, ""], ["2026-11-17", "Dienstag", "08:00", "16:30", 30, ""], ["2026-11-18", "Mittwoch", "08:00", "16:30", 30, ""], ["2026-11-19", "Donnerstag", "08:00", "16:30", 30, ""], ["2026-11-20", "Freitag", "08:00", "16:30", 30, ""], ["2026-11-23", "Montag", "08:00", "16:30", 30, ""], ["2026-11-24", "Dienstag", "08:00", "16:30", 30, ""], ["2026-11-25", "Mittwoch", "08:00", "16:30", 30, ""], ["2026-11-26", "Donnerstag", "08:00", "16:30", 30, ""], ["2026-11-27", "Freitag", "08:00", "16:30", 30, ""], ["2026-11-30", "Montag", "08:00", "16:30", 30, ""], ["2026-11-31", "Dienstag", "08:00", "16:30", 30, ""]]]]
+expected = ["invalid_date", "dates_between", "text_in_number_column", "weekday"]
+
+[[mutant]]
+name = "saturday_instead_of_friday"
+defect = "Saturday 07.11.2026 entered as a working day instead of Friday 06.11.2026"
+set = [["sheets.0.rows.4.0", "2026-11-07"], ["sheets.0.rows.4.1", "Samstag"]]
+expected = ["workdays", "weekend"]
+severity = "soft"
+
+[[mutant]]
+name = "weekdays_shifted"
+defect = "weekday column shifted by one day (Monday, 03.11.2026 instead of Tuesday)"
+replace = [["Montag", "_1"], ["Dienstag", "_2"], ["Mittwoch", "_3"], ["Donnerstag", "_4"], ["Freitag", "_5"],
+           ["_1", "Dienstag"], ["_2", "Mittwoch"], ["_3", "Donnerstag"], ["_4", "Freitag"], ["_5", "Montag"]]
+expected = ["weekday"]
+
+[[mutant]]
+name = "total_missing"
+defect = "the requested total below the working time is missing"
+remove = ["sheets.0.columns.5.total"]
+expected = ["total_row"]

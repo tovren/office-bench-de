@@ -1,0 +1,175 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Homeoffice-Richtlinie",
+  "subtitle": "Stand Oktober 2026",
+  "blocks": [
+   {
+    "type": "heading",
+    "text": "1. Geltungsbereich und Ziel",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Diese Richtlinie gilt für alle Beschäftigten, deren Tätigkeit sich für das Arbeiten von zu Hause eignet. Sie soll helfen, Beruf und Privatleben besser zu vereinbaren, und zugleich eine verlässliche Zusammenarbeit im Team sicherstellen. Ein Anspruch auf Homeoffice entsteht aus dieser Richtlinie nicht; ob eine Tätigkeit geeignet ist, entscheidet die Führungskraft."
+   },
+   {
+    "type": "paragraph",
+    "text": "Die Richtlinie ergänzt den Arbeitsvertrag und die geltenden Betriebsvereinbarungen. Wo diese etwas anderes regeln, gehen sie vor."
+   },
+   {
+    "type": "heading",
+    "text": "2. Umfang und Absprache",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Homeoffice ist an höchstens 2 Tagen pro Woche möglich. Die Tage werden mit der Führungskraft abgesprochen und im Teamkalender eingetragen. Termine vor Ort, Teamtreffen und Einarbeitungen neuer Kolleginnen und Kollegen haben Vorrang."
+   },
+   {
+    "type": "paragraph",
+    "text": "Wer zum ersten Mal im Homeoffice arbeiten möchte, spricht das mit der Führungskraft ab. Die Vereinbarung kann von beiden Seiten mit einer Frist von vier Wochen beendet werden, zum Beispiel wenn sich die Aufgaben ändern."
+   },
+   {
+    "type": "heading",
+    "text": "3. Arbeitszeit und Erreichbarkeit",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Die Kernarbeitszeit von 9 bis 15 Uhr gilt auch im Homeoffice. In dieser Zeit sind die Beschäftigten über Teams und telefonisch erreichbar und nehmen an Besprechungen teil. Außerhalb der Kernarbeitszeit kann die Arbeitszeit wie im Büro im Rahmen der Gleitzeit frei eingeteilt werden."
+   },
+   {
+    "type": "paragraph",
+    "text": "Die Arbeitszeit wird wie im Büro im Zeiterfassungssystem erfasst. Pausen, Höchstarbeitszeiten und Ruhezeiten gelten unverändert. Mehrarbeit ist nur nach Absprache mit der Führungskraft zulässig."
+   },
+   {
+    "type": "heading",
+    "text": "4. Ausstattung",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Die Firma stellt für das Homeoffice einen Laptop und ein Headset. Einen zweiten Bildschirm gibt es auf Antrag bei der Führungskraft. Die Geräte bleiben Eigentum der Firma, dürfen nur dienstlich genutzt werden und werden bei Ende des Arbeitsverhältnisses zurückgegeben."
+   },
+   {
+    "type": "paragraph",
+    "text": "Störungen und Schäden an den Geräten werden sofort dem IT-Support gemeldet. Für den Internetanschluss zu Hause sorgen die Beschäftigten selbst; eine schnelle und stabile Verbindung ist Voraussetzung für das Arbeiten von zu Hause."
+   },
+   {
+    "type": "heading",
+    "text": "5. Arbeitsplatz und Arbeitsschutz",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Der Arbeitsplatz zu Hause soll ungestörtes Arbeiten ermöglichen und ergonomisch eingerichtet sein: ein geeigneter Tisch und Stuhl, ausreichend Licht und ein Bildschirm in Augenhöhe. Hinweise dazu gibt die Fachkraft für Arbeitssicherheit. Arbeitsunfälle im Homeoffice werden wie im Büro der Personalabteilung gemeldet."
+   },
+   {
+    "type": "heading",
+    "text": "6. Datenschutz am heimischen Arbeitsplatz",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Auch zu Hause gelten die Regeln zum Schutz von Kunden- und Firmendaten. Dazu gehört insbesondere:"
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Den Bildschirm sperren, sobald man den Arbeitsplatz verlässt, auch nur kurz.",
+     "Ausdrucke mit Kundendaten nicht in den Hausmüll werfen, sondern mit ins Büro nehmen und dort im Aktenvernichter entsorgen.",
+     "Kein öffentliches WLAN ohne VPN nutzen."
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "7. Ansprechpartner",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Bei Fragen zu dieser Richtlinie hilft Herr Brandt aus der Personalabteilung weiter."
+   }
+  ]
+ },
+ "previous": {
+  "function": "create_word_file",
+  "arguments": {
+   "title": "Homeoffice-Richtlinie",
+   "subtitle": "Stand Oktober 2026",
+   "blocks": [
+    {
+     "type": "heading",
+     "text": "1. Geltungsbereich und Ziel",
+     "level": 1
+    },
+    {
+     "type": "paragraph",
+     "text": "Diese Richtlinie gilt für alle Beschäftigten, deren Tätigkeit sich für das Arbeiten von zu Hause eignet. Sie soll helfen, Beruf und Privatleben besser zu vereinbaren, und zugleich eine verlässliche Zusammenarbeit im Team sicherstellen. Ein Anspruch auf Homeoffice entsteht aus dieser Richtlinie nicht; ob eine Tätigkeit geeignet ist, entscheidet die Führungskraft."
+    },
+    {
+     "type": "paragraph",
+     "text": "Die Richtlinie ergänzt den Arbeitsvertrag und die geltenden Betriebsvereinbarungen. Wo diese etwas anderes regeln, gehen sie vor."
+    },
+    {
+     "type": "heading",
+     "text": "2. Umfang und Absprache",
+     "level": 1
+    },
+    {
+     "type": "paragraph",
+     "text": "Homeoffice ist an höchstens 2 Tagen pro Woche möglich. Die Tage werden mit der Führungskraft abgesprochen und im Teamkalender eingetragen. Termine vor Ort, Teamtreffen und Einarbeitungen neuer Kolleginnen und Kollegen haben Vorrang."
+    },
+    {
+     "type": "paragraph",
+     "text": "Wer zum ersten Mal im Homeoffice arbeiten möchte, spricht das mit der Führungskraft ab. Die Vereinbarung kann von beiden Seiten mit einer Frist von vier Wochen beendet werden, zum Beispiel wenn sich die Aufgaben ändern."
+    },
+    {
+     "type": "heading",
+     "text": "3. Arbeitszeit und Erreichbarkeit",
+     "level": 1
+    },
+    {
+     "type": "paragraph",
+     "text": "Die Kernarbeitszeit von 9 bis 15 Uhr gilt auch im Homeoffice. In dieser Zeit sind die Beschäftigten über Teams und telefonisch erreichbar und nehmen an Besprechungen teil. Außerhalb der Kernarbeitszeit kann die Arbeitszeit wie im Büro im Rahmen der Gleitzeit frei eingeteilt werden."
+    },
+    {
+     "type": "paragraph",
+     "text": "Die Arbeitszeit wird wie im Büro im Zeiterfassungssystem erfasst. Pausen, Höchstarbeitszeiten und Ruhezeiten gelten unverändert. Mehrarbeit ist nur nach Absprache mit der Führungskraft zulässig."
+    },
+    {
+     "type": "heading",
+     "text": "4. Ausstattung",
+     "level": 1
+    },
+    {
+     "type": "paragraph",
+     "text": "Die Firma stellt für das Homeoffice einen Laptop und ein Headset. Einen zweiten Bildschirm gibt es auf Antrag bei der Führungskraft. Die Geräte bleiben Eigentum der Firma, dürfen nur dienstlich genutzt werden und werden bei Ende des Arbeitsverhältnisses zurückgegeben."
+    },
+    {
+     "type": "paragraph",
+     "text": "Störungen und Schäden an den Geräten werden sofort dem IT-Support gemeldet. Für den Internetanschluss zu Hause sorgen die Beschäftigten selbst; eine schnelle und stabile Verbindung ist Voraussetzung für das Arbeiten von zu Hause."
+    },
+    {
+     "type": "heading",
+     "text": "5. Arbeitsplatz und Arbeitsschutz",
+     "level": 1
+    },
+    {
+     "type": "paragraph",
+     "text": "Der Arbeitsplatz zu Hause soll ungestörtes Arbeiten ermöglichen und ergonomisch eingerichtet sein: ein geeigneter Tisch und Stuhl, ausreichend Licht und ein Bildschirm in Augenhöhe. Hinweise dazu gibt die Fachkraft für Arbeitssicherheit. Arbeitsunfälle im Homeoffice werden wie im Büro der Personalabteilung gemeldet."
+    },
+    {
+     "type": "heading",
+     "text": "6. Ansprechpartner",
+     "level": 1
+    },
+    {
+     "type": "paragraph",
+     "text": "Bei Fragen zu dieser Richtlinie hilft Herr Brandt aus der Personalabteilung weiter."
+    }
+   ]
+  }
+ }
+}

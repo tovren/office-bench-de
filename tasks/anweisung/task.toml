@@ -1,0 +1,27 @@
+id = "anweisung"
+title = "Work instruction"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "medium"
+tags = ["table", "numbered_list", "checklist"]
+
+[[turns]]
+text = "Schreib eine Arbeitsanweisung als Word-Datei für die monatliche Datensicherung auf das NAS: Zweck, Zuständigkeiten (als Tabelle), die einzelnen Schritte als nummerierte Liste, was im Fehlerfall zu tun ist, und am Ende eine Checkliste zum Abhaken."
+
+[checks]
+tables_min = 1
+numbered_list = true
+
+[checks.topics]
+Zweck = 'zweck|ziel|geltungsbereich|anwendungsbereich'
+"Zuständigkeiten" = 'zuständig|verantwortlich|rolle'
+Fehlerfall = 'fehlerfall|fehler|störung|problem'
+Checkliste = 'checkliste|abhaken|☐|□|\[ \]'
+
+[judge]
+checklist = [
+  "Zweck, Zuständigkeiten als Tabelle, Schritte als nummerierte Liste, Fehlerfall, Checkliste am Ende",
+  "Schritte konkret und in sinnvoller Reihenfolge (Prüfung der Sicherung, Protokoll)",
+  "Checkliste zum Abhaken erkennbar (Kästchen)",
+]

@@ -1,0 +1,35 @@
+id = "schulung"
+title = "Phishing training"
+version = 1
+kind = "file"
+file_type = "pptx"
+difficulty = "medium"
+tags = ["speaker_notes", "two_columns", "chart", "given_numbers"]
+
+[[turns]]
+text = "Ich halte nächste Woche eine kurze Schulung zum Thema Phishing für alle Kollegen. Mach mir bitte eine PowerPoint mit 8 bis 10 Folien: woran man Phishing-Mails erkennt, was man tun und was man lassen sollte (gegenübergestellt), was zu tun ist, wenn man doch draufgeklickt hat, und ein Diagramm, wie sich die bei uns gemeldeten Phishing-Mails entwickelt haben: 2023 waren es 45, 2024 78, 2025 130 und 2026 bis Ende September 112. Schreib mir zu jeder Folie ein paar Sätze in die Notizen, was ich dazu sagen kann."
+
+# side_by_side (soft): do and don't on one slide in two columns or a table.
+[checks]
+side_by_side = { Tun = 'tun|\bdos?\b|richtig|empfohlen|empfehlung|sollte|so geht|erlaubt|✓|✔|✅', Lassen = 'lassen|don.?t|nicht|falsch|vermeiden|niemals|\bnie\b|tabu|verboten|✗|✘|❌' }
+slides = [8, 10]
+chart = true
+chart_values = [[45, 78, 130, 112]]
+notes_min = 7
+
+[checks.topics]
+Absender = 'absender|e-mail-adresse|von-adresse'
+Links = 'link|\burl\b'
+"wenn geklickt" = 'geklickt|klick|ernstfall|notfall|passiert|sofortmaßnahm|was tun|reagier'
+Melden = 'meld'
+
+[judge]
+checklist = [
+  "8 bis 10 Folien mit Titelfolie und klarer Gliederung",
+  "Erkennungsmerkmale konkret (Absenderadresse und Domain, Link-Ziel prüfen, Zeitdruck, unerwartete Anhänge, unpersönliche Anrede)",
+  "Tun und Lassen gegenübergestellt (zwei Spalten oder Tabelle)",
+  "Ernstfall: sofort IT melden, nichts verschweigen, Passwort ändern, Gerät nicht ausschalten oder vom Netz nach Vorgabe der IT",
+  "Diagramm mit genau den vorgegebenen Zahlen (45, 78, 130, 112), 2026 als „bis September“ gekennzeichnet, keine stille Hochrechnung",
+  "zu jeder Inhaltsfolie Sprechernotizen in ganzen Sätzen",
+  "kurze Stichpunkte, kein Text über den Folienrand",
+]

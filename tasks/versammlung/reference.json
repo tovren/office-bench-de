@@ -1,0 +1,109 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Einladung zur Betriebsversammlung am 12. November 2026",
+  "subtitle": "Donnerstag, 12. November 2026, 9 bis 11 Uhr in der Kantine",
+  "header_text": "Betriebsrat",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "text": "Liebe Kolleginnen und Kollegen,"
+   },
+   {
+    "type": "paragraph",
+    "text": "der Betriebsrat lädt euch herzlich zur Betriebsversammlung ein. **Bitte beachtet: Der Termin hat sich geändert.** Die Versammlung findet am **Donnerstag, 12. November 2026, von 9 bis 11 Uhr in der Kantine** statt."
+   },
+   {
+    "type": "heading",
+    "text": "Tagesordnung",
+    "level": 1
+   },
+   {
+    "type": "numbered",
+    "items": [
+     "Begrüßung",
+     "Bericht der Geschäftsführung",
+     "Neue Gleitzeitregelung",
+     "Vorstellung des neuen Ticketsystems",
+     "Verschiedenes"
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Teilnahme",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Die Teilnahme an der Betriebsversammlung gilt als Arbeitszeit. Wer an diesem Vormittag Außentermine hat, stimmt sich bitte rechtzeitig mit seiner Führungskraft ab."
+   },
+   {
+    "type": "heading",
+    "text": "Fragen vorab",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Ihr habt Fragen oder Themen, die in der Versammlung zur Sprache kommen sollen? Dann schickt sie uns bitte **bis Freitag, 6. November 2026** per E-Mail an den Betriebsrat oder werft sie in den Briefkasten des Betriebsrats neben der Kantine. Auf Wunsch behandeln wir eure Fragen anonym."
+   },
+   {
+    "type": "paragraph",
+    "text": "Wir freuen uns auf eine rege Teilnahme!"
+   },
+   {
+    "type": "paragraph",
+    "text": "Euer Betriebsrat"
+   }
+  ]
+ },
+ "previous": {
+  "function": "create_word_file",
+  "arguments": {
+   "title": "Einladung zur Betriebsversammlung am 5. November 2026",
+   "subtitle": "Donnerstag, 5. November 2026, 9 bis 11 Uhr in der Kantine",
+   "header_text": "Betriebsrat",
+   "blocks": [
+    {
+     "type": "paragraph",
+     "text": "Liebe Kolleginnen und Kollegen,"
+    },
+    {
+     "type": "paragraph",
+     "text": "der Betriebsrat lädt euch herzlich zur Betriebsversammlung ein. Die Versammlung findet am **Donnerstag, 5. November 2026, von 9 bis 11 Uhr in der Kantine** statt."
+    },
+    {
+     "type": "heading",
+     "text": "Tagesordnung",
+     "level": 1
+    },
+    {
+     "type": "numbered",
+     "items": [
+      "Begrüßung",
+      "Bericht der Geschäftsführung",
+      "Neue Gleitzeitregelung",
+      "Parkplatzsituation",
+      "Verschiedenes"
+     ]
+    },
+    {
+     "type": "heading",
+     "text": "Teilnahme",
+     "level": 1
+    },
+    {
+     "type": "paragraph",
+     "text": "Die Teilnahme an der Betriebsversammlung gilt als Arbeitszeit. Wer an diesem Vormittag Außentermine hat, stimmt sich bitte rechtzeitig mit seiner Führungskraft ab."
+    },
+    {
+     "type": "paragraph",
+     "text": "Wir freuen uns auf eine rege Teilnahme!"
+    },
+    {
+     "type": "paragraph",
+     "text": "Euer Betriebsrat"
+    }
+   ]
+  }
+ }
+}

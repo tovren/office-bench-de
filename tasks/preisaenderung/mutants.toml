@@ -1,0 +1,53 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+# Correct: prices from the mail (19,80 / 15,40 / 84,50 / 42,00 €), successor PU-4415 at 312,00 €, fitter hour still
+# 68,00 €; net 1.268,90 €, VAT 241,09 €, gross 1.509,99 €. Rows 2–7 items, 8 net, 9 VAT, 10 gross.
+
+# observed in earlier runs: net, VAT and gross as =D8*F8 etc. on empty cells, 0,00 €
+[[mutant]]
+name = "totals_zero"
+defect = "net, VAT and gross with the line item formula quantity × price on empty cells: all 0,00 €"
+set = [["sheets.0.rows.6.6", "=D8*F8"], ["sheets.0.rows.7.6", "=D9*F9"], ["sheets.0.rows.8.6", "=D10*F10"]]
+expected = ["values_present"]
+
+# observed in an earlier run (SUM($D$2:$D$7*$F$2:$F$7) without array entry, net to gross #VALUE!)
+[[mutant]]
+name = "sum_as_array_formula"
+defect = "net as SUM(D2:D7*F2:F7) without array entry: #VALUE! in net, VAT and gross"
+set = [["sheets.0.rows.6.6", "=SUM(D2:D7*F2:F7)"]]
+expected = ["formula_errors", "values_present"]
+
+# observed in earlier runs (final amounts typed in as fixed numbers, they do not update on changes)
+[[mutant]]
+name = "totals_as_constants"
+defect = "net, VAT and gross as fixed numbers instead of formulas (formulas were asked for)"
+set = [["sheets.0.rows.6.6", 1268.9], ["sheets.0.rows.7.6", 241.09], ["sheets.0.rows.8.6", 1509.99]]
+expected = ["formulas_min", "calculations"]
+
+# observed in an earlier run (5 % volume discount on 12 pieces each; the discount only applies from 20 pieces)
+[[mutant]]
+name = "unjustified_volume_discount"
+defect = "5 % volume discount on thermostat heads and valves (225,72 instead of 237,60 and 175,56 instead of 184,80 €)"
+set = [["sheets.0.rows.0.6", "=D2*F2*0.95"], ["sheets.0.rows.1.6", "=D3*F3*0.95"]]
+expected = ["calculations", "values_present"]
+
+# named as a typical error in the task comment: prices from the list of 01.01. instead of from the mail
+[[mutant]]
+name = "old_list_prices"
+defect = "thermostat head, valve, expansion vessel and call-out at the old list prices (18,90 / 14,20 / 79,00 / 39,00 €)"
+number = [[19.8, 18.9], [15.4, 14.2], [84.5, 79.0], [42.0, 39.0]]
+expected = ["values_present"]
+
+# named as a typical error in the task comment: hourly rate of 72 € already now (only valid from 01.01.2027)
+[[mutant]]
+name = "hourly_rate_2027"
+defect = "fitter hour already at 72,00 € instead of 68,00 € (net 1.292,90 €)"
+number = [[68.0, 72.0]]
+expected = ["values_present"]
+
+# named as a typical error in the task comment: the discontinued pump at the old price
+[[mutant]]
+name = "old_pump"
+defect = "discontinued pump PU-4410 at 289,00 € instead of the successor PU-4415 at 312,00 €"
+set = [["sheets.0.rows.2", [3, "PU-4410", "Umwälzpumpe Aquaflow 25-60, Hocheffizienz", 1, "Stück", 289.0, "=D4*F4"]]]
+remove = ["sheets.1.rows.6"]
+expected = ["topics", "values_present"]

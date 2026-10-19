@@ -1,0 +1,56 @@
+id = "richtlinie"
+title = "Remote work policy (two change rounds)"
+version = 1
+kind = "follow_up"
+file_type = "docx"
+difficulty = "hard"
+tags = ["follow_up", "change_request", "several_rounds", "retain", "numbered_sections"]
+
+# Three user messages. Open WebUI does not show the model the old file; it has to rebuild it from its own
+# arguments in the history. The third file is checked: both changes from round 2 and the new section from
+# round 3 are in it, the rest of the second version stayed unchanged (retained).
+[[turns]]
+text = "Schreib mir bitte eine Homeoffice-Richtlinie für unsere Firma als Word-Dokument, etwa ein bis zwei Seiten, in nummerierten Abschnitten. Eckpunkte: bis zu 3 Tage Homeoffice pro Woche nach Absprache mit der Führungskraft, Kernarbeitszeit 9 bis 15 Uhr, Erreichbarkeit über Teams und Telefon, Laptop und Headset stellt die Firma, einen zweiten Bildschirm gibt es auf Antrag. Die Arbeitszeit wird wie im Büro erfasst. Ansprechpartnerin bei Fragen ist Frau Keller aus der Personalabteilung."
+
+[[turns]]
+text = "Danke! Die Geschäftsführung hat zwei Änderungen: Homeoffice geht künftig an höchstens 2 Tagen pro Woche statt 3, und Ansprechpartner ist ab sofort Herr Brandt aus der Personalabteilung. Alles andere bleibt bitte genau so."
+
+[[turns]]
+text = "Bitte ergänz noch einen Abschnitt zum Datenschutz am heimischen Arbeitsplatz: Bildschirm sperren, wenn man den Platz verlässt, keine Ausdrucke mit Kundendaten in den Hausmüll und kein öffentliches WLAN ohne VPN. Sonst nichts ändern."
+
+# numbered_headings: the prompt asks for numbered sections; headings_min only counts the heading style, so
+# headings without a number would not stand out (mutant without_numbers).
+[checks]
+headings_min = 4
+numbered_headings = true
+words_min = { hard = 300, soft = 400 }
+names = ["Brandt"]
+retained = { hard = 0.6, soft = 0.85 }
+
+# Topic „Ausdrucke nicht in den Hausmüll“ asks for the disposal (Hausmüll, Aktenvernichter, entsorgen …), as in the
+# prompt; 'ausdruck|papier' would also match a distorted „Keine Kundendaten ausdrucken“ (mutant printouts_distorted).
+[checks.topics]
+"höchstens 2 Tage" = '\b(2|zwei)\s+(homeoffice-?|mobile[n]?\s+)?(arbeits)?tag'
+Kernarbeitszeit = 'kernarbeitszeit'
+"9 bis 15 Uhr" = '\b9(:00|\.00)?\s*(uhr)?\s*(bis|–|-)\s*15'
+Teams = 'teams'
+Headset = 'headset'
+"zweiter Bildschirm" = 'bildschirm|monitor'
+Zeiterfassung = 'erfass'
+Datenschutz = 'datenschutz'
+"Bildschirm sperren" = 'sperr'
+"Ausdrucke nicht in den Hausmüll" = 'hausmüll|restmüll|\bmüll|papierkorb|altpapier|aktenvernicht|schredder|papierwolf|entsorg|vernicht'
+VPN = 'vpn'
+
+[checks.forbidden]
+"Frau Keller" = '\bkeller\b'
+"3 Tage Homeoffice" = ['(höchstens|maximal|bis zu|max\.)\s+(3|drei)\s+(homeoffice-?)?(arbeits)?tag', '\b(3|drei)\s+homeoffice-?tag']
+
+[judge]
+checklist = [
+  "höchstens 2 Tage Homeoffice pro Woche nach Absprache, an keiner Stelle mehr 3 Tage",
+  "Ansprechpartner Herr Brandt (Personalabteilung) überall, Frau Keller nirgends mehr",
+  "neuer Abschnitt Datenschutz mit allen drei Punkten (Bildschirm sperren, keine Ausdrucke mit Kundendaten in den Hausmüll, kein öffentliches WLAN ohne VPN), sinnvoll eingeordnet und nummeriert",
+  "alle übrigen Abschnitte der zweiten Fassung unverändert: Kernarbeitszeit 9–15 Uhr, Teams und Telefon, Laptop und Headset, zweiter Bildschirm auf Antrag, Zeiterfassung wie im Büro",
+  "nummerierte Abschnitte, ein bis zwei Seiten, sachlicher Ton einer Richtlinie",
+]

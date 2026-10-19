@@ -1,0 +1,46 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+[[mutant]]
+# observed in an earlier run: the plan series ends with 201 instead of 180
+name = "plan_series_ends_with_actual"
+defect = "the plan series in the line chart ends with €201k instead of €180k, the extra costs disappear"
+set = [["slides.3.chart.series.0.values", [40, 85, 130, 201]]]
+expected = ["chart_values"]
+
+[[mutant]]
+# observed in earlier runs: „+11 Tausend Euro“ instead of 21
+name = "extra_costs_11_instead_of_21"
+defect = "extra costs given as €11k instead of 201 − 180 = €21k (slide 2 and speaker notes)"
+replace = [["Kosten Ende September 21 Tsd. € (11,7 %) über Plan", "Kosten Ende September 11 Tsd. € über Plan"],
+           ["also 21 Tausend Euro oder 11,7 Prozent mehr", "also 11 Tausend Euro mehr"]]
+expected = ["topics_soft", "text_arithmetic", "numbers_sourced", "values_present"]
+severity = "soft"
+
+[[mutant]]
+# observed in several earlier runs (31.10.2026, a Saturday; 15.11.2026, a Sunday)
+name = "deadline_on_saturday"
+defect = "cleanup of the legacy data scheduled until Saturday, 31.10.2026"
+replace = [["Altdaten schlechter als erwartet: Bereinigung vor dem Migrationstest", "Altdaten schlechter als erwartet: Bereinigung bis 31.10.2026, dann Migrationstest"]]
+expected = ["weekend"]
+severity = "soft"
+
+[[mutant]]
+name = "milestone_missing"
+defect = "the milestone „Schulungen“ (plan 30.11.) is missing from the table"
+remove = ["slides.2.table.4"]
+expected = ["topics", "values_present", "count"]
+
+[[mutant]]
+# observed in an earlier run: „[ ] Tsd. €“ and „[ ] Key-Usern“
+name = "empty_placeholders"
+defect = "empty placeholder „[ ] Tsd. €“ in the budget decision"
+replace = [["Budgeterhöhung um 35 Tsd. €", "Budgeterhöhung um [ ] Tsd. €"]]
+expected = ["placeholders"]
+severity = "soft"
+
+[[mutant]]
+# observed in earlier runs: „ab Juli持续的 über Plan“
+name = "cjk_in_notes"
+defect = "Chinese characters in the speaker notes („seit Juli持续的 darüber“)"
+replace = [["seit Juli darüber", "seit Juli持续的 darüber"]]
+expected = ["foreign_script"]

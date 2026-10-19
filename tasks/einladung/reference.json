@@ -1,0 +1,82 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Einladung zur Weihnachtsfeier 2026",
+  "subtitle": "Freitag, 11. Dezember 2026, ab 17 Uhr im Gasthaus Krone in Esslingen",
+  "header_text": "Brenner Haustechnik GmbH",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "text": "Liebe Kolleginnen und Kollegen,"
+   },
+   {
+    "type": "paragraph",
+    "text": "ein arbeitsreiches Jahr liegt hinter uns – Zeit, gemeinsam zu feiern! Wir laden euch herzlich zu unserer Weihnachtsfeier ein und freuen uns auf einen gemütlichen Abend mit gutem Essen, netten Gesprächen und der einen oder anderen Überraschung."
+   },
+   {
+    "type": "heading",
+    "text": "Wann und wo?",
+    "level": 1
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "**Datum:** Freitag, 11. Dezember 2026",
+     "**Beginn:** 17 Uhr",
+     "**Ort:** Gasthaus Krone, Esslingen"
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Ablauf des Abends",
+    "level": 1
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Uhrzeit",
+      "Programm"
+     ],
+     [
+      "17:00 Uhr",
+      "Empfang mit Glühwein und Punsch"
+     ],
+     [
+      "18:00 Uhr",
+      "Begrüßung durch die Geschäftsführung"
+     ],
+     [
+      "18:30 Uhr",
+      "Weihnachtsbuffet"
+     ],
+     [
+      "20:00 Uhr",
+      "Jahresrückblick in Bildern und Tombola"
+     ],
+     [
+      "ab 21:00 Uhr",
+      "Gemütlicher Ausklang"
+     ]
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Anmeldung",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Damit das Gasthaus gut planen kann, meldet euch bitte **bis Freitag, 27. November 2026** bei Frau Yilmaz an – persönlich, telefonisch oder per E-Mail. Sagt dabei bitte auch Bescheid, wenn ihr vegetarisch oder vegan essen möchtet."
+   },
+   {
+    "type": "paragraph",
+    "text": "Wir freuen uns auf euch!"
+   },
+   {
+    "type": "paragraph",
+    "text": "Eure Geschäftsführung"
+   }
+  ]
+ }
+}

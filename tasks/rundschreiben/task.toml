@@ -1,0 +1,31 @@
+id = "rundschreiben"
+title = "Staff circular"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "medium"
+tags = ["table", "header", "faq"]
+dates_from = "2026-10-13"
+
+[[turns]]
+text = "Schreib ein Rundschreiben als Word-Dokument an alle Mitarbeiter: Ab 1. November 2026 gilt eine neue Homeoffice-Regelung. Erkläre die wichtigsten Änderungen, nenne die Fristen als Tabelle (was bis wann) und beantworte am Ende fünf häufige Fragen. Im Seitenkopf soll „Personalabteilung“ stehen."
+
+[checks]
+tables_min = 1
+header_contains = "Personalabteilung"
+# a question mark at the end of a word, also when the answer follows in the same paragraph ("Frage? Antwort.")
+# or markdown follows ("Frage?**"); one count per paragraph/line/cell
+count = [{ name = "Fragen", pattern = '[\w)\]"“”»]\s?\?[*_"“”»)\]]*(?:\s|$)', min = 5 }]
+
+[checks.topics]
+Homeoffice = 'home-?office|mobiles arbeiten'
+"1. November" = '1\.\s*november|0?1\.\s*11\.\s*2026'
+
+[judge]
+checklist = [
+  "Stichtag 1. November 2026 klar genannt",
+  "Änderungen verständlich erklärt",
+  "Fristen als Tabelle, alle nach dem 13.10.2026 und an Werktagen",
+  "fünf Fragen mit Antworten am Ende",
+  "„Personalabteilung“ im Seitenkopf",
+]

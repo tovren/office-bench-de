@@ -1,0 +1,65 @@
+id = "preisaenderung"
+title = "Quote with price list and price change (two attachments)"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "hard"
+tags = ["attachment", "two_attachments", "formula", "line_item_formula", "vat", "superseded_info", "successor"]
+
+# Prices from two attachments: price list of 01.01.2026 and a mail from purchasing (28.09.2026) with new prices from
+# 01.10.2026. Today is 13.10.2026 and the work is done in November, so the new prices apply; the hourly rates only
+# rise on 01.01.2027 (until then 68,00 €). The pump PU-4410 is discontinued; according to the mail the successor
+# PU-4415 (Aquaflow Neo 25-60, 312,00 €) is offered automatically. Volume discount only from 20 pieces, not here.
+# Items: 12 × 19,80 = 237,60 (TK-1001) · 12 × 15,40 = 184,80 (HV-1101, straight form) · 1 × 312,00 (PU-4415) ·
+# 1 × 84,50 (AG-4501) · 6 × 68,00 = 408,00 (LS-9001) · 1 × 42,00 (LS-9010). Net 1.268,90 €, VAT 19 % 241,09 €
+# (241,091), gross 1.509,99 € (1.509,991). Typical errors: old prices (net 1.212,20), hourly rate 72 € already now
+# (1.292,90), angle valve 16,10 (1.277,30), the old pump at 289 € or a discount on 12 pieces.
+# The old article number PU-4410 is not forbidden: almost all earlier runs named it in the note on the successor
+# („Nachfolger von PU-4410“), as the checklist recommends. Whether the old pump is offered shows in values_present
+# (312,00 €) and the totals. Nothing checks the name „Aquaflow 25-60“, because the successor's name is almost the
+# same. Numbers in cells are not text; values_present catches old prices via unit prices and totals.
+[[turns]]
+text = "Im Anhang sind unsere Preisliste und die Mail vom Einkauf mit den Preisänderungen. Herr Markus Lorenz von der Hausverwaltung Kessler & Partner möchte ein Angebot für die Wohnanlage Uhlandstraße 12 in Esslingen: 12 Thermostatköpfe Standard, 12 Heizkörperventile in Durchgangsform, 1 Umwälzpumpe Aquaflow 25-60 und 1 Ausdehnungsgefäß 50 l, dazu 6 Monteurstunden und eine Anfahrt. Die Arbeiten machen wir noch im November. Mach mir bitte das Angebot als Excel mit den Preisen, die jetzt gelten: Pos., Art.-Nr., Bezeichnung, Menge, Einheit, Einzelpreis und Gesamtpreis als Formel, darunter Netto, 19 % MwSt. und Brutto."
+attachments = [
+  { name = "Preisliste Kundendienst 2026.pdf", file = "preisliste_2026.txt" },
+  { name = "Neue Verkaufspreise ab 1. Oktober.pdf", file = "mail_preisaenderung.txt" },
+]
+
+# formulas_min = 9 (six items, net, VAT, gross): the checklist asks for net, VAT and gross as formulas; without it,
+# fixed amounts (mutant totals_as_constants) only failed when a value was wrong.
+[checks]
+numbers_sourced = true
+priced_items_min = 6
+line_item_formula = true
+formulas_min = 9
+columns = ['art|nr', 'bezeichnung|artikel|leistung|position', 'menge|anzahl', 'einzelpreis|preis', 'gesamt']
+values_present = [19.8, 15.4, 312, 84.5, 68, 42, 1268.9, 241.09, 1509.99]
+
+[[checks.calculations]]
+name = "Gesamtpreis = Menge × Einzelpreis"
+columns = { menge = 'menge|anzahl', preis = 'einzelpreis|^(?!.*gesamt).*preis', gesamt = 'gesamt' }
+formula = "menge * preis"
+result = "gesamt"
+
+[checks.topics]
+"Nachfolger PU-4415" = 'pu\s*-?\s*4415|aquaflow\s+neo'
+"TK-1001" = 'tk\s*-?\s*1001'
+"HV-1101" = 'hv\s*-?\s*1101'
+MwSt = 'mwst|mehrwertsteuer|umsatzsteuer|\bust\b'
+Brutto = 'brutto'
+
+[checks.topics_soft]
+Kunde = 'kessler|lorenz'
+
+[checks.forbidden]
+Quellenmarker = '\[\d{1,2}\]'
+"Tags der RAG-Vorlage" = '</?(source|context)\b'
+
+[judge]
+checklist = [
+  "aktuelle Preise aus der Mail: Thermostatkopf 19,80 €, Ventil Durchgangsform 15,40 € (nicht Eckform), Ausdehnungsgefäß 84,50 €, Anfahrt 42,00 €; Monteurstunde noch 68,00 € (72,00 € erst ab 01.01.2027)",
+  "statt der ausgelaufenen Aquaflow 25-60 (PU-4410) der Nachfolger Aquaflow Neo 25-60, PU-4415, zu 312,00 €, am besten mit kurzem Hinweis für den Kunden",
+  "kein Mengenrabatt (erst ab 20 Stück), Gesamtpreis je Position als Formel, Netto 1.268,90 €, MwSt 241,09 €, Brutto 1.509,99 € als Formeln",
+  "Angebotskopf mit Hausverwaltung Kessler & Partner, Herrn Lorenz, Wohnanlage Uhlandstraße 12, Datum; Gültigkeit vier Wochen und Zahlungsziel 14 Tage aus der Preisliste",
+  "keine alten Preise, keine Quellenmarker wie [1], Euroformat",
+]

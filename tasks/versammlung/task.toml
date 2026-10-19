@@ -1,0 +1,60 @@
+id = "versammlung"
+title = "Staff meeting (follow-up)"
+version = 1
+kind = "follow_up"
+file_type = "docx"
+difficulty = "medium"
+tags = ["follow_up", "change_request", "dates", "agenda"]
+dates_from = "2026-10-13"
+
+[[turns]]
+text = "Schreib bitte eine Einladung zur Betriebsversammlung als Word-Dokument, Absender ist der Betriebsrat. Termin: Donnerstag, 5. November 2026, 9 bis 11 Uhr in der Kantine. Tagesordnung: 1. Begrüßung, 2. Bericht der Geschäftsführung, 3. Neue Gleitzeitregelung, 4. Parkplatzsituation, 5. Verschiedenes. Bitte auch den Hinweis, dass die Teilnahme als Arbeitszeit gilt."
+
+[[turns]]
+text = "Danke! Es gibt zwei Änderungen: Die Versammlung wird auf Donnerstag, 12. November verschoben, gleiche Uhrzeit, gleicher Ort. Der Punkt Parkplatzsituation fällt weg, dafür kommt als neuer Punkt 4 die Vorstellung des neuen Ticketsystems. Und ergänz bitte noch einen kurzen Abschnitt, dass man Fragen vorab bis Freitag, 6. November, an den Betriebsrat schicken kann."
+
+# Checks apply to the second file. The old date may appear at most once (a note „verschoben vom 5. November“ is
+# fine), the deleted agenda item only in a note („entfällt“) in the same paragraph. retained compares with the
+# first file; date and agenda change, so it is only soft. Three checks close gaps found by the mutants:
+# - forbidden „alter Termin 5. November“ (hard): per the checklist, 5 November appears at most as a note on the
+#   postponement; a paragraph with the old date without a word like verschoben/statt/ursprünglich/Änderung (title
+#   or subtitle not changed, mutant old_date_in_title) is a hard error (count.max stays for several notes).
+# - forbidden „falscher Paragraf für Arbeitszeit“: attendance counts as working time under § 44 BetrVG (prompt:
+#   note on working time); a BetrVG section other than §§ 42–46 in the same paragraph as the working time is wrong
+#   (mutant wrong_section, observed as § 87 and § 88 BetrVG).
+# - topics_soft „Weg für die Fragen“: the checklist asks for a channel (mail, letterbox …), the prompt does not
+#   explicitly, hence soft (mutant channel_for_questions_missing).
+[checks]
+count = [
+  { name = "alter Termin 5. November", pattern = '(?<!\d)0?5\.\s*(11\.|nov)', max = 1 },
+]
+
+retained = { soft = 0.7 }
+
+[checks.forbidden]
+"gestrichener Punkt Parkplatzsituation" = '^(?!.*(entf[äa]ll|gestrichen|abgesetzt|wegf[äa]ll|nicht mehr|ersetzt|statt|verschoben|bisher|früher)).*parkplatz'
+"alter Termin 5. November" = '^(?!.*(verschoben|verleg|statt|ursprünglich|bisher|zunächst|vorher|früher|änderung|geändert|abgesagt|nicht mehr|entf[äa]ll)).*(?<!\d)0?5\.\s*(11\.|nov)'
+"falscher Paragraf für Arbeitszeit" = [
+  '§\s*(?!4[2-6]\b)\d+[^§\n]{0,30}?(betrvg|betriebsverfassungsgesetz)[^\n]{0,60}?arbeitszeit',
+  'arbeitszeit[^\n]{0,60}?§\s*(?!4[2-6]\b)\d+[^§\n]{0,30}?(betrvg|betriebsverfassungsgesetz)',
+]
+
+[checks.topics]
+"neuer Termin" = '(?<!\d)12\.\s*(11\.|november)'
+Kantine = 'kantine'
+Gleitzeit = 'gleitzeit'
+Ticketsystem = 'ticketsystem'
+"Fragen vorab bis 6. November" = '(?<!\d)0?6\.\s*(11\.|november)'
+Arbeitszeit = 'arbeitszeit'
+
+[checks.topics_soft]
+"Weg für die Fragen" = 'e-?mail|\bmail|@|briefkasten|postfach|intranet|sprechstunde|betriebsratsbüro|büro des betriebsrats|persönlich|telefon|abgeben|einwerfen|formular'
+
+[judge]
+checklist = [
+  "neuer Termin Donnerstag, 12.11.2026, 9 bis 11 Uhr, Kantine; der 5. November kommt höchstens als Hinweis auf die Verschiebung vor",
+  "Tagesordnung: Begrüßung, Bericht der Geschäftsführung, Gleitzeitregelung, Vorstellung Ticketsystem als Punkt 4, Verschiedenes als Punkt 5; Parkplatzsituation gestrichen",
+  "neuer Abschnitt: Fragen vorab bis Freitag, 6.11.2026, an den Betriebsrat, mit Weg (z. B. Mail oder Briefkasten)",
+  "Hinweis, dass die Teilnahme als Arbeitszeit gilt; Absender Betriebsrat",
+  "alles Übrige aus der ersten Fassung bleibt erhalten, nichts doppelt oder widersprüchlich",
+]

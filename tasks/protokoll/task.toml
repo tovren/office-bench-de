@@ -1,0 +1,33 @@
+id = "protokoll"
+title = "Meeting minutes"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "medium"
+tags = ["table", "list", "names"]
+
+[[turns]]
+text = "Erstelle mir ein Word-Dokument: Protokoll der Teambesprechung vom 12.10.2026 (Teilnehmer: Anna, Ben, Carla, David). Drei Tagesordnungspunkte (Projektstand, Urlaubsplanung, neues Ticketsystem), die Beschlüsse als Tabelle und eine To-do-Liste mit Verantwortlichen."
+
+[checks]
+tables_min = 1
+names = ["Anna", "Ben", "Carla", "David"]
+
+# Topics „Datum 12.10.“ and „Beschlüsse“: the prompt asks for both explicitly, not only for the agenda items.
+[checks.topics]
+"Datum 12.10." = '(?<!\d)12\.\s*(10\.|oktober)'
+"Beschlüsse" = 'beschl|entscheid|vereinbar'
+Projektstand = 'projektstand|projektstatus|stand de[sr] projekt|projektfortschritt'
+Urlaubsplanung = 'urlaub'
+Ticketsystem = 'ticket'
+"To-do-Liste" = ['to-?do|aufgaben|maßnahmen|nächste schritte|offene punkte|verantwortlich|zuständig', { pattern = '^\s*(Anna|Ben|Carla|David)\s*[:–-]', min = 2 }]
+
+[judge]
+checklist = [
+  "Datum 12.10.2026 und Wochentag (Montag) stimmen, falls genannt",
+  "alle vier Teilnehmer genannt",
+  "drei Tagesordnungspunkte mit konkretem Inhalt statt Floskeln",
+  "Beschlüsse als Tabelle",
+  "To-do-Liste mit Verantwortlichen und Termin; Termine nach dem 12.10.2026 und an Werktagen",
+  "keine Platzhalter wie „[Name]“ oder „System X“",
+]

@@ -1,0 +1,26 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Unsere Teeküche – sauber für alle",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "text": "Damit sich alle in unserer Teeküche wohlfühlen, haben wir eine Bitte: **Räumt euer Geschirr nach dem Benutzen selbst weg.**"
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Tassen, Teller und Besteck direkt in die Spülmaschine stellen",
+     "Spülmaschine voll? Bitte einschalten.",
+     "Spülmaschine fertig? Kurz ausräumen – das dauert nur zwei Minuten.",
+     "Was nicht in die Spülmaschine darf, gleich abspülen und abtrocknen",
+     "Essensreste in den Biomüll, nicht in die Spüle"
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Vielen Dank, dass ihr mithelft!"
+   }
+  ]
+ }
+}

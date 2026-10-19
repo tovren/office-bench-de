@@ -1,0 +1,41 @@
+id = "kostenumlage"
+title = "Allocate building costs (two keys)"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "medium"
+tags = ["formula", "cost_allocation", "two_keys", "percent", "total_row", "pie_chart"]
+
+# Area 1,000 m², 40 staff. By area (heating 18,400, cleaning 9,600, caretaker 7,200 €):
+# Verwaltung 22 % → 4,048 / 2,112 / 1,584; Vertrieb 14 % → 2,576 / 1,344 / 1,008; Werkstatt 38 % → 6,992 / 3,648 /
+# 2,736; Lager 26 % → 4,784 / 2,496 / 1,872. Electricity 4,800 € by headcount (120 € per head): 1,440 / 960 / 1,680 /
+# 720. Totals per department: 9,184 / 5,888 / 15,056 / 9,872, overall 40,000 €. Allocating electricity by area
+# gives 8,800 / 5,600 / 15,200 / 10,400.
+# numbers_sourced (soft): all numbers come from the request (the costs, areas and headcounts); it reports numbers,
+# times and dates that are not there and do not simply follow from them.
+[[turns]]
+text = "Wir müssen die Gebäudekosten 2026 auf die Abteilungen umlegen. Kosten: Heizung 18.400 €, Strom 4.800 €, Reinigung 9.600 €, Hausmeister 7.200 €. Flächen: Verwaltung 220 m², Vertrieb 140 m², Werkstatt 380 m², Lager 260 m². Mitarbeitende: Verwaltung 12, Vertrieb 8, Werkstatt 14, Lager 6. Der Strom wird nach Köpfen verteilt, alles andere nach Fläche. Mach mir bitte eine Excel: je Abteilung Fläche, Flächenanteil in Prozent, Mitarbeitende, der Betrag für jede Kostenart und die Summe, alles als Formeln, unten eine Summenzeile. Dazu ein Kreisdiagramm, wie sich die Gesamtkosten auf die Abteilungen verteilen."
+
+[checks]
+numbers_sourced = true
+data_rows_min = 4
+columns = ['abteilung|bereich|kostenstelle', 'fläche|m²|qm', 'anteil|%|prozent', 'mitarbeit|köpfe|personen|\bma\b', 'heiz', 'strom', 'reinig', 'hausmeister']
+formulas_min = 16
+total_row = true
+chart = true
+chart_type = "pie"
+chart_values = [[9184, 5888, 15056, 9872]]
+values_present = [
+  22, 14, 38, 26,
+  4048, 2576, 6992, 4784, 1440, 960, 1680, 720, 2112, 1344, 3648, 2496, 1584, 1008, 2736, 1872,
+  9184, 5888, 15056, 9872, 40000,
+]
+
+[judge]
+checklist = [
+  "alle vier Abteilungen mit Fläche, Flächenanteil (22 %, 14 %, 38 %, 26 %) und Mitarbeitenden",
+  "Heizung, Reinigung und Hausmeister nach Fläche, Strom nach Köpfen (120 € je Person); alles als Formeln, die Gesamtkosten stehen einmal und werden referenziert oder sind nachvollziehbar",
+  "Summen je Abteilung 9.184 / 5.888 / 15.056 / 9.872 €, Summenzeile mit 40.000 €, jede Kostenart vollständig verteilt",
+  "Kreisdiagramm der Gesamtkosten je Abteilung, ohne die Summenzeile als eigenes Stück",
+  "Euro- und Prozentformat, Umlageschlüssel erkennbar beschriftet",
+]

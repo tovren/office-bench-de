@@ -1,0 +1,166 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Angebot Kessler und Partner Wohnanlage Uhlandstraße 12",
+  "sheets": [
+   {
+    "name": "Angebot",
+    "columns": [
+     {
+      "header": "Pos.",
+      "type": "integer"
+     },
+     {
+      "header": "Art.-Nr."
+     },
+     {
+      "header": "Bezeichnung"
+     },
+     {
+      "header": "Menge",
+      "type": "number"
+     },
+     {
+      "header": "Einheit"
+     },
+     {
+      "header": "Einzelpreis",
+      "type": "currency"
+     },
+     {
+      "header": "Gesamtpreis",
+      "type": "currency"
+     }
+    ],
+    "rows": [
+     [
+      1,
+      "TK-1001",
+      "Thermostatkopf Standard, Anschluss M30 x 1,5",
+      12,
+      "Stück",
+      19.8,
+      "=D2*F2"
+     ],
+     [
+      2,
+      "HV-1101",
+      "Heizkörperventil DN 15, Durchgangsform",
+      12,
+      "Stück",
+      15.4,
+      "=D3*F3"
+     ],
+     [
+      3,
+      "PU-4415",
+      "Umwälzpumpe Aquaflow Neo 25-60, Hocheffizienz (Nachfolgemodell, passt ohne Umbau)",
+      1,
+      "Stück",
+      312.0,
+      "=D4*F4"
+     ],
+     [
+      4,
+      "AG-4501",
+      "Ausdehnungsgefäß 50 l",
+      1,
+      "Stück",
+      84.5,
+      "=D5*F5"
+     ],
+     [
+      5,
+      "LS-9001",
+      "Monteurstunde (Mo–Fr 7–17 Uhr)",
+      6,
+      "Std.",
+      68.0,
+      "=D6*F6"
+     ],
+     [
+      6,
+      "LS-9010",
+      "Anfahrtspauschale Esslingen und Umgebung",
+      1,
+      "Einsatz",
+      42.0,
+      "=D7*F7"
+     ],
+     [
+      null,
+      null,
+      "Netto",
+      null,
+      null,
+      null,
+      "=SUM(G2:G7)"
+     ],
+     [
+      null,
+      null,
+      "MwSt. 19 %",
+      null,
+      null,
+      null,
+      "=ROUND(G8*0.19,2)"
+     ],
+     [
+      null,
+      null,
+      "Brutto",
+      null,
+      null,
+      null,
+      "=G8+G9"
+     ]
+    ]
+   },
+   {
+    "name": "Angebotsdaten",
+    "columns": [
+     {
+      "header": "Angabe"
+     },
+     {
+      "header": "Wert"
+     }
+    ],
+    "rows": [
+     [
+      "Kunde",
+      "Hausverwaltung Kessler & Partner, Herr Markus Lorenz"
+     ],
+     [
+      "Objekt",
+      "Wohnanlage Uhlandstraße 12, Esslingen"
+     ],
+     [
+      "Angebotsdatum",
+      "13. Oktober 2026"
+     ],
+     [
+      "Ausführung",
+      "November 2026"
+     ],
+     [
+      "Gültigkeit",
+      "vier Wochen ab Angebotsdatum"
+     ],
+     [
+      "Zahlungsziel",
+      "14 Tage nach Rechnungsdatum ohne Abzug"
+     ],
+     [
+      "Hinweis",
+      "Die Umwälzpumpe Aquaflow 25-60 ist nicht mehr lieferbar; angeboten ist das Nachfolgemodell Aquaflow Neo 25-60."
+     ],
+     [
+      "Preise",
+      "netto zuzüglich 19 % Mehrwertsteuer, Stand 1. Oktober 2026"
+     ]
+    ]
+   }
+  ]
+ }
+}

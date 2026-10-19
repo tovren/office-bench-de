@@ -1,0 +1,58 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+# The third version is checked against the second (previous in reference.json).
+
+# The model rebuilds the file from the arguments of the first round and loses the change from round 2
+[[mutant]]
+name = "keller_back"
+defect = "contact person is Frau Keller again instead of Herr Brandt"
+replace = [["Herr Brandt", "Frau Keller"]]
+expected = ["forbidden", "names"]
+
+[[mutant]]
+name = "three_days_back"
+defect = "up to 3 days of remote work again instead of at most 2"
+replace = [["an höchstens 2 Tagen pro Woche", "an bis zu 3 Tagen pro Woche"]]
+expected = ["forbidden", "topics"]
+
+# Round 3 not carried out: the second version delivered once more
+[[mutant]]
+name = "data_protection_missing"
+defect = "new data protection section is missing"
+remove = ["blocks.16", "blocks.15", "blocks.14"]
+replace = [["7. Ansprechpartner", "6. Ansprechpartner"]]
+expected = ["topics"]
+
+# „Sonst nichts ändern“ ignored: all sections rewritten in the model's own words (the key points stay)
+[[mutant]]
+name = "reworded"
+defect = "remaining sections reworded instead of taken over unchanged"
+set = [
+  ["blocks.1.text", "Die Regeln gelten für alle Mitarbeitenden, deren Aufgaben sich auch von zu Hause erledigen lassen. Ziel ist eine bessere Vereinbarkeit von Familie und Beruf bei weiterhin guter Zusammenarbeit. Einen Rechtsanspruch auf Homeoffice begründet diese Richtlinie nicht; über die Eignung entscheidet die jeweilige Führungskraft."],
+  ["blocks.2.text", "Arbeitsvertrag und Betriebsvereinbarungen haben Vorrang vor dieser Richtlinie, wenn sie abweichende Regelungen enthalten."],
+  ["blocks.4.text", "Mitarbeitende können an höchstens 2 Tagen pro Woche im Homeoffice arbeiten. Welche Tage das sind, wird vorab mit der Führungskraft vereinbart und im gemeinsamen Kalender vermerkt. Präsenztermine, Teamrunden und die Einarbeitung neuer Teammitglieder gehen vor."],
+  ["blocks.5.text", "Vor dem ersten Homeoffice-Tag ist ein Gespräch mit der Führungskraft nötig. Beide Seiten können die Vereinbarung mit vierwöchiger Frist kündigen, etwa bei geänderten Aufgaben."],
+  ["blocks.7.text", "Auch zu Hause gilt die Kernarbeitszeit von 9 bis 15 Uhr. Während dieser Zeit ist man per Teams und Telefon erreichbar und nimmt an Besprechungen teil. Davor und danach lässt sich die Arbeitszeit im Gleitzeitrahmen flexibel gestalten."],
+  ["blocks.8.text", "Die Zeiterfassung erfolgt im Homeoffice genauso wie im Büro über das Zeiterfassungssystem. Für Pausen, Höchstarbeitszeit und Ruhezeit gelten dieselben Vorschriften. Überstunden sind vorher mit der Führungskraft abzustimmen."],
+  ["blocks.10.text", "Für die Arbeit zu Hause erhalten Mitarbeitende von der Firma einen Laptop sowie ein Headset. Ein zusätzlicher zweiter Bildschirm kann bei der Führungskraft beantragt werden. Alle Geräte bleiben Firmeneigentum, sind ausschließlich dienstlich zu nutzen und beim Ausscheiden zurückzugeben."],
+  ["blocks.11.text", "Defekte oder beschädigte Geräte sind umgehend beim IT-Support zu melden. Den privaten Internetzugang stellen die Mitarbeitenden selbst; er muss schnell und zuverlässig sein."],
+]
+expected = ["retained"]
+
+# observed in an earlier run; a review noted „die ausdrücklich verlangte Nummerierung fehlt vollständig“
+[[mutant]]
+name = "without_numbers"
+defect = "sections not numbered although „in nummerierten Abschnitten“ was asked for"
+replace = [
+  ["1. Geltungsbereich", "Geltungsbereich"], ["2. Umfang", "Umfang"], ["3. Arbeitszeit und", "Arbeitszeit und"],
+  ["4. Ausstattung", "Ausstattung"], ["5. Arbeitsplatz", "Arbeitsplatz"], ["6. Datenschutz", "Datenschutz"],
+  ["7. Ansprechpartner", "Ansprechpartner"],
+]
+expected = ["numbered_headings", "numbered_list", "headings_min"]
+
+# observed in an earlier run („Drucken Sie keine Kundendaten aus“ instead of the ban on disposal), noted in a review
+[[mutant]]
+name = "printouts_distorted"
+defect = "data protection point distorted: a ban on printing instead of „keine Ausdrucke mit Kundendaten in den Hausmüll“"
+replace = [["Ausdrucke mit Kundendaten nicht in den Hausmüll werfen, sondern mit ins Büro nehmen und dort im Aktenvernichter entsorgen.",
+            "Keine Kundendaten ausdrucken."]]
+expected = ["topics"]

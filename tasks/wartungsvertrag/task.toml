@@ -1,0 +1,71 @@
+id = "wartungsvertrag"
+title = "Overview of a long maintenance contract (attachment)"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "hard"
+tags = ["attachment", "long", "contract", "table", "deadline", "arithmetic", "superseded_info"]
+dates_from = "2026-10-13"
+
+# Long attachment (contract text as PDF, about 31,000 characters, 15 pages). The decisive details come far back and
+# override earlier ones: § 19 (special agreements, page 10) takes precedence over everything else per § 1.4.
+# - Termination: § 4.2 says three months, § 19.1 „abweichend von § 4.2“ six months to the end of the term (receipt).
+#   Minimum term until 31.12.2028 → Friday, 30.06.2028 at the latest. The superseded notice period gives Saturday,
+#   30.09.2028; no correct overview writes this date (forbidden).
+# - Flat fee: Anlage 2 item 1 states 42.00 € per workstation, § 19.2 38.00 € for the minimum term. Inventory per
+#   § 1.2: 24 workstations, 2 servers, 1 phone system. 24 × 38 = 912 + 2 × 95 = 190 + 120 = 1,222.00 € net per month
+#   (14,664 € per year). With the superseded price 24 × 42 = 1,008 + 190 + 120 = 1,318 €.
+# - Device list and contact person: at the latest four weeks after signing (§ 9.2); signed „heute“, 13.10.2026 →
+#   Tuesday, 10.11.2026.
+# - Price cap only in the annex: Anlage 2 item 4, at most 3 %, at the earliest from 1.1.2028 (no other „3 %“ in the
+#   contract).
+# - Response times (Anlage 1): priority 1 2 hours, priority 2 4 hours, priority 3 next working day, only within the
+#   service hours Mon–Fri 7:30–17:00. Hourly rate for additional services 98.00 €.
+# The sample server row in Anlage 3 says „Garantie bis Juni 2028“ so that numbers_sourced does not report the
+# termination date (end of a month that is mentioned) as unsourced; the row has nothing to do with the contract.
+# The date 30.06. is found even without a year, the superseded 30.09. only with 2028 (30.09.2027 can correctly appear
+# as the last day for announcing the first price adjustment).
+# The prompt explicitly asks for the notice period, the deadlines with dates and the total flat fee, so that the hard
+# checks follow from the request.
+[[turns]]
+text = "Den Wartungsvertrag mit Kerner IT haben wir heute unterschrieben, Kerner hatte schon vorher unterschrieben. Er ist im Anhang. Mach mir bitte für die Geschäftsführung und das Büro eine Übersicht als Word-Dokument: Was müssen wir als Auftraggeber tun? Welche Fristen gelten für uns? Die bitte als Tabelle, mit konkretem Datum, wo es sich ausrechnen lässt, auch bis wann wir spätestens kündigen müssten, wenn wir nach der Mindestlaufzeit raus wollen. Und was kostet uns der Vertrag im Monat insgesamt an Pauschale, und was wird zusätzlich abgerechnet?"
+attachments = [{ name = "Rahmenvertrag Kerner IT RV-2026-0147.pdf", file = "wartungsvertrag_kerner.txt" }]
+
+# 1,318 € is not forbidden: per § 19.2 the prices from Anlage 2 apply again after the minimum term, so 1,318 € is then
+# the correct flat fee; 10 of 15 answers in earlier runs stated it that way. The flat fee during the minimum term
+# (1,222 €) stays hard.
+[checks]
+numbers_sourced = true
+tables_min = 1
+values_present = [1222, 98]
+
+[checks.topics]
+"Geräteliste bis 10.11." = '(?<!\d)10\.\s*(11\.|november)'
+"Kündigung bis 30.06.2028" = '(?<!\d)30\.\s*(0?6\.|juni)'
+Ansprechpartner = 'ansprechpartner|ansprechperson|kontaktperson'
+"Geräteliste" = 'geräteliste|geräte-?\s*liste|inventarliste|liste\s+(der|aller)\s+.{0,40}geräte'
+Fernwartung = 'fernwartung|fernzugang|fernzugriff|remote'
+
+# Price cap and response time are soft: the prompt asks about obligations, deadlines and costs, not about these.
+[checks.topics_soft]
+"Preisdeckel 3 %" = ['(?<![\d,.])3(,0)?\s*(%|prozent)', 'drei\s+prozent']
+"Reaktionszeit 2 Stunden" = ['(?<![\d,.])2\s*-?\s*(stunden|std\b|h\b)', 'zwei\s*-?\s*stunden']
+
+# „98 € je Viertelstunde“: the hourly rate is 98.00 € per hour, billed in quarter-hour increments (checklist); as a
+# price per quarter hour it would be 392 € per hour. values_present finds the 98 either way (mutant
+# rate_per_quarter_hour). „24,50 € je Viertelstunde“ stays allowed.
+[checks.forbidden]
+Quellenmarker = '\[\d{1,2}\]'
+"Tags der RAG-Vorlage" = '</?(source|context)\b'
+"überholte Kündigungsfrist (30.09.2028)" = '(?<!\d)30\.\s*(0?9\.|september)\s*(20)?28'
+"98 € je Viertelstunde" = '(?<![\d,.])98(,00)?\s*(€|eur\b|euro)\s*(netto\s*)?(je|pro|/|für\s+jede)\s*(angefangene|begonnene)?\s*(viertelstunde|15\s*min)'
+
+[judge]
+checklist = [
+  "Pflichten des Auftraggebers vollständig und verständlich: Ansprechpartner und Stellvertreter benennen, Geräteliste nach Anlage 3, Fernwartungszugang, Störungen über Ticketportal/Hotline (Priorität 1 zusätzlich telefonisch), Bestandsänderungen binnen 14 Tagen, keine eigenen Eingriffe, Datensicherung außer Haus und Berichte prüfen, Zutritt, Leistungsnachweise binnen 10 Tagen prüfen, Zahlung binnen 14 Tagen",
+  "Fristentabelle mit konkreten Daten: Geräteliste und Ansprechpartner bis Dienstag, 10.11.2026 (vier Wochen ab heute), Kündigung zum 31.12.2028 spätestens Freitag, 30.06.2028, schriftlich und mit Zugang; laufende Fristen ohne erfundene Daten",
+  "überholte Klauseln erkannt: sechs Monate Kündigungsfrist nach § 19.1 statt drei Monate (§ 4.2), 38,00 € je Arbeitsplatz nach § 19.2 statt 42,00 € (Anlage 2)",
+  "Kosten richtig: Pauschale 24 × 38 + 2 × 95 + 120 = 1.222,00 € netto im Monat (14.664 € im Jahr); zusätzlich Stundensatz 98,00 € (Viertelstundentakt, 50 % Zuschlag außerhalb der Servicezeiten), Anfahrt 45,00 €, Einrichtungspauschale 1.450,00 € (halb bei fristgerechter Geräteliste), Hardware nach Angebot",
+  "Preisanpassung frühestens 1.1.2028, höchstens 3 %, drei Monate Ankündigung; Reaktionszeiten 2 / 4 Stunden / nächster Arbeitstag innerhalb der Servicezeiten",
+  "knapp und brauchbar für Geschäftsführung und Büro, nichts erfunden, keine Quellenmarker wie [1]",
+]

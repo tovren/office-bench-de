@@ -1,0 +1,25 @@
+id = "arbeitstage"
+title = "Question: working days in Excel"
+version = 1
+kind = "no_file"
+difficulty = "easy"
+tags = ["no_file", "tempting", "excel_question"]
+
+# Tempting: it is about an Excel file, but only the explanation is wanted. NETTOARBEITSTAGE is also not on the
+# tool's formula allowlist.
+[[turns]]
+text = "In unserer Urlaubsliste in Excel steht in Spalte B der erste und in Spalte C der letzte Urlaubstag. Wie kann ich mir in Spalte D ausrechnen lassen, wie viele Arbeitstage das sind, also ohne Wochenenden und am besten auch ohne Feiertage?"
+
+[reply.topics]
+Funktion = 'nettoarbeitstage|networkdays'
+Feiertage = 'feiertag'
+Zellbezug = '\bB\$?\d+\b'
+
+[judge]
+checklist = [
+  "keine Datei, sondern eine kurze Erklärung im Chat",
+  "richtige Funktion: =NETTOARBEITSTAGE(B2;C2;Feiertage) bzw. englisch NETWORKDAYS, mit Start, Ende und Feiertagsbereich",
+  "erklärt, dass die Feiertage als Datumsliste irgendwo stehen müssen (eigenes Blatt) und der Bezug absolut sein sollte ($A$2:$A$15)",
+  "deutsche Schreibweise mit Semikolon für deutsches Excel; Hinweis, dass Start- und Endtag mitzählen",
+  "optional: halbe Tage (24./31.12.), NETTOARBEITSTAGE.INTL für andere Wochenenden",
+]

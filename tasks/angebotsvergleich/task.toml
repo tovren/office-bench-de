@@ -1,0 +1,46 @@
+id = "angebotsvergleich"
+title = "Decision paper from two offers (attachments)"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "hard"
+tags = ["attachment", "two_attachments", "table", "arithmetic", "recommendation"]
+
+# Costs over 36 months (net). Kunz (leasing): 36 × 289 = €10,404 in rates; 1,000 b/w pages free, so 7,000 × 0.008 +
+# 1,500 × 0.049 = €129.50 per month, × 36 = €4,662; total €15,066. Druckwerk (purchase): 6,900 + 350 + 36 × 79 =
+# €10,094; 8,000 × 0.006 + 1,500 × 0.055 = €130.50 per month, × 36 = €4,698; total €14,792. Druckwerk is €274
+# cheaper and the devices are ours afterwards; Kunz has the faster service (8 hours instead of next working day)
+# and ties up no capital. Without the free pages Kunz would come to €15,354. Both offers are valid until 30.10.2026.
+[[turns]]
+text = "Im Anhang sind zwei Angebote für neue Multifunktionsdrucker. Wir drucken im Monat etwa 8.000 Seiten schwarz-weiß und 1.500 Seiten in Farbe. Vergleich die beiden bitte und mach mir eine kurze Entscheidungsvorlage für die Geschäftsführung als Word-Dokument: die wichtigsten Punkte als Tabelle gegenübergestellt, die Gesamtkosten über 3 Jahre für beide Angebote und eine Empfehlung."
+attachments = [
+  { name = "Angebot Kunz A-26-3318.pdf", file = "angebot_kunz.txt" },
+  { name = "Angebot Druckwerk 2026-0917.pdf", file = "angebot_druckwerk.txt" },
+]
+
+[checks]
+tables_min = 1
+values_present = [15066, 14792]
+
+# The recommendation also counts as „empfohlen“; otherwise „Empfohlen wird das Angebot …“ gives a false alarm
+# (observed in an earlier run).
+[checks.topics]
+Kunz = 'kunz'
+Druckwerk = 'druckwerk'
+Leasing = 'leasing|miete'
+Kauf = 'kauf|eigentum'
+Service = 'reaktionszeit|(?<!\d)8\s*(arbeits)?(stunden|std)|werktag'
+Empfehlung = 'empfehl|empfohl'
+
+[checks.forbidden]
+Quellenmarker = '\[\d{1,2}\]'
+"Tags der RAG-Vorlage" = '</?(source|context)\b'
+
+[judge]
+checklist = [
+  "Gegenüberstellung als Tabelle: Modell, Leasing oder Kauf, einmalige und monatliche Kosten, Seitenpreise, Freiseiten, Service und Reaktionszeit, Eigentum am Ende, Gültigkeit",
+  "Gesamtkosten über 36 Monate richtig und nachvollziehbar: Kunz 15.066 € (mit 1.000 Freiseiten im Monat), Druckwerk 14.792 €, Unterschied 274 €",
+  "Empfehlung mit Begründung, die Kosten und Unterschiede abwägt (Service in 8 Stunden gegen nächster Werktag, Eigentum und Kapitalbindung)",
+  "Hinweis auf die Frist: beide Angebote gelten bis 30.10.2026; alle Preise netto",
+  "kurz und sachlich für die Geschäftsführung, nichts erfunden, keine Quellenmarker wie [1]",
+]

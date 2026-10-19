@@ -1,0 +1,51 @@
+id = "sparquote"
+title = "Budget with savings rate (follow-up)"
+version = 1
+kind = "follow_up"
+file_type = "xlsx"
+difficulty = "medium"
+tags = ["follow_up", "percent", "line_chart", "formula", "total_row"]
+
+# The first turn is word for word the task budget, so both can be compared.
+[[turns]]
+text = "Mach mir eine Excel-Datei mit einem Haushaltsbudget für Januar bis Juni 2026: Einnahmen und Ausgaben pro Monat, der Saldo als Formel, eine Summenzeile und ein Säulendiagramm für Einnahmen und Ausgaben."
+
+[[turns]]
+text = "Super, danke. Füg bitte noch eine Spalte Sparquote in Prozent hinzu, also Saldo geteilt durch Einnahmen, und mach daraus ein Liniendiagramm."
+
+# column_format (soft): the savings rate in percent format (12,5 %), not a share in number format and not
+# multiplied by 100; the calculation still accepts „Sparquote in %“ = 12,5.
+[checks]
+column_format = { 'quote' = "percent" }
+months = [1, 6]
+month_rows_min = 6
+columns = ['sparquote']
+formulas_min = 2
+total_row = true
+chart = true
+chart_type = "line"
+chart_series = ['quote']
+retained = { hard = 0.5, soft = 0.8 }
+
+[[checks.calculations]]
+name = "Saldo = Einnahmen − Ausgaben"
+columns = { einnahmen = '^(?!.*(saldo|quote)).*einnahm', ausgaben = '^(?!.*(saldo|quote)).*ausgab', saldo = '^(?!.*quote).*(saldo|differenz|überschuss)' }
+formula = "einnahmen - ausgaben"
+result = "saldo"
+
+# Percent cells hold the share (12,5 % = 0.125); a column „Sparquote in %“ without percent format holding 12,5 is
+# also right, 12,5 with percent format (shows 1.250 %) is not.
+[[checks.calculations]]
+name = "Sparquote = Saldo / Einnahmen"
+columns = { einnahmen = '^(?!.*(saldo|quote)).*einnahm', saldo = '^(?!.*quote).*(saldo|differenz|überschuss)', quote = 'sparquote' }
+formula = "saldo / einnahmen"
+result = "quote"
+tolerance = 0.005
+
+[judge]
+checklist = [
+  "alles aus der ersten Fassung bleibt: Monate Januar bis Juni 2026, Saldo als Formel, Summenzeile",
+  "neue Spalte Sparquote als Formel Saldo/Einnahmen im Prozentformat (z. B. 12,5 %), nicht mal 100 gerechnet",
+  "Liniendiagramm der Sparquote über die Monate",
+  "Summenzeile bei der Sparquote sinnvoll (Gesamtsaldo/Gesamteinnahmen, Mittelwert oder leer), keine Summe von Prozenten",
+]

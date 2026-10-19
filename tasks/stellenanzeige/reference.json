@@ -1,0 +1,77 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Servicetechniker (m/w/d) für Heizung und Wärmepumpen",
+  "subtitle": "Vollzeit · unbefristet · Esslingen und Umgebung · Start zum 1. Januar 2027 oder früher",
+  "header_text": "Brenner Haustechnik GmbH · Stellenangebot",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "text": "Die Brenner Haustechnik GmbH ist ein Familienbetrieb in Esslingen mit 48 Mitarbeitenden. Wir planen, installieren und warten Heizungsanlagen und Wärmepumpen für Privatkunden, Hausverwaltungen und Gewerbe. Für unseren Kundendienst suchen wir Verstärkung: eine Servicetechnikerin oder einen Servicetechniker (m/w/d) in Vollzeit mit 39 Stunden pro Woche, unbefristet."
+   },
+   {
+    "type": "heading",
+    "text": "Ihre Aufgaben",
+    "level": 2
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Wartung und Reparatur von Heizungsanlagen und Wärmepumpen bei unseren Kunden in Esslingen und Umgebung, selbstständig und mit festen Ansprechpartnern im Büro",
+     "Störungsdienst: Sie finden Fehler und beheben sie zügig",
+     "Beratung der Kundinnen und Kunden vor Ort, zum Beispiel zum Betrieb und zur Pflege ihrer Anlage",
+     "Dokumentation Ihrer Einsätze auf dem Tablet"
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Was Sie mitbringen",
+    "level": 2
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "eine abgeschlossene Ausbildung als Anlagenmechaniker SHK (m/w/d) oder eine vergleichbare Qualifikation",
+     "einen Führerschein der Klasse B",
+     "die Bereitschaft, etwa eine Woche im Monat Rufbereitschaft zu übernehmen",
+     "Erfahrung mit Wärmepumpen ist ein Plus, aber keine Voraussetzung"
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Was wir Ihnen bieten",
+    "level": 2
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "3.600 bis 4.200 € brutto im Monat, je nach Erfahrung, dazu eine Bereitschaftspauschale",
+     "30 Tage Urlaub im Jahr",
+     "ein eigenes Servicefahrzeug, mit dem Sie auch nach Hause fahren",
+     "Tablet und Diensthandy",
+     "JobRad",
+     "50 € Zuschuss im Monat zur betrieblichen Altersvorsorge",
+     "Schulungen bei den Herstellern, damit Sie bei neuen Anlagen und Wärmepumpen auf dem aktuellen Stand bleiben",
+     "einen sicheren, unbefristeten Arbeitsplatz in einem Familienbetrieb mit kurzen Wegen"
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "So bewerben Sie sich",
+    "level": 2
+   },
+   {
+    "type": "paragraph",
+    "text": "Schicken Sie Ihre Bewerbung mit Lebenslauf und Zeugnissen bis **Dienstag, 27. Oktober 2026** per E-Mail an Frau Kerstin Haug, Personal: bewerbung@brenner-haustechnik.example. Nennen Sie uns bitte auch, ab wann Sie bei uns anfangen können und welche Gehaltsvorstellung Sie innerhalb der genannten Spanne haben. Ein Foto brauchen wir nicht. Ein Start zum 1. Januar 2027 oder früher ist möglich."
+   },
+   {
+    "type": "paragraph",
+    "text": "Wir freuen uns auf Ihre Bewerbung, unabhängig von Geschlecht, Alter, Herkunft, Religion, Behinderung oder sexueller Identität."
+   },
+   {
+    "type": "paragraph",
+    "text": "Brenner Haustechnik GmbH · Personal · Frau Kerstin Haug · Esslingen"
+   }
+  ]
+ }
+}

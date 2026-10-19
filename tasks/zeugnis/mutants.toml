@@ -1,0 +1,44 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+# observed in earlier runs: upgraded to very good
+[[mutant]]
+name = "very_good_formula"
+defect = "formula for very good („stets zu unserer vollsten Zufriedenheit“) instead of good"
+replace = [["stets zu unserer vollen Zufriedenheit", "stets zu unserer vollsten Zufriedenheit"]]
+expected = ["forbidden", "topics"]
+
+# observed in an earlier run: „volle Zufriedenheit“ without „stets“ = satisfactory
+[[mutant]]
+name = "formula_without_stets"
+defect = "„zu unserer vollen Zufriedenheit“ without „stets“: that is satisfactory, not good"
+replace = [["stets zu unserer vollen Zufriedenheit", "zu unserer vollen Zufriedenheit"]]
+expected = ["topics"]
+
+# observed in earlier runs: „stets zu unserer Zufriedenheit“
+[[mutant]]
+name = "grade_three_formula"
+defect = "„stets zu unserer Zufriedenheit“ (grade 3) instead of „stets zu unserer vollen Zufriedenheit“"
+replace = [["stets zu unserer vollen Zufriedenheit", "stets zu unserer Zufriedenheit"]]
+expected = ["topics"]
+
+# observed in earlier runs: conduct „vorbildlich“, „stets vorbildlich“
+[[mutant]]
+name = "conduct_exemplary"
+defect = "conduct „stets vorbildlich“ (formula for very good) next to performance good: inconsistent grade"
+replace = [["war stets einwandfrei", "war stets vorbildlich"]]
+expected = ["forbidden", "topics"]
+
+# observed in earlier runs: no regret
+[[mutant]]
+name = "regret_missing"
+defect = "closing formula without regret (when the employee resigns, a signal for worse than good)"
+replace = [["Wir bedauern ihr Ausscheiden, danken ihr", "Wir danken ihr"]]
+expected = ["topics"]
+
+# observed in earlier runs: dated today instead of 31.10.
+[[mutant]]
+name = "issue_date_today"
+defect = "reference dated 13.10.2026, although it speaks in the past tense about the employment until 31.10.2026"
+replace = [["Esslingen, 31. Oktober 2026", "Esslingen, 13. Oktober 2026"]]
+expected = ["topics_soft", "topics", "numbers_sourced"]
+severity = "soft"

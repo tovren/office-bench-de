@@ -1,0 +1,29 @@
+id = "wartungsmail"
+title = "Server maintenance email"
+version = 1
+kind = "no_file"
+difficulty = "easy"
+tags = ["no_file", "email", "short"]
+
+[[turns]]
+text = "Formulier mir bitte eine kurze E-Mail an alle Kollegen: Am Freitag ab 14 Uhr werden die Server gewartet, bis etwa 18 Uhr sind die Netzlaufwerke und das Warenwirtschaftssystem nicht erreichbar. Alle sollen vorher ihre Dateien speichern und sich abmelden."
+
+# [reply] words_max = 150 (soft): „kurze E-Mail“, checklist „unter 150 Wörter“; the whole final reply is counted.
+[reply]
+words_max = 150
+
+[reply.topics]
+Betreff = 'betreff'
+Freitag = 'freitag'
+Beginn = '\b14(:00|\.00)?\s*uhr|\b14:00'
+Ende = '\b18(:00|\.00)?\s*uhr|\b18:00'
+Speichern = 'speicher|sichern'
+Abmelden = 'abmeld|ausloggen|melden sie sich\b.{0,40}\bab\b|meldet euch\b.{0,40}\bab\b'
+
+[judge]
+checklist = [
+  "E-Mail als Text im Chat mit Betreff, Anrede und Gruß; keine Datei",
+  "Freitag (falls mit Datum: 16.10.2026), 14 bis etwa 18 Uhr",
+  "klar, was nicht geht (Netzlaufwerke, Warenwirtschaft) und was zu tun ist (speichern, abmelden)",
+  "kurz (unter 150 Wörter), freundlich, keine Platzhalter außer ggf. dem Absendernamen",
+]

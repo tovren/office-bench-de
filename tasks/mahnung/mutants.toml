@@ -1,0 +1,54 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+# observed in earlier runs: due date 03.09.2026 instead of 02.09.2026, 31 instead of 30 days counted
+[[mutant]]
+name = "due_date_31_days"
+defect = "due date of 2026-0412 on 03.09. instead of 02.09.2026 (31 days counted)"
+replace = [["02.09.2026", "03.09.2026"]]
+expected = ["topics"]
+
+# the main trap of the task: 2026-0571 is only due on 22.10. and does not belong in the reminder
+[[mutant]]
+name = "all_four_reminded"
+defect = "the not yet due invoice 2026-0571 reminded as well, total 8.628,00 €"
+set = [["blocks.5.rows", [
+  ["Rechnung", "Rechnungsdatum", "Fällig seit", "Betrag"],
+  ["2026-0412", "03.08.2026", "02.09.2026", "2.380,00 €"],
+  ["2026-0467", "19.08.2026", "18.09.2026", "1.190,00 €"],
+  ["2026-0533", "07.09.2026", "07.10.2026", "4.165,50 €"],
+  ["2026-0571", "22.09.2026", "22.10.2026", "892,50 €"],
+  ["Summe", "", "", "8.628,00 €"],
+]]]
+replace = [["7.735,50", "8.628,00"], ["zu drei offenen Rechnungen", "zu vier offenen Rechnungen"]]
+remove = ["blocks.8"]
+expected = ["values_present"]
+
+[[mutant]]
+name = "deadline_saturday"
+defect = "new deadline 24.10.2026 (Saturday) instead of Friday, 23.10.2026"
+replace = [["bis spätestens **Freitag, 23. Oktober 2026**", "bis spätestens **24.10.2026**"]]
+expected = ["topics", "weekend"]
+
+# observed in an earlier run („wir<|message|>hen davon aus“)
+[[mutant]]
+name = "control_tokens"
+defect = "control tokens of the model in mid-sentence"
+replace = [["Sicher handelt es sich nur um ein Versehen.", "Wir<|message|>hen davon aus, dass es sich nur um ein Versehen handelt."]]
+expected = ["control_tokens"]
+
+# observed in an earlier run (an invented repeated dunning fee); the checklist says: no invented dunning fees
+[[mutant]]
+name = "dunning_fee_invented"
+defect = "invented dunning fee of 15,00 €"
+replace = [["Falls es Unklarheiten", "Für diese Zahlungserinnerung berechnen wir eine Mahngebühr von 15,00 €. Falls es Unklarheiten"]]
+expected = ["numbers_sourced"]
+severity = "soft"
+
+# observed in an earlier run (the forbidden bank details „IBAN [ ] · BIC [ ]“); the checklist says: no bank details
+# as placeholders
+[[mutant]]
+name = "bank_details_blank"
+defect = "bank details as blank placeholders „IBAN [ ] · BIC [ ]“"
+replace = [["auf das Ihnen bekannte Konto", "auf unser Konto (IBAN [ ] · BIC [ ])"]]
+expected = ["placeholders"]
+severity = "soft"

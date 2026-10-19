@@ -1,0 +1,573 @@
+Rahmenvertrag über Wartung und IT-Service
+Vertragsnummer RV-2026-0147
+
+zwischen
+
+Kerner IT-Systemhaus GmbH
+Heilbronner Straße 118
+70191 Stuttgart
+vertreten durch die Geschäftsführerin Dr. Simone Kerner
+– nachfolgend „Auftragnehmer“ –
+
+und
+
+Brenner Haustechnik GmbH
+Fabrikstraße 7
+73728 Esslingen am Neckar
+vertreten durch den Geschäftsführer Thomas Brenner
+– nachfolgend „Auftraggeber“ –
+
+– Auftraggeber und Auftragnehmer gemeinsam nachfolgend „Vertragsparteien“ –
+
+Präambel
+
+Der Auftraggeber ist ein mittelständischer Fachbetrieb für Heizung, Sanitär und Lüftung mit Sitz in Esslingen am
+Neckar. Für die Verwaltung, die Auftragsabwicklung und die Einsatzplanung der Monteure betreibt er eine eigene
+IT-Infrastruktur aus Arbeitsplatzrechnern, Servern und einer Telefonanlage. Bisher wurde diese Infrastruktur
+teils durch eigene Mitarbeitende, teils durch einzelne Aufträge an wechselnde Dienstleister betreut.
+
+Der Auftragnehmer ist ein IT-Systemhaus, das kleine und mittlere Unternehmen in der Region Stuttgart betreut und
+über eigenes, entsprechend qualifiziertes Personal für den Betrieb von Windows-Arbeitsplätzen, Serversystemen und
+IP-Telefonanlagen verfügt.
+
+Die Vertragsparteien beabsichtigen, die laufende Betreuung der IT-Infrastruktur des Auftraggebers auf eine
+verlässliche, planbare Grundlage zu stellen. Zu diesem Zweck schließen sie den folgenden Rahmenvertrag. Er regelt
+die regelmäßig wiederkehrenden Leistungen gegen eine monatliche Pauschale sowie die Bedingungen, zu denen der
+Auftragnehmer darüber hinaus Einzelleistungen erbringt.
+
+§ 1 Vertragsgegenstand
+
+1.1 Gegenstand dieses Vertrags ist die Wartung, Pflege und Betreuung der in Anlage 3 aufgeführten IT-Systeme des
+Auftraggebers (nachfolgend „betreute Systeme“) durch den Auftragnehmer sowie die Erbringung weiterer
+IT-Dienstleistungen auf Abruf.
+
+1.2 Bei Abschluss dieses Vertrags umfasst der Bestand des Auftraggebers nach dessen Angaben 24 Arbeitsplätze
+(Arbeitsplatzrechner oder Notebooks einschließlich der zugehörigen Monitore und Peripherie), 2 Server (ein
+Dateiserver mit Domänencontroller und ein Anwendungsserver für die Branchensoftware) sowie 1 Telefonanlage
+(IP-Telefonanlage am Standort Esslingen einschließlich der Endgeräte). Die genaue Zusammensetzung ergibt sich aus
+der Geräteliste nach Anlage 3, die der Auftraggeber gemäß § 9.2 übermittelt.
+
+Seite 1 von 15
+
+1.3 Software, die nicht in der Geräteliste aufgeführt ist, insbesondere Fachanwendungen Dritter, ist nur insoweit
+Vertragsgegenstand, als der Auftragnehmer deren Lauffähigkeit auf den betreuten Systemen sicherstellt. Die
+inhaltliche Pflege solcher Anwendungen, die Beratung zu deren Bedienung sowie Fehler, die in der Anwendung selbst
+liegen, schuldet der Auftragnehmer nicht; insoweit ist der jeweilige Hersteller zuständig.
+
+1.4 Die Anlagen 1 bis 3 sind Bestandteil dieses Vertrags. Bei Widersprüchen gehen die Regelungen in § 19
+(Besondere Vereinbarungen) allen übrigen Regelungen vor; im Übrigen gehen die Bestimmungen dieses Vertragstextes
+den Anlagen vor, soweit in den Anlagen nicht ausdrücklich etwas anderes bestimmt ist.
+
+§ 2 Begriffsbestimmungen
+
+2.1 „Arbeitsplatz“ ist ein von einer Person genutzter Rechner (Desktop oder Notebook) mit Betriebssystem und
+Standardsoftware einschließlich der direkt angeschlossenen Peripherie wie Monitor, Tastatur, Maus und
+Dockingstation. Netzwerkdrucker und Multifunktionsgeräte zählen nicht als Arbeitsplatz; sie werden nach Aufwand
+betreut.
+
+2.2 „Server“ ist ein physisches oder virtuelles System, das zentrale Dienste für mehrere Arbeitsplätze bereitstellt,
+etwa Dateiablage, Benutzerverwaltung, Datenbanken oder Anwendungen.
+
+2.3 „Störung“ ist jede Abweichung der betreuten Systeme vom bestimmungsgemäßen Betrieb, die die Arbeit der
+Nutzerinnen und Nutzer beeinträchtigt. Eine Störung ist nicht gegeben, wenn das System wie vorgesehen funktioniert
+und lediglich eine Änderung oder Erweiterung gewünscht wird.
+
+2.4 „Reaktionszeit“ ist die Zeitspanne zwischen dem Eingang einer ordnungsgemäßen Störungsmeldung beim
+Auftragnehmer und dem Beginn der Störungsbearbeitung durch eine qualifizierte Fachkraft, sei es per Fernwartung,
+telefonisch oder vor Ort. Reaktionszeiten laufen nur innerhalb der Servicezeiten.
+
+2.5 „Servicezeiten“ sind die in Anlage 1 festgelegten Zeiten, in denen der Auftragnehmer die vertraglichen
+Leistungen erbringt und erreichbar ist.
+
+2.6 „Textform“ bedeutet eine lesbare Erklärung auf einem dauerhaften Datenträger im Sinne von § 126b BGB,
+insbesondere E-Mail. „Schriftform“ bedeutet eine eigenhändig unterzeichnete Erklärung im Sinne von § 126 BGB.
+
+§ 3 Leistungsumfang
+
+3.1 Die durch die monatliche Pauschale abgegoltenen Leistungen (Grundleistungen) umfassen für die betreuten
+Systeme:
+
+a) die Überwachung der Server und der Telefonanlage auf Verfügbarkeit, Speicherplatz, Fehlermeldungen und den
+erfolgreichen Abschluss der Datensicherung (Monitoring) während der Servicezeiten;
+
+b) die Installation sicherheitsrelevanter Updates für Betriebssysteme und die in Anlage 3 als Standardsoftware
+gekennzeichneten Programme innerhalb von zehn Arbeitstagen nach Veröffentlichung durch den Hersteller, bei als
+kritisch eingestuften Sicherheitslücken unverzüglich;
+
+Seite 2 von 15
+
+c) die Pflege des Virenschutzes und der Firewall-Regeln einschließlich der Auswertung von Warnmeldungen;
+
+d) die Bearbeitung von Störungen nach Maßgabe der Anlage 1, vorrangig per Fernwartung;
+
+e) die telefonische und per Fernwartung erbrachte Unterstützung der Nutzerinnen und Nutzer bei Fragen zur
+Bedienung der Standardsoftware (Anwenderunterstützung) im Umfang von bis zu zehn Stunden je Kalendermonat;
+nicht ausgeschöpfte Stunden verfallen am Monatsende;
+
+f) die Einrichtung neuer Benutzerkonten und die Sperrung ausgeschiedener Nutzerinnen und Nutzer auf Anforderung;
+
+g) eine halbjährliche Wartung vor Ort, bei der der Auftragnehmer die Server, die Netzwerkkomponenten und die
+Telefonanlage prüft, Firmware aktualisiert und einen Kurzbericht über den Zustand der Systeme erstellt;
+
+h) die Pflege einer Systemdokumentation, die dem Auftraggeber auf Anforderung jederzeit zur Verfügung gestellt
+wird.
+
+3.2 Nicht zu den Grundleistungen gehören insbesondere die Beschaffung, Lieferung und Installation neuer Hardware
+oder Software, die Einrichtung zusätzlicher Arbeitsplätze, Umzüge von Arbeitsplätzen, Projekte wie die Umstellung
+auf neue Betriebssystemversionen, die Wiederherstellung von Daten, die durch Bedienfehler des Auftraggebers
+verloren gegangen sind, Schulungen sowie die Beseitigung von Störungen, die der Auftraggeber oder Dritte durch
+unsachgemäße Eingriffe verursacht haben. Diese Leistungen erbringt der Auftragnehmer auf Anforderung als
+Zusatzleistungen nach § 7.
+
+3.3 Die Datensicherung selbst wird auf den Systemen des Auftraggebers durchgeführt. Der Auftragnehmer richtet sie
+ein und überwacht ihren erfolgreichen Abschluss nach Ziffer 3.1 a). Die Verantwortung für die Aufbewahrung der
+Sicherungsmedien außerhalb der Betriebsräume trägt der Auftraggeber (§ 9.6).
+
+3.4 Der Auftragnehmer erbringt die Leistungen nach dem anerkannten Stand der Technik und mit der Sorgfalt eines
+ordentlichen Kaufmanns. Er ist berechtigt, die Art und Weise der Leistungserbringung im Rahmen dieses Vertrags
+selbst zu bestimmen, soweit die Interessen des Auftraggebers dadurch nicht beeinträchtigt werden.
+
+§ 4 Vertragsbeginn, Laufzeit und Kündigung
+
+4.1 Der Vertrag tritt mit Unterzeichnung durch beide Vertragsparteien in Kraft. Die Leistungspflichten nach § 3
+und die Vergütungspflicht nach § 6 beginnen am 1. November 2026 (Vertragsbeginn). Der Vertrag wird für eine feste
+Mindestlaufzeit bis zum 31. Dezember 2028 geschlossen. Er verlängert sich danach jeweils um weitere zwölf Monate,
+wenn er nicht fristgerecht gekündigt wird.
+
+4.2 Jede Vertragspartei kann den Vertrag mit einer Frist von drei Monaten zum Ende der Mindestlaufzeit oder zum
+Ende eines Verlängerungszeitraums ordentlich kündigen. Maßgeblich für die Einhaltung der Frist ist der Zugang der
+Kündigung bei der anderen Vertragspartei.
+
+Seite 3 von 15
+
+4.3 Das Recht zur außerordentlichen Kündigung aus wichtigem Grund bleibt unberührt. Ein wichtiger Grund liegt für
+den Auftraggeber insbesondere vor, wenn der Auftragnehmer die Reaktionszeiten für Störungen der Priorität 1 nach
+Anlage 1 in drei aufeinanderfolgenden Kalendermonaten jeweils mehr als zweimal überschreitet. Ein wichtiger Grund
+liegt für den Auftragnehmer insbesondere vor, wenn der Auftraggeber mit der Zahlung von mehr als zwei
+Monatspauschalen in Verzug ist.
+
+4.4 Jede Kündigung bedarf der Schriftform. Eine Kündigung per E-Mail ist nicht ausreichend.
+
+4.5 Bei Beendigung des Vertrags, gleich aus welchem Grund, übergibt der Auftragnehmer dem Auftraggeber innerhalb
+von vier Wochen die aktuelle Systemdokumentation, sämtliche Zugangsdaten zu den betreuten Systemen sowie die bei ihm
+gespeicherten Konfigurationsdaten. Auf Wunsch des Auftraggebers unterstützt er die Übergabe an einen nachfolgenden
+Dienstleister; diese Unterstützung wird als Zusatzleistung nach § 7 vergütet.
+
+§ 5 Servicezeiten und Reaktionszeiten
+
+5.1 Die Servicezeiten, die Einteilung der Störungen in Prioritäten und die jeweils geltenden Reaktionszeiten sind in
+Anlage 1 (Service Level Agreement) festgelegt.
+
+5.2 Der Auftragnehmer betreibt für die Dauer des Vertrags ein Ticketportal, über das der Auftraggeber Störungen und
+Anfragen melden und den Bearbeitungsstand verfolgen kann, sowie eine Service-Hotline. Die Zugangsdaten zum
+Ticketportal und die Rufnummer der Hotline teilt der Auftragnehmer dem Auftraggeber spätestens bis zum
+Vertragsbeginn in Textform mit.
+
+5.3 Die Reaktionszeit gilt als eingehalten, wenn innerhalb der Frist eine qualifizierte Fachkraft mit der Analyse
+der Störung begonnen und dies dem Auftraggeber über das Ticketportal oder telefonisch bestätigt hat. Eine
+Wiederherstellungszeit schuldet der Auftragnehmer nur, soweit Anlage 1 sie ausdrücklich als verbindlich
+bezeichnet.
+
+5.4 Meldet der Auftraggeber eine Störung außerhalb der Servicezeiten, beginnt die Reaktionszeit mit dem Beginn der
+nächsten Servicezeit. Leistungen außerhalb der Servicezeiten erbringt der Auftragnehmer nur nach gesonderter
+Beauftragung im Einzelfall; sie werden nach § 7 vergütet.
+
+§ 6 Vergütung
+
+6.1 Für die Grundleistungen nach § 3.1 zahlt der Auftraggeber eine monatliche Pauschale. Sie errechnet sich aus der
+Zahl der betreuten Arbeitsplätze, Server und Telefonanlagen und den Preisen je Einheit nach dem Preisblatt in
+Anlage 2 Ziffer 1.
+
+6.2 Maßgeblich für die Berechnung ist der Bestand am Ersten des jeweiligen Kalendermonats. Ändert sich der Bestand,
+weil der Auftraggeber Geräte hinzufügt oder außer Betrieb nimmt, passt der Auftragnehmer die Pauschale ab dem auf
+die Meldung nach § 9.4 folgenden Kalendermonat an.
+
+Seite 4 von 15
+
+6.3 Für die Erstaufnahme der betreuten Systeme (Bestandsaufnahme, Einrichtung des Monitorings und der
+Fernwartung, Erstellung der Systemdokumentation) berechnet der Auftragnehmer einmalig eine Einrichtungspauschale
+nach Anlage 2 Ziffer 2.
+
+6.4 Alle Preise in diesem Vertrag und seinen Anlagen verstehen sich in Euro zuzüglich der jeweils geltenden
+gesetzlichen Umsatzsteuer.
+
+6.5 Mit der Pauschale sind alle Grundleistungen einschließlich der Fahrtkosten für die halbjährliche Wartung vor Ort
+nach § 3.1 g) abgegolten. Weitere Fahrtkosten werden nach § 7.3 berechnet.
+
+§ 7 Zusatzleistungen
+
+7.1 Leistungen, die nicht zu den Grundleistungen gehören, erbringt der Auftragnehmer auf Anforderung des
+Auftraggebers als Zusatzleistungen. Zur Anforderung berechtigt sind die nach § 9.1 benannten Ansprechpartner. Bei
+Zusatzleistungen mit einem voraussichtlichen Aufwand von mehr als acht Stunden legt der Auftragnehmer vorab einen
+Kostenvoranschlag in Textform vor; mit den Arbeiten beginnt er erst nach Freigabe durch den Auftraggeber.
+
+7.2 Zusatzleistungen werden nach Aufwand zu den Stundensätzen nach Anlage 2 Ziffer 3 vergütet. Abgerechnet wird je
+angefangene Viertelstunde. Leistungen, die auf ausdrücklichen Wunsch des Auftraggebers außerhalb der Servicezeiten
+erbracht werden, werden mit dem Zuschlag nach Anlage 2 Ziffer 3 berechnet.
+
+7.3 Für jeden Einsatz vor Ort, der nicht zu den Grundleistungen gehört, berechnet der Auftragnehmer zusätzlich die
+Anfahrtspauschale nach Anlage 2 Ziffer 3. Fahrzeiten werden nicht gesondert berechnet. Ein Einsatz vor Ort zur
+Beseitigung einer Störung, die sich per Fernwartung nicht beheben lässt, gilt als Grundleistung, sofern die Störung
+nicht vom Auftraggeber zu vertreten ist.
+
+7.4 Hardware, Software-Lizenzen und Verbrauchsmaterial, die der Auftragnehmer im Auftrag des Auftraggebers
+beschafft, werden gesondert nach Angebot berechnet.
+
+7.5 Überschreitet die Anwenderunterstützung in einem Monat das in § 3.1 e) genannte Kontingent, werden die
+darüber hinausgehenden Stunden als Zusatzleistung zum Stundensatz nach Anlage 2 Ziffer 3 berechnet. Der
+Auftragnehmer weist den Auftraggeber darauf hin, sobald das Kontingent eines Monats zu drei Vierteln verbraucht ist.
+
+§ 8 Preisanpassung
+
+8.1 Der Auftragnehmer ist berechtigt, die Preise nach Anlage 2 anzupassen, um gestiegene Personal- und Sachkosten
+weiterzugeben. Zeitpunkt, Höhe und Verfahren der Anpassung richten sich nach Anlage 2 Ziffer 4.
+
+8.2 Eine Preisanpassung, die nicht den Vorgaben der Anlage 2 Ziffer 4 entspricht, ist unwirksam.
+
+Seite 5 von 15
+
+8.3 Senken sich die Kosten des Auftragnehmers, insbesondere durch günstigere Lizenzbedingungen der eingesetzten
+Überwachungs- und Sicherheitssoftware, gibt er die Ersparnis in angemessenem Umfang an den Auftraggeber weiter.
+
+§ 9 Mitwirkungspflichten des Auftraggebers
+
+9.1 Der Auftraggeber benennt einen Ansprechpartner und einen Stellvertreter, die berechtigt sind, Zusatzleistungen
+anzufordern, Leistungsnachweise entgegenzunehmen und Entscheidungen im Rahmen dieses Vertrags zu treffen. Ein
+Wechsel der benannten Personen ist dem Auftragnehmer unverzüglich in Textform mitzuteilen.
+
+9.2 Der Auftraggeber übermittelt dem Auftragnehmer spätestens vier Wochen nach Unterzeichnung dieses Vertrags die
+Namen des Ansprechpartners und des Stellvertreters nach Ziffer 9.1 sowie eine vollständige Liste der zu betreuenden
+Geräte nach dem Muster in Anlage 3, jeweils in Textform. Solange die Geräteliste nicht vorliegt, ist der
+Auftragnehmer nicht verpflichtet, die Reaktionszeiten nach Anlage 1 einzuhalten.
+
+9.3 Der Auftraggeber stellt dem Auftragnehmer einen dauerhaften, gesicherten Fernwartungszugang zu den betreuten
+Systemen zur Verfügung und erhält dessen Funktionsfähigkeit aufrecht. Die dafür erforderliche Software stellt der
+Auftragnehmer bereit; ihre Installation ist Teil der Erstaufnahme nach § 6.3. Der Fernwartungszugang darf nur mit
+Zustimmung des Auftraggebers im Einzelfall oder im Rahmen der Grundleistungen genutzt werden; jeder Zugriff wird
+protokolliert.
+
+9.4 Änderungen am Bestand der betreuten Systeme, insbesondere neue, ausgetauschte oder außer Betrieb genommene
+Geräte, meldet der Auftraggeber dem Auftragnehmer innerhalb von 14 Tagen in Textform. Der Auftraggeber nimmt ohne
+vorherige Abstimmung mit dem Auftragnehmer keine Eingriffe in die Konfiguration der Server, der Firewall oder der
+Telefonanlage vor und ändert keine administrativen Kennwörter.
+
+9.5 Störungen meldet der Auftraggeber über das Ticketportal oder die Service-Hotline. Die Meldung soll das
+betroffene System, eine Beschreibung der Störung und, soweit bekannt, den Zeitpunkt ihres ersten Auftretens
+enthalten. Störungen der Priorität 1 sind zusätzlich zur Meldung im Ticketportal immer telefonisch über die
+Service-Hotline zu melden.
+
+9.6 Der Auftraggeber sorgt dafür, dass die Sicherungsmedien der Datensicherung regelmäßig gewechselt und
+mindestens ein aktueller Sicherungsstand außerhalb der Betriebsräume aufbewahrt wird. Er prüft die Berichte über den
+Abschluss der Datensicherung, die der Auftragnehmer wöchentlich übermittelt, und meldet Auffälligkeiten.
+
+9.7 Der Auftraggeber gewährt den Mitarbeitenden des Auftragnehmers während der Servicezeiten nach vorheriger
+Ankündigung Zutritt zu den Räumen, in denen sich die betreuten Systeme befinden, und stellt für Arbeiten vor Ort
+einen geeigneten Arbeitsplatz zur Verfügung.
+
+Seite 6 von 15
+
+9.8 Erfüllt der Auftraggeber seine Mitwirkungspflichten nicht oder nicht rechtzeitig, verlängern sich die
+Reaktionszeiten um die Dauer der Verzögerung. Mehraufwand, der dem Auftragnehmer dadurch entsteht, kann er als
+Zusatzleistung nach § 7 berechnen, sofern er den Auftraggeber vorher auf die fehlende Mitwirkung hingewiesen hat.
+
+§ 10 Leistungsnachweise
+
+10.1 Der Auftragnehmer dokumentiert alle Zusatzleistungen und alle Einsätze vor Ort in Leistungsnachweisen. Diese
+enthalten mindestens das Datum, die ausführende Person, die Art der Tätigkeit, den Zeitaufwand in Viertelstunden
+und bei Einsätzen vor Ort den Hinweis auf die Anfahrt.
+
+10.2 Die Leistungsnachweise eines Kalendermonats übermittelt der Auftragnehmer dem Auftraggeber zusammen mit der
+Rechnung nach § 17.3. Der Auftraggeber prüft die Leistungsnachweise. Einwendungen sind innerhalb von 10 Tagen nach
+Zugang des Leistungsnachweises in Textform zu erheben; danach gilt der Leistungsnachweis als genehmigt. Der
+Auftragnehmer weist bei jeder Übermittlung auf diese Folge hin.
+
+10.3 Für die Grundleistungen erstellt der Auftragnehmer zum Ende jedes Kalenderquartals einen Bericht, der die
+Verfügbarkeit der Server, die bearbeiteten Störungen mit ihren Reaktionszeiten sowie die eingespielten Updates
+ausweist.
+
+§ 11 Gewährleistung
+
+11.1 Der Auftragnehmer erbringt die Grundleistungen als Dienstleistungen. Soweit er im Rahmen von Zusatzleistungen
+ein bestimmtes Ergebnis schuldet, etwa die Einrichtung eines Arbeitsplatzes, gelten für dieses Ergebnis die
+gesetzlichen Vorschriften über den Werkvertrag.
+
+11.2 Mängel einer werkvertraglichen Leistung hat der Auftraggeber nach ihrer Entdeckung in Textform zu rügen. Der
+Auftragnehmer wird den Mangel innerhalb angemessener Frist beseitigen. Schlägt die Nacherfüllung zweimal fehl, kann
+der Auftraggeber die Vergütung für die betroffene Leistung angemessen mindern.
+
+11.3 Die Verjährungsfrist für Mängelansprüche beträgt zwölf Monate ab Abnahme, soweit nicht § 12 eine
+abweichende Regelung trifft.
+
+§ 12 Haftung
+
+12.1 Der Auftragnehmer haftet unbeschränkt für Schäden aus der Verletzung des Lebens, des Körpers oder der
+Gesundheit sowie für Schäden, die auf Vorsatz oder grober Fahrlässigkeit beruhen.
+
+12.2 Bei leichter Fahrlässigkeit haftet der Auftragnehmer nur bei Verletzung einer wesentlichen Vertragspflicht,
+deren Erfüllung die ordnungsgemäße Durchführung des Vertrags überhaupt erst ermöglicht und auf deren Einhaltung der
+Auftraggeber regelmäßig vertrauen darf. In diesem Fall ist die Haftung auf den vertragstypischen, vorhersehbaren
+Schaden begrenzt, höchstens jedoch auf 50.000 € je Schadensfall und 100.000 € je Vertragsjahr.
+
+Seite 7 von 15
+
+12.3 Für den Verlust von Daten haftet der Auftragnehmer nur in dem Umfang, der bei ordnungsgemäßer Datensicherung
+durch den Auftraggeber nach § 9.6 zur Wiederherstellung erforderlich gewesen wäre.
+
+12.4 Der Auftragnehmer unterhält für die Dauer des Vertrags eine Betriebs- und Vermögensschadenhaftpflicht-
+versicherung mit einer Deckungssumme von mindestens 1.000.000 € je Schadensfall und weist sie dem Auftraggeber auf
+Verlangen nach.
+
+12.5 Die vorstehenden Haftungsbeschränkungen gelten auch zugunsten der Mitarbeitenden und Erfüllungsgehilfen des
+Auftragnehmers. Die Haftung nach dem Produkthaftungsgesetz bleibt unberührt.
+
+§ 13 Datenschutz
+
+13.1 Soweit der Auftragnehmer bei der Erbringung der Leistungen Zugriff auf personenbezogene Daten erhält, für die
+der Auftraggeber verantwortlich ist, verarbeitet er diese ausschließlich im Auftrag und nach Weisung des
+Auftraggebers. Die Vertragsparteien schließen hierzu einen gesonderten Vertrag über die Auftragsverarbeitung nach
+Art. 28 DSGVO, der zusammen mit diesem Vertrag unterzeichnet wird.
+
+13.2 Der Auftragnehmer setzt nur Mitarbeitende ein, die auf die Vertraulichkeit verpflichtet und im Datenschutz
+geschult sind. Er trifft die technischen und organisatorischen Maßnahmen, die im Vertrag über die
+Auftragsverarbeitung beschrieben sind.
+
+13.3 Der Auftragnehmer verarbeitet die Daten des Auftraggebers ausschließlich in Rechenzentren innerhalb der
+Europäischen Union. Eine Übermittlung in Drittländer findet nicht statt.
+
+§ 14 Vertraulichkeit
+
+14.1 Die Vertragsparteien verpflichten sich, alle ihnen im Zusammenhang mit diesem Vertrag bekannt gewordenen
+Geschäfts- und Betriebsgeheimnisse der jeweils anderen Partei vertraulich zu behandeln und nur für die Zwecke dieses
+Vertrags zu verwenden. Dazu gehören insbesondere Kundendaten, Kalkulationen, Zugangsdaten und die Konfiguration der
+IT-Systeme.
+
+14.2 Die Pflicht zur Vertraulichkeit gilt nicht für Informationen, die öffentlich bekannt sind oder ohne Verstoß
+gegen diesen Vertrag bekannt werden, die der empfangenden Partei bereits vorher rechtmäßig bekannt waren oder die
+aufgrund gesetzlicher Pflichten oder behördlicher Anordnung offengelegt werden müssen.
+
+14.3 Die Pflicht zur Vertraulichkeit besteht nach Beendigung des Vertrags für weitere fünf Jahre fort.
+
+§ 15 Unterauftragnehmer
+
+15.1 Der Auftragnehmer darf Unterauftragnehmer nur mit vorheriger Zustimmung des Auftraggebers in Textform
+einsetzen. Die Zustimmung darf nur aus wichtigem Grund verweigert werden.
+
+Seite 8 von 15
+
+15.2 Für die Hersteller der eingesetzten Hard- und Software, deren Support der Auftragnehmer im Rahmen der
+Störungsbearbeitung in Anspruch nimmt, bedarf es keiner Zustimmung.
+
+15.3 Der Auftragnehmer haftet für das Verschulden seiner Unterauftragnehmer wie für eigenes Verschulden.
+
+§ 16 Änderungen der Leistungen
+
+16.1 Wünscht der Auftraggeber eine Änderung des Leistungsumfangs, etwa die Aufnahme weiterer Standorte oder
+Systemarten, teilt er dies dem Auftragnehmer in Textform mit. Der Auftragnehmer prüft den Änderungswunsch und legt
+innerhalb von zwei Wochen ein Angebot vor, aus dem sich die Auswirkungen auf Leistungen, Termine und Vergütung
+ergeben.
+
+16.2 Änderungen und Ergänzungen dieses Vertrags einschließlich seiner Anlagen bedürfen der Textform, soweit dieser
+Vertrag nicht ausdrücklich die Schriftform verlangt. Das gilt auch für die Aufhebung dieses Formerfordernisses.
+
+§ 17 Rechnungsstellung und Zahlung
+
+17.1 Die monatliche Pauschale nach § 6.1 wird monatlich im Voraus in Rechnung gestellt. Die Rechnung für den Monat
+November 2026 stellt der Auftragnehmer mit Vertragsbeginn.
+
+17.2 Die Einrichtungspauschale nach § 6.3 wird nach Abschluss der Erstaufnahme in Rechnung gestellt.
+
+17.3 Zusatzleistungen und Anfahrtspauschalen werden monatlich nachträglich auf Grundlage der Leistungsnachweise nach
+§ 10 abgerechnet.
+
+17.4 Rechnungen sind innerhalb von 14 Tagen nach Rechnungsdatum ohne Abzug zur Zahlung fällig. Der Auftragnehmer
+übermittelt die Rechnungen elektronisch an die vom Auftraggeber benannte Rechnungsadresse.
+
+17.5 Der Auftraggeber kann nur mit unbestrittenen oder rechtskräftig festgestellten Forderungen aufrechnen.
+
+§ 18 Abwerbeverbot
+
+18.1 Die Vertragsparteien verpflichten sich, während der Laufzeit dieses Vertrags und für zwölf Monate nach seiner
+Beendigung keine Mitarbeitenden der jeweils anderen Partei, die mit der Durchführung dieses Vertrags befasst waren,
+aktiv abzuwerben.
+
+18.2 Bewerbungen auf öffentliche Stellenausschreibungen bleiben hiervon unberührt.
+
+Seite 9 von 15
+
+§ 19 Besondere Vereinbarungen
+
+Die Vertragsparteien haben im Rahmen der Vertragsverhandlungen die folgenden Punkte abweichend vom Mustervertrag
+des Auftragnehmers vereinbart. Sie gehen nach § 1.4 allen übrigen Regelungen dieses Vertrags und seiner Anlagen
+vor.
+
+19.1 Abweichend von § 4.2 beträgt die Kündigungsfrist für beide Vertragsparteien sechs Monate zum Ende der
+Mindestlaufzeit oder eines Verlängerungszeitraums. Die Kündigung muss der anderen Vertragspartei also spätestens
+sechs Monate vor dem Ablauf der jeweiligen Laufzeit zugehen. § 4.4 (Schriftform) bleibt unberührt.
+
+19.2 Abweichend von Anlage 2 Ziffer 1 beträgt die monatliche Pauschale je Arbeitsplatz während der
+Mindestlaufzeit 38,00 €. Für die Server und die Telefonanlage bleibt es bei den Preisen nach Anlage 2 Ziffer 1.
+Nach Ablauf der Mindestlaufzeit gelten für Arbeitsplätze die Preise nach Anlage 2 Ziffer 1 in der dann gültigen
+Fassung.
+
+19.3 Der Auftragnehmer verzichtet auf die Berechnung der Einrichtungspauschale nach Anlage 2 Ziffer 2 zur Hälfte,
+wenn der Auftraggeber die Geräteliste und die Ansprechpartner fristgerecht nach § 9.2 übermittelt.
+
+19.4 Der Auftragnehmer wird in den ersten drei Monaten nach Vertragsbeginn einmal monatlich einen festen Termin
+vor Ort im Umfang von zwei Stunden anbieten, um Fragen der Mitarbeitenden zu klären. Diese Termine sind mit der
+Pauschale abgegolten.
+
+§ 20 Schlussbestimmungen
+
+20.1 Sollte eine Bestimmung dieses Vertrags unwirksam oder undurchführbar sein oder werden, bleibt die Wirksamkeit
+der übrigen Bestimmungen davon unberührt. An die Stelle der unwirksamen oder undurchführbaren Bestimmung tritt
+diejenige wirksame Regelung, die dem wirtschaftlichen Zweck der unwirksamen Bestimmung am nächsten kommt.
+
+20.2 Allgemeine Geschäftsbedingungen der Vertragsparteien finden keine Anwendung, auch wenn ihnen nicht
+ausdrücklich widersprochen wird.
+
+20.3 Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts.
+
+20.4 Gerichtsstand für alle Streitigkeiten aus und im Zusammenhang mit diesem Vertrag ist Stuttgart, soweit die
+Vertragsparteien Kaufleute sind.
+
+Seite 10 von 15
+
+Unterschriften
+
+Stuttgart, den ______________________
+Für den Auftragnehmer:
+______________________________
+Dr. Simone Kerner, Geschäftsführerin
+Kerner IT-Systemhaus GmbH
+
+Esslingen am Neckar, den ______________________
+Für den Auftraggeber:
+______________________________
+Thomas Brenner, Geschäftsführer
+Brenner Haustechnik GmbH
+
+Anlagen:
+Anlage 1 – Service Level Agreement
+Anlage 2 – Preisblatt
+Anlage 3 – Muster Geräteliste
+
+Seite 11 von 15
+
+Anlage 1 – Service Level Agreement
+
+1. Servicezeiten
+
+Die Servicezeiten sind Montag bis Freitag von 7:30 Uhr bis 17:00 Uhr. Ausgenommen sind die gesetzlichen Feiertage
+im Land Baden-Württemberg sowie der 24. und der 31. Dezember. Während der Servicezeiten ist die Service-Hotline
+besetzt, und Meldungen im Ticketportal werden bearbeitet. Außerhalb der Servicezeiten können Störungen im
+Ticketportal erfasst werden; ihre Bearbeitung beginnt mit der nächsten Servicezeit.
+
+2. Prioritäten
+
+Der Auftragnehmer ordnet jede gemeldete Störung nach den folgenden Kriterien einer Priorität zu. Bei
+Meinungsverschiedenheiten über die Einordnung gilt bis zur Klärung die vom Auftraggeber angegebene Priorität.
+
+Priorität 1 – kritisch: Ausfall eines Servers oder der Telefonanlage oder Störung, die mehrere Arbeitsplätze
+gleichzeitig arbeitsunfähig macht (zum Beispiel Ausfall des Netzwerks oder der Benutzeranmeldung).
+
+Priorität 2 – hoch: Ausfall oder schwere Beeinträchtigung eines einzelnen Arbeitsplatzes, für den kein
+Ersatzgerät bereitsteht.
+
+Priorität 3 – normal: sonstige Störungen, bei denen ein Weiterarbeiten mit Einschränkungen möglich ist, sowie
+Anfragen zur Anwenderunterstützung und Änderungswünsche.
+
+3. Reaktionszeiten
+
+Priorität 1: Reaktionszeit 2 Stunden innerhalb der Servicezeiten.
+Priorität 2: Reaktionszeit 4 Stunden innerhalb der Servicezeiten.
+Priorität 3: Reaktion bis zum Ende des nächsten Arbeitstags.
+
+Ein Beispiel: Geht eine Störungsmeldung der Priorität 1 an einem Freitag um 16:15 Uhr ein, laufen am Freitag noch
+45 Minuten der Reaktionszeit ab; die restlichen 75 Minuten laufen ab Montag 7:30 Uhr, die Reaktionszeit endet also
+am Montag um 8:45 Uhr, sofern der Montag kein Feiertag ist.
+
+4. Wiederherstellung
+
+Bei Störungen der Priorität 1 strebt der Auftragnehmer eine Wiederherstellung des Betriebs innerhalb von acht
+Stunden innerhalb der Servicezeiten an, gegebenenfalls durch eine Übergangslösung. Diese Wiederherstellungszeit ist
+eine Zielgröße und nicht verbindlich im Sinne von § 5.3 des Vertrags.
+
+Seite 12 von 15
+
+5. Verfügbarkeit der Hotline
+
+Der Auftragnehmer stellt sicher, dass mindestens neun von zehn Anrufen bei der Service-Hotline während der
+Servicezeiten innerhalb von drei Minuten persönlich angenommen werden. Nicht angenommene Anrufe werden innerhalb
+einer Stunde zurückgerufen.
+
+6. Messung und Berichte
+
+Die Einhaltung der Reaktionszeiten wird anhand der Zeitstempel im Ticketportal gemessen. Der Auftragnehmer weist sie
+im Quartalsbericht nach § 10.3 des Vertrags aus. Überschreitet er die Reaktionszeit bei einer Störung der
+Priorität 1, schreibt er dem Auftraggeber für jede volle Stunde der Überschreitung 50,00 €, höchstens jedoch 500,00 €
+je Kalendermonat, auf der nächsten Rechnung gut.
+
+Anlage 2 – Preisblatt
+
+Alle Preise in Euro zuzüglich gesetzlicher Umsatzsteuer.
+
+1. Monatliche Pauschale für die Grundleistungen
+
+Je Arbeitsplatz: 42,00 € im Monat
+Je Server: 95,00 € im Monat
+Telefonanlage einschließlich Endgeräte: 120,00 € im Monat (pauschal)
+
+2. Einrichtungspauschale
+
+Einmalig für die Erstaufnahme nach § 6.3 des Vertrags: 1.450,00 €
+
+3. Zusatzleistungen
+
+Stundensatz Systemtechnik (Montag bis Freitag, 7:30 bis 17:00 Uhr): 98,00 €
+Zuschlag für Leistungen außerhalb dieser Zeiten auf ausdrücklichen Wunsch des Auftraggebers: 50 % auf den
+Stundensatz
+Anfahrtspauschale je Einsatz vor Ort im Großraum Stuttgart und Esslingen: 45,00 €
+
+Seite 13 von 15
+
+4. Preisanpassung
+
+Der Auftragnehmer kann die Preise nach den Ziffern 1 bis 3 erstmals zum 1. Januar 2028 und danach frühestens zwölf
+Monate nach der jeweils letzten Anpassung anpassen. Die Erhöhung darf höchstens 3 % gegenüber den bis dahin
+geltenden Preisen betragen. Der Auftragnehmer kündigt die Anpassung mindestens drei Monate vor ihrem Inkrafttreten
+in Textform an und begründet sie. Beträgt die angekündigte Erhöhung mehr als die Hälfte der zulässigen Höchstgrenze,
+kann der Auftraggeber den Vertrag abweichend von § 4 mit einer Frist von einem Monat zum Inkrafttreten der Erhöhung
+kündigen.
+
+Seite 14 von 15
+
+Anlage 3 – Muster Geräteliste
+
+Die Geräteliste ist vom Auftraggeber nach diesem Muster zu erstellen und in Textform, vorzugsweise als
+Tabellendatei, zu übermitteln. Für jedes Gerät ist eine Zeile anzulegen.
+
+Spalten der Geräteliste:
+Lfd. Nr.
+Gerätetyp (Arbeitsplatz, Notebook, Server, Telefonanlage, Netzwerkkomponente, Drucker)
+Hersteller und Modell
+Seriennummer
+Standort (Gebäude, Raum)
+Hauptnutzer oder Funktion
+Betriebssystem und Version
+Kaufdatum und Ende der Herstellergarantie
+Bemerkungen (zum Beispiel Sonderkonfiguration, Fachanwendungen)
+
+Beispielzeilen:
+1 | Arbeitsplatz | Fujitsu Esprimo Q7010 | YM4T00128 | Verwaltung, Raum 1.04 | Buchhaltung | Windows 11 Pro 24H2 |
+Mai 2024, Garantie bis Mai 2027 | Branchensoftware Auftragsbearbeitung
+2 | Server | Dell PowerEdge T360 | 7HXQ2K4 | Serverraum EG | Dateiserver, Domänencontroller | Windows Server 2022 |
+Juni 2023, Garantie bis Juni 2028 | Datensicherung auf Band
+
+Geräte, die der Auftraggeber nicht in die Liste aufnimmt, gehören nicht zu den betreuten Systemen. Störungen an
+solchen Geräten bearbeitet der Auftragnehmer auf Anforderung als Zusatzleistung.
+
+Ansprechpartner des Auftraggebers nach § 9.1 (vom Auftraggeber auszufüllen):
+Ansprechpartner: ______________________ Telefon: ______________________ E-Mail: ______________________
+Stellvertreter: ______________________ Telefon: ______________________ E-Mail: ______________________
+
+Seite 15 von 15

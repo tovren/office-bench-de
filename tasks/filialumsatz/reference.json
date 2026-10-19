@@ -1,0 +1,117 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Filialumsätze 2026",
+  "sheets": [
+   {
+    "name": "Umsätze 2026",
+    "columns": [
+     {
+      "header": "Filiale",
+      "type": "text"
+     },
+     {
+      "header": "Q1",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Q2",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Q3",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Q4",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Jahressumme",
+      "type": "currency",
+      "formula": "=SUM(B{row}:E{row})",
+      "total": "sum"
+     }
+    ],
+    "rows": [
+     [
+      "Stuttgart",
+      412380,
+      398120,
+      441900,
+      476250,
+      null
+     ],
+     [
+      "Ludwigsburg",
+      256900,
+      249180,
+      262430,
+      288050,
+      null
+     ],
+     [
+      "Reutlingen",
+      221560,
+      214890,
+      230120,
+      241700,
+      null
+     ],
+     [
+      "Esslingen",
+      198440,
+      205310,
+      189770,
+      231600,
+      null
+     ],
+     [
+      "Heilbronn",
+      189330,
+      195470,
+      201880,
+      214260,
+      null
+     ],
+     [
+      "Böblingen",
+      173220,
+      181640,
+      176310,
+      199480,
+      null
+     ],
+     [
+      "Tübingen",
+      164510,
+      171230,
+      168950,
+      183440,
+      null
+     ],
+     [
+      "Göppingen",
+      142760,
+      139920,
+      151340,
+      166810,
+      null
+     ]
+    ],
+    "chart": {
+     "type": "bar",
+     "title": "Jahresumsatz 2026 je Filiale",
+     "category_column": "Filiale",
+     "value_columns": [
+      "Jahressumme"
+     ]
+    }
+   }
+  ]
+ }
+}

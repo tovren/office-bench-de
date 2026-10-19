@@ -1,0 +1,35 @@
+id = "quartal"
+title = "Quarterly presentation"
+version = 1
+kind = "file"
+file_type = "pptx"
+difficulty = "medium"
+tags = ["chart", "table", "side_by_side"]
+
+[[turns]]
+text = "Mach eine kurze PowerPoint (6 bis 8 Folien) für das Vertriebsmeeting zu den Zahlen von Q3 2026: Umsatz je Region als Diagramm im Vergleich zum Vorjahr, die fünf größten Kunden als Tabelle, was gut und was schlecht lief gegenübergestellt, und die Maßnahmen für Q4."
+
+# side_by_side (soft): what went well and what went badly on one slide, in two columns or a table; topics alone only
+# look at the whole file.
+[checks]
+side_by_side = { gut = 'gut|positiv|erfolg|stärke|highlight', schlecht = 'schlecht|negativ|schwäche|problem|herausforderung|verbesser|schwierig|risik|nicht|rückgang|kritisch|lowlight' }
+slides = [6, 8]
+chart = true
+chart_series_min = 2
+tables_min = 1
+
+[checks.topics]
+Region = 'region'
+Vorjahr = 'vorjahr|2025'
+Kunden = 'kunde'
+"gut/schlecht" = 'gut|positiv|erfolg|stärke'
+"Maßnahmen Q4" = 'maßnahm|q4|nächste schritte|ausblick'
+
+[judge]
+checklist = [
+  "6 bis 8 Folien",
+  "Diagramm Umsatz je Region mit zwei Reihen (Q3 2026 und Q3 2025)",
+  "Tabelle mit fünf Kunden",
+  "Gegenüberstellung gut/schlecht",
+  "konkrete Maßnahmen für Q4",
+]

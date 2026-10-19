@@ -1,0 +1,107 @@
+{
+ "function": "create_powerpoint_file",
+ "arguments": {
+  "title": "Kundenservice 2026",
+  "slides": [
+   {
+    "layout": "title",
+    "title": "Kundenservice 2026",
+    "subtitle": "Jahresbericht Q1–Q3 für die Geschäftsführung"
+   },
+   {
+    "layout": "bullets",
+    "title": "Die wichtigsten Kennzahlen",
+    "bullets": [
+     "12.840 Anfragen in Q1 bis Q3",
+     "Erstlösungsquote 71 % (Vorjahr 64 %)",
+     "Bearbeitungszeit 6,5 Stunden pro Ticket (Vorjahr 9,1)",
+     "Kundenzufriedenheit 4,3 von 5 (Vorjahr 4,0)",
+     "Telefonische Erreichbarkeit 92 % (Ziel 90 %)"
+    ]
+   },
+   {
+    "layout": "chart",
+    "title": "Tickets pro Quartal",
+    "chart": {
+     "type": "column",
+     "categories": [
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026"
+     ],
+     "series": [
+      {
+       "name": "Tickets",
+       "values": [
+        4210,
+        3980,
+        4650
+       ]
+      }
+     ],
+     "unit": "Tickets"
+    },
+    "notes": "Der Anstieg im dritten Quartal kommt vom Wechsel des Versanddienstleisters im August. Seit September sind die Zahlen wieder normal. Für Q4 gibt es noch keine vollständigen Zahlen."
+   },
+   {
+    "layout": "table",
+    "title": "Themen der Anfragen (Q1–Q3)",
+    "table": [
+     [
+      "Thema",
+      "Anteil"
+     ],
+     [
+      "Lieferstatus",
+      "34 %"
+     ],
+     [
+      "Rechnungsfragen",
+      "22 %"
+     ],
+     [
+      "Reklamationen",
+      "18 %"
+     ],
+     [
+      "Technische Fragen",
+      "15 %"
+     ],
+     [
+      "Sonstiges",
+      "11 %"
+     ]
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Team",
+    "bullets": [
+     "14 Mitarbeitende, zwei neue Kolleginnen seit Juli",
+     "Einarbeitung etwa sechs Wochen",
+     "Krankenstand 4,8 %, leicht unter dem Firmendurchschnitt"
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Maßnahmen 2027",
+    "bullets": [
+     "Self-Service-Portal für Lieferstatus und Rechnungskopien ab März 2027",
+     "Chatbot auf der Website für Fragen zum Lieferstatus",
+     "Schulung zum neuen Reklamationsprozess im ersten Quartal",
+     "Wöchentliche Abstimmung mit dem Versanddienstleister"
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Budget und Entscheidung",
+    "bullets": [
+     "Einmalig 85.000 € für Portal und Chatbot",
+     "Laufend rund 1.200 € im Monat",
+     "Erwartung: rund 20 % weniger Anfragen zum Lieferstatus",
+     "Bitte um Freigabe in der Sitzung im November"
+    ]
+   }
+  ]
+ }
+}

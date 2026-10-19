@@ -1,0 +1,49 @@
+# Broken variants of reference.json (format: docs/mutants.md). Follow-up task: the mutation hits the file after
+# the second turn (new date, agenda change, questions in advance).
+
+# Follow-up changed only in the body text, title and subtitle still name the old date. count.max is deliberately
+# soft (a note „verschoben vom 5. November“ is allowed); forbidden „alter Termin 5. November“ reports it as hard
+# (paragraph with the old date without a note on the postponement).
+[[mutant]]
+name = "old_date_in_title"
+defect = "title and subtitle still name 5 November, only the body text names 12 November"
+replace = [["Einladung zur Betriebsversammlung am 12. November 2026", "Einladung zur Betriebsversammlung am 5. November 2026"],
+           ["Donnerstag, 12. November 2026, 9 bis 11 Uhr in der Kantine", "Donnerstag, 5. November 2026, 9 bis 11 Uhr in der Kantine"]]
+expected = ["forbidden", "count"]
+
+[[mutant]]
+name = "parking_not_removed"
+defect = "ticket system added, but the deleted item Parkplatzsituation is still on the agenda"
+set = [["blocks.3.items", ["Begrüßung", "Bericht der Geschäftsführung", "Neue Gleitzeitregelung",
+          "Vorstellung des neuen Ticketsystems", "Parkplatzsituation", "Verschiedenes"]]]
+expected = ["forbidden"]
+
+[[mutant]]
+name = "deadline_wrong_weekday"
+defect = "questions in advance „bis Donnerstag, 6. November 2026“: 6.11.2026 is a Friday"
+replace = [["bis Freitag, 6. November 2026", "bis Donnerstag, 6. November 2026"]]
+expected = ["weekday"]
+
+# observed in almost all earlier runs: no channel for the questions
+[[mutant]]
+name = "channel_for_questions_missing"
+defect = "section on questions in advance without a channel (no mail, no letterbox)"
+replace = [[" per E-Mail an den Betriebsrat oder werft sie in den Briefkasten des Betriebsrats neben der Kantine.", "."]]
+expected = ["topics_soft", "topics"]
+severity = "soft"
+
+# observed in earlier runs: § 87 or § 88 BetrVG
+[[mutant]]
+name = "wrong_section"
+defect = "working-time note with the wrong legal basis § 87 Abs. 2 Nr. 6 BetrVG (correct: § 44 BetrVG)"
+replace = [["Die Teilnahme an der Betriebsversammlung gilt als Arbeitszeit.",
+            "Die Teilnahme an der Betriebsversammlung gilt gemäß § 87 Abs. 2 Nr. 6 BetrVG als Arbeitszeit."]]
+expected = ["forbidden"]
+
+# observed in earlier runs („[Unterschrift]“, „[Kontaktdaten]“)
+[[mutant]]
+name = "placeholder_signature"
+defect = "placeholder „[Unterschrift]“ at the end"
+replace = [["Euer Betriebsrat", "Euer Betriebsrat [Unterschrift]"]]
+expected = ["placeholders"]
+severity = "soft"

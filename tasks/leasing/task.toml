@@ -1,0 +1,24 @@
+id = "leasing"
+title = "Question: lease or buy"
+version = 1
+kind = "no_file"
+difficulty = "easy"
+tags = ["no_file", "arithmetic", "tempting"]
+
+# Arithmetic question in the chat, no file asked for. Leasing: 2.000 + 36 × 389 (14.004) + 3 × 420 (1.260) = 17.264 €.
+# Buying: 34.900 − 21.000 + 3 × 350 (1.050) = 14.950 €. Buying is 2.314 € cheaper.
+[[turns]]
+text = "Kurze Rechenfrage: Wir brauchen einen neuen Firmenwagen und überlegen zwischen Leasing und Kauf, jeweils für 3 Jahre. Leasing: 2.000 € Anzahlung und 389 € im Monat, die Wartung ist inklusive, aber wir müssen Vollkasko nehmen, das kostet uns 420 € im Jahr mehr als die Teilkasko, die wir beim Kauf nehmen würden. Kauf: 34.900 €, nach 3 Jahren können wir ihn für etwa 21.000 € verkaufen, die Wartung zahlen wir dann selbst, rund 350 € im Jahr. Alles netto, Zinsen lassen wir mal weg. Was kostet uns jede Variante über die 3 Jahre, und was ist günstiger?"
+
+[reply.topics]
+"Leasing 17.264 €" = '17[.\s]?264'
+"Kauf 14.950 €" = '14[.\s]?950'
+"Unterschied 2.314 €" = '2[.\s]?314'
+
+[judge]
+checklist = [
+  "keine Datei, sondern eine kurze Rechnung im Chat",
+  "Leasing 17.264 € (2.000 + 36 × 389 = 14.004 + 3 × 420 = 1.260)",
+  "Kauf 14.950 € (34.900 − 21.000 + 3 × 350)",
+  "klares Ergebnis: Kauf ist 2.314 € günstiger; knappe Hinweise auf das, was die Rechnung weglässt (Zinsen und Kapitalbindung, Unsicherheit beim Restwert), ohne neue Annahmen hineinzurechnen",
+]

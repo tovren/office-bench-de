@@ -1,0 +1,42 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+# observed in several earlier runs
+[[mutant]]
+name = "thursday"
+defect = "„Donnerstag, 11. Dezember 2026“ instead of Friday"
+replace = [["Freitag, 11. Dezember 2026", "Donnerstag, 11. Dezember 2026"]]
+expected = ["weekday"]
+
+# observed in an earlier run („Donnerstag, 11. Dezember“ without a year)
+[[mutant]]
+name = "thursday_without_year"
+defect = "„Donnerstag, 11. Dezember“ without a year; 11.12.2026 is a Friday"
+replace = [["Freitag, 11. Dezember 2026", "Donnerstag, 11. Dezember"]]
+expected = ["weekday"]
+severity = "soft"
+
+[[mutant]]
+name = "no_header"
+defect = "company name not in the header"
+remove = ["header_text"]
+expected = ["header_contains"]
+
+[[mutant]]
+name = "deadline_saturday"
+defect = "registration deadline 28 November 2026 (a Saturday) instead of 27 November"
+replace = [["bis Freitag, 27. November 2026", "bis 28. November 2026"]]
+expected = ["topics", "weekend"]
+
+[[mutant]]
+name = "schedule_as_list"
+defect = "schedule of the evening as a bulleted list instead of a table"
+set = [["blocks.5", { type = "bullets", items = ["17:00 Uhr: Empfang mit Glühwein und Punsch", "18:00 Uhr: Begrüßung durch die Geschäftsführung", "18:30 Uhr: Weihnachtsbuffet", "20:00 Uhr: Jahresrückblick in Bildern und Tombola", "ab 21:00 Uhr: Gemütlicher Ausklang"] }]]
+expected = ["tables_min"]
+
+# as in the checklist: „keine Platzhalter wie [Telefon]“; observed in earlier runs of the task mahnung
+[[mutant]]
+name = "phone_placeholder"
+defect = "way to register given as placeholders „[Telefonnummer]“ and „[E-Mail-Adresse]“"
+replace = [["persönlich, telefonisch oder per E-Mail", "telefonisch unter [Telefonnummer] oder per E-Mail an [E-Mail-Adresse]"]]
+expected = ["placeholders"]
+severity = "soft"

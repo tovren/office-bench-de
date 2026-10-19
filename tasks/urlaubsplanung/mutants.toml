@@ -1,0 +1,57 @@
+# Broken variants of reference.json (format: docs/mutants.md). Vague task: there are only minimal checks
+# (workdays soft, data_rows_min, topic Urlaub), so most real errors slip through.
+
+[[mutant]]
+# observed in many earlier runs, the most common error; the column formula takes precedence over the values in
+# the rows
+name = "calendar_days_not_workdays"
+defect = "days = to − from + 1 counts calendar days including weekends and public holidays (Ben 22.03.–02.04.2027: 12 instead of 8)"
+set = [["sheets.0.columns.3", { header = "Arbeitstage", type = "integer", formula = "=C{row}-B{row}+1", total = "sum" }]]
+expected = ["workdays"]
+gap = "no check recounts the workdays between from and to; calculations only knows + - * / (would need a function like workdays(from, to) or NETWORKDAYS in calculations.formula, then as [[checks.calculations]] with columns from/to/days)"
+
+[[mutant]]
+# observed in earlier runs: periods start on a Sunday or end on a Saturday
+name = "starts_on_sunday"
+defect = "vacation starts on a Sunday (06.06.2027) and ends on a Saturday (19.06.2027)"
+set = [["sheets.0.rows.3.1", "2027-06-06"], ["sheets.0.rows.3.2", "2027-06-19"]]
+expected = ["workdays"]
+severity = "soft"
+
+[[mutant]]
+# observed in an earlier run („John Doe“, placeholder names)
+name = "placeholder_names"
+defect = "sample rows with placeholder names (Max Mustermann) instead of a usable template"
+replace = [["Anna Berger", "Max Mustermann"]]
+expected = ["placeholders"]
+severity = "soft"
+
+[[mutant]]
+# observed in earlier runs: row „Summe“ computes =AVERAGE
+name = "sum_as_average"
+defect = "row „Summe“ computes the average of the workdays (9.6 instead of 86)"
+set = [["sheets.0.columns.3.total", "average"]]
+expected = ["sum_range"]
+severity = "soft"
+
+[[mutant]]
+# observed in earlier runs (7,333.3 %, 8,400.0 %)
+name = "share_times_100"
+defect = "share planned times 100 in percent format (5,152 % instead of 51.5 %)"
+set = [["sheets.1.columns.4", { header = "Anteil verplant", type = "percent", formula = "=D{row}/(B{row}+C{row})*100" }]]
+expected = ["share_over_100", "value_ranges"]
+severity = "soft"
+
+[[mutant]]
+# observed in earlier runs: calendar almost entirely before the reference date, past entries still „Geplant“
+name = "plan_in_the_past"
+defect = "vacation plan for 2026: seven of nine vacations lie before 13.10.2026 and are still requested/planned"
+replace = [["2027-01-07", "2026-01-08"], ["2027-01-08", "2026-01-09"], ["2027-03-22", "2026-03-23"], ["2027-04-02", "2026-04-03"],
+           ["2027-05-18", "2026-05-19"], ["2027-05-28", "2026-05-29"], ["2027-06-07", "2026-06-08"], ["2027-06-18", "2026-06-19"],
+           ["2027-07-12", "2026-07-13"], ["2027-07-30", "2026-07-31"], ["2027-08-02", "2026-08-03"], ["2027-08-20", "2026-08-21"],
+           ["2027-08-23", "2026-08-24"], ["2027-09-10", "2026-09-11"], ["2027-10-25", "2026-10-26"], ["2027-11-05", "2026-11-06"],
+           ["2027-12-27", "2026-12-28"], ["2027-12-30", "2026-12-31"],
+           ["Urlaubsplanung 2027", "Urlaubsplanung 2026"], ["Anspruch 2027", "Anspruch 2026"], ["Rest aus 2026", "Rest aus 2025"]]
+set = [["sheets.0.rows.1.3", 9], ["sheets.0.rows.7.3", 10], ["sheets.1.rows.1.3", 19]]
+expected = ["past_dates"]
+gap = "past_dates only checks with dates_from; the vague task does not set it (vacation in January 2026 can also be a review in October). Fix: dates_from = 2026-10-13 only for rows with status planned/requested, or soft when all dates lie before the reference date"

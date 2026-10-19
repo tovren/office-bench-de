@@ -1,0 +1,52 @@
+id = "befragung"
+title = "Employee survey (follow-up)"
+version = 1
+kind = "follow_up"
+file_type = "pptx"
+difficulty = "medium"
+tags = ["follow_up", "pie_chart", "given_numbers", "summary"]
+dates_from = "2026-10-13"
+
+[[turns]]
+text = "Erstell mir bitte eine kurze PowerPoint mit den Ergebnissen unserer Mitarbeiterbefragung 2026 für die Abteilungsleiterrunde, 5 bis 6 Folien. Teilgenommen haben 61 von 80 Kolleginnen und Kollegen. Gesamtzufriedenheit: sehr zufrieden 14, zufrieden 27, teils/teils 13, unzufrieden 7 – das bitte als Säulendiagramm. Dazu drei Stärken (Teamzusammenhalt, flexible Arbeitszeiten, sichere Arbeitsplätze) und drei Handlungsfelder (interne Kommunikation, Weiterbildung, IT-Ausstattung)."
+
+[[turns]]
+text = "Mach aus dem Säulendiagramm bitte ein Kreisdiagramm, das passt besser. Und häng am Ende noch eine Folie mit einer Zusammenfassung und den nächsten Schritten an."
+
+# last_slide_topics: summary and next steps on the last slide (a closing slide like „Vielen Dank“ after it does not
+# count); slides_added = 1: exactly one slide more than the first version.
+# Both are soft (in docs/task-format.md for all tasks). As hard checks they flagged, in half of the runs, cases that
+# fulfil the request: summary and next steps on two closing slides, or an existing closing slide „Nächste Schritte“
+# extended to „Zusammenfassung & nächste Schritte“.
+# numbers_sourced (soft): all result numbers come from the prompt; without it a wrong share („82 % zufrieden oder
+# sehr zufrieden“ instead of 41/61 = 67 %, mutant satisfaction_82_percent) goes unnoticed. values_present 67 would be
+# too strict: the checklist only asks that stated shares are right.
+[checks]
+numbers_sourced = true
+slides_added = 1
+slides = [6, 8]
+chart = true
+chart_type = "pie"
+chart_values = [[14, 27, 13, 7]]
+retained = { soft = 0.7 }
+
+[checks.topics]
+Teilnahme = ['\b61\b', '\b76\s*%', '\b76,\d']
+"Stärken" = 'stärke'
+Handlungsfelder = 'handlungsfeld'
+Kommunikation = 'kommunikation'
+Zusammenfassung = 'zusammenfassung|fazit|kernaussage'
+"Nächste Schritte" = 'nächste schritte|weiteres vorgehen|maßnahmen|ausblick|to-?dos?'
+
+[checks.last_slide_topics]
+Zusammenfassung = 'zusammenfass|fazit|kernaussage|kernergebnis|resümee|auf einen blick|im überblick|summary|takeaway'
+"Nächste Schritte" = 'nächste schritte|weiteres vorgehen|maßnahmen|ausblick|to-?dos?|next steps'
+
+[judge]
+checklist = [
+  "Kreisdiagramm mit den vier Antwortstufen und genau den Werten 14, 27, 13 und 7 (Summe 61); genannte Anteile stimmen (z. B. zufrieden 44 %, zusammen mit sehr zufrieden 67 %)",
+  "Teilnahmequote 61 von 80 = 76 %",
+  "Stärken und Handlungsfelder wie vorgegeben, kurz erläutert",
+  "neue letzte Folie mit Zusammenfassung und konkreten nächsten Schritten (wer, bis wann; Termine nach dem 13.10.2026)",
+  "die übrigen Folien aus der ersten Fassung bleiben erhalten, insgesamt 6 bis 8 Folien",
+]

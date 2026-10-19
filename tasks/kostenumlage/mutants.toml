@@ -1,0 +1,37 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+[[mutant]]
+name = "electricity_by_area"
+defect = "electricity allocated by area instead of by headcount"
+replace = [["=D{row}/SUM(D$2:D$5)*'Kosten'!$B$3", "=C{row}*'Kosten'!$B$3"]]
+expected = ["values_present", "chart_values"]
+
+[[mutant]]
+name = "no_total_row"
+defect = "no total row below the allocation"
+remove = ["sheets.0.columns.*.total"]
+expected = ["total_row"]
+
+[[mutant]]
+name = "percent_times_100"
+defect = "area share times 100 in percent format (2,200 % instead of 22 %)"
+replace = [["=B{row}/SUM(B$2:B$5)", "=B{row}/SUM(B$2:B$5)*100"]]
+expected = ["values_present", "value_ranges", "chart_values"]
+
+[[mutant]]
+name = "heating_digits_swapped"
+defect = "heating costs taken as 14,800 instead of 18,400 €"
+number = [[18400, 14800]]
+expected = ["values_present", "chart_values"]
+
+[[mutant]]
+name = "bar_instead_of_pie"
+defect = "column chart instead of pie chart"
+set = [["sheets.0.chart.type", "bar"]]
+expected = ["chart_type"]
+
+[[mutant]]
+name = "no_chart"
+defect = "chart missing"
+remove = ["sheets.0.chart"]
+expected = ["chart"]

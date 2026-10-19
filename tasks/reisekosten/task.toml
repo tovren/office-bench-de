@@ -1,0 +1,34 @@
+id = "reisekosten"
+title = "Travel expenses"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "medium"
+tags = ["formula", "total_row", "dates"]
+
+[[turns]]
+text = "Erstelle eine Reisekostenabrechnung als Excel für Oktober 2026: sechs Dienstfahrten mit Datum, Ziel, Anlass und gefahrenen Kilometern, die Erstattung mit 0,30 € pro Kilometer als Formel, dazu Verpflegungspauschalen und eine Gesamtsumme."
+
+[checks]
+data_rows_min = 6
+columns = ['datum', 'ziel|\bort\b', 'anlass|zweck|grund', 'kilometer|\bkm\b']
+dates_between = ["2026-10-01", "2026-10-31"]
+formulas_min = 1
+total_row = true
+
+[checks.topics]
+Verpflegung = 'verpflegung'
+
+[[checks.calculations]]
+name = "Erstattung = Kilometer × 0,30 €"
+columns = { km = '^(?!.*(€|eur|erstattung|betrag)).*(kilometer|\bkm\b)', erstattung = 'erstattung|fahrt?kosten|kilometer-?(geld|pauschale)|km-?(geld|pauschale)' }
+formula = "km * 0.30"
+result = "erstattung"
+
+[judge]
+checklist = [
+  "sechs Fahrten im Oktober 2026 an Werktagen, plausible Ziele und Kilometer",
+  "Erstattung = km × 0,30 € als Formel",
+  "Verpflegungspauschalen nach deutschen Sätzen (14 € ab 8 Stunden, 28 € ganzer Tag)",
+  "Gesamtsumme als Formel",
+]

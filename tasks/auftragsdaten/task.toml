@@ -1,0 +1,63 @@
+id = "auftragsdaten"
+title = "Q3 order analysis from an export (attachment)"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "hard"
+tags = ["attachment", "long", "copy_data", "filtering", "three_sheets", "sumif", "chart"]
+
+# The attachment is an export from the merchandise management system (text, semicolon, decimal comma) with 84 orders
+# from 01.07. to 30.09.2026 (workdays only), 4 of them cancelled: A-26-3134 (Kröger, 1,034.92), A-26-3206 (Wohnbau
+# Neckartal, 265.23), A-26-3277 (Wohnbau Neckartal, 974.53), A-26-3333 (Wohnbau Neckartal, 238.05). 80 orders are
+# valid (68 invoiced, 12 open; the open ones count). Net revenue: July 28,106.88, August 19,874.16, September
+# 29,826.76, total 77,807.80 €. Per customer (orders, revenue), descending: Schulze & Partner 13 / 14,319.70; Kröger
+# 15 / 13,907.28; Pflegeheim Am Kirchberg 14 / 12,992.57; Immobilien Sattler 8 / 10,667.98; Wohnbau Neckartal 14 /
+# 7,894.23; Bäckerei Hölzle 3 / 7,481.21; Hotel Traube 5 / 6,249.03; Autohaus Rempp 8 / 4,295.80.
+# With the cancellations it would be 29,407.03 / 20,848.69 / 30,064.81 = 80,320.53 €, and Kröger (16 / 14,942.20)
+# would come before Schulze. All sums recalculated in Python (Decimal).
+# The numbers of the cancelled orders are not forbidden: a note on which orders were left out is not an error.
+# Checks: the values show whether all 80 rows were copied correctly and the cancellations left out; `groups` whether
+# the customer overview matches the list on sheet 1. The tool knows SUMIF and COUNTIF, but not SUMIFS/COUNTIFS:
+# monthly sums work with a month column on sheet 1 or as the difference of two SUMIFs over the date (as the
+# reference does). Monthly and customer sums as constants are flagged by `numbers_sourced` (soft; the heuristic does
+# not check sums of a selection from over 60 numbers); mistyped amounts on sheet 1, on the other hand, it does flag.
+[[turns]]
+text = "Im Anhang ist der Auftragsexport aus unserer Warenwirtschaft für das dritte Quartal. Mach mir daraus bitte eine Excel-Auswertung: Auf das erste Blatt alle Aufträge mit Auftragsnummer, Datum, Kunde, Leistungsart und Nettobetrag, unten die Summe. Stornierte Aufträge lass bitte ganz weg, die offenen zählen mit. Dazu je ein eigenes Blatt mit dem Nettoumsatz je Monat (Juli, August, September) samt Säulendiagramm und mit der Zahl der Aufträge und dem Nettoumsatz je Kunde, absteigend nach Umsatz sortiert."
+attachments = [{ name = "Auftragsexport Q3 2026.txt", file = "auftragsexport_q3.txt" }]
+
+[checks]
+numbers_sourced = true
+sheets_min = 3
+data_rows_min = 80
+columns = ['auftrag', 'datum', 'kunde', 'leistung', 'betrag|netto|umsatz']
+total_row = true
+dates_between = ["2026-07-01", "2026-09-30"]
+chart = true
+chart_type = "column"
+chart_values = [[28106.88, 19874.16, 29826.76]]
+# sorted on the customer sheet (the prompt asks for „absteigend nach Umsatz sortiert“). Without `sheet`, sorted only
+# sees the first sheet with a matching column, and the prompt does not fix the order of the sheets (gap found by
+# mutants.toml).
+sorted = { sheet = 'kunde', column = 'umsatz|summe|betrag|netto', descending = true }
+values_present = [
+  28106.88, 19874.16, 29826.76, 77807.80,
+  14319.70, 13907.28, 12992.57, 10667.98, 7894.23, 7481.21, 6249.03, 4295.80,
+]
+
+[[checks.groups]]
+name = "Übersicht je Kunde"
+source = { sheet = 1, group = 'kunde', value = 'betrag|netto|umsatz' }
+target = { sheet = 'kunde', group = 'kunde', count = 'anzahl|aufträge|auftraege', value = 'umsatz|summe|betrag|netto' }
+
+[checks.forbidden]
+Quellenmarker = '\[\d{1,2}\]'
+"Tags der RAG-Vorlage" = '</?(source|context)\b'
+
+[judge]
+checklist = [
+  "Blatt 1 mit allen 80 gültigen Aufträgen (Nummer, Datum als Datum, Kunde, Leistungsart, Nettobetrag), genau wie im Export; die vier stornierten (A-26-3134, -3206, -3277, -3333) fehlen, die offenen sind dabei; Summenzeile 77.807,80 €",
+  "Blatt je Monat: Juli 28.106,88 €, August 19.874,16 €, September 29.826,76 €, mit Säulendiagramm genau dieser drei Werte",
+  "Blatt je Kunde: Zahl der Aufträge und Nettoumsatz für alle acht Kunden, passend zu Blatt 1 (z. B. Schulze & Partner 13 / 14.319,70 €, Kröger 15 / 13.907,28 €), absteigend nach Umsatz sortiert (Schulze & Partner vor Kröger)",
+  "Übersichten am besten als Formeln (SUMMEWENN/ZÄHLENWENN) auf Blatt 1, Euro-Format, sprechende Blattnamen",
+  "nichts erfunden oder gerundet, keine Quellenmarker wie [1]",
+]

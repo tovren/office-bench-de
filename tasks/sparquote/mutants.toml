@@ -1,0 +1,43 @@
+# Broken variants of reference.json (format: docs/mutants.md). Follow-up task: the file of the first turn
+# (previous) stays unchanged; the mutation hits the file after „Füg bitte noch eine Spalte Sparquote … hinzu“.
+
+[[mutant]]
+# a typical error: percentages a hundred times too high
+name = "percent_times_100"
+defect = "savings rate times 100 in percent format (1,094 % instead of 10.9 %)"
+replace = [["=D{row}/B{row}", "=D{row}/B{row}*100"]]
+expected = ["calculations"]
+
+[[mutant]]
+name = "rate_over_expenses"
+defect = "savings rate = balance / expenses instead of balance / income (wrong reference)"
+replace = [["=D{row}/B{row}", "=D{row}/C{row}"]]
+expected = ["calculations"]
+
+[[mutant]]
+name = "columns_kept"
+defect = "the chart stays a column chart although a line chart was asked for"
+set = [["sheets.0.chart.type", "column"]]
+expected = ["chart_type"]
+
+[[mutant]]
+name = "line_without_rate"
+defect = "the line chart still shows income and expenses, not the savings rate"
+set = [["sheets.0.chart.value_columns", ["Einnahmen", "Ausgaben"]], ["sheets.0.chart.title", "Einnahmen und Ausgaben pro Monat"]]
+expected = ["chart_series"]
+
+[[mutant]]
+# the follow-up loses content of the first version
+name = "total_row_lost"
+defect = "the total row of the first version got lost while adding the savings rate"
+remove = ["sheets.0.columns.*.total"]
+expected = ["total_row"]
+
+[[mutant]]
+# follow-up: the model rebuilds the file and invents other amounts
+name = "amounts_reinvented"
+defect = "file rebuilt in the follow-up, income and expenses of every month invented anew"
+number = [[3200, 3600], [3350, 3700], [3400, 3800], [2850, 2900], [2700, 2750], [3100, 3150], [2950, 3050], [2800, 3000],
+          [3250, 3300]]
+expected = ["retained"]
+gap = "retained counts units (texts and constants once each): months and headers stay, all nine distinct amounts are missing, that is 55 % retained and only soft (hard below 50 %). Fix: judge number constants in xlsx separately (e.g. hard when fewer than half of the previous file's numbers come back) or the task sets values_present with the amounts of the first version"

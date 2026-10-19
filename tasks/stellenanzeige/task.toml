@@ -1,0 +1,61 @@
+id = "stellenanzeige"
+title = "Job ad for a service technician (AGG-compliant)"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "medium"
+tags = ["language", "conventions", "anti_discrimination", "dates", "given_numbers"]
+dates_from = "2026-10-13"
+
+# German job ad: gender marker (m/w/d) in the title, formal Sie throughout, nothing that targets age, origin or
+# gender under the AGG („junges Team“, „Muttersprache Deutsch“, „Digital Native“). Application deadline „in zwei
+# Wochen“ from Tuesday, 13.10.2026: Tuesday, 27.10.2026. All other numbers are in the prompt (3,600–4,200 € gross per
+# month, 39 hours, 30 days of leave, 50 € pension contribution, on call about one week per month, start on 01.01.2027
+# or earlier).
+[[turns]]
+text = "Wir suchen Verstärkung für unseren Kundendienst. Schreib mir bitte eine Stellenanzeige als Word-Dokument für die Website und die Jobbörse der Arbeitsagentur: Servicetechniker für Heizung und Wärmepumpen, Vollzeit mit 39 Stunden pro Woche, unbefristet, Einsatzgebiet Esslingen und Umgebung, Start zum 1. Januar 2027 oder früher. Aufgaben: Wartung und Reparatur von Heizungsanlagen und Wärmepumpen, Störungsdienst, Beratung der Kunden vor Ort, Dokumentation auf dem Tablet. Wir erwarten eine abgeschlossene Ausbildung als Anlagenmechaniker SHK oder etwas Vergleichbares und den Führerschein Klasse B; Erfahrung mit Wärmepumpen ist ein Plus. Etwa eine Woche im Monat ist Rufbereitschaft. Wir bieten 3.600 bis 4.200 € brutto im Monat je nach Erfahrung plus Bereitschaftspauschale, 30 Tage Urlaub, ein eigenes Servicefahrzeug, mit dem man auch nach Hause fährt, Tablet und Diensthandy, JobRad, 50 € Zuschuss im Monat zur betrieblichen Altersvorsorge und Schulungen bei den Herstellern. Bewerbungsschluss ist in zwei Wochen, bitte mit Datum. Bewerbungen per Mail an Frau Kerstin Haug, Personal, bewerbung@brenner-haustechnik.example. Bitte AGG-konform und in der Sie-Form. Wir sind die Brenner Haustechnik GmbH in Esslingen, ein Familienbetrieb mit 48 Mitarbeitenden."
+
+[checks]
+numbers_sourced = true
+names = ["Haug"]
+words_min = { hard = 200, soft = 300 }
+words_max = 800
+values_present = [3600, 4200]
+
+[checks.topics]
+"(m/w/d)" = '\(\s*[mwd]\s*/\s*[mwd]\s*/\s*[mwd]\s*\)'
+"39 Stunden" = '(?<![\d,.])39(\s*-)?\s*(stunden|std\b|wochenstunden|h\b)'
+"30 Tage Urlaub" = ['(?<![\d,.])30\s*(arbeits)?tage\w*\s*(\w+\s+){0,2}(jahres)?urlaub', '(?<![\d,.])30\s+urlaubstage', 'urlaub\w*\s*(von\s+|:\s*)?30\s*(arbeits)?tage']
+"Bewerbungsschluss 27.10." = '(?<!\d)27\.\s*(10\.|oktober)'
+Esslingen = 'esslingen'
+"Wärmepumpen" = 'wärmepumpe'
+"Führerschein" = 'führerschein'
+Rufbereitschaft = 'rufbereitschaft|bereitschaftsdienst'
+"Altersvorsorge" = 'altersvorsorge'
+"Mail-Adresse" = 'bewerbung@brenner-haustechnik\.example'
+
+# Forbidden are informal du (du, dich, dir, dein …, euch, euer) and the three AGG classics; „gute Deutschkenntnisse“
+# is allowed (needed for customer conversations), „Muttersprache“ and „Muttersprachniveau“ are not.
+# „Foto, Geburtsdatum oder Familienstand verlangt“: the checklist asks for the application documents without photo,
+# date of birth or marital status (mutant photo_requested). A paragraph with a negation („Ein Foto brauchen wir
+# nicht“, „ohne Foto“, „keine Bewerbungsfotos“, „verzichten“, „unabhängig von“) is allowed; so is a photo unrelated
+# to the application (documentation with photos on the tablet).
+[checks.forbidden]
+Duzen = '\b(du|dich|dir|dein|deine|deinen|deinem|deiner|deines|euch|euer|eure|euren|eurem|eurer)\b'
+"junges Team (Alter)" = '\bjung(e|en|er|es)?[\s,]+(und\s+)?(\w+[\s,]+)?(team|kolleg|mitarbeit|belegschaft)'
+"Muttersprache (Herkunft)" = 'muttersprach'
+"Digital Native (Alter)" = 'digital\s*-?\s*native'
+"Foto, Geburtsdatum oder Familienstand verlangt" = [
+  '^(?!.*\b(ohne|kein\w*|nicht|verzicht\w*|freiwillig|optional|unabhängig)\b).*(lichtbild|bewerbungsfoto|bewerbungsbild)',
+  '^(?!.*\b(ohne|kein\w*|nicht|verzicht\w*|freiwillig|optional|unabhängig)\b).*(bewerbung|unterlagen|lebenslauf|anschreiben|zeugnis).*(\bfotos?\b|geburtsdatum|geburtsjahr|familienstand)',
+  '^(?!.*\b(ohne|kein\w*|nicht|verzicht\w*|freiwillig|optional|unabhängig)\b).*(\bfotos?\b|geburtsdatum|geburtsjahr|familienstand).*(bewerbung|unterlagen|lebenslauf|anschreiben|zeugnis)',
+]
+
+[judge]
+checklist = [
+  "Titel mit „Servicetechniker (m/w/d) Heizung und Wärmepumpen“ oder ähnlich, Einleitung zum Unternehmen (Familienbetrieb, 48 Mitarbeitende, Esslingen) ohne Floskeln",
+  "Aufgaben, Anforderungen und Angebot vollständig wie im Auftrag: 39 Stunden, unbefristet, 3.600–4.200 € brutto plus Bereitschaftspauschale, 30 Tage Urlaub, Servicefahrzeug auch für den Heimweg, Tablet, Diensthandy, JobRad, 50 € Altersvorsorge, Herstellerschulungen, etwa eine Woche Rufbereitschaft im Monat",
+  "Bewerbungsschluss Dienstag, 27.10.2026 (zwei Wochen ab heute), Eintritt zum 01.01.2027 oder früher; Kontakt Frau Kerstin Haug mit der Mailadresse; was die Bewerbung enthalten soll, ohne Foto, Geburtsdatum oder Familienstand zu verlangen",
+  "AGG-konform: (m/w/d), keine Hinweise auf Alter, Herkunft oder Geschlecht („junges Team“, „Muttersprache“, „belastbarer Mann“), Anforderungen sachlich begründet; Erfahrung mit Wärmepumpen als Plus, nicht als Pflicht",
+  "durchgehend Sie-Form, ansprechend und konkret, gut gegliedert (Abschnitte oder Aufzählungen), nichts erfunden (keine zusätzlichen Leistungen, Gehälter oder Telefonnummern)",
+]

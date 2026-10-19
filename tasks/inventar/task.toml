@@ -1,0 +1,39 @@
+id = "inventar"
+title = "IT inventory list (long)"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "hard"
+tags = ["long", "dates", "total_row", "two_sheets", "pie_chart"]
+
+# Large table (about 50 rows × 8 columns): this is where the JSON is most likely to break. The model may count the
+# overview on sheet 2 itself or compute it with cross-sheet formulas; groups checks that count and total value per
+# device type match sheet 1.
+# chart_series: the prompt asks for a pie chart „für den Wert“; any pie chart is not enough, including one of the
+# count per device type (mutant pie_chart_count).
+[[turns]]
+text = "Wir stellen unsere IT-Inventur auf Excel um. Mach mir bitte eine Inventarliste mit realistischen Beispieldaten, damit wir sehen, wie das aussieht: rund 50 Geräte (Laptops, Monitore, Dockingstations, Drucker, Telefone) mit Inventarnummer, Gerätetyp, Hersteller und Modell, Seriennummer, Standort, zugeordnetem Mitarbeiter, Kaufdatum und Kaufpreis, unten die Summe der Kaufpreise. Auf ein zweites Blatt bitte eine Übersicht mit Anzahl und Gesamtwert je Gerätetyp und ein Kreisdiagramm für den Wert."
+
+[checks]
+data_rows_min = 40
+sheets_min = 2
+columns = ['inventar|inv\.?-?nr|asset|anlagen-?nr', 'typ|gerät|kategorie', 'hersteller|modell|marke', 'serien|\bs/?n\b|seriennr', 'standort|raum|\bort\b|büro', 'mitarbeit|benutzer|nutzer|zugeordnet|person|besitzer|verantwortlich', 'kaufdatum|anschaffung|gekauft|kauf.*datum', 'preis|wert|kosten|betrag']
+total_row = true
+dates_between = ["2015-01-01", "2026-10-13"]
+chart = true
+chart_type = "pie"
+chart_series = ['wert|summe|gesamt|betrag|preis|kosten|€|\beur\b']
+
+[[checks.groups]]
+name = "Übersicht je Gerätetyp"
+source = { sheet = 1, group = 'typ|gerät|kategorie', value = 'preis|wert|kosten|betrag' }
+target = { sheet = 2, group = 'typ|gerät|kategorie', count = 'anzahl|stück|menge', value = 'wert|summe|gesamt|betrag|preis' }
+
+[judge]
+checklist = [
+  "mindestens 40, besser rund 50 Geräte mit allen acht Angaben, keine leeren Zellen",
+  "eindeutige Inventar- und Seriennummern, plausible Hersteller, Modelle und Preise (Laptop 800–1.800 €, Monitor 120–400 €, Dockingstation 120–300 €, Telefon 80–300 €, Drucker 250–2.000 €)",
+  "Kaufdaten in der Vergangenheit und im Datumsformat",
+  "Summe der Kaufpreise als Formel unter der Liste",
+  "Blatt 2: Anzahl und Gesamtwert je Gerätetyp stimmen genau mit der Liste überein; Kreisdiagramm für den Wert",
+]

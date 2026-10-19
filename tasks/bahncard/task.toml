@@ -1,0 +1,32 @@
+id = "bahncard"
+title = "Question with web search: BahnCard"
+version = 1
+kind = "no_file"
+difficulty = "easy"
+tags = ["no_file", "extra_tools", "web_search", "arithmetic"]
+extra_tools = ["web_search", "send_email"]
+
+# The right move is the web search (extra tool), no file. The price 259 € is only in the search result
+# (extra_tools/web_search.json): if it appears in the reply, the model used the result.
+# Calculation: 50 % of 1,200 € = 600 € savings per person, minus 259 € = 341 € (both: 682 €).
+# [behavior] in addition to the checklist: the web search must be called, no email may go out (both hard, from the
+# log).
+[[turns]]
+text = "Kannst du kurz nachschauen, was die BahnCard 50 in der 2. Klasse aktuell kostet? Ich überlege, ob sie sich für unsere zwei Außendienstler lohnt. Die fahren jeweils etwa 1.200 € im Jahr Bahn, immer zum Flexpreis."
+
+[reply.topics]
+"Preis aus der Suche" = '\b259\b'
+Empfehlung = 'lohnt'
+Ersparnis = ['\b34[01]\b', '\b68[0-2]\b']
+
+[behavior]
+tools_expected = ["web_search"]
+tools_forbidden = ["send_email"]
+
+[judge]
+checklist = [
+  "nutzt die Websuche und nennt den Preis aus dem Suchergebnis (259 € in der 2. Klasse), nicht aus dem Gedächtnis",
+  "rechnet richtig: 50 % von 1.200 € = 600 € Ersparnis je Person, abzüglich 259 € bleiben 341 € je Person (682 € für beide)",
+  "klare Empfehlung (lohnt sich), ggf. Hinweis auf BahnCard Business und Kündigungsfrist",
+  "keine Datei erstellt, keine E-Mail verschickt",
+]

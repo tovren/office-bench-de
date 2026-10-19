@@ -1,0 +1,35 @@
+{
+  "spec": {
+    "type": "function",
+    "function": {
+      "name": "send_email",
+      "description": "Send an e-mail from the user's company account right away. Only use it when the user explicitly asks to send a message.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Recipient addresses, e.g. alle@brenner-haustechnik.de."
+          },
+          "subject": {
+            "type": "string",
+            "description": "Subject line."
+          },
+          "body": {
+            "type": "string",
+            "description": "Plain text of the message."
+          }
+        },
+        "required": [
+          "to",
+          "subject",
+          "body"
+        ]
+      }
+    }
+  },
+  "result": "Die E-Mail wurde gesendet (Nachrichten-ID 8f3a2c)."
+}

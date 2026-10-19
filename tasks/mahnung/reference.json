@@ -1,0 +1,85 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Zahlungserinnerung",
+  "header_text": "Brenner Haustechnik GmbH · Buchhaltung",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "text": "Gerber Metallbau GmbH\nz. Hd. Herrn Stefan Gerber\nIndustriestraße 12\n72766 Reutlingen"
+   },
+   {
+    "type": "paragraph",
+    "text": "Esslingen, 13. Oktober 2026"
+   },
+   {
+    "type": "heading",
+    "text": "Zahlungserinnerung zu drei offenen Rechnungen",
+    "level": 2
+   },
+   {
+    "type": "paragraph",
+    "text": "Sehr geehrter Herr Gerber,"
+   },
+   {
+    "type": "paragraph",
+    "text": "bei der Durchsicht unserer Buchhaltung haben wir festgestellt, dass die folgenden Rechnungen trotz Ablauf des Zahlungsziels von 30 Tagen noch nicht beglichen sind:"
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Rechnung",
+      "Rechnungsdatum",
+      "Fällig seit",
+      "Betrag"
+     ],
+     [
+      "2026-0412",
+      "03.08.2026",
+      "02.09.2026",
+      "2.380,00 €"
+     ],
+     [
+      "2026-0467",
+      "19.08.2026",
+      "18.09.2026",
+      "1.190,00 €"
+     ],
+     [
+      "2026-0533",
+      "07.09.2026",
+      "07.10.2026",
+      "4.165,50 €"
+     ],
+     [
+      "Summe",
+      "",
+      "",
+      "7.735,50 €"
+     ]
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Bitte überweisen Sie den offenen Betrag von **7.735,50 €** bis spätestens **Freitag, 23. Oktober 2026** auf das Ihnen bekannte Konto. Geben Sie dabei bitte die Rechnungsnummern als Verwendungszweck an, damit wir die Zahlung schnell zuordnen können."
+   },
+   {
+    "type": "paragraph",
+    "text": "Sicher handelt es sich nur um ein Versehen. Sollten Sie die Zahlung in den letzten Tagen bereits veranlasst haben, betrachten Sie dieses Schreiben bitte als gegenstandslos. Falls es Unklarheiten zu einer der Rechnungen gibt, melden Sie sich gern bei mir."
+   },
+   {
+    "type": "paragraph",
+    "text": "Die Rechnung 2026-0571 vom 22. September 2026 über 892,50 € wird erst am 22. Oktober 2026 fällig und ist in dieser Erinnerung nicht enthalten."
+   },
+   {
+    "type": "paragraph",
+    "text": "Mit freundlichen Grüßen"
+   },
+   {
+    "type": "paragraph",
+    "text": "i. A. Yilmaz\nBuchhaltung\nBrenner Haustechnik GmbH"
+   }
+  ]
+ }
+}

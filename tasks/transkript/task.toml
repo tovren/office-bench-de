@@ -1,0 +1,66 @@
+id = "transkript"
+title = "Decision minutes from a transcript (attachment)"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "hard"
+tags = ["attachment", "long", "transcript", "table", "names", "correction", "weekday", "dates"]
+dates_from = "2026-10-13"
+
+# Automatic transcript (about 17,000 characters) of a meeting held today, Tuesday 13.10.2026: spoken language with
+# filler words, digressions, recognition errors („Termatek“, „Amtsplatt“) and self-corrections.
+# Final values: open day Saturday 14.11.2026, 10:00–16:00; budget 6,500 € (proposal of 8,000 € rejected), of which at
+# most 1,500 € for catering; Thermatec talk moved after the summary from 11:00 to 14:30 (11:00: tour, 13:00:
+# funding). Nina Kaya does the mailing instead of Jonas Petersen, only to customers who gave consent.
+# Deadlines (weekdays checked with Python): registration page „nächsten Dienstag, also den 20.“ = Tue 20.10.;
+# Brückner's confirmation and catering offers „bis Ende nächster Woche, also bis Freitag“ = Fri 23.10.2026 (never
+# stated as a date); mailing „übernächsten Dienstag … am 27.“ = Tue 27.10.; print data Fri 30.10.; ad deadline
+# Mon 02.11. (published Thu 05.11.); devices in trial operation Thu 12.11.; setup Fri 13.11.; next meeting
+# Thu 22.10.2026, 9:00.
+[[turns]]
+text = "Anbei das automatische Transkript unserer Besprechung zum Infotag von heute Vormittag. Mach mir daraus bitte ein ordentliches Ergebnisprotokoll als Word-Dokument, das ich an alle schicken kann: Teilnehmende, die Beschlüsse je Thema und eine Tabelle mit den Aufgaben (wer, was, bis wann – bitte immer mit konkretem Datum)."
+attachments = [{ name = "Transkript Besprechung Infotag 13.10.2026.docx", file = "transkript_infotag.txt" }]
+
+[checks]
+numbers_sourced = true
+tables_min = 1
+names = ["Albrecht", "Petersen", "Schuster", "Ott", "Kaya", "Horn"]
+values_present = [6500, 1500]
+
+[checks.topics]
+"Infotag 14.11." = '(?<!\d)14\.\s*(11\.|november)'
+"Vortrag Thermatec 14:30" = ['(?<![\d.:,])14[:.]30(?!\d)', 'halb drei']
+Thermatec = 'thermatec|brückner'
+"Anmeldeseite bis 20.10." = '(?<!\d)20\.\s*(10\.|oktober)'
+"Zusage und Angebote bis 23.10." = '(?<!\d)23\.\s*(10\.|oktober)'
+"Mailing bis 27.10." = '(?<!\d)27\.\s*(10\.|oktober)'
+"Druckdaten bis 30.10." = '(?<!\d)30\.\s*(10\.|oktober)'
+"Anzeigenschluss 02.11." = '(?<!\d)0?2\.\s*(11\.|november)'
+"Probebetrieb bis 12.11." = '(?<!\d)12\.\s*(11\.|november)'
+"nächste Besprechung 22.10." = '(?<!\d)22\.\s*(10\.|oktober)'
+
+[checks.topics_soft]
+"Mailing nur mit Einwilligung" = 'einwillig|zustimm|opt.?in'
+"Parken beim Autohaus" = 'autohaus'
+
+# forbidden only for slips of the tongue that are corrected at once and belong in no proper minutes: „Samstag, den
+# 7.“ (meant 14.11.), print data „bis zum 29.“ (meant 30.10.), „800 Stück“ (meant 500 flyers). Proposals rejected in
+# the discussion (8,000 €, talk at 11:00, mailing by Jonas) may appear in the minutes as rejected: checklist only, the
+# checks test the final value.
+[checks.forbidden]
+"Versprecher 7.11." = '(?<!\d)0?7\.\s*(11\.|november)'
+"Versprecher 29.10." = '(?<!\d)29\.\s*(10\.|oktober)'
+"Versprecher 800 Flyer" = '(?<![\d.,])800\s*(stück|exemplare|flyer)'
+Quellenmarker = '\[\d{1,2}\]'
+"Tags der RAG-Vorlage" = '</?(source|context)\b'
+
+# The checklist says „Herr Brenner“, not „Thomas Brenner“: the transcript only says „Herr Brenner“.
+[judge]
+checklist = [
+  "Kopf mit Datum Dienstag, 13.10.2026, Teilnehmenden (Katrin Albrecht als Leitung, Jonas Petersen über Teams, Melanie Schuster, Stefan Ott, Nina Kaya, Dennis Horn später dazugekommen) und Herr Brenner als entschuldigt",
+  "Beschlüsse je Thema vollständig und in sauberem Schriftdeutsch, ohne Füllwörter, Abschweifungen (Kühlschrank) und Erkennungsfehler („Termatek“, „Amtsplatt“)",
+  "endgültige Werte statt verworfener: Infotag Samstag, 14.11.2026, 10–16 Uhr; Budget 6.500 € (nicht 8.000 €), davon höchstens 1.500 € Catering; Vortrag Thermatec um 14:30 Uhr (nicht 11 Uhr), Förderung 13 Uhr, 11 Uhr Führung; 500 Flyer; Mailing durch Nina Kaya, nur an Kunden mit Einwilligung",
+  "Aufgabentabelle mit wer, was, bis wann und jeweils konkretem Datum: Anmeldeseite Di 20.10., Zusage Brückner und Catering-Angebote Fr 23.10. (aus „bis Ende nächster Woche“), Mailing Di 27.10., Druckdaten Fr 30.10., Anzeige bis Mo 02.11., Geräte im Probebetrieb Do 12.11., Aufbau Fr 13.11.",
+  "Wochentage passen zu den Daten; nächste Besprechung Donnerstag, 22.10.2026, 9 Uhr",
+  "nichts erfunden, keine Quellenmarker wie [1], keine Platzhalter",
+]

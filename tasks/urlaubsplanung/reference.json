@@ -1,0 +1,186 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Urlaubsplanung 2027",
+  "sheets": [
+   {
+    "name": "Urlaubsplanung 2027",
+    "columns": [
+     {
+      "header": "Mitarbeiter",
+      "type": "text"
+     },
+     {
+      "header": "Urlaub von",
+      "type": "date"
+     },
+     {
+      "header": "Urlaub bis",
+      "type": "date"
+     },
+     {
+      "header": "Arbeitstage",
+      "type": "integer",
+      "total": "sum"
+     },
+     {
+      "header": "Status",
+      "type": "text"
+     },
+     {
+      "header": "Vertretung",
+      "type": "text"
+     }
+    ],
+    "rows": [
+     [
+      "Anna Berger",
+      "2027-01-07",
+      "2027-01-08",
+      2,
+      "genehmigt",
+      "Ben Krüger"
+     ],
+     [
+      "Ben Krüger",
+      "2027-03-22",
+      "2027-04-02",
+      8,
+      "genehmigt",
+      "Anna Berger"
+     ],
+     [
+      "Carla Neumann",
+      "2027-05-18",
+      "2027-05-28",
+      8,
+      "beantragt",
+      "David Lehmann"
+     ],
+     [
+      "Frieda Vogel",
+      "2027-06-07",
+      "2027-06-18",
+      10,
+      "geplant",
+      "Emre Aydin"
+     ],
+     [
+      "Emre Aydin",
+      "2027-07-12",
+      "2027-07-30",
+      15,
+      "beantragt",
+      "Frieda Vogel"
+     ],
+     [
+      "David Lehmann",
+      "2027-08-02",
+      "2027-08-20",
+      15,
+      "beantragt",
+      "Carla Neumann"
+     ],
+     [
+      "Anna Berger",
+      "2027-08-23",
+      "2027-09-10",
+      15,
+      "beantragt",
+      "Emre Aydin"
+     ],
+     [
+      "Ben Krüger",
+      "2027-10-25",
+      "2027-11-05",
+      9,
+      "geplant",
+      "David Lehmann"
+     ],
+     [
+      "Carla Neumann",
+      "2027-12-27",
+      "2027-12-30",
+      4,
+      "geplant",
+      "Frieda Vogel"
+     ]
+    ]
+   },
+   {
+    "name": "Urlaubskonto",
+    "columns": [
+     {
+      "header": "Mitarbeiter",
+      "type": "text"
+     },
+     {
+      "header": "Anspruch 2027 (Tage)",
+      "type": "integer",
+      "total": "sum"
+     },
+     {
+      "header": "Rest aus 2026",
+      "type": "integer",
+      "total": "sum"
+     },
+     {
+      "header": "Verplant",
+      "type": "integer",
+      "total": "sum"
+     },
+     {
+      "header": "Noch frei",
+      "type": "integer",
+      "formula": "=B{row}+C{row}-D{row}",
+      "total": "sum"
+     }
+    ],
+    "rows": [
+     [
+      "Anna Berger",
+      30,
+      3,
+      17,
+      null
+     ],
+     [
+      "Ben Krüger",
+      30,
+      0,
+      17,
+      null
+     ],
+     [
+      "Carla Neumann",
+      30,
+      5,
+      12,
+      null
+     ],
+     [
+      "David Lehmann",
+      30,
+      2,
+      15,
+      null
+     ],
+     [
+      "Emre Aydin",
+      30,
+      0,
+      15,
+      null
+     ],
+     [
+      "Frieda Vogel",
+      30,
+      4,
+      10,
+      null
+     ]
+    ]
+   }
+  ]
+ }
+}

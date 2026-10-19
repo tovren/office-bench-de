@@ -1,0 +1,393 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Einarbeitungshandbuch für neue Mitarbeiterinnen und Mitarbeiter",
+  "subtitle": "Brenner Haustechnik GmbH, Esslingen – Stand Oktober 2026",
+  "header_text": "Brenner Haustechnik GmbH",
+  "table_of_contents": true,
+  "blocks": [
+   {
+    "type": "heading",
+    "text": "Willkommen bei Brenner Haustechnik",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Schön, dass du da bist! Dieses Handbuch begleitet dich durch deine ersten Wochen bei uns. Es erklärt, wie wir arbeiten, welche Regeln gelten und an wen du dich mit Fragen wenden kannst. Lies es in Ruhe durch und halte es in den ersten Tagen griffbereit. Vieles wird dir deine Patin oder dein Pate noch persönlich zeigen, aber hier kannst du jederzeit nachschlagen."
+   },
+   {
+    "type": "paragraph",
+    "text": "Das Handbuch ersetzt nicht deinen Arbeitsvertrag und nicht die Betriebsvereinbarungen. Wenn etwas hier anders klingt als dort, gilt der Vertrag oder die Vereinbarung. Wenn dir etwas unklar ist oder fehlt, sag uns bitte Bescheid: Wir überarbeiten das Handbuch jedes Jahr und freuen uns über Hinweise von Leuten, die gerade neu angefangen haben."
+   },
+   {
+    "type": "heading",
+    "text": "Wer wir sind",
+    "level": 2
+   },
+   {
+    "type": "paragraph",
+    "text": "Die Brenner Haustechnik GmbH plant, installiert und wartet Heizungs-, Sanitär- und Lüftungsanlagen für Privatkunden, Wohnungsbaugesellschaften und Gewerbebetriebe im Raum Esslingen und Stuttgart. Mit rund 80 Mitarbeiterinnen und Mitarbeitern sind wir groß genug für anspruchsvolle Projekte und klein genug, dass man sich kennt. Etwa die Hälfte unserer Kolleginnen und Kollegen ist als Monteurinnen und Monteure auf Baustellen und im Kundendienst unterwegs. Die andere Hälfte arbeitet in Planung, Projektleitung, Einkauf, Buchhaltung, Personal und im Kundenservice an unserem Standort in Esslingen."
+   },
+   {
+    "type": "paragraph",
+    "text": "Unsere Kunden erwarten, dass ihre Heizung im Winter läuft, dass Termine eingehalten werden und dass jemand ans Telefon geht, wenn etwas nicht funktioniert. Das gelingt nur, wenn Büro und Baustelle gut zusammenarbeiten. Deshalb lernst du in deinen ersten Wochen nicht nur deine eigene Abteilung kennen, sondern auch die Kolleginnen und Kollegen, mit denen du später am meisten zu tun hast."
+   },
+   {
+    "type": "heading",
+    "text": "So sind wir organisiert",
+    "level": 2
+   },
+   {
+    "type": "paragraph",
+    "text": "Geschäftsführer ist Stefan Wagner, der das Unternehmen seit 2015 gemeinsam mit einem kleinen Leitungsteam führt. Darunter gibt es fünf Bereiche: Kundendienst, Montage, Planung und Projektleitung, kaufmännische Abteilungen (Einkauf, Buchhaltung, Personal) sowie den Kundenservice am Telefon. Jeder Bereich hat eine Leitung, die für Einsatzplanung, Urlaub und Entwicklung ihrer Leute zuständig ist. Einmal im Monat treffen sich alle Bereichsleitungen, um Termine, Engpässe und größere Aufträge abzustimmen."
+   },
+   {
+    "type": "heading",
+    "text": "Was uns wichtig ist",
+    "level": 2
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "**Zuverlässigkeit:** Wir halten, was wir unseren Kunden zusagen – bei Terminen, Preisen und Qualität.",
+     "**Offenheit:** Fragen ist ausdrücklich erwünscht. Niemand muss alles wissen, aber jeder sollte wissen, wen er fragen kann.",
+     "**Sicherheit:** Arbeitsschutz und Datenschutz gehen vor Tempo.",
+     "**Miteinander:** Büro und Baustelle sind ein Team. Wir helfen uns gegenseitig und sprechen Probleme direkt an."
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Dein erster Arbeitstag",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "An deinem ersten Tag beginnst du um 8:30 Uhr. Melde dich bitte am Empfang im Erdgeschoss, dort holt dich deine Führungskraft oder deine Patin bzw. dein Pate ab. Bring bitte deinen Personalausweis, deine Steuer-Identifikationsnummer, deine Sozialversicherungsnummer und deine Bankverbindung mit, falls du uns diese Angaben noch nicht geschickt hast. Wenn du ein eigenes Fahrzeug nutzt, kannst du auf den Mitarbeiterparkplätzen hinter dem Gebäude parken; die Zufahrt öffnet deine Zugangskarte."
+   },
+   {
+    "type": "heading",
+    "text": "Ablauf des ersten Tages",
+    "level": 2
+   },
+   {
+    "type": "numbered",
+    "items": [
+     "Begrüßung durch deine Führungskraft und Rundgang durch das Gebäude",
+     "Termin bei der Personalabteilung: Unterlagen, Fragen zu Gehalt und Zeiterfassung",
+     "Übergabe von Schlüssel, Zugangskarte und – je nach Stelle – Laptop und Diensthandy",
+     "Einrichtung deiner Zugänge und erste Anmeldung zusammen mit der IT",
+     "Gemeinsames Mittagessen mit deinem Team",
+     "Sicherheitsunterweisung: Fluchtwege, Erste Hilfe, Brandschutz",
+     "Kurzes Abschlussgespräch mit deiner Führungskraft: Was steht in den nächsten Tagen an?"
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Mach dir keine Sorgen, wenn du dir am ersten Tag nicht alle Namen und Abläufe merken kannst. Das geht allen so. Wichtig ist nur, dass du am Ende des Tages weißt, wo dein Arbeitsplatz ist, wie du dich anmeldest und wen du fragen kannst."
+   },
+   {
+    "type": "heading",
+    "text": "Die ersten Tage danach",
+    "level": 2
+   },
+   {
+    "type": "paragraph",
+    "text": "Ab dem zweiten Tag arbeitest du dich Schritt für Schritt in deine Aufgaben ein. Deine Führungskraft gibt dir dafür einen Einarbeitungsplan, in dem steht, welche Abteilungen du kennenlernst, welche Schulungen anstehen und welche Aufgaben du nach und nach übernimmst. Im Büro begleitest du in der ersten Woche auch einen Tag den Kundendienst, damit du siehst, was draußen passiert, wenn bei uns im Büro ein Auftrag angelegt wird."
+   },
+   {
+    "type": "heading",
+    "text": "Deine Patin oder dein Pate",
+    "level": 2
+   },
+   {
+    "type": "paragraph",
+    "text": "Jede neue Kollegin und jeder neue Kollege bekommt für die ersten drei Monate eine Patin oder einen Paten aus dem eigenen Bereich. Sie oder er zeigt dir die alltäglichen Abläufe, stellt dich den wichtigsten Kolleginnen und Kollegen vor und ist erste Ansprechperson für alle Fragen, die nicht in diesem Handbuch stehen – von der Kaffeemaschine bis zur Reisekostenabrechnung. Ihr trefft euch in den ersten Wochen mindestens einmal pro Woche zu einem kurzen Gespräch. Nach drei Monaten führst du mit deiner Führungskraft ein Feedbackgespräch, in dem ihr gemeinsam auf die Einarbeitung zurückblickt."
+   },
+   {
+    "type": "heading",
+    "text": "Arbeitszeit und Gleitzeit",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Die regelmäßige Arbeitszeit beträgt bei einer Vollzeitstelle 39 Stunden pro Woche, verteilt auf Montag bis Freitag. Für die Kolleginnen und Kollegen im Büro gilt Gleitzeit. Für Montage und Kundendienst gelten die Einsatzpläne der jeweiligen Abteilung, die dir deine Führungskraft erklärt. Teilzeitregelungen sind in deinem Arbeitsvertrag festgehalten."
+   },
+   {
+    "type": "heading",
+    "text": "Gleitzeitregeln im Büro",
+    "level": 2
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Gleitzeitrahmen: Montag bis Freitag von 6:30 bis 19:00 Uhr",
+     "Kernzeit: Montag bis Donnerstag von 9:00 bis 15:00 Uhr, freitags von 9:00 bis 12:00 Uhr",
+     "Pausen: bei mehr als 6 Stunden Arbeit mindestens 30 Minuten, bei mehr als 9 Stunden mindestens 45 Minuten",
+     "Höchstens 10 Stunden Arbeit pro Tag, so verlangt es das Arbeitszeitgesetz",
+     "Gleitzeitkonto: bis zu 40 Plusstunden und 10 Minusstunden",
+     "Gleittage: bis zu 6 ganze Tage pro Jahr nach Absprache im Team"
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Deine Arbeitszeit erfasst du am Terminal am Eingang mit deiner Zugangskarte oder, wenn du unterwegs bist, in der Zeiterfassungs-App auf dem Diensthandy. Wenn du einmal vergisst zu stempeln, trägst du die Zeit nachträglich im Personalportal ein; deine Führungskraft bestätigt sie dort. Bitte stimme Gleittage und längere Abwesenheiten rechtzeitig mit deinem Team ab, damit Telefon und Kundenanfragen immer besetzt sind."
+   },
+   {
+    "type": "heading",
+    "text": "Überstunden und mobiles Arbeiten",
+    "level": 2
+   },
+   {
+    "type": "paragraph",
+    "text": "Überstunden ordnet deine Führungskraft an. Sie werden in der Regel durch Freizeit ausgeglichen. Wenn sich auf deinem Gleitzeitkonto dauerhaft mehr als 30 Stunden ansammeln, sprich bitte mit deiner Führungskraft darüber, wie ihr sie abbaut. Im Büro ist nach der Einarbeitung mobiles Arbeiten an bis zu zwei Tagen pro Woche möglich, wenn die Aufgaben es zulassen. In den ersten drei Monaten arbeitest du aber vor Ort, damit du die Abläufe und die Menschen gut kennenlernst."
+   },
+   {
+    "type": "heading",
+    "text": "Dienstreisen und Fahrtzeiten",
+    "level": 2
+   },
+   {
+    "type": "paragraph",
+    "text": "Fahrten zu Kunden, Baustellen oder Lieferanten während der Arbeitszeit gelten als Arbeitszeit. Für Dienstfahrten nutzt du nach Möglichkeit ein Firmenfahrzeug, die Buchung läuft über den Empfang. Fährst du ausnahmsweise mit dem eigenen Auto, erstatten wir 0,30 € pro Kilometer. Die Reisekostenabrechnung reichst du monatlich über das Personalportal ein; deine Patin oder dein Pate zeigt dir beim ersten Mal, wie es geht."
+   },
+   {
+    "type": "heading",
+    "text": "Urlaub und Krankmeldung",
+    "level": 1
+   },
+   {
+    "type": "heading",
+    "text": "Urlaub",
+    "level": 2
+   },
+   {
+    "type": "paragraph",
+    "text": "Bei einer Fünf-Tage-Woche hast du Anspruch auf 30 Arbeitstage Urlaub im Kalenderjahr. Im Eintrittsjahr erhältst du für jeden vollen Monat der Beschäftigung ein Zwölftel davon. Zusätzlich sind der 24. und der 31. Dezember bei uns arbeitsfrei. Wer in Teilzeit an weniger Tagen arbeitet, bekommt entsprechend weniger Urlaubstage, aber genauso viele freie Wochen."
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Urlaub beantragst du im Personalportal, deine Führungskraft genehmigt ihn dort.",
+     "Längeren Urlaub ab einer Woche bitte mindestens vier Wochen vorher beantragen, für die Sommerferien bis Ende Februar.",
+     "Plane deinen Urlaub mit deinem Team, damit die Vertretung geregelt ist.",
+     "Resturlaub sollte bis zum 31. März des Folgejahres genommen werden.",
+     "Vor dem Urlaub richtest du in Outlook eine Abwesenheitsnotiz mit deiner Vertretung ein."
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Im Monteursbereich gibt es außerdem Urlaubssperren in der Heizperiode, wenn der Kundendienst besonders gefragt ist. Deine Führungskraft sagt dir rechtzeitig, welche Wochen betroffen sind."
+   },
+   {
+    "type": "paragraph",
+    "text": "Gesetzliche Feiertage richten sich nach Baden-Württemberg. Dazu gehören neben den bundesweiten Feiertagen auch Heilige Drei Könige am 6. Januar, Fronleichnam und Allerheiligen am 1. November. An diesen Tagen ist der Betrieb geschlossen; für Notdienste gibt es einen eigenen Plan mit Zuschlägen."
+   },
+   {
+    "type": "heading",
+    "text": "Krankmeldung",
+    "level": 2
+   },
+   {
+    "type": "paragraph",
+    "text": "Wenn du krank bist, gib bitte **am ersten Tag vor Arbeitsbeginn** Bescheid – telefonisch bei deiner Führungskraft oder, wenn du sie nicht erreichst, bei der Personalabteilung. Erreichst du niemanden, reicht eine kurze E-Mail. Sag dabei, wie lange du voraussichtlich ausfällst und ob dringende Termine verschoben werden müssen. Medizinische Details musst du nicht nennen."
+   },
+   {
+    "type": "paragraph",
+    "text": "Dauert die Arbeitsunfähigkeit länger als drei Kalendertage, brauchen wir spätestens am vierten Tag eine ärztliche Bescheinigung. Bist du gesetzlich versichert, ruft die Personalabteilung die Bescheinigung elektronisch bei deiner Krankenkasse ab (eAU). Du musst dich dafür nur ärztlich krankschreiben lassen und uns sagen, dass eine Bescheinigung vorliegt. Bist du privat versichert, schickst du die Bescheinigung bitte als Scan an die Personalabteilung."
+   },
+   {
+    "type": "paragraph",
+    "text": "Wird dein Kind krank, informierst du uns auf demselben Weg. Die Personalabteilung erklärt dir, wie du Kinderkrankentage bei deiner Krankenkasse beantragst. Wenn du nach einer längeren Krankheit zurückkommst, bieten wir dir ein Gespräch zur Wiedereingliederung an."
+   },
+   {
+    "type": "heading",
+    "text": "IT und Passwörter",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Am ersten Tag bekommst du von der IT deinen Benutzernamen und ein Startpasswort, das du bei der ersten Anmeldung änderst. Laptop, Diensthandy und Software sind für die Arbeit bestimmt; private Nutzung ist nur in geringem Umfang und in den Pausen erlaubt. Dateien speicherst du auf den Netzlaufwerken oder in den Teams-Kanälen deiner Abteilung, nicht auf dem Desktop – nur dort werden sie jede Nacht gesichert."
+   },
+   {
+    "type": "heading",
+    "text": "Telefon, E-Mail und Teams",
+    "level": 2
+   },
+   {
+    "type": "paragraph",
+    "text": "Für interne Absprachen nutzen wir Microsoft Teams: kurze Fragen im Chat, Abstimmungen in den Kanälen der Abteilung und Besprechungen als Teams-Termin. E-Mail nutzen wir vor allem für Kunden, Lieferanten und Dokumente, die nachvollziehbar abgelegt werden müssen. Dein Telefon leitest du um, wenn du nicht am Platz bist, damit Kundenanrufe nicht ins Leere laufen. Eine einheitliche E-Mail-Signatur richtet dir die IT am ersten Tag ein."
+   },
+   {
+    "type": "heading",
+    "text": "Passwortregeln",
+    "level": 2
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Verwende eine Passphrase aus mindestens 12 Zeichen, zum Beispiel vier zufällige Wörter mit Sonderzeichen dazwischen.",
+     "Nutze für jeden Dienst ein eigenes Passwort und nie dein privates.",
+     "Gib dein Passwort niemals weiter, auch nicht an die IT. Wir fragen nie danach.",
+     "Notiere Passwörter nicht auf Zetteln am Bildschirm, sondern nutze den Passwort-Manager, den die IT dir einrichtet.",
+     "Für E-Mail und VPN von unterwegs ist die Zwei-Faktor-Anmeldung mit der Authenticator-App Pflicht."
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Sicher im Alltag",
+    "level": 2
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Sperre deinen Bildschirm mit Windows-Taste und L, sobald du den Platz verlässt.",
+     "Öffne keine unerwarteten Anhänge und klicke nicht auf Links in verdächtigen E-Mails.",
+     "Verdächtige Mails schickst du mit dem Button „Phishing melden“ an die IT.",
+     "Installiere keine eigene Software und schließe keine fremden USB-Sticks an.",
+     "Probleme meldest du im Ticketsystem oder an der IT-Hotline unter der Durchwahl 300."
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Wenn du doch einmal auf einen verdächtigen Link geklickt hast, melde dich sofort bei der IT. Das ist kein Grund, sich zu schämen – je früher wir Bescheid wissen, desto kleiner ist der Schaden. Dasselbe gilt, wenn dein Laptop oder Diensthandy verloren geht oder gestohlen wird: Ruf sofort an, damit die IT das Gerät sperren kann."
+   },
+   {
+    "type": "heading",
+    "text": "Datenschutz",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Wir arbeiten täglich mit personenbezogenen Daten: mit Namen, Adressen und Telefonnummern unserer Kunden, mit Daten von Kolleginnen und Kollegen und manchmal auch mit Informationen aus den Wohnungen und Häusern, in denen wir arbeiten. Die Datenschutz-Grundverordnung (DSGVO) verpflichtet uns, diese Daten zu schützen. An deinem ersten Tag unterschreibst du deshalb eine Verpflichtung auf die Vertraulichkeit, und in den ersten zwei Wochen machst du eine kurze Online-Schulung zum Datenschutz."
+   },
+   {
+    "type": "heading",
+    "text": "Was das im Alltag heißt",
+    "level": 2
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Nutze Kundendaten nur für den Auftrag, für den sie gedacht sind.",
+     "Schicke keine Kundendaten an private E-Mail-Adressen oder über private Messenger.",
+     "Lass keine Unterlagen offen auf dem Schreibtisch oder im Auto liegen.",
+     "Wirf Papier mit personenbezogenen Daten in die verschlossenen Datenschutztonnen, nicht ins Altpapier.",
+     "Gib am Telefon nur Auskunft, wenn du sicher bist, mit wem du sprichst.",
+     "Fotografiere auf Baustellen nur die Anlage, nicht Personen oder private Räume."
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Besonders sensibel sind Termine bei Kunden zu Hause. Was du dort siehst und hörst, bleibt vertraulich. Schlüssel, die Kunden uns überlassen, werden nur mit einer Nummer und nie mit der Adresse beschriftet und liegen im verschlossenen Schlüsselschrank. Auftragszettel mit Namen und Adressen nimmst du nach dem Termin wieder mit ins Büro oder fotografierst sie in die Auftrags-App und vernichtest das Papier."
+   },
+   {
+    "type": "paragraph",
+    "text": "Wenn dir eine Datenpanne auffällt – zum Beispiel ein verlorenes Handy, eine falsch verschickte E-Mail oder ein offener Schrank mit Personalakten –, melde sie bitte sofort der IT oder unserer Datenschutzbeauftragten. Wir müssen solche Vorfälle unter Umständen innerhalb von 72 Stunden an die Aufsichtsbehörde melden. Auch hier gilt: Lieber einmal zu viel melden als einmal zu wenig."
+   },
+   {
+    "type": "heading",
+    "text": "Ansprechpartner",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Die wichtigsten Ansprechpartner für den Anfang findest du in dieser Übersicht. Die Nummern sind interne Durchwahlen; E-Mail-Adressen haben die Form vorname.nachname@brenner-haustechnik.de."
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Thema",
+      "Ansprechperson",
+      "Durchwahl"
+     ],
+     [
+      "Arbeitsvertrag, Gehalt, Urlaub",
+      "Selin Yilmaz, Personalabteilung",
+      "210"
+     ],
+     [
+      "Zeiterfassung und Gleitzeit",
+      "Selin Yilmaz, Personalabteilung",
+      "210"
+     ],
+     [
+      "Laptop, Zugänge, Passwörter",
+      "Jonas Brandt, IT",
+      "300"
+     ],
+     [
+      "Arbeitssicherheit und Erste Hilfe",
+      "Markus Keller, Fachkraft für Arbeitssicherheit",
+      "240"
+     ],
+     [
+      "Datenschutz",
+      "Dr. Petra Lang, externe Datenschutzbeauftragte",
+      "über die Personalabteilung"
+     ],
+     [
+      "Betriebsrat",
+      "Andrea Wolf, Vorsitzende",
+      "250"
+     ],
+     [
+      "Empfang, Post, Schlüssel",
+      "Empfang im Erdgeschoss",
+      "100"
+     ]
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Für alles, was hier nicht steht, ist deine Patin oder dein Pate die richtige Adresse. Und wenn du nicht weißt, wen du fragen sollst: Frag einfach am Empfang, dort kennt man fast jede Antwort oder zumindest die Person, die sie kennt."
+   },
+   {
+    "type": "heading",
+    "text": "Checkliste für die ersten zwei Wochen",
+    "level": 1
+   },
+   {
+    "type": "paragraph",
+    "text": "Hake die Punkte ab, sobald sie erledigt sind, und geh die Liste am Ende der zweiten Woche gemeinsam mit deiner Führungskraft durch."
+   },
+   {
+    "type": "heading",
+    "text": "Erste Woche",
+    "level": 2
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "☐ Unterlagen bei der Personalabteilung abgegeben",
+     "☐ Schlüssel, Zugangskarte und Arbeitsmittel erhalten",
+     "☐ Passwort geändert und Zwei-Faktor-Anmeldung eingerichtet",
+     "☐ Zeiterfassung ausprobiert",
+     "☐ Sicherheitsunterweisung besucht",
+     "☐ Team und Patin oder Pate kennengelernt",
+     "☐ Ablage auf den Netzlaufwerken gezeigt bekommen"
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Zweite Woche",
+    "level": 2
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "☐ Online-Schulung zum Datenschutz abgeschlossen",
+     "☐ Verpflichtung auf die Vertraulichkeit unterschrieben",
+     "☐ Wichtigste Abläufe der eigenen Abteilung kennengelernt",
+     "☐ Erste eigene Aufgaben übernommen",
+     "☐ Kolleginnen und Kollegen der Nachbarabteilungen kennengelernt",
+     "☐ Feedbackgespräch mit der Führungskraft geführt"
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Wir wünschen dir einen guten Start und freuen uns auf die Zusammenarbeit!"
+   }
+  ]
+ }
+}

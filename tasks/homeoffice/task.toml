@@ -1,0 +1,48 @@
+id = "homeoffice"
+title = "Circular email from a long works agreement (attachment, no file)"
+version = 1
+kind = "no_file"
+difficulty = "hard"
+tags = ["no_file", "attachment", "long", "email", "summarize", "short", "superseded_info"]
+
+# Asked for is a short email in the chat (at most 150 words, to paste into Outlook), no file. The attachment is a
+# works agreement of about 18,700 characters (7 pages). The four requested rules:
+# - Scope: § 4 Abs. 1 says up to two days per week, Protokollnotiz Nr. 3 at the very end takes precedence: up to three
+#   mobile days per calendar week, at least two days on site.
+# - Applying: once, a supplementary agreement with HR (§ 3 Abs. 3), then enter each week's days in the Personalportal
+#   by Thursday of the previous week, 12:00; the manager approves by Friday (§ 5).
+# - Availability: core hours 9–15 by phone and Teams, on mobile days also on Fridays (§ 6 Abs. 3; the flexitime core
+#   hours end at 12 on Fridays, the working-time frame 6:30–19:30 is not the availability).
+# - Applies from Sunday, 1 November 2026 (§ 15); 2 October is the signing date, 26 October the earliest entry for the
+#   first week (Protokollnotiz Nr. 1), 31.12.2027 the end of the pilot phase.
+# Forbidden besides source markers and tags of the RAG template: „bis zu / höchstens / maximal zwei Tage“, the
+# superseded scope from § 4 Abs. 1. A correct email never says that: the agreement is new (no „bisher“), part-time is
+# stated there without a number („anteilig“), and „mindestens zwei Tage im Betrieb“ does not match the pattern.
+[[turns]]
+text = "Im Anhang ist unsere neue Betriebsvereinbarung zum mobilen Arbeiten. Die liest so schnell keiner ganz durch. Schreib mir bitte eine kurze Rundmail an die Kolleginnen und Kollegen im Büro, höchstens 150 Wörter, die kopiere ich direkt in Outlook. Rein sollen nur die Regeln, die im Alltag wirklich zählen: an wie vielen Tagen pro Woche man mobil arbeiten darf, wie und bis wann man die Tage beantragt, wann man erreichbar sein muss und ab wann das Ganze gilt. Absender bin ich, Kerstin Haug aus der Personalabteilung."
+attachments = [{ name = "Betriebsvereinbarung Mobiles Arbeiten 2026.pdf", file = "betriebsvereinbarung_mobil.txt" }]
+
+[reply]
+words_max = 150
+no_markdown = true
+
+[reply.topics]
+"bis zu drei Tage" = '(?<![\d,.])(3|drei)\s+(\S+\s+){0,2}(arbeits)?tag'
+Personalportal = 'portal'
+"bis Donnerstag der Vorwoche" = 'donnerstag'
+"Kernzeit 9–15 Uhr" = '(?<![\d:.,])0?9([:.]00)?\s*(uhr\s*)?(-|bis|und)\s*15([:.]00)?(?![\d:])'
+"ab 1. November" = '(?<!\d)0?1\.\s*(11\.|november)'
+
+[reply.forbidden]
+"überholt: bis zu zwei Tage" = '(bis\s+zu|höchstens|maximal|max\.)\s+(2|zwei)\s+(\S+\s+)?(arbeits)?tag'
+Quellenmarker = '\[\d{1,2}\]'
+"Tags der RAG-Vorlage" = '</?(source|context)\b'
+
+[judge]
+checklist = [
+  "keine Datei, sondern ein fertiger Mailtext im Chat mit Betreff, Anrede, Gruß von Kerstin Haug (Personalabteilung); höchstens 150 Wörter",
+  "Umfang nach Protokollnotiz Nr. 3: bis zu drei mobile Tage pro Woche, mindestens zwei Tage im Betrieb (nicht die überholten zwei Tage aus § 4 Abs. 1)",
+  "Beantragen: einmal die Zusatzvereinbarung mit der Personalabteilung, dann die Tage bis Donnerstag der Vorwoche, 12 Uhr, im Personalportal eintragen, die Führungskraft gibt frei",
+  "Erreichbarkeit in der Kernzeit 9–15 Uhr über Telefon und Teams, auch freitags (nicht die Rahmenarbeitszeit 6:30–19:30 Uhr und nicht „freitags bis 12 Uhr“)",
+  "gilt ab 1. November 2026; nur die verlangten Regeln, knapp und freundlich, nichts erfunden, keine Quellenmarker wie [1] und kein Markdown, das in Outlook als Sternchen ankommt",
+]

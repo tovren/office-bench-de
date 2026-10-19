@@ -1,0 +1,45 @@
+id = "servicebericht"
+title = "Slides from a report (attachment)"
+version = 1
+kind = "file"
+file_type = "pptx"
+difficulty = "medium"
+tags = ["attachment", "chart", "given_numbers", "summarize"]
+
+# The report comes as an attachment (PDF text as Open WebUI extracts it, with page numbers). All numbers are in the
+# attachment; the chart must show exactly the three quarters, there is no Q4 yet.
+[[turns]]
+text = "Im Anhang ist der Entwurf unseres Jahresberichts Kundenservice. Mach mir daraus bitte eine PowerPoint mit 6 bis 8 Folien für die Geschäftsführung: die wichtigsten Kennzahlen, ein Säulendiagramm mit den Tickets pro Quartal, die Themen der Anfragen und die geplanten Maßnahmen samt Budget."
+attachments = [{ name = "Jahresbericht Kundenservice 2026 (Entwurf).pdf", file = "jahresbericht_kundenservice.txt" }]
+
+# numbers_sourced (soft): all numbers come from the request (the report); it reports numbers, times and dates that
+# are not there and do not simply follow from it.
+[checks]
+numbers_sourced = true
+slides = [6, 8]
+chart = true
+chart_type = "column"
+chart_values = [[4210, 3980, 4650]]
+values_present = [71, 6.5, 4.3]
+
+[checks.topics]
+"Erstlösungsquote" = 'erstlösung|lösungsquote|first.?contact'
+Zufriedenheit = 'zufrieden'
+Lieferstatus = 'lieferstatus|sendungsverfolgung'
+"Self-Service-Portal" = 'self-?service|portal'
+Budget = '85\.000|85\s*(tsd|t€|tausend)'
+Versanddienstleister = 'versand'
+
+[checks.forbidden]
+Quellenmarker = '\[\d{1,2}\]'
+"Tags der RAG-Vorlage" = '</?(source|context)\b'
+
+[judge]
+checklist = [
+  "6 bis 8 Folien mit Titelfolie, klarer Botschaft je Folie und Fazit oder Entscheidungsbedarf (Budgetfreigabe im November)",
+  "Kennzahlen richtig aus dem Bericht: 12.840 Anfragen Q1–Q3, Erstlösungsquote 71 % (Vorjahr 64 %), Bearbeitungszeit 6,5 h (9,1 h), Zufriedenheit 4,3 von 5 (4,0)",
+  "Säulendiagramm mit genau Q1 4.210, Q2 3.980, Q3 4.650, ohne erfundenes Q4; Anstieg in Q3 mit dem Versanddienstleister erklärt",
+  "Themen der Anfragen mit den Anteilen aus dem Bericht (Lieferstatus 34 % usw.)",
+  "Maßnahmen 2027 und Budget: 85.000 € einmalig plus rund 1.200 € im Monat, erwarteter Effekt",
+  "nichts hinzuerfunden, keine Quellenmarker wie [1], kurze Stichpunkte",
+]

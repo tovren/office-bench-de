@@ -1,0 +1,48 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+# observed in earlier runs (twice): last termination day 19.10.2028 instead of 30.06.2028
+[[mutant]]
+name = "termination_19_10"
+defect = "termination at 31.12.2028 „spätestens 19.10.2028“ (73 days before) instead of Friday, 30.06.2028"
+replace = [["Freitag, 30.06.2028", "19.10.2028"]]
+expected = ["topics", "forbidden"]
+
+# superseded clause: three months from § 4.2 instead of six months from § 19.1
+[[mutant]]
+name = "termination_three_months"
+defect = "notice period of three months per § 4.2 (superseded by § 19.1): Saturday, 30.09.2028 at the latest"
+replace = [["Freitag, 30.06.2028", "Samstag, 30.09.2028"], ["6 Monate vor Ablauf", "3 Monate vor Ablauf"],
+           ["§ 19.1 (ersetzt die drei Monate aus § 4.2), § 4.4", "§ 4.2, § 4.4"]]
+expected = ["forbidden", "topics"]
+
+# observed in an earlier run: „Montag, 30. Juni 2028“, correct is Friday
+[[mutant]]
+name = "termination_wrong_weekday"
+defect = "notice deadline „Montag, 30.06.2028“: 30.06.2028 is a Friday"
+replace = [["Freitag, 30.06.2028", "Montag, 30.06.2028"]]
+expected = ["weekday"]
+
+# superseded price from Anlage 2 (42.00 €) instead of § 19.2 (38.00 €) for the minimum term
+[[mutant]]
+name = "flat_fee_superseded_price"
+defect = "flat fee with 42.00 € per workstation from Anlage 2 (superseded by § 19.2): 1,318.00 € instead of 1,222.00 €"
+replace = [["Sie ändern die Kündigungsfrist (sechs statt drei Monate) und den Preis je Arbeitsplatz (38,00 € statt 42,00 € nach dem Preisblatt).",
+            "Sie ändern die Kündigungsfrist (sechs statt drei Monate)."],
+           ["Arbeitsplätze (Preis nach § 19.2)", "Arbeitsplätze (Preis nach Anlage 2)"],
+           ["38,00 €", "42,00 €"], ["912,00 €", "1.008,00 €"], ["1.222,00 €", "1.318,00 €"], ["14.664,00 €", "15.816,00 €"]]
+expected = ["values_present"]
+
+# observed in an earlier run: „98,00 € je angefangene Viertelstunde“ (392 €/h)
+[[mutant]]
+name = "rate_per_quarter_hour"
+defect = "hourly rate given as „98,00 € je angefangene Viertelstunde“, which would be 392 € per hour"
+replace = [["98,00 € je Stunde, abgerechnet je angefangene Viertelstunde", "98,00 € je angefangene Viertelstunde"]]
+expected = ["values_present", "forbidden"]
+
+# observed in three earlier runs (45 and 59 markers in two of them)
+[[mutant]]
+name = "source_markers"
+defect = "source marker „[1]“ from the RAG template in the overview"
+replace = [["Einen dauerhaften, gesicherten Fernwartungszugang bereitstellen und funktionsfähig halten (§ 9.3).",
+            "Einen dauerhaften, gesicherten Fernwartungszugang bereitstellen und funktionsfähig halten (§ 9.3) [1]."]]
+expected = ["forbidden"]

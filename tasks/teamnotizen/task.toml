@@ -1,0 +1,47 @@
+id = "teamnotizen"
+title = "Minutes from notes (attachment)"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "medium"
+tags = ["attachment", "table", "names", "addendum", "weekday"]
+dates_from = "2026-10-13"
+
+# The notes come as an attachment (Open WebUI puts them before the message with its RAG template; the template asks
+# for source markers like [1], which do not belong in the document). „gestern“ = Monday, 12.10.2026; „bis Fr“ =
+# Friday, 16.10.2026. The addendum at the end moves the CRM training from 22.10. to Tuesday, 27.10.
+[[turns]]
+text = "Anbei meine Notizen von der Teamrunde gestern. Mach mir daraus bitte ein ordentliches Protokoll als Word-Dokument, das ich ans Team schicken kann, mit einer Tabelle für die Aufgaben (wer, was, bis wann)."
+attachments = [{ name = "Notizen Teamrunde 12.10.docx", file = "notizen_teamrunde.txt" }]
+
+# numbers_sourced (soft): all numbers come from the request (the notes); it reports numbers, times and dates that
+# are not there and do not simply follow from it.
+[checks]
+numbers_sourced = true
+tables_min = 1
+names = ["Krüger", "Wendt", "Demir", "Rossi", "Feldmann", "Hahn"]
+
+[checks.topics]
+"Umsatz Q3" = '1[,.]48\s*mio|1\.480\.000'
+"CRM-Schulung am 27.10." = '(?<!\d)27\.\s*(10\.|oktober)'
+"Raum 2.14" = '2\.14'
+"Messebudget" = '4\.500|4500'
+"Druckerei Maier" = 'maier'
+"Urlaubsanträge bis 30.10." = '(?<!\d)30\.\s*(10\.|oktober)'
+"Beschluss CRM statt Excel" = 'crm'
+"Angebote über 10.000 €" = '10\.000|10000|10 000'
+"nächste Teamrunde 26.10." = '(?<!\d)26\.\s*(10\.|oktober)'
+
+[checks.forbidden]
+Quellenmarker = '\[\d{1,2}\]'
+"Tags der RAG-Vorlage" = '</?(source|context)\b'
+
+[judge]
+checklist = [
+  "Kopf mit Datum Montag, 12.10.2026, Teilnehmenden (Sabine Krüger als Leitung, Tobias Wendt, Aylin Demir, Marco Rossi, Jana Feldmann) und Peter Hahn als abwesend",
+  "alle vier Themen, die Beschlüsse und Sonstiges vollständig und sachlich ausformuliert, nichts erfunden",
+  "Nachtrag umgesetzt: CRM-Schulung am Dienstag, 27.10.2026, 9–12 Uhr, Raum 2.14 (nicht mehr der 22.10.)",
+  "Aufgabentabelle mit wer, was, bis wann; „bis Fr“ als Freitag, 16.10.2026; Fristen 23.10. und 30.10. richtig, Peters Anrufe bis Ende Oktober",
+  "Wochentage passen zu den Daten, keine Quellenmarker wie [1] und keine Platzhalter",
+  "nächste Teamrunde Montag, 26.10.2026, 10 Uhr",
+]

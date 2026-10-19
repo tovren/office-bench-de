@@ -1,0 +1,337 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Plan-Ist-Vergleich Kostenstellen Q1 bis Q3 2026",
+  "sheets": [
+   {
+    "name": "Plan-Ist Q1-Q3",
+    "columns": [
+     {
+      "header": "Kostenstelle"
+     },
+     {
+      "header": "Quartal"
+     },
+     {
+      "header": "Plan (€)",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Ist (€)",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Abweichung in €",
+      "type": "currency",
+      "formula": "=D{row}-C{row}",
+      "total": "sum"
+     },
+     {
+      "header": "Abweichung in %",
+      "type": "percent",
+      "formula": "=E{row}/C{row}"
+     }
+    ],
+    "rows": [
+     [
+      "4100 Verwaltung",
+      "Q1",
+      42000,
+      40950,
+      null,
+      null
+     ],
+     [
+      "4100 Verwaltung",
+      "Q2",
+      42000,
+      43260,
+      null,
+      null
+     ],
+     [
+      "4100 Verwaltung",
+      "Q3",
+      42000,
+      41580,
+      null,
+      null
+     ],
+     [
+      "4200 Vertrieb",
+      "Q1",
+      36000,
+      37440,
+      null,
+      null
+     ],
+     [
+      "4200 Vertrieb",
+      "Q2",
+      38000,
+      36860,
+      null,
+      null
+     ],
+     [
+      "4200 Vertrieb",
+      "Q3",
+      36000,
+      39600,
+      null,
+      null
+     ],
+     [
+      "4300 Kundendienst",
+      "Q1",
+      58000,
+      59160,
+      null,
+      null
+     ],
+     [
+      "4300 Kundendienst",
+      "Q2",
+      60000,
+      63000,
+      null,
+      null
+     ],
+     [
+      "4300 Kundendienst",
+      "Q3",
+      62000,
+      60140,
+      null,
+      null
+     ],
+     [
+      "4400 Werkstatt",
+      "Q1",
+      55000,
+      52800,
+      null,
+      null
+     ],
+     [
+      "4400 Werkstatt",
+      "Q2",
+      60000,
+      61240,
+      null,
+      null
+     ],
+     [
+      "4400 Werkstatt",
+      "Q3",
+      58000,
+      59740,
+      null,
+      null
+     ]
+    ]
+   },
+   {
+    "name": "Je Kostenstelle",
+    "columns": [
+     {
+      "header": "Kostenstelle"
+     },
+     {
+      "header": "Plan Q1–Q3 (€)",
+      "type": "currency",
+      "formula": "=SUMIF('Plan-Ist Q1-Q3'!$A$2:$A$13,A{row},'Plan-Ist Q1-Q3'!$C$2:$C$13)",
+      "total": "sum"
+     },
+     {
+      "header": "Ist Q1–Q3 (€)",
+      "type": "currency",
+      "formula": "=SUMIF('Plan-Ist Q1-Q3'!$A$2:$A$13,A{row},'Plan-Ist Q1-Q3'!$D$2:$D$13)",
+      "total": "sum"
+     },
+     {
+      "header": "Abweichung in €",
+      "type": "currency",
+      "formula": "=C{row}-B{row}",
+      "total": "sum"
+     },
+     {
+      "header": "Abweichung in %",
+      "type": "percent",
+      "formula": "=D{row}/B{row}"
+     }
+    ],
+    "rows": [
+     [
+      "4100 Verwaltung",
+      null,
+      null,
+      null,
+      null
+     ],
+     [
+      "4200 Vertrieb",
+      null,
+      null,
+      null,
+      null
+     ],
+     [
+      "4300 Kundendienst",
+      null,
+      null,
+      null,
+      null
+     ],
+     [
+      "4400 Werkstatt",
+      null,
+      null,
+      null,
+      null
+     ]
+    ]
+   }
+  ]
+ },
+ "previous": {
+  "function": "create_excel_file",
+  "arguments": {
+   "title": "Plan-Ist-Vergleich Kostenstellen Q1 bis Q3 2026",
+   "sheets": [
+    {
+     "name": "Plan-Ist Q1-Q3",
+     "columns": [
+      {
+       "header": "Kostenstelle"
+      },
+      {
+       "header": "Quartal"
+      },
+      {
+       "header": "Plan (€)",
+       "type": "currency",
+       "total": "sum"
+      },
+      {
+       "header": "Ist (€)",
+       "type": "currency",
+       "total": "sum"
+      },
+      {
+       "header": "Abweichung in €",
+       "type": "currency",
+       "formula": "=D{row}-C{row}",
+       "total": "sum"
+      },
+      {
+       "header": "Abweichung in %",
+       "type": "percent",
+       "formula": "=E{row}/C{row}"
+      }
+     ],
+     "rows": [
+      [
+       "4100 Verwaltung",
+       "Q1",
+       42000,
+       40950,
+       null,
+       null
+      ],
+      [
+       "4100 Verwaltung",
+       "Q2",
+       42000,
+       43260,
+       null,
+       null
+      ],
+      [
+       "4100 Verwaltung",
+       "Q3",
+       42000,
+       41580,
+       null,
+       null
+      ],
+      [
+       "4200 Vertrieb",
+       "Q1",
+       36000,
+       37440,
+       null,
+       null
+      ],
+      [
+       "4200 Vertrieb",
+       "Q2",
+       38000,
+       36860,
+       null,
+       null
+      ],
+      [
+       "4200 Vertrieb",
+       "Q3",
+       36000,
+       39600,
+       null,
+       null
+      ],
+      [
+       "4300 Kundendienst",
+       "Q1",
+       58000,
+       59160,
+       null,
+       null
+      ],
+      [
+       "4300 Kundendienst",
+       "Q2",
+       60000,
+       63000,
+       null,
+       null
+      ],
+      [
+       "4300 Kundendienst",
+       "Q3",
+       62000,
+       60140,
+       null,
+       null
+      ],
+      [
+       "4400 Werkstatt",
+       "Q1",
+       55000,
+       52800,
+       null,
+       null
+      ],
+      [
+       "4400 Werkstatt",
+       "Q2",
+       60000,
+       61240,
+       null,
+       null
+      ],
+      [
+       "4400 Werkstatt",
+       "Q3",
+       58000,
+       59740,
+       null,
+       null
+      ]
+     ]
+    }
+   ]
+  }
+ }
+}

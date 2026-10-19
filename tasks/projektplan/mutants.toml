@@ -1,0 +1,56 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+# Correct: start Monday, 19.10.2026, last end no later than Friday, 29.01.2027; end =D+E-1 (start + duration − 1),
+# dates on workdays without public holidays in Baden-Württemberg, progress 0 %.
+
+# observed in two earlier runs: =C2+D2-1 adds responsible and start, #VALUE! in every row
+[[mutant]]
+name = "end_formula_wrong_columns"
+defect = "end date =C+D-1 calculates with responsible and start instead of start and duration: #VALUE!"
+replace = [["=D{row}+E{row}-1", "=C{row}+D{row}-1"]]
+expected = ["formula_errors", "calculations"]
+
+# observed in several earlier runs: end dates on a Sunday, package 1 ends on All Saints' Day
+[[mutant]]
+name = "ends_on_sunday"
+defect = "two packages end on a Sunday (01.11.2026, All Saints' Day, and 15.11.2026)"
+set = [["sheets.0.rows.0.4", 14], ["sheets.0.rows.1.4", 14]]
+expected = ["workdays", "weekend"]
+severity = "soft"
+
+# observed in earlier runs (=D+E without −1, the last package ends Saturday, 30.01.2027, after the deadline)
+[[mutant]]
+name = "deadline_missed"
+defect = "end date =D+E without −1: the last package ends Saturday, 30.01.2027, after the deadline 29.01.2027"
+replace = [["=D{row}+E{row}-1", "=D{row}+E{row}"]]
+expected = ["dates_between"]
+
+# observed in an earlier run (start Saturday, 17.10.2026 instead of Monday, 19.10.2026)
+[[mutant]]
+name = "start_before_monday"
+defect = "the first package starts on Saturday, 17.10.2026, instead of the requested Monday, 19.10.2026"
+set = [["sheets.0.rows.0.3", "2026-10-17"], ["sheets.0.rows.0.4", 14]]
+expected = ["dates_between"]
+
+# observed in an earlier run: start dates as ISO text 2026-10-19 without date format
+[[mutant]]
+name = "start_date_as_text"
+defect = "start dates as text „2026-10-19“ instead of in date format"
+set = [["sheets.0.columns.3.type", "text"]]
+expected = ["column_format"]
+severity = "soft"
+
+# observed in earlier runs (Max Mustermann as the responsible person)
+[[mutant]]
+name = "placeholder_mustermann"
+defect = "placeholder „Max Mustermann“ as the responsible person"
+replace = [["Einkauf", "Max Mustermann"]]
+expected = ["placeholders"]
+severity = "soft"
+
+# observed in earlier runs („Kick-off in KW 42“, but 19.10.2026 is in calendar week 43)
+[[mutant]]
+name = "kickoff_wrong_week"
+defect = "„Kick-off in KW 42“ in the row starting 19.10.2026 (calendar week 43)"
+replace = [["Projektstart und Bedarfsaufnahme", "Kick-off in KW 42 und Bedarfsaufnahme"]]
+expected = ["calendar_week"]
+severity = "soft"

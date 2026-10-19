@@ -1,0 +1,797 @@
+{
+ "function": "create_excel_file",
+ "arguments": {
+  "title": "Auftragsauswertung Q3 2026",
+  "sheets": [
+   {
+    "name": "Aufträge Q3",
+    "columns": [
+     {
+      "header": "Auftragsnr."
+     },
+     {
+      "header": "Datum",
+      "type": "date"
+     },
+     {
+      "header": "Kunde"
+     },
+     {
+      "header": "Leistungsart"
+     },
+     {
+      "header": "Betrag netto",
+      "type": "currency",
+      "total": "sum"
+     },
+     {
+      "header": "Status"
+     }
+    ],
+    "rows": [
+     [
+      "A-26-3107",
+      "2026-07-01",
+      "Immobilien Sattler KG",
+      "Reparatur",
+      1322.5,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3108",
+      "2026-07-02",
+      "Schulze & Partner Steuerberater",
+      "Wartung",
+      280.09,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3112",
+      "2026-07-02",
+      "Immobilien Sattler KG",
+      "Wartung",
+      562.12,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3116",
+      "2026-07-03",
+      "Wohnbau Neckartal eG",
+      "Material",
+      199.42,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3117",
+      "2026-07-06",
+      "Hotel Traube",
+      "Notdienst",
+      873.77,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3121",
+      "2026-07-08",
+      "Hausverwaltung Kröger GmbH",
+      "Material",
+      663.43,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3124",
+      "2026-07-08",
+      "Hausverwaltung Kröger GmbH",
+      "Material",
+      497.93,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3128",
+      "2026-07-09",
+      "Wohnbau Neckartal eG",
+      "Wartung",
+      343.64,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3129",
+      "2026-07-10",
+      "Hausverwaltung Kröger GmbH",
+      "Material",
+      706.99,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3136",
+      "2026-07-14",
+      "Hausverwaltung Kröger GmbH",
+      "Reparatur",
+      736.91,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3139",
+      "2026-07-20",
+      "Autohaus Rempp GmbH",
+      "Reparatur",
+      798.62,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3142",
+      "2026-07-21",
+      "Wohnbau Neckartal eG",
+      "Material",
+      368.26,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3146",
+      "2026-07-22",
+      "Hausverwaltung Kröger GmbH",
+      "Material",
+      291.96,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3149",
+      "2026-07-22",
+      "Autohaus Rempp GmbH",
+      "Reparatur",
+      1283.02,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3150",
+      "2026-07-23",
+      "Hausverwaltung Kröger GmbH",
+      "Wartung",
+      463.33,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3155",
+      "2026-07-23",
+      "Wohnbau Neckartal eG",
+      "Reparatur",
+      290.56,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3158",
+      "2026-07-23",
+      "Schulze & Partner Steuerberater",
+      "Material",
+      750.6,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3159",
+      "2026-07-23",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Wartung",
+      409.71,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3164",
+      "2026-07-24",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Wartung",
+      196.66,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3166",
+      "2026-07-24",
+      "Hausverwaltung Kröger GmbH",
+      "Reparatur",
+      1250.08,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3169",
+      "2026-07-24",
+      "Wohnbau Neckartal eG",
+      "Reparatur",
+      1025.72,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3172",
+      "2026-07-24",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Reparatur",
+      1002.02,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3175",
+      "2026-07-24",
+      "Autohaus Rempp GmbH",
+      "Material",
+      263.73,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3178",
+      "2026-07-28",
+      "Immobilien Sattler KG",
+      "Reparatur",
+      509.54,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3182",
+      "2026-07-28",
+      "Hotel Traube",
+      "Installation",
+      4262.61,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3184",
+      "2026-07-28",
+      "Hotel Traube",
+      "Wartung",
+      496.48,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3187",
+      "2026-07-29",
+      "Schulze & Partner Steuerberater",
+      "Notdienst",
+      834.91,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3190",
+      "2026-07-29",
+      "Schulze & Partner Steuerberater",
+      "Wartung",
+      520.55,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3192",
+      "2026-07-29",
+      "Immobilien Sattler KG",
+      "Installation",
+      5258.07,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3196",
+      "2026-07-30",
+      "Wohnbau Neckartal eG",
+      "Material",
+      556.85,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3198",
+      "2026-07-30",
+      "Schulze & Partner Steuerberater",
+      "Wartung",
+      510.99,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3201",
+      "2026-07-30",
+      "Immobilien Sattler KG",
+      "Reparatur",
+      575.81,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3209",
+      "2026-08-03",
+      "Autohaus Rempp GmbH",
+      "Wartung",
+      611.75,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3211",
+      "2026-08-04",
+      "Wohnbau Neckartal eG",
+      "Material",
+      766.71,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3215",
+      "2026-08-05",
+      "Hausverwaltung Kröger GmbH",
+      "Material",
+      259.69,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3217",
+      "2026-08-06",
+      "Autohaus Rempp GmbH",
+      "Wartung",
+      437.11,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3221",
+      "2026-08-12",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Reparatur",
+      762.25,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3223",
+      "2026-08-14",
+      "Immobilien Sattler KG",
+      "Wartung",
+      493.72,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3225",
+      "2026-08-14",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Reparatur",
+      274.83,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3229",
+      "2026-08-18",
+      "Immobilien Sattler KG",
+      "Reparatur",
+      961.6,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3232",
+      "2026-08-18",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Wartung",
+      192.83,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3234",
+      "2026-08-19",
+      "Schulze & Partner Steuerberater",
+      "Notdienst",
+      795.27,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3237",
+      "2026-08-20",
+      "Wohnbau Neckartal eG",
+      "Reparatur",
+      777.99,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3242",
+      "2026-08-21",
+      "Bäckerei Hölzle GmbH",
+      "Installation",
+      6647.92,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3245",
+      "2026-08-21",
+      "Wohnbau Neckartal eG",
+      "Reparatur",
+      524.81,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3247",
+      "2026-08-24",
+      "Wohnbau Neckartal eG",
+      "Reparatur",
+      1299.34,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3249",
+      "2026-08-24",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Material",
+      196.43,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3253",
+      "2026-08-24",
+      "Hausverwaltung Kröger GmbH",
+      "Wartung",
+      245.05,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3255",
+      "2026-08-24",
+      "Schulze & Partner Steuerberater",
+      "Reparatur",
+      1175.81,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3258",
+      "2026-08-25",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Wartung",
+      322.79,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3261",
+      "2026-08-25",
+      "Hausverwaltung Kröger GmbH",
+      "Reparatur",
+      1393.11,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3264",
+      "2026-08-26",
+      "Wohnbau Neckartal eG",
+      "Material",
+      424.28,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3267",
+      "2026-08-27",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Material",
+      246.15,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3271",
+      "2026-08-28",
+      "Bäckerei Hölzle GmbH",
+      "Material",
+      400.64,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3273",
+      "2026-08-28",
+      "Autohaus Rempp GmbH",
+      "Notdienst",
+      464.08,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3280",
+      "2026-08-31",
+      "Hausverwaltung Kröger GmbH",
+      "Material",
+      200.0,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3283",
+      "2026-09-03",
+      "Immobilien Sattler KG",
+      "Reparatur",
+      984.62,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3287",
+      "2026-09-03",
+      "Schulze & Partner Steuerberater",
+      "Material",
+      350.69,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3288",
+      "2026-09-03",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Installation",
+      6468.62,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3291",
+      "2026-09-04",
+      "Hausverwaltung Kröger GmbH",
+      "Material",
+      197.35,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3294",
+      "2026-09-04",
+      "Schulze & Partner Steuerberater",
+      "Wartung",
+      528.18,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3298",
+      "2026-09-04",
+      "Hotel Traube",
+      "Notdienst",
+      315.75,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3300",
+      "2026-09-07",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Reparatur",
+      532.38,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3304",
+      "2026-09-08",
+      "Hausverwaltung Kröger GmbH",
+      "Material",
+      102.17,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3306",
+      "2026-09-14",
+      "Hausverwaltung Kröger GmbH",
+      "Material",
+      713.01,
+      "offen"
+     ],
+     [
+      "A-26-3311",
+      "2026-09-14",
+      "Schulze & Partner Steuerberater",
+      "Installation",
+      6679.7,
+      "offen"
+     ],
+     [
+      "A-26-3314",
+      "2026-09-14",
+      "Schulze & Partner Steuerberater",
+      "Wartung",
+      534.44,
+      "offen"
+     ],
+     [
+      "A-26-3316",
+      "2026-09-16",
+      "Schulze & Partner Steuerberater",
+      "Material",
+      89.6,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3320",
+      "2026-09-17",
+      "Autohaus Rempp GmbH",
+      "Reparatur",
+      257.44,
+      "offen"
+     ],
+     [
+      "A-26-3322",
+      "2026-09-18",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Material",
+      524.8,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3324",
+      "2026-09-21",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Reparatur",
+      1162.27,
+      "offen"
+     ],
+     [
+      "A-26-3327",
+      "2026-09-22",
+      "Schulze & Partner Steuerberater",
+      "Reparatur",
+      1268.87,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3331",
+      "2026-09-24",
+      "Autohaus Rempp GmbH",
+      "Material",
+      180.05,
+      "offen"
+     ],
+     [
+      "A-26-3336",
+      "2026-09-25",
+      "Wohnbau Neckartal eG",
+      "Material",
+      103.78,
+      "offen"
+     ],
+     [
+      "A-26-3339",
+      "2026-09-25",
+      "Bäckerei Hölzle GmbH",
+      "Notdienst",
+      432.65,
+      "abgerechnet"
+     ],
+     [
+      "A-26-3343",
+      "2026-09-25",
+      "Wohnbau Neckartal eG",
+      "Material",
+      697.93,
+      "offen"
+     ],
+     [
+      "A-26-3346",
+      "2026-09-25",
+      "Wohnbau Neckartal eG",
+      "Wartung",
+      514.94,
+      "offen"
+     ],
+     [
+      "A-26-3349",
+      "2026-09-28",
+      "Pflegeheim Am Kirchberg gGmbH",
+      "Notdienst",
+      700.83,
+      "offen"
+     ],
+     [
+      "A-26-3351",
+      "2026-09-28",
+      "Hotel Traube",
+      "Wartung",
+      300.42,
+      "offen"
+     ],
+     [
+      "A-26-3356",
+      "2026-09-30",
+      "Hausverwaltung Kröger GmbH",
+      "Installation",
+      6186.27,
+      "offen"
+     ]
+    ]
+   },
+   {
+    "name": "Je Monat",
+    "columns": [
+     {
+      "header": "Monat"
+     },
+     {
+      "header": "Von",
+      "type": "date"
+     },
+     {
+      "header": "Bis",
+      "type": "date"
+     },
+     {
+      "header": "Aufträge",
+      "type": "integer",
+      "total": "sum",
+      "formula": "=COUNTIF('Aufträge Q3'!$B$2:$B$81,\">=\"&B{row})-COUNTIF('Aufträge Q3'!$B$2:$B$81,\">\"&C{row})"
+     },
+     {
+      "header": "Umsatz netto",
+      "type": "currency",
+      "total": "sum",
+      "formula": "=SUMIF('Aufträge Q3'!$B$2:$B$81,\">=\"&B{row},'Aufträge Q3'!$E$2:$E$81)-SUMIF('Aufträge Q3'!$B$2:$B$81,\">\"&C{row},'Aufträge Q3'!$E$2:$E$81)"
+     }
+    ],
+    "rows": [
+     [
+      "Juli",
+      "2026-07-01",
+      "2026-07-31",
+      null,
+      null
+     ],
+     [
+      "August",
+      "2026-08-01",
+      "2026-08-31",
+      null,
+      null
+     ],
+     [
+      "September",
+      "2026-09-01",
+      "2026-09-30",
+      null,
+      null
+     ]
+    ],
+    "chart": {
+     "type": "column",
+     "title": "Nettoumsatz je Monat (Q3 2026)",
+     "category_column": "Monat",
+     "value_columns": [
+      "Umsatz netto"
+     ]
+    }
+   },
+   {
+    "name": "Je Kunde",
+    "columns": [
+     {
+      "header": "Kunde"
+     },
+     {
+      "header": "Aufträge",
+      "type": "integer",
+      "total": "sum",
+      "formula": "=COUNTIF('Aufträge Q3'!$C$2:$C$81,A{row})"
+     },
+     {
+      "header": "Umsatz netto",
+      "type": "currency",
+      "total": "sum",
+      "formula": "=SUMIF('Aufträge Q3'!$C$2:$C$81,A{row},'Aufträge Q3'!$E$2:$E$81)"
+     }
+    ],
+    "rows": [
+     [
+      "Schulze & Partner Steuerberater",
+      null,
+      null
+     ],
+     [
+      "Hausverwaltung Kröger GmbH",
+      null,
+      null
+     ],
+     [
+      "Pflegeheim Am Kirchberg gGmbH",
+      null,
+      null
+     ],
+     [
+      "Immobilien Sattler KG",
+      null,
+      null
+     ],
+     [
+      "Wohnbau Neckartal eG",
+      null,
+      null
+     ],
+     [
+      "Bäckerei Hölzle GmbH",
+      null,
+      null
+     ],
+     [
+      "Hotel Traube",
+      null,
+      null
+     ],
+     [
+      "Autohaus Rempp GmbH",
+      null,
+      null
+     ]
+    ]
+   }
+  ]
+ }
+}

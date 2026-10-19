@@ -1,0 +1,40 @@
+id = "projektplan"
+title = "Project plan for an office move"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "medium"
+tags = ["dates", "date_formula", "percent", "appointments", "weekday"]
+dates_from = "2026-10-13"
+
+# „Nächster Montag“ is 19.10.2026 (reference date Tuesday, 13.10.2026); latest end Friday, 29.01.2027.
+[[turns]]
+text = "Erstelle mir bitte einen Projektplan als Excel für den Umzug unserer Verwaltung ins neue Bürogebäude. Wir fangen nächsten Montag an, der Umzug muss bis spätestens Freitag, 29. Januar 2027 durch sein. Etwa 10 Arbeitspakete, jeweils mit Verantwortlichem, Startdatum, Dauer in Kalendertagen und Enddatum, das sich per Formel aus Start und Dauer ergibt. Dazu eine Spalte Fortschritt in Prozent, erstmal überall 0 %."
+
+# workdays = "BW" and column_format (both soft): start and end on workdays without public holidays in
+# Baden-Württemberg, date columns in date format, progress in percent format.
+[checks]
+workdays = "BW"
+column_format = { 'start|beginn|anfang' = "date", '\bende|enddatum' = "date", 'fortschritt' = "percent" }
+data_rows_min = 8
+columns = ['arbeitspaket|aufgabe|vorgang|tätigkeit|maßnahme|phase|schritt|paket', 'verantwortlich|zuständig|owner|\bwer\b', 'start|beginn|anfang', 'dauer|kalendertage', '\bende|enddatum|fertig|abschluss', 'fortschritt|erledigt|status|%']
+dates_between = ["2026-10-19", "2027-01-29"]
+formulas_min = 8
+
+# End = start + duration or start + duration − 1 (depending on whether the start day counts): both are right.
+[[checks.calculations]]
+name = "Ende = Start + Dauer (± 1 Tag je nach Zählweise)"
+columns = { start = 'start|beginn|anfang', dauer = 'dauer|kalendertage', ende = '\bende|enddatum|fertig' }
+formula = "start + dauer - 0.5"
+result = "ende"
+tolerance = 0.6
+
+[judge]
+checklist = [
+  "erstes Paket beginnt Montag, 19.10.2026; letztes Ende spätestens Freitag, 29.01.2027",
+  "rund 10 sinnvolle Arbeitspakete in logischer Reihenfolge (Planung, Umzugsfirma, Möbel, IT und Telefonie, Kommunikation, Packen, Umzug, Nacharbeiten)",
+  "Enddatum als Formel aus Start und Dauer, im Datumsformat",
+  "Start- und Endtermine an Werktagen, Feiertage zwischen den Jahren und am 1. und 6. Januar (Baden-Württemberg) berücksichtigt",
+  "Fortschritt als Prozentspalte mit 0 %",
+  "Verantwortliche als Rollen oder Namen, keine Platzhalter",
+]

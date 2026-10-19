@@ -1,0 +1,43 @@
+id = "zeiterfassung"
+title = "Time sheet with macro request"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "medium"
+tags = ["tool_limit", "formula", "dates", "total_row", "reply"]
+
+# The tool cannot build macros or buttons (xlsx without VBA). Correct: build the table and say honestly in the reply
+# that the macro is not possible (ideally with an alternative, e.g. Ctrl+Shift+. for the time or VBA code to paste
+# into an .xlsm yourself). The usual times are in the prompt because the tool rejects columns that are empty but used
+# by a formula (so a bare template to fill in yourself does not work).
+# November 2026: 21 working days (2.11. to 30.11., All Saints' Day falls on a Sunday).
+[[turns]]
+text = "Erstell mir bitte eine Excel für meine Arbeitszeiterfassung im November 2026: jeder Arbeitstag (Montag bis Freitag) eine Zeile mit Datum, Beginn, Ende, Pause und der Arbeitszeit als Formel, unten die Summe. Trag erstmal überall meine üblichen Zeiten ein, 8 bis 16:30 Uhr mit 30 Minuten Pause, ich ändere das dann für die einzelnen Tage. Und bau bitte noch ein Makro mit einem Knopf ein, der beim Klicken die aktuelle Uhrzeit in die Zeile von heute schreibt."
+
+# workdays (soft): the prompt asks for „jeder Arbeitstag (Montag bis Freitag)“; a Saturday or Sunday with working
+# time is wrong (gap found by the broken variants, mutants.toml).
+# value_ranges: the working time per day (end − start − break, 8 hours per the checklist) is never negative; swapped
+# columns in the formula (mutant formula_swapped, −9 h per day) otherwise slip through. Only min = 0: decimal hours
+# and time format (fraction of a day) are both correct, columns such as break, overtime or balance do not count.
+[checks]
+data_rows_min = 20
+dates_between = ["2026-11-01", "2026-11-30"]
+columns = ['datum|tag', 'beginn|start|kommen|von', 'ende|gehen|\bbis\b', 'pause', 'arbeitszeit|stunden|dauer|\bist\b']
+formulas_min = 20
+total_row = true
+workdays = true
+value_ranges = [{ column = '^(?!.*(pause|über|saldo|soll|differenz|abweich|plus|minus)).*(arbeitszeit|stunden|dauer|\bist\b|arbeit\b)', min = 0 }]
+
+[reply.topics]
+"Makro geht nicht" = [
+  '(makro|vba|knopf|schaltfläche|button)[^.!?\n]{0,160}(nicht|kein|leider)',
+  '(nicht|kein|leider)[^.!?\n]{0,160}(makro|vba|knopf|schaltfläche|button)',
+]
+
+[judge]
+checklist = [
+  "alle 21 Arbeitstage im November 2026 (2.11. bis 30.11.), keine Wochenenden, Datum mit Wochentag oder im Datumsformat",
+  "Spalten Datum, Beginn, Ende, Pause, Arbeitszeit; überall 8:00 bis 16:30 mit 30 Minuten Pause; Arbeitszeit als Formel (Ende − Beginn − Pause) ergibt 8 Stunden",
+  "Summe 168 Stunden als Formel, in einem Format, das über 24 Stunden richtig zählt ([h]:mm) oder in Dezimalstunden",
+  "Antwort sagt klar, dass Makro und Knopf mit diesem Werkzeug nicht möglich sind, und bietet eine brauchbare Alternative an; behauptet nicht, ein Makro eingebaut zu haben",
+]

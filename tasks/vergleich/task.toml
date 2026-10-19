@@ -1,0 +1,32 @@
+id = "vergleich"
+title = "Laptop comparison"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "medium"
+tags = ["formula", "chart", "rating"]
+
+[[turns]]
+text = "Vergleiche in einer Excel-Tabelle vier Angebote für neue Firmen-Laptops: Preis pro Gerät, Garantie in Jahren, Gewicht, Akkulaufzeit und eine Bewertung von 1 bis 5. Berechne die Kosten für 25 Geräte per Formel und zeig die Preise in einem Balkendiagramm."
+
+[checks]
+data_rows_min = 4
+columns = ['preis', 'garantie', 'gewicht', 'akku|laufzeit|batterie', 'bewertung|\bnote\b|punkte|rating|sterne|score']
+chart = true
+chart_type = ["bar", "column"]
+formulas_min = 1
+value_ranges = [{ column = 'bewertung|\bnote\b|punkte|rating|sterne|score', min = 1, max = 5 }]
+
+[[checks.calculations]]
+name = "Kosten 25 Geräte = 25 × Preis"
+columns = { preis = '^(?!.*(25|gesamt|summe|kosten)).*preis', kosten = '25|gesamt|kosten' }
+formula = "25 * preis"
+result = "kosten"
+
+[judge]
+checklist = [
+  "vier Angebote mit allen fünf Merkmalen und Einheiten",
+  "Kosten für 25 Geräte als Formel",
+  "Balkendiagramm der Preise",
+  "plausible Werte (Preis, Gewicht in kg, Akku in Stunden), Bewertung 1–5 nachvollziehbar",
+]

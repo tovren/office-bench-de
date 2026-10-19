@@ -1,0 +1,44 @@
+id = "mahnung"
+title = "Payment reminder (overdue only)"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "medium"
+tags = ["letter", "table", "dates", "arithmetic", "deadline"]
+
+# Due date = invoice date + 30 days: 0412 on Wed 02.09., 0467 on Fri 18.09., 0533 on Wed 07.10.2026 (overdue);
+# 0571 only on Thu 22.10.2026 (not yet due, does not belong in the reminder). Open and due: 2.380,00 + 1.190,00 +
+# 4.165,50 = 7.735,50 € (all four: 8.628,00 €). New deadline 10 days from today: Friday, 23.10.2026.
+# No dates_from: the invoice and due dates lie in the past.
+[[turns]]
+text = "Schreib mir bitte eine Zahlungserinnerung als Word-Dokument an die Gerber Metallbau GmbH, z. Hd. Herrn Stefan Gerber, Industriestraße 12, 72766 Reutlingen. Bei denen sind noch vier Rechnungen offen: Nr. 2026-0412 vom 3. August über 2.380,00 €, Nr. 2026-0467 vom 19. August über 1.190,00 €, Nr. 2026-0533 vom 7. September über 4.165,50 € und Nr. 2026-0571 vom 22. September über 892,50 €. Zahlungsziel ist jeweils 30 Tage nach Rechnungsdatum. Erinnere bitte nur an die Rechnungen, die heute schon überfällig sind, als Tabelle mit Rechnungsdatum, Fälligkeit und Betrag, darunter die Summe. Neue Zahlungsfrist: 10 Tage ab heute. Freundlich, aber bestimmt. Absender ist unsere Buchhaltung, Frau Yilmaz, Brenner Haustechnik GmbH."
+
+# numbers_sourced (soft): all numbers come from the prompt (the invoices); it reports numbers, times and dates that
+# are not there and do not simply follow from it.
+[checks]
+numbers_sourced = true
+tables_min = 1
+names = ["Gerber", "Yilmaz"]
+values_present = [2380, 1190, 4165.5, 7735.5]
+
+[checks.topics]
+"fällig 02.09." = '(?<!\d)0?2\.\s*(0?9\.|september)'
+"fällig 18.09." = '(?<!\d)18\.\s*(0?9\.|september)'
+"fällig 07.10." = '(?<!\d)0?7\.\s*(10\.|oktober)'
+"neue Frist 23.10." = '(?<!\d)23\.\s*(10\.|oktober)'
+
+# The invoice numbers are soft: the prompt asks the table only for invoice date, due date and amount; without the
+# numbers the reminder is weaker, but not wrong (as in the task anfrage).
+[checks.topics_soft]
+"Rechnung 2026-0412" = '2026-0412'
+"Rechnung 2026-0467" = '2026-0467'
+"Rechnung 2026-0533" = '2026-0533'
+
+[judge]
+checklist = [
+  "nur die drei überfälligen Rechnungen (2026-0412, -0467, -0533) in der Tabelle; 2026-0571 (fällig erst am 22.10.2026) nicht gemahnt, höchstens als Hinweis",
+  "Fälligkeiten richtig: 02.09.2026, 18.09.2026 und 07.10.2026; Summe 7.735,50 €",
+  "neue Frist Freitag, 23.10.2026 (10 Tage ab dem 13.10.2026), Wochentag stimmt, falls genannt",
+  "vollständiger Geschäftsbrief: Absender Brenner Haustechnik GmbH, Empfängeranschrift mit Herrn Gerber, Datum, Betreff, Anrede, Gruß von Frau Yilmaz",
+  "Ton freundlich, aber bestimmt; Hinweis, das Schreiben sei gegenstandslos, falls schon bezahlt; keine erfundenen Mahngebühren oder Bankdaten als Platzhalter",
+]

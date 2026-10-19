@@ -1,0 +1,177 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Ergebnisprotokoll Besprechung Infotag Wärmepumpe vom 13. Oktober 2026",
+  "header_text": "Brenner Haustechnik GmbH",
+  "blocks": [
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Datum",
+      "Dienstag, 13.10.2026, 9:15 bis 9:34 Uhr"
+     ],
+     [
+      "Ort",
+      "Besprechungsraum EG und Teams"
+     ],
+     [
+      "Teilnehmende",
+      "Katrin Albrecht (Leitung), Jonas Petersen (über Teams), Melanie Schuster, Stefan Ott, Nina Kaya, Dennis Horn (später dazugekommen)"
+     ],
+     [
+      "Entschuldigt",
+      "Thomas Brenner (Termin bei der Innung)"
+     ],
+     [
+      "Protokoll",
+      "Katrin Albrecht, nach dem automatischen Transkript"
+     ]
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "1. Termin und Ablauf",
+    "level": 1
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Der Infotag Wärmepumpe findet am Samstag, 14. November 2026, von 10 bis 16 Uhr in der Ausstellung und in der Halle statt.",
+     "Erwartet werden 60 bis 80 Besucherinnen und Besucher über den Tag verteilt. Anmeldung über die Website, Besuch auch ohne Anmeldung möglich.",
+     "Ablauf: 10 Uhr Begrüßung durch Herrn Brenner, 11 Uhr Führung durch die Ausstellung (Dennis Horn), 13 Uhr Vortrag zur Förderung (Stefan Ott, rund 20 Minuten), 14:30 Uhr Vortrag von Herrn Brückner (Thermatec) zu den neuen Geräten. Vormittags gibt es Führungen durch die Ausstellung.",
+     "Der Vortrag von Thermatec wurde am Ende der Besprechung auf 14:30 Uhr verlegt, weil Herr Brückner erst am Nachmittag kommen kann. Er soll das bis Freitag, 23.10.2026, schriftlich bestätigen."
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "2. Budget",
+    "level": 1
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Herr Brenner hat ein Gesamtbudget von 6.500 € freigegeben, alles inklusive.",
+     "Davon höchstens 1.500 € für das Catering (Kaffee, Kuchen, Würstchen, Getränke).",
+     "Kein Zelt: Gegrillt wird unter dem Vordach vor der Halle. Das Gewinnspiel (Heizungscheck) bleibt.",
+     "Zwei neue Rollups mit dem neuen Logo (rund 150 € je Stück) werden angeschafft, innerhalb der 6.500 €."
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "3. Werbung",
+    "level": 1
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "500 Flyer bei der Druckerei Haller in Esslingen; Auslage am Empfang, die Monteure nehmen sie zu den Kunden mit.",
+     "Anzeige (Viertelseite, 680 €) im Amtsblatt, Erscheinungstag Donnerstag, 5. November 2026, Anzeigenschluss Montag, 2. November 2026.",
+     "Mailing an Bestandskunden mit einer Heizung, die älter als 15 Jahre ist (laut CRM rund 1.200 Kunden). Per E-Mail nur an Kunden mit Einwilligung; das Mailing übernimmt Nina Kaya, Jonas Petersen liefert Text und Flyerbild.",
+     "Social Media (Instagram, Facebook) macht Jonas Petersen nebenher, mit neuen Fotos der Ausstellung statt der Bilder vom Ausbildungstag."
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "4. Catering und Organisation vor Ort",
+    "level": 1
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Kaffee und Kuchen am Vormittag, mittags Würstchen vom Grill und eventuell Maultaschen, dazu Getränke. Angebote von der Metzgerei Schäfer und der Bäckerei Rapp, Geschirr wird mit angefragt. Die Azubis grillen.",
+     "Parken: Die Monteurfahrzeuge stehen am Infotag auf dem Hof des Autohauses nebenan. Ab 13 Uhr dürfen Besucher den Hof des Autohauses nutzen.",
+     "Die Halle ist frei, sobald die Paletten für Wendlingen Ende Oktober ausgeliefert sind.",
+     "Zwei Wärmepumpen werden im Betrieb gezeigt: die Luft-Wasser-Wärmepumpe von Thermatec und eine kleinere Split-Anlage. Stehtische aus dem Lager, Bierbänke vom Sportverein.",
+     "Aufbau am Freitag, 13. November 2026, ab Mittag; wer kann, hilft mit."
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "5. Sonstiges",
+    "level": 1
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Am Infotag werden direkt Termine für den Heizungscheck vergeben; Nina Kaya trägt sie am Laptop in die Planung ein, die Kunden bekommen gleich eine Bestätigung.",
+     "Jonas Petersen erstellt die Karten für das Gewinnspiel zusammen mit den Flyern."
+    ]
+   },
+   {
+    "type": "heading",
+    "text": "Aufgaben",
+    "level": 1
+   },
+   {
+    "type": "table",
+    "rows": [
+     [
+      "Wer",
+      "Was",
+      "Bis wann"
+     ],
+     [
+      "Nina Kaya",
+      "Anmeldeseite für den Infotag auf der Website freischalten",
+      "Di, 20.10.2026"
+     ],
+     [
+      "Stefan Ott",
+      "Schriftliche Zusage von Herrn Brückner (Thermatec) für den Vortrag um 14:30 Uhr einholen",
+      "Fr, 23.10.2026"
+     ],
+     [
+      "Melanie Schuster",
+      "Catering-Angebote von Metzgerei Schäfer und Bäckerei Rapp einholen, Geschirr mit anfragen (höchstens 1.500 €)",
+      "Fr, 23.10.2026"
+     ],
+     [
+      "Jonas Petersen",
+      "Text und Flyerbild für das Mailing an Nina Kaya schicken",
+      "vor dem Versand am 27.10.2026"
+     ],
+     [
+      "Nina Kaya",
+      "Mailing an Bestandskunden mit Einwilligung versenden",
+      "Di, 27.10.2026"
+     ],
+     [
+      "Jonas Petersen",
+      "Druckdaten für 500 Flyer an die Druckerei Haller schicken, Gewinnspielkarten erstellen",
+      "Fr, 30.10.2026"
+     ],
+     [
+      "Jonas Petersen",
+      "Anzeige im Amtsblatt aufgeben",
+      "Mo, 02.11.2026"
+     ],
+     [
+      "Jonas Petersen",
+      "Zwei neue Rollups bestellen",
+      "rechtzeitig vor dem Infotag"
+     ],
+     [
+      "Dennis Horn",
+      "Ausstellungsgeräte aufbauen und im Probebetrieb laufen lassen",
+      "Do, 12.11.2026"
+     ],
+     [
+      "Dennis Horn",
+      "Bierbänke beim Sportverein leihen",
+      "bis zum Aufbau am 13.11.2026"
+     ],
+     [
+      "Stefan Ott",
+      "Monteure informieren: Fahrzeuge am Infotag auf dem Hof des Autohauses abstellen",
+      "bis zum Aufbau am 13.11.2026"
+     ]
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Nächste Besprechung: Donnerstag, 22. Oktober 2026, 9 Uhr, Besprechungsraum EG."
+   }
+  ]
+ }
+}

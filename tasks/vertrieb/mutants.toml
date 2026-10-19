@@ -1,0 +1,51 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+# observed in an earlier run: total 2026 2,695 instead of 2,795 k€, +3.7 % instead of +7.5 %
+[[mutant]]
+name = "total_miscalculated"
+defect = "total revenue 2026 added up as 2,695 instead of 2,795 k€, hence +95 k€ and +3.7 % instead of +195 k€ and +7.5 %"
+replace = [["2.795", "2.695"], ["+195 Tsd. €", "+95 Tsd. €"], ["7,5 %", "3,7 %"], ["7,5 Prozent", "3,7 Prozent"]]
+expected = ["values_present"]
+
+# observed in earlier runs (three times by one model): Ost +20.0 % instead of +15.0 %
+[[mutant]]
+name = "ost_20_percent"
+defect = "Ost in the table with +20.0 % instead of +15.0 % (506 / 440)"
+set = [["slides.3.table.2.3", "+20,0 %"]]
+expected = ["topics"]
+
+# observed in an earlier run: „Umsatzbeitrag Hagemann ≈ 45 Tsd. €/Jahr (geschätzt)“
+[[mutant]]
+name = "hagemann_revenue_invented"
+defect = "invented Hagemann revenue „≈ 45 Tsd. € im Jahr (geschätzt)“ on the Süd slide"
+set = [["slides.4.bullets", ["Umsatz 663 Tsd. € nach 680 Tsd. €: −17 Tsd. € (−2,5 %)",
+          "Großkunde Hagemann im Frühjahr verloren", "Umsatzbeitrag Hagemann ≈ 45 Tsd. € im Jahr (geschätzt)",
+          "Ohne diesen Verlust läge Süd vermutlich im Plus"]]]
+expected = ["numbers_sourced"]
+severity = "soft"
+gap = "45 counts as sourced because two numbers of the prompt happen to give 45 (663 − 618, Süd 2026 minus West 2026); differences across different regions and years can almost always be found among ten revenues. Fix: pairs only from numbers that stand next to each other in the prompt (value pair per region), or report numbers marked „geschätzt/≈“ separately"
+
+# chart shows the change instead of both years per region
+[[mutant]]
+name = "chart_only_change"
+defect = "column chart with only one series (change in %) instead of 2025 and 2026 per region"
+set = [["slides.2.chart", { type = "column", categories = ["Nord", "Ost", "West", "Mitte", "Süd"], series = [{ name = "Veränderung in %", values = [20, 15, 3, 8, -2.5] }], unit = "%" }]]
+expected = ["chart_series_min", "chart_values"]
+
+# observed in earlier runs: „Ohne Süd … rund 10,2 %“, also „9,3 %“ (correct: 11.0 %)
+[[mutant]]
+name = "without_sued_miscalculated"
+defect = "note: „Ohne Süd läge das Wachstum bei rund 10,2 %“, correct is (2,132 − 1,920) / 1,920 = 11.0 %"
+replace = [["Süd ist die einzige Region mit Rückgang.", "Süd ist die einzige Region mit Rückgang. Ohne Süd läge das Wachstum bei rund 10,2 Prozent."]]
+expected = ["numbers_sourced", "text_arithmetic"]
+severity = "soft"
+# Found only because 10.2 does not follow from the prompt; the correct „11,0 %“ would be just as „unsourced“
+# (numbers_sourced does not derive percentages from partial sums), and no check verifies the calculation itself.
+
+# observed in an earlier run: placeholder „[bitte ergänzen]“ on the Süd slide
+[[mutant]]
+name = "placeholder_sued"
+defect = "placeholder „[bitte ergänzen]“ on the Süd slide"
+replace = [["Großkunde Hagemann im Frühjahr verloren", "Großkunde Hagemann im Frühjahr verloren, Umsatz 2025: [bitte ergänzen]"]]
+expected = ["placeholders"]
+severity = "soft"

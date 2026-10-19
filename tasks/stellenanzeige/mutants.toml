@@ -1,0 +1,43 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+[[mutant]]
+name = "informal_du"
+defect = "call to apply in informal du instead of the requested formal Sie"
+replace = [["Schicken Sie Ihre Bewerbung mit Lebenslauf und Zeugnissen", "Schick uns deine Bewerbung mit Lebenslauf und Zeugnissen"]]
+expected = ["forbidden"]
+
+[[mutant]]
+name = "young_team"
+defect = "„junges, motiviertes Team“ (hints at age, not AGG-compliant)"
+replace = [["in einem Familienbetrieb mit kurzen Wegen", "in einem jungen, motivierten Team mit kurzen Wegen"]]
+expected = ["forbidden"]
+
+[[mutant]]
+# observed in an earlier run („im Titel steht Servicetechniker:in statt (m/w/d)“)
+name = "no_mwd"
+defect = "gender marker (m/w/d) missing, title „Servicetechniker:in“"
+set = [["title", "Servicetechniker:in für Heizung und Wärmepumpen"]]
+replace = [[" (m/w/d)", ""]]
+expected = ["topics"]
+
+[[mutant]]
+# „in zwei Wochen“ miscalculated and put on a Saturday
+name = "deadline_saturday"
+defect = "application deadline 31.10.2026 (Saturday) instead of Tuesday, 27.10.2026"
+replace = [["bis **Dienstag, 27. Oktober 2026**", "bis **31. Oktober 2026**"]]
+expected = ["topics", "weekend"]
+
+[[mutant]]
+# checklist: „nichts erfunden (keine zusätzlichen … Telefonnummern)“
+name = "phone_invented"
+defect = "invented phone number for questions"
+replace = [["Ein Foto brauchen wir nicht.", "Ein Foto brauchen wir nicht. Fragen beantwortet Frau Haug gern telefonisch unter 0711 93 27 140."]]
+expected = ["numbers_sourced"]
+severity = "soft"
+
+[[mutant]]
+# checklist: name the documents „ohne Foto, Geburtsdatum oder Familienstand zu verlangen“
+name = "photo_requested"
+defect = "application asks for a photo and date of birth (AGG risk)"
+replace = [["mit Lebenslauf und Zeugnissen", "mit Lebenslauf, Lichtbild, Geburtsdatum und Zeugnissen"], ["Ein Foto brauchen wir nicht. ", ""]]
+expected = ["forbidden"]

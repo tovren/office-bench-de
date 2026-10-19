@@ -1,0 +1,82 @@
+id = "planist"
+title = "Plan vs. actual per cost centre (follow-up, three rounds)"
+version = 1
+kind = "follow_up"
+file_type = "xlsx"
+difficulty = "hard"
+tags = ["follow_up", "several_rounds", "change_request", "retain", "formula", "percent", "total_row", "sumif", "two_sheets"]
+
+# Three rounds. Turn 1: 12 rows (4 cost centres × Q1–Q3), variance € = actual − plan, total row: plan 589.000,
+# actual 598.650, variance 9.650 €. Turn 2: actual Werkstatt Q2 61.240 instead of 64.120 (variance 1.240 € = 2,07 %
+# instead of 4.120 € = 6,87 %), plus variance in % = (actual − plan) / plan; totals now actual 595.770, variance
+# 6.770 € (1,15 %). Turn 3: second sheet per cost centre for Q1–Q3:
+#   4100 Verwaltung   plan 126.000  actual 125.790  var. −210 € (−0,17 %)
+#   4200 Vertrieb     plan 110.000  actual 113.900  var. 3.900 € (3,55 %)
+#   4300 Kundendienst plan 180.000  actual 182.300  var. 2.300 € (1,28 %)
+#   4400 Werkstatt    plan 173.000  actual 173.780  var. 780 € (0,45 %)   (with the old value: actual 176.660, 3.660 €)
+#   together          plan 589.000  actual 595.770  var. 6.770 € (1,15 %)
+# Percentages per row (turn 2): −2,5 / 3,0 / −1,0 · 4,0 / −3,0 / 10,0 · 2,0 / 5,0 / −3,0 · −4,0 / 2,07 / 3,0.
+# All recomputed with Python. calculations checks the percentages per row (not values_present: a rounded display is
+# right); values_present (correct value) and groups (sheet 2 matches sheet 1) check the cost centre totals.
+# retained compares with the file from turn 2.
+[[turns]]
+text = """Mach mir bitte einen Plan-Ist-Vergleich unserer Kosten für Q1 bis Q3 2026 als Excel: eine Zeile je Kostenstelle und Quartal mit Kostenstelle, Quartal, Plan, Ist und der Abweichung in € (Ist minus Plan) als Formel, unten eine Summenzeile. Die Zahlen in Euro, jeweils Q1, Q2, Q3:
+
+4100 Verwaltung: Plan 42.000 / 42.000 / 42.000, Ist 40.950 / 43.260 / 41.580
+4200 Vertrieb: Plan 36.000 / 38.000 / 36.000, Ist 37.440 / 36.860 / 39.600
+4300 Kundendienst: Plan 58.000 / 60.000 / 62.000, Ist 59.160 / 63.000 / 60.140
+4400 Werkstatt: Plan 55.000 / 60.000 / 58.000, Ist 52.800 / 64.120 / 59.740"""
+
+[[turns]]
+text = "Danke. Zwei Änderungen: Beim Ist der Werkstatt im Q2 war eine Rechnung doppelt gebucht, richtig sind 61.240 € statt 64.120 €. Und füg bitte rechts eine Spalte „Abweichung in %“ hinzu, bezogen auf den Plan, auch als Formel. Sonst bleibt alles, wie es ist."
+
+[[turns]]
+text = "Super. Leg bitte noch ein zweites Blatt „Je Kostenstelle“ an: eine Zeile je Kostenstelle mit Plan, Ist und Abweichung in € und in % für Q1 bis Q3 zusammen, mit Formeln, die sich auf das erste Blatt beziehen, und unten einer Summenzeile. Das erste Blatt bleibt, wie es ist."
+
+# formulas_min 40: sheet 1 with total row has 27 to 28 formulas, sheet 2 with formulas (as asked) 16 to 20, together
+# at least 43; 30 was already reached by a sheet 2 with fixed values and a SUM row (mutant sheet2_as_constants).
+# 40 leaves room for total rows without percentage or variance.
+[checks]
+numbers_sourced = true
+sheets_min = 2
+data_rows_min = 12
+columns = ['kostenstelle|\bkst\b', 'quartal', '^\s*plan', '^\s*ist', 'abweichung(?!.*%)|differenz(?!.*%)', '%|prozent']
+formulas_min = 40
+total_row = true
+values_present = [61240, 595770, 6770, 125790, 113900, 182300, 173780, -210, 3900, 2300, 780]
+retained = { hard = 0.6, soft = 0.8 }
+column_format = { '%|prozent' = "percent" }
+
+[[checks.calculations]]
+name = "Abweichung in € = Ist − Plan"
+columns = { plan = '^\s*plan', ist = '^\s*ist', abweichung = 'abweichung(?!.*%)|differenz(?!.*%)' }
+formula = "ist - plan"
+result = "abweichung"
+
+[[checks.calculations]]
+name = "Abweichung in % = (Ist − Plan) / Plan"
+columns = { plan = '^\s*plan', ist = '^\s*ist', prozent = '%|prozent' }
+formula = "(ist - plan) / plan"
+result = "prozent"
+tolerance = 0.0006
+
+[[checks.groups]]
+name = "Ist je Kostenstelle"
+source = { sheet = 1, group = 'kostenstelle|\bkst\b', value = '^\s*ist' }
+target = { sheet = 2, group = 'kostenstelle|\bkst\b', value = '^\s*ist' }
+
+# The cost centre names are soft: the prompt asks for a column Kostenstelle, and the number alone (4100) satisfies
+# that too.
+[checks.topics_soft]
+Verwaltung = 'verwaltung'
+Vertrieb = 'vertrieb'
+Kundendienst = 'kundendienst'
+Werkstatt = 'werkstatt'
+
+[judge]
+checklist = [
+  "Blatt 1 unverändert bis auf die Korrektur: 12 Zeilen, Werkstatt Q2 Ist 61.240 € (nicht mehr 64.120 €), Abweichung 1.240 €; Summen Plan 589.000 €, Ist 595.770 €, Abweichung 6.770 €",
+  "Abweichung in € (Ist minus Plan) und in % bezogen auf den Plan als Formeln, Prozentformat (z. B. Vertrieb Q3 +10,0 %, Werkstatt Q2 +2,1 %); in der Summenzeile keine Summe der Prozente",
+  "Blatt 2 je Kostenstelle mit Formeln auf Blatt 1 (SUMMEWENN o. Ä.): Verwaltung −210 € (−0,2 %), Vertrieb 3.900 € (3,5 %), Kundendienst 2.300 € (1,3 %), Werkstatt 780 € (0,5 %), zusammen 6.770 € (1,1 %)",
+  "Euroformat, lesbare Köpfe, Kostenstellen mit Nummer und Name; Überschreitungen erkennbar (Vorzeichen oder Hervorhebung)",
+]

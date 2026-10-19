@@ -1,0 +1,54 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+# 19.11.2026 is a Thursday; the prompt names no weekday
+[[mutant]]
+name = "wrong_weekday"
+defect = "title slide „Mittwoch, 19. November 2026“: 19.11.2026 is a Thursday"
+replace = [["Donnerstag, 19. November 2026", "Mittwoch, 19. November 2026"]]
+expected = ["weekday"]
+
+# duration copied wrongly: work groups 60 instead of 75 minutes, all later times shift
+[[mutant]]
+name = "work_groups_60_minutes"
+defect = "work groups calculated with 60 instead of 75 minutes: end 16:15 instead of 16:30, all later times wrong"
+set = [["slides.2.table.7", ["13:30–14:30", "Arbeitsgruppen", "60 Min."]],
+       ["slides.2.table.8", ["14:30–14:45", "Kaffeepause", "15 Min."]],
+       ["slides.2.table.9", ["14:45–15:35", "Vorstellung der Ergebnisse", "50 Min."]],
+       ["slides.2.table.10", ["15:35–16:15", "Maßnahmenplan und Abschluss", "40 Min."]]]
+replace = [["Ende 16:30 Uhr", "Ende 16:15 Uhr"], ["Kaffeepausen 10:05 und 14:45 Uhr", "Kaffeepausen 10:05 und 14:30 Uhr"]]
+expected = ["topics"]
+
+# a single block with a wrong end time: brainstorming 11:20–12:20 (50 instead of 70 minutes), then a gap until 12:30
+[[mutant]]
+name = "brainstorming_end_time_wrong"
+defect = "brainstorming „11:20–12:20“ with „70 Min.“: the end time matches neither the duration nor the start of lunch"
+set = [["slides.2.table.5.0", "11:20–12:20"]]
+expected = ["topics", "text_arithmetic"]
+gap = "The topics only require that each time appears somewhere (12:30 is there at lunch); nothing checks whether in an agenda table end − start = duration and each block starts where the previous one ends (extension of text_arithmetic for time spans „hh:mm–hh:mm“ with „n Min.“ in the same row)"
+
+# observed in earlier runs: „[Name]“, „[Nummer]“; „[Ansprechpartner, Telefonnummer]“
+[[mutant]]
+name = "contact_placeholder"
+defect = "placeholder „Ansprechpartner: [Name], Tel. [Nummer]“ on the organisation slide"
+set = [["slides.4.bullets", ["Hotel Linde, Nürtingen", "Beginn 9:00 Uhr, Ende 16:30 Uhr",
+        "Kaffeepausen 10:05 und 14:45 Uhr, Mittagessen 12:30 Uhr", "Ansprechpartner: [Name], Tel. [Nummer]",
+        "Ergebnisse kommen als Fotoprotokoll per Mail"]]]
+expected = ["placeholders"]
+severity = "soft"
+
+# observed in an earlier run: note „6 Stunden 40 Minuten Programm“ (9:00–16:30 = 7.5 h, 6 h without breaks)
+[[mutant]]
+name = "total_duration_wrong"
+defect = "organisation slide: „Beginn 9:00 Uhr, Ende 16:30 Uhr, insgesamt 6 Stunden 40 Minuten“, actually 7.5 hours (6 hours without breaks and lunch)"
+replace = [["Beginn 9:00 Uhr, Ende 16:30 Uhr", "Beginn 9:00 Uhr, Ende 16:30 Uhr, insgesamt 6 Stunden 40 Minuten"]]
+expected = ["text_arithmetic"]
+severity = "soft"
+gap = "text_arithmetic only recognises calculations that are written out; a duration in hours and minutes next to a time span „von 9:00 bis 16:30“ in the same sentence is not recalculated"
+
+# observed in earlier runs: self-imposed deadlines; here on a Sunday
+[[mutant]]
+name = "deadline_on_sunday"
+defect = "self-imposed deadline „Essenswünsche bis 15.11.2026 melden“: 15.11.2026 is a Sunday"
+replace = [["Ergebnisse kommen als Fotoprotokoll per Mail", "Essenswünsche bitte bis 15.11.2026 melden"]]
+expected = ["weekend"]
+severity = "soft"

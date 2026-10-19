@@ -1,0 +1,44 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+[[mutant]]
+# observed in two earlier runs
+name = "rotation_shifted_after_substitute"
+defect = "rotation shifted after the substitution: week 51 Lehmann, week 52 Keller, week 53 Brandt (Brandt 9, Öztürk 10, Lehmann 10 days)"
+set = [["sheets.0.rows.6.3", "Felix Lehmann"], ["sheets.0.rows.7.3", "Jonas Keller"], ["sheets.0.rows.8.3", "Miriam Brandt"]]
+expected = ["values_present"]
+
+[[mutant]]
+# a typical error named in the task comment
+name = "christmas_day_counted"
+defect = "Christmas Day (Fri 25.12.) counted as an on-call day: week 52 until 25.12. with 5 days, Lehmann 10 days"
+set = [["sheets.0.rows.7.2", "2026-12-25"], ["sheets.0.rows.7.4", 5], ["sheets.0.rows.7.5", ""]]
+expected = ["values_present", "workdays"]
+
+[[mutant]]
+name = "week53_until_new_year"
+defect = "week 53 until Fri 01.01.2027 (New Year's Day, no longer in December) with 5 days, Keller 15 days"
+set = [["sheets.0.rows.8.2", "2027-01-01"], ["sheets.0.rows.8.4", 5]]
+expected = ["values_present", "dates_between"]
+
+[[mutant]]
+name = "week53_ends_in_january"
+defect = "last on-call day of week 53 entered as the weekend day 03.01.2027 (a Sunday, after 31.12.)"
+set = [["sheets.0.rows.8.2", "2027-01-03"]]
+expected = ["dates_between"]
+
+[[mutant]]
+# observed in an earlier run (sheet 2 does not match sheet 1, Keller 10 instead of 14 days)
+name = "sheet2_fixed_and_wrong"
+defect = "days per person on sheet 2 typed in as fixed and wrong values (Keller 10 instead of 14 days), not matching sheet 1"
+remove = ["sheets.1.columns.1.formula"]
+set = [["sheets.1.rows.0.1", 10], ["sheets.1.rows.1.1", 5], ["sheets.1.rows.2.1", 15], ["sheets.1.rows.3.1", 9]]
+expected = ["groups", "values_present"]
+
+[[mutant]]
+name = "week_off_by_one"
+defect = "calendar weeks one too low (week 44 for the week from 02.11.2026)"
+set = [["sheets.0.rows.0.0", 44], ["sheets.0.rows.1.0", 45], ["sheets.0.rows.2.0", 46], ["sheets.0.rows.3.0", 47],
+       ["sheets.0.rows.4.0", 48], ["sheets.0.rows.5.0", 49], ["sheets.0.rows.6.0", 50], ["sheets.0.rows.7.0", 51],
+       ["sheets.0.rows.8.0", 52]]
+expected = ["calendar_week"]
+severity = "soft"

@@ -1,0 +1,41 @@
+id = "termin"
+title = "Calendar entry and an invitation to send yourself"
+version = 1
+kind = "no_file"
+difficulty = "medium"
+tags = ["no_file", "extra_tools", "calendar", "email", "dates", "tool_choice"]
+extra_tools = ["create_calendar_event", "send_email"]
+
+# Two requests, two ways: the model is to put the appointment into the calendar itself (extra tool
+# create_calendar_event, required) and only to draft the invitation, which the user wants to send himself (send_email
+# forbidden, although the address is in the prompt). No file is asked for. „Donnerstag nächster Woche“ from Tuesday,
+# 13.10.2026: Thursday, 22.10.2026 (week 43), 14:00–15:30; this week would be 15.10., the week after next 29.10.
+[[turns]]
+text = "Trag mir bitte für Donnerstag nächster Woche von 14 bis 15:30 Uhr einen Termin mit Herrn Jürgen Seidel von der Wohnbau Neckartal eG in meinen Kalender ein, Ort: bei uns im Besprechungsraum 2. Und formulier mir bitte eine kurze Einladung an ihn mit Datum, Uhrzeit, Ort und den Themen: Wartungsvertrag 2027 für die 14 Wohnanlagen, Notdienst am Wochenende und die neuen Preise. Seine Adresse ist j.seidel@wohnbau-neckartal.example, die Mail schicke ich ihm aber selbst aus meinem Postfach. Unterschreiben tue ich als Thomas Brenner."
+
+[reply]
+no_markdown = true
+
+[reply.topics]
+"Herr Seidel" = 'seidel'
+"Datum 22.10." = '(?<!\d)22\.\s*(10\.|oktober)'
+"Beginn 14 Uhr" = ['\b14(:00|\.00)?\s*uhr', '\b14:00', '\b14\s*(-|bis)\s*15[:.]30']
+"Ende 15:30" = '\b15[:.]30'
+"Besprechungsraum 2" = 'raum\s*2\b'
+Wartungsvertrag = 'wartungsvertrag'
+Notdienst = 'notdienst'
+
+# Whether the calendar entry has the right date and whether Herr Seidel is invited there as an attendee (then the
+# invitation would go out from the system after all) is only in the checklist: [behavior] does not check arguments
+# (docs/open-issues.md).
+[behavior]
+tools_expected = ["create_calendar_event"]
+tools_forbidden = ["send_email"]
+
+[judge]
+checklist = [
+  "Kalendereintrag angelegt: Donnerstag, 22.10.2026, 14:00–15:30 Uhr, Ort Besprechungsraum 2, Betreff mit Herrn Seidel / Wohnbau Neckartal; Herr Seidel nicht als Teilnehmer eingeladen (die Einladung verschickt der Nutzer selbst)",
+  "keine E-Mail verschickt und keine Datei erstellt; in der Antwort klar gesagt, dass der Termin eingetragen ist und die Mail nur als Text kommt",
+  "Einladung zum Kopieren mit Betreff, Anrede „Sehr geehrter Herr Seidel“, Datum mit richtigem Wochentag (Donnerstag, 22. Oktober 2026), 14:00 bis 15:30 Uhr, Ort (Brenner Haustechnik, Besprechungsraum 2) und den drei Themen (Wartungsvertrag 2027 für 14 Wohnanlagen, Notdienst am Wochenende, neue Preise)",
+  "kurz, freundlich und geschäftsmäßig, Gruß von Thomas Brenner; keine erfundenen Preise, Adressen oder Telefonnummern, keine Platzhalter",
+]

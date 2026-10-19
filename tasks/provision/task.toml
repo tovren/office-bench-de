@@ -1,0 +1,34 @@
+id = "provision"
+title = "Sales commission statement with tiers and bonus"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "medium"
+tags = ["formula", "if_formula", "tiered_pricing", "edge_case", "total_row"]
+
+# Commission = 3 % on min(revenue, 100,000) + 5 % on the part above; bonus €500 only above €150,000.
+# Becker 2,529.00 · Schulz 3,000 + 1,337.50 = 4,337.50 · Wagner 3,000 + 2,560 = 5,560.00 + 500 = 6,060.00 ·
+# Fischer 2,952.00 · Weber 3,000 + 3,695 = 6,695.00 + 500 = 7,195.00 · Meyer (exactly 150,000, no bonus) 5,500.00.
+# Totals: revenue 784,550, commission 27,573.50, bonus 1,000, payout 28,573.50. Typical errors: 5 % on the whole
+# revenue (Schulz 6,337.50), bonus for Meyer too (bonus 1,500, payout 29,073.50).
+[[turns]]
+text = "Mach mir bitte eine Excel für die Provisionsabrechnung unserer Außendienstler im dritten Quartal. Umsätze Q3: Becker 84.300 €, Schulz 126.750 €, Wagner 151.200 €, Fischer 98.400 €, Weber 173.900 €, Meyer 150.000 €. Regel: 3 % Provision auf den Umsatz bis 100.000 €, auf den Teil darüber 5 %. Wer mehr als 150.000 € Umsatz hat, bekommt zusätzlich 500 € Bonus. Provision, Bonus und Auszahlung (Provision plus Bonus) bitte als Formeln, unten jeweils die Summe."
+
+# numbers_sourced (soft): all numbers come from the prompt (the revenues); it reports numbers, times and dates that
+# are not there and do not simply follow from them.
+[checks]
+numbers_sourced = true
+data_rows_min = 6
+columns = ['name|mitarbeit|außendienst|verkäufer|vertreter', 'umsatz', 'provision', 'bonus', 'auszahl|gesamt']
+formulas_min = 18
+total_row = true
+values_present = [84300, 126750, 151200, 98400, 173900, 150000, 2529, 4337.5, 5560, 2952, 6695, 5500, 6060, 7195, 27573.5, 1000, 28573.5]
+
+[judge]
+checklist = [
+  "alle sechs Außendienstler mit den Umsätzen aus dem Auftrag",
+  "Provision gestaffelt: 3 % bis 100.000 €, 5 % nur auf den Teil darüber (z. B. Schulz 4.337,50 €), als Formel",
+  "Bonus 500 € nur über 150.000 € (Wagner, Weber), Meyer mit genau 150.000 € ohne Bonus; als Formel (WENN)",
+  "Auszahlung = Provision + Bonus als Formel; Summenzeile mit Provision 27.573,50 €, Bonus 1.000 € und Auszahlung 28.573,50 €",
+  "Regeln nachvollziehbar (Sätze und Grenzen sichtbar, z. B. in Kopf, Hinweis oder eigenen Zellen); Euro-Format",
+]

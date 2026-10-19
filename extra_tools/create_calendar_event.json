@@ -1,0 +1,42 @@
+{
+  "spec": {
+    "type": "function",
+    "function": {
+      "name": "create_calendar_event",
+      "description": "Create an appointment in the user's Outlook calendar and optionally invite colleagues. Only use it when the user asks for a calendar entry or an invitation by Outlook.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Subject of the appointment."
+          },
+          "start": {
+            "type": "string",
+            "description": "Start as ISO date and time, e.g. 2026-10-15T10:00."
+          },
+          "end": {
+            "type": "string",
+            "description": "End as ISO date and time."
+          },
+          "location": {
+            "type": "string",
+            "description": "Room or address."
+          },
+          "attendees": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "E-mail addresses of the people to invite."
+          }
+        },
+        "required": [
+          "title",
+          "start"
+        ]
+      }
+    }
+  },
+  "result": "Termin wurde im Kalender eingetragen (Eintrag-Nr. K-20417)."
+}

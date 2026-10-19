@@ -1,0 +1,44 @@
+# Broken variants of reference.json (format: docs/mutants.md). Follow-up task: the first version (previous, column
+# chart, five slides) stays unchanged; the mutation hits the version with pie chart and closing slide.
+
+[[mutant]]
+name = "columns_kept"
+defect = "column chart not converted into a pie chart"
+set = [["slides.2.chart.type", "column"]]
+expected = ["chart_type"]
+
+[[mutant]]
+name = "closing_slide_missing"
+defect = "no new slide with summary and next steps appended"
+remove = ["slides.5"]
+expected = ["topics", "slides_added", "last_slide_topics"]
+
+[[mutant]]
+# the follow-up loses content: slides on strengths and fields of action dropped in the rebuild
+name = "slides_lost"
+defect = "the slides on strengths and fields of action get lost in the rework (only four slides left)"
+remove = ["slides.4", "slides.3"]
+expected = ["slides", "retained"]
+
+[[mutant]]
+# observed in earlier runs: „82 % zufrieden oder sehr zufrieden“ instead of 67 %, contradicting the model's own chart
+name = "satisfaction_82_percent"
+defect = "key message „82 % zufrieden oder sehr zufrieden“ on the closing slide and in the note, correct is 41/61 = 67 %"
+replace = [["Zwei Drittel zufrieden oder sehr zufrieden", "82 % zufrieden oder sehr zufrieden"],
+           ["41 von 61, also rund zwei Drittel (67 %), sind", "82 % sind"]]
+expected = ["numbers_sourced", "text_arithmetic", "values_present"]
+severity = "soft"
+
+[[mutant]]
+name = "pie_values_swapped"
+defect = "values in the pie chart swapped: teils/teils 7 and unzufrieden 13 (categories no longer match the numbers)"
+set = [["slides.2.chart.series.0.values", [14, 27, 7, 13]]]
+expected = ["chart_values"]
+
+[[mutant]]
+# observed in an earlier run: deadline 31.10.2026 is a Saturday
+name = "deadline_on_saturday"
+defect = "deadline for the presentation in the departments set on Saturday, 31.10.2026"
+replace = [["bis 30.10.2026", "bis 31.10.2026"]]
+expected = ["weekend"]
+severity = "soft"

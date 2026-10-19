@@ -1,0 +1,129 @@
+{
+ "function": "create_powerpoint_file",
+ "arguments": {
+  "title": "Vertriebsrunde: Umsatz Januar bis September 2026",
+  "slides": [
+   {
+    "layout": "title",
+    "title": "Umsatz Januar bis September 2026",
+    "subtitle": "Vertriebsrunde · Vergleich mit dem Vorjahr nach Regionen"
+   },
+   {
+    "layout": "bullets",
+    "title": "Auf einen Blick",
+    "bullets": [
+     "Gesamtumsatz 2.795 Tsd. € nach 2.600 Tsd. € im Vorjahr: +195 Tsd. € (+7,5 %)",
+     "Vier von fünf Regionen wachsen, Nord am stärksten mit +20 %",
+     "Süd bleibt größte Region, verliert aber 2,5 %",
+     "Zeitraum jeweils Januar bis September"
+    ],
+    "notes": "Insgesamt ein gutes Jahr: Wir liegen 7,5 Prozent über dem Vorjahr. Das Wachstum kommt vor allem aus Nord und Ost, Süd ist die einzige Region mit Rückgang."
+   },
+   {
+    "layout": "chart",
+    "title": "Umsatz je Region 2025 und 2026",
+    "chart": {
+     "type": "column",
+     "categories": [
+      "Nord",
+      "Ost",
+      "West",
+      "Mitte",
+      "Süd"
+     ],
+     "series": [
+      {
+       "name": "2025",
+       "values": [
+        480,
+        440,
+        600,
+        400,
+        680
+       ]
+      },
+      {
+       "name": "2026",
+       "values": [
+        576,
+        506,
+        618,
+        432,
+        663
+       ]
+      }
+     ],
+     "unit": "Tsd. €"
+    },
+    "notes": "Umsatz jeweils Januar bis September in Tausend Euro."
+   },
+   {
+    "layout": "table",
+    "title": "Veränderung gegenüber dem Vorjahr",
+    "table": [
+     [
+      "Region",
+      "2025 (Tsd. €)",
+      "2026 (Tsd. €)",
+      "Veränderung"
+     ],
+     [
+      "Nord",
+      "480",
+      "576",
+      "+20,0 %"
+     ],
+     [
+      "Ost",
+      "440",
+      "506",
+      "+15,0 %"
+     ],
+     [
+      "West",
+      "600",
+      "618",
+      "+3,0 %"
+     ],
+     [
+      "Mitte",
+      "400",
+      "432",
+      "+8,0 %"
+     ],
+     [
+      "Süd",
+      "680",
+      "663",
+      "−2,5 %"
+     ],
+     [
+      "Gesamt",
+      "2.600",
+      "2.795",
+      "+7,5 %"
+     ]
+    ]
+   },
+   {
+    "layout": "bullets",
+    "title": "Süd: Rückgang durch den Verlust von Hagemann",
+    "bullets": [
+     "Umsatz 663 Tsd. € nach 680 Tsd. €: −17 Tsd. € (−2,5 %)",
+     "Großkunde Hagemann im Frühjahr verloren",
+     "Ohne diesen Verlust läge Süd vermutlich im Plus"
+    ],
+    "notes": "Süd ist weiter unsere größte Region. Der Rückgang geht auf den Verlust von Hagemann im Frühjahr zurück; die genauen Hagemann-Umsätze des Vorjahres sollten wir für die nächste Runde nachliefern."
+   },
+   {
+    "layout": "bullets",
+    "title": "Vorschläge für das weitere Vorgehen",
+    "bullets": [
+     "Süd: Gespräch mit Hagemann über die Gründe und eine Rückgewinnung",
+     "Süd: Neukundenaktion, um den Ausfall bis Mitte 2027 auszugleichen",
+     "Was in Nord und Ost funktioniert hat, in West und Mitte übertragen"
+    ]
+   }
+  ]
+ }
+}

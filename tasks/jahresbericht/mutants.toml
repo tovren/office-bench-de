@@ -1,0 +1,44 @@
+# Broken variants of reference.json (format: docs/mutants.md). The attachment gives the draft figures up front, the
+# addendum of 9.10. at the end corrects them (revenue 5,786 instead of 5,708 k€, Q4 1,584 instead of 1,506).
+
+[[mutant]]
+# typical error according to the task comment: addendum overlooked, key figures from the draft
+name = "figures_from_draft"
+defect = "addendum overlooked: revenue 5,708 k€ (+7.5 %), EBIT 411 k€, margin 7.2 % from the draft"
+replace = [["5.786 Tsd. €", "5.708 Tsd. €"], ["+9,0 %", "+7,5 %"], ["463 Tsd. €", "411 Tsd. €"], ["8,0 %", "7,2 %"],
+           ["Der Plan von 5.650 Tsd. € wurde um 136 Tsd. € übertroffen.", "Der Plan von 5.650 Tsd. € wurde um 58 Tsd. € übertroffen."]]
+expected = ["values_present", "topics"]
+
+[[mutant]]
+# typical error according to the task comment: chart from the quarterly table of the draft
+name = "chart_q4_from_draft"
+defect = "column chart with the draft value Q4 1,506 instead of 1,584 k€"
+number = [[1584, 1506]]
+expected = ["chart_values"]
+
+[[mutant]]
+# observed in an earlier run: source marker „[1]“ in all notes
+name = "source_markers_in_notes"
+defect = "source marker „[1]“ from the RAG template in the speaker notes"
+replace = [["ist im vierten Quartal enthalten.", "ist im vierten Quartal enthalten [1]."],
+           ["mehrere abgeschlossene Modernisierungen in Wohnanlagen.", "mehrere abgeschlossene Modernisierungen in Wohnanlagen [1]."]]
+expected = ["forbidden"]
+
+[[mutant]]
+name = "risks_missing"
+defect = "the requested slide with the main risks is missing (shortage of skilled workers, major customer Wohnbau Neckar)"
+remove = ["slides.4"]
+expected = ["topics"]
+
+[[mutant]]
+name = "board_meeting_weekday"
+defect = "title slide says Wednesday, 5 November 2026 (correct: Thursday)"
+replace = [["Beiratssitzung am 5. November 2026", "Beiratssitzung am Mittwoch, 5. November 2026"]]
+expected = ["weekday"]
+
+[[mutant]]
+name = "investment_item_missing"
+defect = "investment budget with only three of the four items (training 65 k€ missing), total row 420 does not match 355"
+remove = ["slides.6.table.4"]
+expected = ["text_arithmetic"]
+severity = "soft"

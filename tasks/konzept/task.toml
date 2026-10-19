@@ -1,0 +1,35 @@
+id = "konzept"
+title = "Concept paper"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "hard"
+tags = ["table", "long", "toc", "arithmetic"]
+dates_from = "2026-10-13"
+
+[[turns]]
+text = "Schreib mir ein ausführliches Konzept als Word-Datei für die Einführung eines Ticketsystems in einer Firma mit 80 Mitarbeitern: Ausgangslage, Ziele, Anforderungen (als Tabelle mit Priorität), Zeitplan, Kosten, Risiken. Mit Inhaltsverzeichnis."
+
+[checks]
+tables_min = 1
+toc = true
+headings_min = 5
+words_min = { hard = 250, soft = 500 }
+
+[checks.topics]
+Ausgangslage = 'ausgangslage|ist-zustand|ausgangssituation|ist-situation|ist-analyse|status quo|hintergrund|aktuelle (situation|lage)'
+Ziele = 'ziel(?!gruppe)'
+Anforderungen = 'anforderung|lastenheft|muss-kriterien'
+Zeitplan = 'zeitplan|meilenstein|projektplan|terminplan|phasenplan|roadmap|zeitlicher ablauf|umsetzungsplan'
+Kosten = 'kosten|budget|investition'
+Risiken = 'risik'
+
+[judge]
+checklist = [
+  "alle sechs verlangten Kapitel mit Substanz, Inhaltsverzeichnis vorhanden",
+  "Anforderungen als Tabelle mit Priorität",
+  "Kosten mit nachvollziehbarem Mengengerüst (Lizenzen pro Bearbeiter, nicht für alle 80), Summen rechnen richtig",
+  "Zeitplan beginnt nach dem 13.10.2026, Dauer und Termine passen zueinander, Kalenderwochen stimmen",
+  "Wirtschaftlichkeit/Amortisation geht mit den eigenen Zahlen auf",
+  "fehlerfreies Deutsch ohne fremde Schriftzeichen",
+]

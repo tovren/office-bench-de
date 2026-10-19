@@ -1,0 +1,28 @@
+id = "urlaubsplanung"
+title = "Vacation planning (vague)"
+version = 1
+kind = "file"
+file_type = "xlsx"
+difficulty = "easy"
+tags = ["vague"]
+
+# Vague: hardly any requirements, so only minimal checks. The judge assesses whether the structure is usable.
+[[turns]]
+text = "Mach mir eine Excel für die Urlaubsplanung im Team."
+
+# workdays (soft): vacation dates in the data rows not on a weekend. Public holidays are not checked, the prompt
+# names no federal state.
+[checks]
+workdays = true
+data_rows_min = 3
+
+[checks.topics]
+Urlaub = 'urlaub'
+
+[judge]
+checklist = [
+  "brauchbare Struktur: Mitarbeiter, Urlaub von/bis, Anzahl Arbeitstage, Anspruch und Resturlaub (Formel)",
+  "Beispielzeilen oder klar erkennbare Vorlage; Jahr passt zum Bezugsdatum 13.10.2026 (2026 oder 2027)",
+  "Formeln richtig (Rest = Anspruch − genommen); Arbeitstage, falls eingetragen, stimmen mit dem Kalender",
+  "optional sinnvolle Extras: Übersicht je Monat, Feiertage, Vertretung, Status (beantragt/genehmigt)",
+]

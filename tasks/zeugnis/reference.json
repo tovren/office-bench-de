@@ -1,0 +1,60 @@
+{
+ "function": "create_word_file",
+ "arguments": {
+  "title": "Arbeitszeugnis",
+  "header_text": "Brenner Haustechnik GmbH · Esslingen",
+  "blocks": [
+   {
+    "type": "paragraph",
+    "text": "Frau Lena Hoffmann, geboren am 14. März 1991, war vom 1. April 2019 bis zum 31. Oktober 2026 in unserem Unternehmen als Sachbearbeiterin in der Auftragsabwicklung beschäftigt."
+   },
+   {
+    "type": "paragraph",
+    "text": "Die Brenner Haustechnik GmbH ist ein mittelständischer Fachbetrieb für Heizung, Sanitär und Klima mit eigenem Kundendienst und Notdienst. Wir planen, installieren und warten haustechnische Anlagen für Privat- und Gewerbekunden im Raum Esslingen und Stuttgart."
+   },
+   {
+    "type": "paragraph",
+    "text": "Zu den Aufgaben von Frau Hoffmann gehörten insbesondere:"
+   },
+   {
+    "type": "bullets",
+    "items": [
+     "Erfassung und Terminierung eingehender Kundenaufträge",
+     "Bestellung von Material bei unseren Lieferanten und Überwachung der Liefertermine",
+     "Planung der Einsätze unserer Monteure",
+     "Vorbereitung der Rechnungen nach Abschluss der Aufträge",
+     "Beantwortung telefonischer Kundenanfragen",
+     "seit 2023 zusätzlich die Betreuung unserer Auszubildenden in der Auftragsabwicklung"
+    ]
+   },
+   {
+    "type": "paragraph",
+    "text": "Frau Hoffmann arbeitete sich schnell und sicher in ihr Aufgabengebiet ein. Sie verfügt über ein umfassendes und fundiertes Fachwissen, das sie stets sicher und zielgerichtet in der Praxis einsetzte. Auch bei hohem Arbeitsaufkommen behielt sie den Überblick und arbeitete stets selbstständig, sorgfältig und zuverlässig. Die Einsatzplanung der Monteure organisierte sie umsichtig und vorausschauend, sodass Termine bei unseren Kunden zuverlässig eingehalten wurden. Bei der Materialbestellung achtete sie auf wirtschaftliche Konditionen und eine termingerechte Lieferung."
+   },
+   {
+    "type": "paragraph",
+    "text": "Unseren Kunden begegnete Frau Hoffmann am Telefon stets freundlich und kompetent; Anliegen klärte sie schnell und lösungsorientiert. Die ihr anvertrauten Auszubildenden führte sie geduldig und strukturiert an die Aufgaben der Auftragsabwicklung heran und förderte ihre Selbstständigkeit."
+   },
+   {
+    "type": "paragraph",
+    "text": "Frau Hoffmann erledigte die ihr übertragenen Aufgaben stets zu unserer vollen Zufriedenheit."
+   },
+   {
+    "type": "paragraph",
+    "text": "Ihr Verhalten gegenüber Vorgesetzten, Kolleginnen und Kollegen sowie Kunden war stets einwandfrei. Wegen ihrer hilfsbereiten und offenen Art war sie im gesamten Team sehr geschätzt."
+   },
+   {
+    "type": "paragraph",
+    "text": "Frau Hoffmann verlässt unser Unternehmen zum 31. Oktober 2026 auf eigenen Wunsch. Wir bedauern ihr Ausscheiden, danken ihr für die stets gute Zusammenarbeit und wünschen ihr für ihre berufliche und private Zukunft alles Gute und weiterhin viel Erfolg."
+   },
+   {
+    "type": "paragraph",
+    "text": "Esslingen, 31. Oktober 2026"
+   },
+   {
+    "type": "paragraph",
+    "text": "Thomas Brenner\nGeschäftsführer\nBrenner Haustechnik GmbH"
+   }
+  ]
+ }
+}

@@ -1,0 +1,25 @@
+id = "aushang"
+title = "Tea kitchen notice (vague)"
+version = 1
+kind = "file"
+file_type = "docx"
+difficulty = "easy"
+tags = ["vague", "short"]
+
+# Vague: hardly any requirements, so only minimal checks.
+[[turns]]
+text = "Mach mir bitte einen Aushang für die Teeküche als Word-Datei. Die Leute sollen ihr Geschirr selbst wegräumen."
+
+[checks]
+words_max = 400
+
+[checks.topics]
+Geschirr = 'geschirr|tasse|spülmaschine|becher|teller|spüle'
+
+[judge]
+checklist = [
+  "kurz und auf einen Blick lesbar: deutliche Überschrift, wenige Sätze oder Punkte, passt auf eine Seite",
+  "klare Bitte: Geschirr in die Spülmaschine stellen oder abspülen, Spülmaschine ausräumen",
+  "freundlich-bestimmter Ton, nicht belehrend oder passiv-aggressiv",
+  "keine Platzhalter wie „[Name]“",
+]

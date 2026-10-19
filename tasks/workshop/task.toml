@@ -1,0 +1,39 @@
+id = "workshop"
+title = "Workshop agenda with times"
+version = 1
+kind = "file"
+file_type = "pptx"
+difficulty = "medium"
+tags = ["table", "times", "arithmetic", "weekday"]
+dates_from = "2026-10-13"
+
+# 19.11.2026 is a Thursday (not stated in the prompt). Times from the durations: 9:00–9:20, 9:20–10:05,
+# 10:05–10:20, 10:20–11:20, 11:20–12:30, 12:30–13:30, 13:30–14:45, 14:45–15:00, 15:00–15:50, 15:50–16:30.
+[[turns]]
+text = "Am 19. November machen wir mit dem Vertriebsteam einen Strategieworkshop im Hotel Linde in Nürtingen, Beginn 9 Uhr. Mach mir bitte eine PowerPoint für den Einstieg, 5 bis 7 Folien: Titelfolie, Ziele des Tages (Rückblick auf 2026, Ideen für mehr Neukunden, Maßnahmenplan 2027 mit Verantwortlichen), die Agenda als Tabelle mit Uhrzeit von und bis, Spielregeln und Organisatorisches. Die Blöcke in dieser Reihenfolge: Begrüßung und Ziele 20 Minuten, Rückblick 2026 45 Minuten, Kaffeepause 15 Minuten, Ergebnisse der Kundenumfrage 60 Minuten, Ideensammlung 70 Minuten, Mittagessen 60 Minuten, Arbeitsgruppen 75 Minuten, Kaffeepause 15 Minuten, Vorstellung der Ergebnisse 50 Minuten, Maßnahmenplan und Abschluss 40 Minuten."
+
+[checks]
+slides = [5, 7]
+tables_min = 1
+
+[checks.topics]
+"9:20" = '(?<![\d.:,])0?9[:.]20(?!\d)'
+"10:05" = '(?<![\d.:,])10[:.]05(?!\d)'
+"10:20" = '(?<![\d.:,])10[:.]20(?!\d)'
+"11:20" = '(?<![\d.:,])11[:.]20(?!\d)'
+"12:30" = '(?<![\d.:,])12[:.]30(?!\d)'
+"13:30" = '(?<![\d.:,])13[:.]30(?!\d)'
+"14:45" = '(?<![\d.:,])14[:.]45(?!\d)'
+"15:50" = '(?<![\d.:,])15[:.]50(?!\d)'
+"Ende 16:30" = '(?<![\d.:,])16[:.]30(?!\d)'
+"Hotel Linde" = 'linde'
+Spielregeln = 'spielregel|regeln'
+
+[judge]
+checklist = [
+  "Titelfolie mit Datum 19.11.2026; falls ein Wochentag genannt ist, Donnerstag",
+  "Agenda-Tabelle mit allen zehn Blöcken in der vorgegebenen Reihenfolge und richtigen Uhrzeiten von 9:00 bis 16:30 (z. B. Rückblick 9:20–10:05, Mittagessen 12:30–13:30, Arbeitsgruppen 13:30–14:45)",
+  "Ziele des Tages wie vorgegeben, Spielregeln konkret und knapp",
+  "Organisatorisches: Hotel Linde in Nürtingen, Beginn 9 Uhr, Ende 16:30 Uhr, Pausen und Mittagessen; nichts Wichtiges erfunden (keine erfundene Adresse oder Telefonnummer als Fakt)",
+  "5 bis 7 Folien, kurze Stichpunkte, sauberes Layout",
+]

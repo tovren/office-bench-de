@@ -1,0 +1,90 @@
+Brenner Haustechnik GmbH – Auftragsexport
+Export vom 05.10.2026, Filter: Auftragsdatum 01.07.2026 bis 30.09.2026, alle Status
+
+Auftragsnr;Datum;Kunde;Leistungsart;Betrag netto (EUR);Status
+A-26-3107;01.07.2026;Immobilien Sattler KG;Reparatur;1322,50;abgerechnet
+A-26-3108;02.07.2026;Schulze & Partner Steuerberater;Wartung;280,09;abgerechnet
+A-26-3112;02.07.2026;Immobilien Sattler KG;Wartung;562,12;abgerechnet
+A-26-3116;03.07.2026;Wohnbau Neckartal eG;Material;199,42;abgerechnet
+A-26-3117;06.07.2026;Hotel Traube;Notdienst;873,77;abgerechnet
+A-26-3121;08.07.2026;Hausverwaltung Kröger GmbH;Material;663,43;abgerechnet
+A-26-3124;08.07.2026;Hausverwaltung Kröger GmbH;Material;497,93;abgerechnet
+A-26-3128;09.07.2026;Wohnbau Neckartal eG;Wartung;343,64;abgerechnet
+A-26-3129;10.07.2026;Hausverwaltung Kröger GmbH;Material;706,99;abgerechnet
+A-26-3134;14.07.2026;Hausverwaltung Kröger GmbH;Reparatur;1034,92;storniert
+A-26-3136;14.07.2026;Hausverwaltung Kröger GmbH;Reparatur;736,91;abgerechnet
+A-26-3139;20.07.2026;Autohaus Rempp GmbH;Reparatur;798,62;abgerechnet
+A-26-3142;21.07.2026;Wohnbau Neckartal eG;Material;368,26;abgerechnet
+A-26-3146;22.07.2026;Hausverwaltung Kröger GmbH;Material;291,96;abgerechnet
+A-26-3149;22.07.2026;Autohaus Rempp GmbH;Reparatur;1283,02;abgerechnet
+A-26-3150;23.07.2026;Hausverwaltung Kröger GmbH;Wartung;463,33;abgerechnet
+A-26-3155;23.07.2026;Wohnbau Neckartal eG;Reparatur;290,56;abgerechnet
+A-26-3158;23.07.2026;Schulze & Partner Steuerberater;Material;750,60;abgerechnet
+A-26-3159;23.07.2026;Pflegeheim Am Kirchberg gGmbH;Wartung;409,71;abgerechnet
+A-26-3164;24.07.2026;Pflegeheim Am Kirchberg gGmbH;Wartung;196,66;abgerechnet
+A-26-3166;24.07.2026;Hausverwaltung Kröger GmbH;Reparatur;1250,08;abgerechnet
+A-26-3169;24.07.2026;Wohnbau Neckartal eG;Reparatur;1025,72;abgerechnet
+A-26-3172;24.07.2026;Pflegeheim Am Kirchberg gGmbH;Reparatur;1002,02;abgerechnet
+A-26-3175;24.07.2026;Autohaus Rempp GmbH;Material;263,73;abgerechnet
+A-26-3178;28.07.2026;Immobilien Sattler KG;Reparatur;509,54;abgerechnet
+A-26-3182;28.07.2026;Hotel Traube;Installation;4262,61;abgerechnet
+A-26-3184;28.07.2026;Hotel Traube;Wartung;496,48;abgerechnet
+A-26-3187;29.07.2026;Schulze & Partner Steuerberater;Notdienst;834,91;abgerechnet
+A-26-3190;29.07.2026;Schulze & Partner Steuerberater;Wartung;520,55;abgerechnet
+A-26-3192;29.07.2026;Immobilien Sattler KG;Installation;5258,07;abgerechnet
+A-26-3196;30.07.2026;Wohnbau Neckartal eG;Material;556,85;abgerechnet
+A-26-3198;30.07.2026;Schulze & Partner Steuerberater;Wartung;510,99;abgerechnet
+A-26-3201;30.07.2026;Immobilien Sattler KG;Reparatur;575,81;abgerechnet
+A-26-3206;31.07.2026;Wohnbau Neckartal eG;Material;265,23;storniert
+A-26-3209;03.08.2026;Autohaus Rempp GmbH;Wartung;611,75;abgerechnet
+A-26-3211;04.08.2026;Wohnbau Neckartal eG;Material;766,71;abgerechnet
+A-26-3215;05.08.2026;Hausverwaltung Kröger GmbH;Material;259,69;abgerechnet
+A-26-3217;06.08.2026;Autohaus Rempp GmbH;Wartung;437,11;abgerechnet
+A-26-3221;12.08.2026;Pflegeheim Am Kirchberg gGmbH;Reparatur;762,25;abgerechnet
+A-26-3223;14.08.2026;Immobilien Sattler KG;Wartung;493,72;abgerechnet
+A-26-3225;14.08.2026;Pflegeheim Am Kirchberg gGmbH;Reparatur;274,83;abgerechnet
+A-26-3229;18.08.2026;Immobilien Sattler KG;Reparatur;961,60;abgerechnet
+A-26-3232;18.08.2026;Pflegeheim Am Kirchberg gGmbH;Wartung;192,83;abgerechnet
+A-26-3234;19.08.2026;Schulze & Partner Steuerberater;Notdienst;795,27;abgerechnet
+A-26-3237;20.08.2026;Wohnbau Neckartal eG;Reparatur;777,99;abgerechnet
+A-26-3242;21.08.2026;Bäckerei Hölzle GmbH;Installation;6647,92;abgerechnet
+A-26-3245;21.08.2026;Wohnbau Neckartal eG;Reparatur;524,81;abgerechnet
+A-26-3247;24.08.2026;Wohnbau Neckartal eG;Reparatur;1299,34;abgerechnet
+A-26-3249;24.08.2026;Pflegeheim Am Kirchberg gGmbH;Material;196,43;abgerechnet
+A-26-3253;24.08.2026;Hausverwaltung Kröger GmbH;Wartung;245,05;abgerechnet
+A-26-3255;24.08.2026;Schulze & Partner Steuerberater;Reparatur;1175,81;abgerechnet
+A-26-3258;25.08.2026;Pflegeheim Am Kirchberg gGmbH;Wartung;322,79;abgerechnet
+A-26-3261;25.08.2026;Hausverwaltung Kröger GmbH;Reparatur;1393,11;abgerechnet
+A-26-3264;26.08.2026;Wohnbau Neckartal eG;Material;424,28;abgerechnet
+A-26-3267;27.08.2026;Pflegeheim Am Kirchberg gGmbH;Material;246,15;abgerechnet
+A-26-3271;28.08.2026;Bäckerei Hölzle GmbH;Material;400,64;abgerechnet
+A-26-3273;28.08.2026;Autohaus Rempp GmbH;Notdienst;464,08;abgerechnet
+A-26-3277;31.08.2026;Wohnbau Neckartal eG;Reparatur;974,53;storniert
+A-26-3280;31.08.2026;Hausverwaltung Kröger GmbH;Material;200,00;abgerechnet
+A-26-3283;03.09.2026;Immobilien Sattler KG;Reparatur;984,62;abgerechnet
+A-26-3287;03.09.2026;Schulze & Partner Steuerberater;Material;350,69;abgerechnet
+A-26-3288;03.09.2026;Pflegeheim Am Kirchberg gGmbH;Installation;6468,62;abgerechnet
+A-26-3291;04.09.2026;Hausverwaltung Kröger GmbH;Material;197,35;abgerechnet
+A-26-3294;04.09.2026;Schulze & Partner Steuerberater;Wartung;528,18;abgerechnet
+A-26-3298;04.09.2026;Hotel Traube;Notdienst;315,75;abgerechnet
+A-26-3300;07.09.2026;Pflegeheim Am Kirchberg gGmbH;Reparatur;532,38;abgerechnet
+A-26-3304;08.09.2026;Hausverwaltung Kröger GmbH;Material;102,17;abgerechnet
+A-26-3306;14.09.2026;Hausverwaltung Kröger GmbH;Material;713,01;offen
+A-26-3311;14.09.2026;Schulze & Partner Steuerberater;Installation;6679,70;offen
+A-26-3314;14.09.2026;Schulze & Partner Steuerberater;Wartung;534,44;offen
+A-26-3316;16.09.2026;Schulze & Partner Steuerberater;Material;89,60;abgerechnet
+A-26-3320;17.09.2026;Autohaus Rempp GmbH;Reparatur;257,44;offen
+A-26-3322;18.09.2026;Pflegeheim Am Kirchberg gGmbH;Material;524,80;abgerechnet
+A-26-3324;21.09.2026;Pflegeheim Am Kirchberg gGmbH;Reparatur;1162,27;offen
+A-26-3327;22.09.2026;Schulze & Partner Steuerberater;Reparatur;1268,87;abgerechnet
+A-26-3331;24.09.2026;Autohaus Rempp GmbH;Material;180,05;offen
+A-26-3333;25.09.2026;Wohnbau Neckartal eG;Wartung;238,05;storniert
+A-26-3336;25.09.2026;Wohnbau Neckartal eG;Material;103,78;offen
+A-26-3339;25.09.2026;Bäckerei Hölzle GmbH;Notdienst;432,65;abgerechnet
+A-26-3343;25.09.2026;Wohnbau Neckartal eG;Material;697,93;offen
+A-26-3346;25.09.2026;Wohnbau Neckartal eG;Wartung;514,94;offen
+A-26-3349;28.09.2026;Pflegeheim Am Kirchberg gGmbH;Notdienst;700,83;offen
+A-26-3351;28.09.2026;Hotel Traube;Wartung;300,42;offen
+A-26-3356;30.09.2026;Hausverwaltung Kröger GmbH;Installation;6186,27;offen
+
+84 Datensätze

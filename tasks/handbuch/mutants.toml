@@ -1,0 +1,55 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+
+# observed in several earlier runs (contact table made only of placeholders)
+[[mutant]]
+name = "contact_placeholders"
+defect = "contact table with „[Name]“ instead of names"
+replace = [
+  ["Selin Yilmaz, Personalabteilung", "[Name], Personalabteilung"],
+  ["Jonas Brandt, IT", "[Name], IT"],
+  ["Markus Keller, Fachkraft für Arbeitssicherheit", "[Name], Fachkraft für Arbeitssicherheit"],
+  ["Andrea Wolf, Vorsitzende", "[Name], Vorsitzende"],
+]
+expected = ["placeholders"]
+severity = "soft"
+
+# observed in several earlier runs (1,330 to 1,850 words)
+[[mutant]]
+name = "too_short"
+defect = "about 1,900 words instead of at least 2,000 (all chapters present, just shorter)"
+remove = ["blocks.56", "blocks.46", "blocks.37", "blocks.14", "blocks.5", "blocks.2"]
+expected = ["words_min"]
+
+# observed in an earlier run (Cyrillic „е“ in „Patе“, U+0435)
+[[mutant]]
+name = "cyrillic_pate"
+defect = "Cyrillic „е“ in „Patе“"
+replace = [["dein Pate", "dein Patе"]]
+expected = ["foreign_script"]
+
+# Truncated output (task comment: long texts are where the JSON most likely breaks): contacts and checklist are
+# missing
+[[mutant]]
+name = "end_missing"
+defect = "contacts and checklist missing, the handbook ends after data protection"
+remove = ["blocks.63", "blocks.62", "blocks.61", "blocks.60", "blocks.59", "blocks.58", "blocks.57", "blocks.56",
+          "blocks.55", "blocks.54", "blocks.53"]
+expected = ["topics", "tables_min"]
+
+# observed in several earlier runs („AU ab dem dritten Kalendertag“)
+[[mutant]]
+name = "sick_note_from_third_day"
+defect = "medical certificate required from the third calendar day (correct: on the fourth at the latest)"
+replace = [["Dauert die Arbeitsunfähigkeit länger als drei Kalendertage, brauchen wir spätestens am vierten Tag eine ärztliche Bescheinigung.",
+            "Ab dem dritten Kalendertag der Arbeitsunfähigkeit brauchen wir eine ärztliche Bescheinigung."]]
+expected = ["topics"]
+gap = "A legal rule that no check key sees; only the blind review does. Caught by a forbidden pattern like 'ab dem (dritten|3\\.) (kalender)?tag' (or topics 'vierten|4\\. (kalender)?tag'). Deliberately left open: the checklist says „spätestens ab dem vierten Kalendertag“, and the employer may ask for the certificate earlier (§ 5 Abs. 1 Satz 3 EFZG); „ab dem dritten Tag“ as a company rule (about 25 real runs) is therefore not a sure error, and a topics pattern would also have to allow „länger als drei Tage“ or „ab dem ersten Tag“."
+
+# observed in earlier runs („4×8,5 + 5,25 = 39,25 h statt der genannten 40 h“; Mon–Thu 9 h = 36 h instead of 40 h)
+[[mutant]]
+name = "weekly_hours_wrong"
+defect = "working hours split wrongly: 4 × 8.5 hours + 5.25 hours = 40 hours (that makes 39.25; 39 are agreed)"
+replace = [["39 Stunden pro Woche, verteilt auf Montag bis Freitag.",
+            "39 Stunden pro Woche, verteilt auf Montag bis Freitag: 4 × 8,5 Stunden + 5,25 Stunden = 40 Stunden."]]
+expected = ["text_arithmetic"]
+severity = "soft"

@@ -1,0 +1,58 @@
+# Broken variants of reference.json (format: docs/mutants.md).
+# Correct: hardware €10,529, discount €526.45, setup €1,140, net €11,142.55, VAT €2,117.08, gross €13,259.63.
+# Rows: 2–6 items, 7 hardware, 8 discount, 9 setup, 10 net, 11 VAT, 12 gross.
+
+# observed in an earlier run (hardware after discount €9,998.55 instead of €10,002.55, net €11,138.55)
+[[mutant]]
+name = "hardware_sum_miscalculated"
+defect = "hardware total miscalculated by hand (€10,525 instead of €10,529), net and gross wrong"
+set = [["sheets.0.rows.5.5", 10525]]
+expected = ["values_present"]
+
+[[mutant]]
+name = "discount_on_setup_too"
+defect = "5 % discount also applied to the setup (net €11,085.55 instead of €11,142.55)"
+replace = [["=-ROUND(F7*0.05,2)", "=-ROUND((F7+F6)*0.05,2)"]]
+expected = ["values_present"]
+
+# observed in two earlier runs (VAT €2,117.09, gross €13,259.64)
+[[mutant]]
+name = "vat_rounded_up"
+defect = "VAT rounded up (€2,117.09), gross €13,259.64 instead of €13,259.63"
+replace = [["=ROUND(F10*0.19,2)", "=ROUNDUP(F10*0.19,2)"]]
+expected = ["values_present"]
+
+# observed in four earlier runs: the item formula quantity × price also runs through the total rows, which are
+# empty; net, VAT and gross come out as 0
+[[mutant]]
+name = "item_formula_in_total_rows"
+defect = "formula quantity × unit price also in the total rows: hardware, discount, net, VAT and gross are 0"
+set = [
+  ["sheets.0.rows.5.5", "=C7*E7"],
+  ["sheets.0.rows.6.5", "=C8*E8"],
+  ["sheets.0.rows.7.5", "=C9*E9"],
+  ["sheets.0.rows.8.5", "=C10*E10"],
+  ["sheets.0.rows.9.5", "=C11*E11"],
+  ["sheets.0.rows.10.5", "=C12*E12"],
+]
+expected = ["values_present"]
+
+# observed in an earlier run (final totals as fixed amounts in a second table)
+[[mutant]]
+name = "totals_as_constants"
+defect = "hardware, discount, net, VAT and gross as fixed amounts instead of formulas (the checklist asks for formulas)"
+set = [
+  ["sheets.0.rows.5.5", 10529],
+  ["sheets.0.rows.6.5", -526.45],
+  ["sheets.0.rows.7.5", 1140],
+  ["sheets.0.rows.8.5", 11142.55],
+  ["sheets.0.rows.9.5", 2117.08],
+  ["sheets.0.rows.10.5", 13259.63],
+]
+expected = ["formulas_min"]
+
+[[mutant]]
+name = "source_marker"
+defect = "source marker [1] from the RAG template in the quote"
+replace = [["E-Mail vom 9. Oktober 2026", "E-Mail vom 9. Oktober 2026 [1]"]]
+expected = ["forbidden"]
