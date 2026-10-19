@@ -2,7 +2,8 @@
 
     obench judge RUN_FOLDER... --judge configs/judges/<judge>.toml [--samples 2] [--out grades.jsonl]
 
-Per model and task the judge sees the first `samples` task runs that delivered something: the file as Markdown text
+Per model and task the judge sees the first `samples` task runs not ended by an outage that delivered a file (any
+such run for tasks without a file): the file as Markdown text
 (render.render_text: Excel with formulas and recalculated values) plus images of its pages, or the final chat answer
 for tasks without a file. It also sees what the model saw — the user's messages, the text of attached files and the
 reference date — and the task's checklist (what a 5 looks like). Files are copied with neutral timestamps first, and
@@ -163,7 +164,8 @@ def parse_grades(text: str) -> dict | None:
 
 
 def select_items(folders: list[Path], samples: int, tasks: dict[str, Task] | None = None) -> list[Item]:
-    """Per model folder and task: the first `samples` runs that delivered something to grade."""
+    """Per model folder and task: the first `samples` runs not ended by an outage that delivered a file; for tasks
+    without a file the first such runs, with or without a final answer."""
     tasks = tasks or load_tasks()
     items = []
     for folder in folders:

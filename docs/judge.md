@@ -6,7 +6,9 @@ blind on five criteria.
 
 ## What the judge sees
 
-Per model and task the judge grades the first runs that delivered something (default: two). For each it gets:
+Per model and task the judge grades the first runs (default: two) that a provider or network failure did not end
+and that delivered a file; for tasks without a file the first such runs, and a run without a final answer is graded
+as "no final answer". For each it gets:
 
 - the user's message(s) as the model got them, the full text of attached files and the reference date,
 - what was expected (a Word/Excel/PowerPoint file, the last file of a conversation, or a chat answer),

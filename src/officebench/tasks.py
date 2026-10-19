@@ -549,7 +549,7 @@ def extra_tool(name: str) -> dict:
 
 
 def json_schema() -> dict:
-    """JSON schema of task.toml (for editors: docs/task.schema.json)."""
+    """JSON schema of task.toml (`obench tasks schema`, for editor completion)."""
     return TaskSpec.model_json_schema()
 
 

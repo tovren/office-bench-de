@@ -339,7 +339,7 @@ obench check FILE_OR_FOLDER ... [--task ID] [--only-defects] [--today YYYY-MM-DD
 
 Content check of single files, e.g. a file from `files/` or one built by hand. The task is taken from the file name
 (`budget-3__…`) unless `--task` is given; without a task only the general checks run. `--previous` is the earlier
-file of a follow-up task (for `retained`). `obench check -- --help` shows the options.
+file of a follow-up task (for `retained`). `obench check --help` shows the options.
 
 ## Testing your own local model
 

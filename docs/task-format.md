@@ -21,7 +21,7 @@ Check the task files with
 
 ```
 obench tasks validate                  # all tasks; --select "budget,tag:chart" for a selection
-obench tasks schema > docs/task.schema.json   # JSON schema of task.toml, for editor completion and validation
+obench tasks schema > task.schema.json        # JSON schema of task.toml, for editor completion and validation
 ```
 
 `--select` takes `all`, task ids, `tag:<tag>`, `type:<docx|xlsx|pptx>` and `kind:<kind>`, separated by commas.
@@ -79,7 +79,8 @@ They apply to the last delivered file. Every violated check produces a defect wi
 severity (`hard` = task not done or certainly wrong; `soft` = quality issue or uncertain heuristic). "Content ok"
 means: no hard defects. "Defect-free" means: no defects at all. Which keys exist per file type, with label and
 severity, is listed in `TASK_CHECKS` in `src/officebench/checks/registry.py`; the schema accepts exactly those keys
-for the task's `file_type` (`no_file` tasks only the keys for all file types).
+for the task's `file_type` (`no_file` tasks only the keys for all file types, which have no effect there: there is
+no file to check).
 
 ### All file types (on the whole text of the file)
 
@@ -91,8 +92,8 @@ for the task's `file_type` (`no_file` tasks only the keys for all file types).
 | `count` | list of `{ name, pattern, min, max }` | count the paragraphs/lines/cells the pattern matches (e.g. questions). Below `min`: hard, above `max`: soft |
 | `words_min` | number or `{ hard = 250, soft = 500 }` | word count of the whole text; as a number hard, in two levels: below `hard` hard, below `soft` soft |
 | `words_max` | number | at most this many words (soft) |
-| `tables_min` | number | docx: tables; pptx: tables on slides (in both cases only tables with at least one filled row below the header) |
-| `forbidden` | table name → pattern | format and matching like `topics`, but every match is a hard defect "forbidden content" (name, quote, location): points dropped in a follow-up, source markers „[1]“ from a retrieval template |
+| `tables_min` | number | docx and pptx only: docx tables, pptx tables on slides (in both cases only tables with at least one filled row below the header) |
+| `forbidden` | table name → pattern | format and matching like `topics`, but every entry that matches is a hard defect "forbidden content" (name, the first quote with its location, the number of matches): points dropped in a follow-up, source markers „[1]“ from a retrieval template |
 | `values_present` | list of numbers or number lists | every number is in the file (tolerance 0.005): xlsx as a cell value (stored or recalculated, also a number stored as text; percent cell 12,5 % also as 12.5), docx/pptx as a number in the text or in tables (German format), pptx also as a chart value. A list inside the list is a set of alternatives: `[[-2.5, 2.5], 7.5]` (decline „−2,5 %“ or „2,5 %“). Missing ones: one hard defect "missing value" with the first five |
 | `numbers_sourced` | bool | numbers, times and dates in the file that are neither in the messages nor in the attachments and do not simply follow from them (see below): soft defect "number without source" with up to five examples, metric "numbers without source" (distinct texts). Only for tasks in which every number comes from the request |
 | `retained` | share or `{ hard = 0.5, soft = 0.8 }` | follow-ups: this much of the content of the previous file is in the new one again (see below); as a number hard, in two levels like `words_min` |
@@ -131,7 +132,7 @@ checkable".
 |---|---|---|
 | `headings_min` | number | paragraphs with a heading style |
 | `toc` | bool | TOC field present (hard); only a hand-made table of contents („Inhaltsverzeichnis“ with typed entries): soft |
-| `numbered_list` | bool | at least one numbered list (style „List Number“ or numbering) |
+| `numbered_list` | bool | at least one numbered list (style „List Number“ or numbering), or at least two consecutive paragraphs typed as „1.“ / „2)“ |
 | `numbered_headings` | bool | numbered sections: at least two paragraphs with a heading style carry a number, typed („1. Geltungsbereich“, „2.1“, „§ 3“, „IV.“, „Abschnitt 2“) or as Word numbering (also via the style, no bullets). With fewer than two headings it is not checked (`headings_min` reports that) |
 | `header_contains` | text | the text must be in a page header |
 
@@ -140,8 +141,8 @@ checkable".
 | Key | Type | Meaning |
 |---|---|---|
 | `sheets_min` | number | number of sheets |
-| `data_rows_min` | number | data rows on the first sheet (without header and total rows) |
-| `month_rows_min` | number | this many data rows **or** columns with month names in the header |
+| `data_rows_min` | number | data rows with at least two filled cells on the first sheet (without header and total rows) |
+| `month_rows_min` | number | this many data rows on one sheet (whatever they hold) **or** this many columns with month names in the header |
 | `months` | `[from, to]` | all months from–to (1–12) occur in cells (name, abbreviation, date) |
 | `dates_between` | `["YYYY-MM-DD", "YYYY-MM-DD"]` | date values in data rows lie in this range: hard in date columns (header with Datum, Kauf, Start, Ende, Termin, Frist, …tag such as Stichtag/Bereitschaftstag), soft in other columns; validity columns („Garantie bis“) and dates in running text do not count |
 | `columns` | list of regexes | each must match a header cell (or row label) of a sheet |
@@ -180,9 +181,10 @@ sheet = 1                     # optional: sheet (position from 1) or regex on th
 ```
 
 Columns are found via the header row; if nothing matches, via the row labels (transposed table, e.g. months as
-columns). Columns not found give a soft defect "not checkable", wrong values a hard one. Total rows are only checked
-where the inputs and the result are SUM formulas (not MIN/MAX/AVERAGE rows); if a sum is missing there, that is a
-soft defect "total row incomplete". Percent: percent cells count as a share (12,5 % = 0.125). If the result cell has
+columns). Columns not found (or no row with all values) give a soft defect "not checkable", wrong values a hard one,
+an empty result in a data row whose inputs are all there a hard "missing result". Total rows are only checked where
+the inputs and the result are SUM formulas (not MIN/MAX/AVERAGE rows); if a sum is missing there, that is a soft
+defect "incomplete total row". Percent: percent cells count as a share (12,5 % = 0.125). If the result cell has
 no percent format and the header of the result column (when transposed: the row label) contains `%` or „Prozent“,
 the value × 100 also counts (tolerance × 100): „Sparquote in %“ = 17,31 with `=J2/D2*100` is right, 1.731 % (percent
 format and × 100) stays wrong.
@@ -222,7 +224,7 @@ consistent; attachments only with one turn, names unique per turn, files present
 regexes in all patterns (also `value_ranges.column`, `calculations.sheet`, `chart_series`, `sorted.column`, `groups`,
 `column_format`), lists for `names`/`columns`/`disable` (`disable` only with names of general checks), integers for
 the `…_min`/`…_max`, number lists for `values_present` (also lists as alternatives)/`chart_values`, `retained` as a
-share 0–1 or `{ hard, soft }` with hard ≤ soft (likewise `words_min`), `months`/`slides` as `[from, to]`,
+share 0–1 or `{ hard, soft }` (at least one of them, hard ≤ soft; likewise `words_min`), `months`/`slides` as `[from, to]`,
 `slides_added` as a number or `[from, to]`, `dates_between` as two ISO dates in ascending order, `chart_type` from
 `column`/`bar`/`line`/`pie`, `calculations.formula` as an expression of `+ - * /`, brackets, numbers and the names
 from `columns` (and `result` one of those names), required parts of `groups` and `target.value` only with
@@ -236,7 +238,7 @@ would otherwise lie more than 120 days before it. For the weekday, from 60 days 
 
 | Name | Label | Severity | Example |
 |---|---|---|---|
-| `foreign_script` | foreign script | hard | „eine直观e Anbindung“, Cyrillic „единоAnna“ |
+| `foreign_script` | foreign script; other foreign script | hard | „eine直观e Anbindung“ (Chinese/Japanese/Korean: "foreign script"), Cyrillic „единоAnna“ (also Arabic, Hebrew, Thai, Indic scripts: "other foreign script") |
 | `english` | English text | soft | more English than German function words (the, and … against der, und …) |
 | `control_tokens` | control tokens | hard | `<\|"\|>`, `<\|channel\|>` in the text |
 | `literal_newline` | literal \n | hard | `Zeile 1\nZeile 2` as text (not in paths such as `\\nas01\backup`) |
@@ -245,7 +247,7 @@ would otherwise lie more than 120 days before it. For the weekday, from 60 days 
 | `weekday` | wrong weekday | hard; soft when the year is inferred | „Dienstag, 26. Oktober 2026“ (Monday); „Di., 19.10.“; „12.10.2026 (Mittwoch)“; row „Di \| 26.10.2026“. Not: „Mo–Fr 12.10.–16.10.“ |
 | `calendar_week` | wrong calendar week | soft | „Woche 41“ in the header of minutes dated 12.10.2026 (KW 42), „KW 1–6 (Dezember 2026 – Januar 2027)“, „26.10.2026 (KW 45)“, „KW 53/2027“ (does not exist); table row „44 \| 02.11.2026 \| 06.11.2026“ under the header „KW“ (KW 45), „Kick-off in KW 42“ in the row with start 19.10.2026. Right: „KW 52–1 (Dez.–Jan.)“, „KW 53 (28.12.2026–03.01.2027)“, the week of the start, of the end or in between. Only a KW directly next to a date/month or in a table row with date cells: a KW column or a cell „KW 44“ against all date cells of the row, a KW in the running text of a cell only against columns such as Start/Beginn/Von/Ende/Zeitraum/Datum (not Frist, bis, Plan, Soll/Ist) |
 | `past_dates` | date in the past | soft | only with `dates_from`: „Start in KW 19/2026“, „Kick-off am 01.10.2026“. Not: „Stand: 01.10.2026“, „Protokoll vom …“, titles, a period that ends after `dates_from` |
-| `text_arithmetic` | wrong calculation in text | soft | „80 × 8 € × 12 = 7.860 €“; table row „0,2 PT/Woche × 48 × 85 EUR \| 4.080“; row „Gesamt …“ or „… gesamt“ ≠ sum of the amounts above it (ranges „23.000 – 39.000“ added separately, a subtotal of the rows directly above counts); tolerance 0.5 %, at least the written precision („4 × 8,5 h + 5,25 h = 39 h“ is wrong). Not: ranges „15–30 € × 5–10“, a monthly amount next to an annual amount |
+| `text_arithmetic` | wrong calculation in text | soft | „80 × 8 € × 12 = 7.860 €“; table row „0,2 PT/Woche × 48 × 85 EUR \| 4.080“; row „Gesamt …“ or „… gesamt“ ≠ sum of the amounts above it (ranges „23.000 – 39.000“ added separately, a subtotal of the rows directly above counts); tolerance 0.5 % (5 % after „ca.“, „rund“, „etwa“, „~“, „≈“), at least the written precision („4 × 8,5 h + 5,25 h = 39 h“ is wrong). Not: ranges „15–30 € × 5–10“, a monthly amount next to an annual amount |
 | `formula_errors` | formula error | hard | `#VALUE!`, `#REF!`, `#NAME?`, `#DIV/0!`, `Err:502` after recalculation |
 | `formula_empty` | formula without result | hard | formula cell stays empty after recalculation |
 | `formula_as_text` | formula as text | hard | text cell „=B2-B3“ or „"=SUM(B3:B4)"“ |
@@ -258,17 +260,18 @@ would otherwise lie more than 120 days before it. For the weekday, from 60 days 
 | `weekend` | date on a weekend | soft | „Abgabe bis 17.10.2026“, cell „18.10.2026“ in a column „Frist“/„Termin“/„Datum“. Not: a written-out weekday („Samstag, 17.10.“), periods, vacation/celebration/„in Kraft“, validity before the date („gilt ab 01.11.“, „gelten bis zum 31.10.“, „gültig bis“; but „bis 25.10., damit das Angebot noch gilt“ counts), purchase or warranty dates, dates from the prompt |
 | `invalid_date` | invalid date | hard | xlsx: text cell „2026-11-31“ or „30.02.2026“ (with a four-digit year in any column, otherwise in date columns) |
 | `date_as_text` | date as text | soft | xlsx: valid date stored as text („2026-07-01“, „01.07.2026“) in a date column (header with Datum, Start, …tag, or mostly date or date-text cells); not if `column_format` already checks the column as a date |
-| `share_over_100` | share over 100 % | soft | xlsx: cell in percent format above 100 % in a column Anteil/Quote/Verteilung (6.954 % instead of 69,5 %), above 1.000 % with Auslastung/Belegung/Prozent/„%“ in the header. Not: Veränderung, Abweichung, Wachstum, Zielerreichung, Erfüllung, Plan/Soll/Ist, Vorjahr |
+| `share_over_100` | share over 100 % | soft | xlsx: cell in percent format above 100 % in a column Anteil/Quote/Verteilung (6.954 % instead of 69,5 %), above 1.000 % with Auslastung/Belegung/Prozent/„%“ in the header. Not: Veränderung, Abweichung, Wachstum, Zuwachs, Steigerung, Delta, Differenz, Vorjahr, Ziel(erreichung), Erfüllung, Index, „+/-“ (Plan/Soll/Ist are checked like any share column, docs/open-issues.md) |
 
 ### Severities
 
 Severity of the `[checks]` keys: missing required parts and wrong values are hard (also `chart_type`,
 `chart_values`, `chart_series`, `value_ranges`, `dates_between`, `calculations`, `count.min`, `words_min`,
 `forbidden`, `values_present`, `notes_min`, `sorted`, `groups`, `retained` below `hard`); soft are `words_max`,
-`count.max`, `topics_soft`, `retained` below `soft`, `last_slide_topics`, `slides_added`, the heuristics
-`side_by_side`, `column_format`, `workdays` and `numbers_sourced`, everything "not checkable", and with
-`calculations` an incomplete total row (additive formula, one value missing). Without a chart, every chart key gives
-a hard defect "no chart". An unreadable file, a wrong or unknown file type and "not recalculated" (LibreOffice) are
+`count.max`, `topics_soft`, `retained` and `words_min` below `soft`, `last_slide_topics`, `slides_added`, the
+heuristics `side_by_side`, `column_format`, `workdays` and `numbers_sourced`, everything "not checkable", `toc` when
+only a typed table of contents exists, `dates_between` outside date columns, and with `calculations` an incomplete
+total row (additive formula, one value missing). Without a chart there is one hard defect "no chart" (check
+`chart`), whichever chart keys the task sets. An unreadable file, a wrong or unknown file type and "not recalculated" (LibreOffice) are
 hard. If a single check crashes, there is only a soft defect "check crashed"; the other findings remain.
 `calculations` treats date cells as Excel serial numbers (days) and percent cells as shares (12,5 % = 0.125); with %
 in the header and without percent format, × 100 also counts (see above).
