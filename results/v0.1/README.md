@@ -15,5 +15,10 @@ uv run obench report results/v0.1 --grades results/v0.1/grades.jsonl
 - `grades.jsonl`: one line per graded file (`model`, `task`, `rep`, `file`, five grades, reasons in German),
   judge `claude-opus-5.5-agent`: Claude Opus 5.5 agent sessions with the export of `obench judge --export`, ten
   files per session, two files per model and task.
+- Rescored on 20 October 2026 with the checks of v0.1.1 (same runs and files, no new model calls): `formula_empty`
+  no longer flags an IF that leaves a row empty on purpose, and `total_row`, `line_item_formula` and
+  `data_rows_min` look at the main table instead of the first sheet. Four runs change from failed to successful
+  (DeepSeek `bueromaterial` 1 and `preisaenderung` 1, Qwen3.8-27B `preisaenderung` 0, Gemma `sparquote` 1); no run
+  gets worse. Before: DeepSeek 86 %, Qwen3.8-27B 83 %, Gemma 61 %.
 - The built files are not in the repository; they are the release asset `v0.1-files.zip`
   (`<model>/files/…`, unzip here to rerun `obench score`).

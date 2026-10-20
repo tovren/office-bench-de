@@ -351,6 +351,11 @@ def general_checks(b: Sheet, ctx: Context) -> None:
             _share_over_100(b, ctx)
 
 
+# An IF with "" as a result (=IF(A9="";"";C9*E9)): the tool applies a column formula to every row, so models leave
+# total and note rows empty on purpose. IFERROR(…;"") alone still counts: there the empty cell hides an error.
+DELIBERATELY_EMPTY = re.compile(r'(?=.*\bIF\()(?=.*[,;]\s*""\s*[,;)])', re.I | re.S)
+
+
 def _formula_errors(b: Sheet, ctx: Context) -> None:
     ws, wsv = b.ws, b.wsv
     if wsv is None:
@@ -360,7 +365,7 @@ def _formula_errors(b: Sheet, ctx: Context) -> None:
         v = wsv[c.coordinate].value
         if isinstance(v, str) and ERROR_VALUE.match(v):
             errors[(ERROR_VALUE.match(v).group(1), c.column)].append(c.row)
-        elif empty(v):
+        elif empty(v) and not DELIBERATELY_EMPTY.search(str(c.value)):
             no_result[c.column].append(c.row)
     for row in wsv.iter_rows():  # error values outside formula cells
         for c in row:
@@ -507,11 +512,9 @@ def _date_text(b: Sheet, ctx: Context) -> None:
 # but not by a factor of ten; changes and target attainment (Veränderung +150 %, Zielerreichung 105 %) are left out.
 SHARE_HEADER = re.compile(r"anteil|quote|verteilung", re.I)
 PERCENT_HEADER = re.compile(r"auslastung|belegung|prozent|%", re.I)
-# The old checker had „\bdiff\b|\bplan\b|\bsoll\b|\bist\b|\bvs\b“ here with literal backspace characters (0x08)
-# instead of word boundaries, so those alternatives never matched; left out to keep the verdicts identical (with them
-# „Anteil verplant“ or „Quote Liste“ would no longer be checked).
+# Plan, Soll, Ist, Diff and vs. only as whole words: „Quote Ist“ is a comparison, „Anteil verplant“ a share.
 NO_SHARE_HEADER = re.compile(r"veränder|änderung|abweich|wachstum|zuwachs|steiger|delta|differenz|vorjahr|"
-                             r"erfüll|erreich|ziel|index|\+/-|±", re.I)
+                             r"erfüll|erreich|ziel|index|\+/-|±|\b(?:diff|plan|soll|ist|vs)\b", re.I)
 
 
 def _share_over_100(b: Sheet, ctx: Context) -> None:
@@ -777,12 +780,20 @@ def _is_date_column(b: Sheet, c: int) -> bool:
     return len(values) >= 2 and sum(1 for v in values if isinstance(v, (datetime, date))) >= len(values) / 2
 
 
+def _main_sheet(sheets) -> Sheet | None:
+    """The sheet with the largest table (most data rows, the first of equals) of at least three columns: not a
+    parameter or key-value sheet (Parameter | Wert) or a short evaluation next to the table; without such a table
+    the first sheet."""
+    tables = [b for b in sheets if len(b.headers) >= 3]
+    return max(tables, key=lambda b: len(b.data)) if tables else sheets[0] if sheets else None
+
+
 def _data_rows(sheets, ctx):
-    first, p = sheets[0] if sheets else None, ctx.checks
-    n = sum(1 for r in first.data if sum(1 for c in range(1, first.width + 1)
-                                         if not empty(first.ws.cell(r, c).value)) >= 2) if first else 0
-    if n < p["data_rows_min"]:
-        ctx.report("data_rows_min", f"only {n} data rows on the first sheet (expected ≥ {p['data_rows_min']})")
+    main, expected = _main_sheet(sheets), ctx.checks["data_rows_min"]
+    n = sum(1 for r in main.data if sum(1 for c in range(1, main.width + 1)
+                                        if not empty(main.ws.cell(r, c).value)) >= 2) if main else 0
+    if n < expected:
+        ctx.report("data_rows_min", f"only {n} data rows in the table (expected ≥ {expected})")
 
 
 def _months(sheets, ctx):
@@ -851,21 +862,21 @@ def _columns(sheets, ctx):
 
 
 def _total_row(sheets, ctx):
-    """A SUM in a total row of the first sheet (or in a total column of a table across); running sums do not count."""
-    first = sheets[0] if sheets else None
-    if first is None:
+    """A SUM in a total row of the main sheet (or in a total column of a table across); running sums do not count."""
+    main = _main_sheet(sheets)
+    if main is None:
         return
-    total_cols = {c for c, head in first.headers.items() if TOTAL_LABEL.match(head)}
-    has = any(SUM.search(str(c.value)) and (c.row in first.totals or c.column in total_cols)
-              for c in first.formulas())
+    total_cols = {c for c, head in main.headers.items() if TOTAL_LABEL.match(head)}
+    has = any(SUM.search(str(c.value)) and (c.row in main.totals or c.column in total_cols)
+              for c in main.formulas())
     if not has:
-        ctx.report("total_row", "no total row (SUM formula) on the first sheet")
+        ctx.report("total_row", f"no total row (SUM formula) on the sheet „{main.name}“")
 
 
 def _line_item_formula(sheets, ctx):
-    first = sheets[0] if sheets else None
-    if first and not any(re.search(r"\*|PRODUCT|PRODUKT", str(c.value), re.I) for c in first.formulas()
-                         if c.row in first.data):
+    main = _main_sheet(sheets)
+    if main and not any(re.search(r"\*|PRODUCT|PRODUKT", str(c.value), re.I) for c in main.formulas()
+                        if c.row in main.data):
         ctx.report("line_item_formula", "no formula for the line total (quantity × unit price)")
 
 

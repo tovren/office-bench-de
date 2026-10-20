@@ -30,7 +30,7 @@ docs/task-format.md.
   scripts. Grades from an API judge differ from these and from each other; the calibration is in docs/judge.md.
   Grades from different judges should not be compared directly.
 
-## Heuristics and probable false alarms
+## Heuristics
 
 - **`numbers_sourced` is a heuristic and a lower bound.** It cannot know which numbers a model invented; it reports
   numbers that neither appear in the source nor follow from it by one simple step. The more numbers a paragraph of
@@ -45,19 +45,6 @@ docs/task-format.md.
   - deadlines in words ("in drei Wochen", "sechs Monate vor Ablauf") are not computed. `stellenanzeige` and
     `wartungsvertrag` are built so that the correct date is sourced anyway ("in zwei Wochen" lies within reference
     date ± 14 days; an attachment names the month of the correct date).
-- **`total_row` looks only at the first sheet.** The same holds for `line_item_formula` and `data_rows_min`. In
-  `kostenumlage`, one real run put a parameter sheet first; its total row was correct on the second sheet and was
-  reported as a hard "no total row". Probably a false alarm.
-- **`formula_empty` flags deliberately empty formulas.** A formula such as `=IF(…;"";…)` that leaves a cell empty
-  on purpose is reported as a hard "formula without result". In `bueromaterial`, one real run built a column that
-  only calculates in the total rows; the values were right. Probably a false alarm.
-- **`share_over_100` does not exclude Diff/Plan/Soll/Ist/vs.** The original checker meant to skip columns whose
-  header contains these words, but its pattern never matched them. The check is kept identical to the original on
-  purpose, so verdicts stay comparable with earlier runs: a percent column "Anteil Plan" or "Quote Ist" is checked
-  like any share column (with the words excluded as
-  plain substrings, headers such as "Anteil verplant" or "Quote Liste" would no longer be checked either).
-- **Placeholders.** The placeholder check does not yet know many words in square brackets, e.g. "[Raum]",
-  "[Gebäude/Etage]", "[z. B. 20 %]", "[Pfad/Ablage]".
 
 Changes to these checks should first be tried on tasks that are not part of the published set, so that published
 numbers do not shift.

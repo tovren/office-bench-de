@@ -70,6 +70,20 @@ def _sums(path: Path):
     wb.save(path)
 
 
+def _empty_results(path: Path):
+    """A column formula that leaves a note row empty on purpose (=IF(A6="";"";…)) and an IFERROR that hides a
+    failed lookup behind an empty cell."""
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Bestellung"
+    ws.append(["Artikel", "Menge", "Preis", "Gesamt", "Lager"])
+    for i in range(2, 5):
+        ws.append([f"Artikel {i}", i, 2.5, f'=IF(A{i}="","",B{i}*C{i})', f'=IFERROR(VLOOKUP(A{i},G:H,2,0),"")'])
+    ws.append(["Summe", None, None, "=SUM(D2:D4)"])
+    ws.append([None, "Hinweis: Preise netto", None, '=IF(A6="","",B6*C6)'])
+    wb.save(path)
+
+
 def _savings_rate(path: Path, as_percent_number: bool):
     wb = Workbook()
     ws = wb.active
@@ -159,11 +173,12 @@ def _shares_and_date_text(path: Path):
     wb = Workbook()
     ws = wb.active
     ws.title = "Team"
-    ws.append(["Name", "Datum", "Anteil am Budget", "Veränderung zum Vorjahr", "Auslastung", "Anteil verplant"])
-    for row in (("Keller", date(2026, 7, 1), 0.4, 1.5, 1.1, 51.5), ("Brandt", "2026-07-02", 0.6, -0.2, 0.9, 0.5),
-                ("Lehmann", "31.11.2026", 0.0, 0.1, 1.0, 0.25)):
+    ws.append(["Name", "Datum", "Anteil am Budget", "Veränderung zum Vorjahr", "Auslastung", "Anteil verplant",
+               "Quote Ist"])
+    for row in (("Keller", date(2026, 7, 1), 0.4, 1.5, 1.1, 51.5, 1.4), ("Brandt", "2026-07-02", 0.6, -0.2, 0.9, 0.5,
+                0.9), ("Lehmann", "31.11.2026", 0.0, 0.1, 1.0, 0.25, 1.0)):
         ws.append(list(row))
-    for cells in ws.iter_rows(min_row=2, min_col=3, max_col=6):
+    for cells in ws.iter_rows(min_row=2, min_col=3, max_col=7):
         for c in cells:
             c.number_format = "0.0%"
     ws["B2"].number_format = "DD.MM.YYYY"
@@ -191,6 +206,9 @@ def findings(tmp_path_factory) -> dict:
             "name": "Ende = Start + Dauer + 3", "columns": {"start": "start", "dauer": "dauer", "ende": r"\bende"},
             "formula": "start + dauer + 3", "result": "ende"}])),
     }
+    path = folder / "empty_results.xlsx"
+    _empty_results(path)
+    files["empty_results"] = (path, make_task("xlsx"))
     for name, builder in (("budget_transposed", _budget_transposed), ("budget_text", _budget_text), ("sums", _sums)):
         path = folder / f"{name}.xlsx"
         builder(path)
@@ -258,6 +276,11 @@ def test_sum_range_and_formula_errors(findings):
     assert "no value in Budget!B8, C8" in _d(f, "calculations", "soft")[0]
 
 
+def test_deliberately_empty_formula(findings):
+    empty = _d(findings["empty_results"], "formula_empty", "hard")
+    assert len(empty) == 1 and "Bestellung!E2:E4" in empty[0] and "D6" not in empty[0], empty
+
+
 def test_constant_and_value_range(findings):
     f = findings["reisekosten"]
     assert "Fahrten!E4 = 30, expected 24" in _d(f, "calculations", "hard")[0]
@@ -301,6 +324,7 @@ def test_share_over_100_and_date_as_text(findings):
     share = _d(f, "share_over_100", "soft")
     assert len(share) == 1 and "„Anteil verplant“ Team!F2 " in share[0] and "5.150 %" in share[0], share
     assert "Veränderung" not in share[0] and "Auslastung" not in share[0] and "Budget" not in share[0]
+    assert "Quote Ist" not in share[0]
     invalid = _d(f, "invalid_date", "hard")
     assert len(invalid) == 1 and "Team!B4" in invalid[0] and "31.11.2026" in invalid[0], invalid
     as_text = _d(f, "date_as_text", "soft")

@@ -38,7 +38,8 @@ PLACEHOLDERS = [
     # [Name eintragen], <Datum>, {Firmenname}; not markdown links [Text](url) and not check boxes [ ]
     re.compile(r"[\[<{][^\]\[<>{}\n]{0,40}?(?:name|vorname|nachname|datum|termin|firma|unternehmen|adresse|betrag|"
                r"anzahl|abteilung|ansprechpartner|telefon|e-?mail|kunde|kundin|projekt|produkt|uhrzeit|nummer|"
-               r"unterschrift|kontakt|durchwahl|bankverbindung|bankdaten|\biban\b|\bbic\b|"
+               r"unterschrift|kontakt|durchwahl|bankverbindung|bankdaten|\biban\b|\bbic\b|\braum\b|gebäude|"
+               r"\betage\b|\bpfad\b|\bablage\b|\bz\.\s?b\.|"
                r"einfügen|eintragen|ergänzen|einsetzen|angeben|platzhalter|hier|xx|tbd|ort\b)"
                r"[^\]\[<>{}\n]{0,40}?[\]>}](?!\()", re.I),
     re.compile(r"\((?:bitte\s+)?(?:\w+\s+){0,3}(?:einfügen|eintragen|ergänzen)\)", re.I),

@@ -16,12 +16,12 @@ run logs and grades.
 | Model | Success | pass^3 | Content ok | Quality (1–5) | Cost of 150 runs |
 |---|---:|---:|---:|---:|---:|
 | Claude Haiku 5.5 (thinking medium) | 91 % (84–97) | 80 % | 90 % | 4.30 (4.11–4.47) | $0.71 |
-| DeepSeek V4 Flash (thinking high) | 86 % (77–94) | 80 % | 88 % | 4.27 (4.12–4.40) | $0.17 |
+| DeepSeek V4 Flash (thinking high) | 87 % (79–95) | 80 % | 89 % | 4.27 (4.12–4.40) | $0.17 |
 | Nemotron 3.5 Super VL (thinking on) | 85 % (76–93) | 76 % | 86 % | 4.00 (3.85–4.17) | $0.50 |
-| Qwen3.8-27B (thinking medium) | 83 % (75–91) | 68 % | 84 % | 3.91 (3.73–4.08) | $0.27 |
+| Qwen3.8-27B (thinking medium) | 84 % (75–92) | 68 % | 85 % | 3.91 (3.73–4.08) | $0.27 |
 | Qwen3.8-Flash (thinking medium) | 83 % (74–91) | 64 % | 82 % | 3.92 (3.74–4.08) | $0.46 |
 | gpt-oss-120b (reasoning medium) | 66 % (54–77) | 46 % | 67 % | 3.57 (3.38–3.76)\* | $0.36 |
-| Gemma 4 31B | 61 % (49–74) | 52 % | 56 % | 3.63 (3.45–3.81) | $0.38 |
+| Gemma 4 31B | 62 % (49–75) | 52 % | 57 % | 3.63 (3.45–3.81) | $0.38 |
 
 - **Success**: the run delivered what the task asks for (the file, every follow-up turn, no hard defect in the
   content check, reply and behavior checks where the task has them). 95 % intervals from a bootstrap over tasks.

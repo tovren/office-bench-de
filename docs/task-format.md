@@ -141,14 +141,14 @@ checkable".
 | Key | Type | Meaning |
 |---|---|---|
 | `sheets_min` | number | number of sheets |
-| `data_rows_min` | number | data rows with at least two filled cells on the first sheet (without header and total rows) |
+| `data_rows_min` | number | data rows with at least two filled cells in the main table (without header and total rows); main table = the sheet with the most data rows among those with at least three columns, else the first sheet |
 | `month_rows_min` | number | this many data rows on one sheet (whatever they hold) **or** this many columns with month names in the header |
 | `months` | `[from, to]` | all months from–to (1–12) occur in cells (name, abbreviation, date) |
 | `dates_between` | `["YYYY-MM-DD", "YYYY-MM-DD"]` | date values in data rows lie in this range: hard in date columns (header with Datum, Kauf, Start, Ende, Termin, Frist, …tag such as Stichtag/Bereitschaftstag), soft in other columns; validity columns („Garantie bis“) and dates in running text do not count |
 | `columns` | list of regexes | each must match a header cell (or row label) of a sheet |
 | `formulas_min` | number | real formula cells in total |
-| `total_row` | bool | SUM formula in a total row (or total column) of the first sheet; running totals (`=SUM(D$2:D3)`) do not count |
-| `line_item_formula` | bool | formula with `*` or PRODUCT in the data rows of the first sheet |
+| `total_row` | bool | SUM formula in a total row (or total column) of the main table (see `data_rows_min`); running totals (`=SUM(D$2:D3)`) do not count |
+| `line_item_formula` | bool | formula with `*` or PRODUCT in the data rows of the main table (see `data_rows_min`) |
 | `priced_items_min` | number | data rows of the first sheet with a unit price > 0 |
 | `chart` | bool | at least one chart |
 | `chart_type` | text or list | `column`, `bar`, `line`, `pie`; one of them must occur |
@@ -249,7 +249,7 @@ would otherwise lie more than 120 days before it. For the weekday, from 60 days 
 | `past_dates` | date in the past | soft | only with `dates_from`: „Start in KW 19/2026“, „Kick-off am 01.10.2026“. Not: „Stand: 01.10.2026“, „Protokoll vom …“, titles, a period that ends after `dates_from` |
 | `text_arithmetic` | wrong calculation in text | soft | „80 × 8 € × 12 = 7.860 €“; table row „0,2 PT/Woche × 48 × 85 EUR \| 4.080“; row „Gesamt …“ or „… gesamt“ ≠ sum of the amounts above it (ranges „23.000 – 39.000“ added separately, a subtotal of the rows directly above counts); tolerance 0.5 % (5 % after „ca.“, „rund“, „etwa“, „~“, „≈“), at least the written precision („4 × 8,5 h + 5,25 h = 39 h“ is wrong). Not: ranges „15–30 € × 5–10“, a monthly amount next to an annual amount |
 | `formula_errors` | formula error | hard | `#VALUE!`, `#REF!`, `#NAME?`, `#DIV/0!`, `Err:502` after recalculation |
-| `formula_empty` | formula without result | hard | formula cell stays empty after recalculation |
+| `formula_empty` | formula without result | hard | formula cell stays empty after recalculation; not an IF with `""` as a result (`=IF(A9="";"";C9*E9)`, an empty row on purpose), but IFERROR(…;"") alone counts |
 | `formula_as_text` | formula as text | hard | text cell „=B2-B3“ or „"=SUM(B3:B4)"“ |
 | `number_as_text` | number as text | soft | text cell „1.500 €“ (not in columns Pos./Nr./Jahr/KW …) |
 | `text_in_number_column` | text in number column | soft | „siehe oben“ in a column formatted as numbers |
@@ -260,7 +260,7 @@ would otherwise lie more than 120 days before it. For the weekday, from 60 days 
 | `weekend` | date on a weekend | soft | „Abgabe bis 17.10.2026“, cell „18.10.2026“ in a column „Frist“/„Termin“/„Datum“. Not: a written-out weekday („Samstag, 17.10.“), periods, vacation/celebration/„in Kraft“, validity before the date („gilt ab 01.11.“, „gelten bis zum 31.10.“, „gültig bis“; but „bis 25.10., damit das Angebot noch gilt“ counts), purchase or warranty dates, dates from the prompt |
 | `invalid_date` | invalid date | hard | xlsx: text cell „2026-11-31“ or „30.02.2026“ (with a four-digit year in any column, otherwise in date columns) |
 | `date_as_text` | date as text | soft | xlsx: valid date stored as text („2026-07-01“, „01.07.2026“) in a date column (header with Datum, Start, …tag, or mostly date or date-text cells); not if `column_format` already checks the column as a date |
-| `share_over_100` | share over 100 % | soft | xlsx: cell in percent format above 100 % in a column Anteil/Quote/Verteilung (6.954 % instead of 69,5 %), above 1.000 % with Auslastung/Belegung/Prozent/„%“ in the header. Not: Veränderung, Abweichung, Wachstum, Zuwachs, Steigerung, Delta, Differenz, Vorjahr, Ziel(erreichung), Erfüllung, Index, „+/-“ (Plan/Soll/Ist are checked like any share column, docs/open-issues.md) |
+| `share_over_100` | share over 100 % | soft | xlsx: cell in percent format above 100 % in a column Anteil/Quote/Verteilung (6.954 % instead of 69,5 %), above 1.000 % with Auslastung/Belegung/Prozent/„%“ in the header. Not: Veränderung, Abweichung, Wachstum, Zuwachs, Steigerung, Delta, Differenz, Vorjahr, Ziel(erreichung), Erfüllung, Index, „+/-“ and the words Plan, Soll, Ist, Diff, vs. (whole words: „Anteil verplant“ is checked) |
 
 ### Severities
 

@@ -90,6 +90,9 @@ def test_foreign_script(text, expected):
     ("Kundennummer: [ ]", "Kundennummer: [ ]"),
     ("Meldeadresse security@firma.de | IT-Desk 0000", "IT-Desk 0000"),
     ("Personalabteilung (Tel. 0000 1234)", "Tel. 0000"),
+    ("Treffpunkt: [Raum] im [Gebäude/Etage]", "[Raum]"),
+    ("Rabatt [z. B. 20 %] auf alle Positionen", "[z. B. 20 %]"),
+    ("Die Vorlage liegt unter [Pfad/Ablage].", "[Pfad/Ablage]"),
 ])
 def test_placeholders(text, hit):
     m = only(text_defects([text]), "placeholders")
@@ -100,7 +103,7 @@ def test_placeholders(text, hit):
     "Zum Beispiel Jira oder Zendesk", "Siehe [Projektplan](https://example.org)", "[ ] Sicherung prüfen",
     "Anbieter A ist günstiger als Anbieter B", "Größe XXL", "Windows 11 und Office 365", "Ziel: 4,2/5 Punkte",
     "Backup gestartet [ ]", "1. [ ] Protokoll gelesen\n[ ] Passwort geändert", "Teilnahme: ja [ ] nein [ ]",
-    "Rechnungs-Nr. 0001234", "Quelle [1]",
+    "Rechnungs-Nr. 0001234", "Quelle [1]", "Zeitraum [Q3 2026] ohne Feiertage",
 ])
 def test_no_placeholder(text):
     assert not only(text_defects([text]), "placeholders")

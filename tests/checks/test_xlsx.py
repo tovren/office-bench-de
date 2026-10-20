@@ -78,6 +78,24 @@ def test_running_sum_is_no_total_row(tmp_path):
     assert [m.check for m in d_with if m.hard] == ["not_recalculated"]
 
 
+def test_table_checks_look_at_every_sheet(tmp_path):
+    """A parameter sheet in front of the table: total row, line item formula and data rows are on the second sheet."""
+    path = tmp_path / "params_first.xlsx"
+    wb = Workbook()
+    params = wb.active
+    params.title = "Parameter"
+    params.append(["Parameter", "Wert"])
+    params.append(["Kilometerpauschale", 0.3])
+    ws = wb.create_sheet("Positionen")
+    ws.append(["Artikel", "Menge", "Preis", "Gesamt"])
+    for i in range(2, 6):
+        ws.append([f"Artikel {i}", i, 2.5, f"=B{i}*C{i}"])
+    ws.append(["Summe", None, None, "=SUM(D2:D5)"])
+    wb.save(path)
+    d = check_one(path, Context(make_task(total_row=True, line_item_formula=True, data_rows_min=4)), {}).defects
+    assert [m.check for m in d if m.hard] == ["not_recalculated"]
+
+
 def test_libreoffice_timeout_kills_process_group(tmp_path):
     """A hanging soffice (script that starts a child and sleeps) is killed with its whole process group."""
     pids = tmp_path / "pids"
