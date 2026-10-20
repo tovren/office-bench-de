@@ -3,6 +3,7 @@ behavior checks. Most tests replace the content check by a fake (verdict from th
 build real files from tasks/<id>/reference.json and run the real check."""
 
 import json
+import shutil
 from pathlib import Path
 
 import pytest
@@ -313,6 +314,9 @@ def test_results_file_and_cli(tmp_path, fake_check, capsys):
     (folder / "log.jsonl").touch()  # a newer log: scored again
     scoring.load_results(folder)
     assert len(fake_check) == 3
+    shutil.rmtree(folder / "files")  # published results come without the built files: read as they are
+    (folder / "log.jsonl").touch()
+    assert scoring.load_results(folder)[0].to_dict() == lines[0] and len(fake_check) == 3
 
 
 # -------------------------------------------------------------------------------- real files, real check --

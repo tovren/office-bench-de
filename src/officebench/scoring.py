@@ -470,10 +470,13 @@ def write_results(folder: Path, results: list[Result]) -> Path:
 
 
 def load_results(folder: Path, rescore: bool = False) -> list[Result]:
-    """results.jsonl of a model folder; scored (and written) again if missing, older than the log or rescore."""
+    """results.jsonl of a model folder; scored (and written) again if missing, older than the log or rescore. A folder
+    without files/ (published results: the built files are a separate download) is read as it is, since a git checkout
+    does not keep the order of the timestamps."""
     folder = Path(folder)
     path, log = folder / RESULTS, folder / "log.jsonl"
-    if rescore or not path.exists() or (log.exists() and log.stat().st_mtime > path.stat().st_mtime):
+    stale = log.exists() and log.stat().st_mtime > path.stat().st_mtime if path.exists() else True
+    if rescore or not path.exists() or (stale and (folder / "files").is_dir()):
         results = score_run(folder)
         write_results(folder, results)
         return results
