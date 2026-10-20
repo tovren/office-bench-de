@@ -1,6 +1,6 @@
 id = "anfrage"
 title = "Quote for a customer inquiry (attachment)"
-version = 1
+version = 2
 kind = "file"
 file_type = "xlsx"
 difficulty = "medium"
@@ -11,14 +11,14 @@ tags = ["attachment", "formula", "discount", "vat", "line_item_formula"]
 # (no discount); net €11,142.55, VAT €2,117.08, gross €13,259.63. No check total = quantity × price: the discount
 # may also be included per row in the total price; values_present checks net and gross.
 [[turns]]
-text = "Im Anhang ist eine Anfrage der Schreinerei Vogt. Mach mir bitte ein Angebot als Excel mit unseren Preisen: Laptop 1.149 €, Dockingstation 189 €, Monitor 27 Zoll 259 €, Multifunktionsdrucker 429 €, Einrichtung 95 € pro Stunde. Auf die Hardware gibt es 5 % Rabatt, auf die Einrichtung nicht. Darunter Netto, 19 % MwSt und Brutto."
+text = "Im Anhang ist eine Anfrage der Schreinerei Vogt. Mach mir bitte ein Angebot als Excel mit unseren Preisen: Laptop 1.149 €, Dockingstation 189 €, Monitor 27 Zoll 259 €, Multifunktionsdrucker 429 €, Einrichtung 95 € pro Stunde. Auf die Hardware gibt es 5 % Rabatt, auf die Einrichtung nicht. Darunter Netto, 19 % MwSt und Brutto. Bitte mit Formeln, damit ich Mengen und Preise noch ändern kann."
 attachments = [{ name = "Anfrage Schreinerei Vogt.pdf", file = "anfrage_vogt.txt" }]
 
 # numbers_sourced (soft): quantities and prices come from the attachment and the prompt; it reports numbers and
 # dates that are not there and do not follow from them (e.g. an invented validity „bis 13.11.2026“).
-# formulas_min = 8 (five items, net, VAT, gross): the checklist asks for net, VAT and gross as formulas; without it,
-# final totals as fixed amounts (mutant totals_as_constants, in real runs a summary with constants) only fail
-# when a value is wrong.
+# formulas_min = 8 (five items, net, VAT, gross): the prompt asks for formulas (version 1 did not, and only 1 of 21
+# runs had them); without the check, final totals as fixed amounts (mutant totals_as_constants, in real runs a
+# summary with constants) only fail when a value is wrong.
 [checks]
 numbers_sourced = true
 priced_items_min = 5

@@ -68,13 +68,15 @@ def _judge(args) -> int:
 
     if args.import_dir:
         r = grade.import_grades(Path(args.import_dir), Path(args.out), args.judge_name)
-        print(f"imported {r['imported']}, missing {len(r['missing'])}, invalid {len(r['invalid'])}: "
-              f"{', '.join(r['missing'] + r['invalid'])[:500]}")
+        problems = ", ".join(r["missing"] + r["invalid"])
+        print(f"imported {r['imported']}, missing {len(r['missing'])}, invalid {len(r['invalid'])}"
+              + (f": {problems[:500]}" if problems else ""))
         return 0 if not r["invalid"] else 1
     if not args.runs:
         print("error: give run folders (or --import DIR)", file=sys.stderr)
         return 2
-    items = grade.select_items(model_folders(args.runs), args.samples)
+    tasks = {t.id: t for t in task_registry.select(args.tasks)}
+    items = grade.select_items(model_folders(args.runs), args.samples, tasks)
     if args.export:
         r = grade.export_items(items, Path(args.export), args.package_size)
         print(f"exported {r['items']} items in {r['packages']} packages to {args.export}")
@@ -122,6 +124,7 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("judge", help="grade delivered files with an LLM judge (API, or export/import for agents)")
     p.add_argument("runs", nargs="*", help="run folders (a model folder or a folder with model subfolders)")
     p.add_argument("--judge", help="judge config, e.g. configs/judges/claude-sonnet-5.5.toml")
+    p.add_argument("--tasks", default="all", help="task selection (see `obench tasks list --help`)")
     p.add_argument("--samples", type=int, default=2, help="graded runs per model and task (default 2)")
     p.add_argument("--out", default="grades.jsonl", help="grades file (appended; default grades.jsonl)")
     p.add_argument("--export", help="write the prompts for agent graders to this folder instead of calling an API")

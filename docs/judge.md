@@ -48,7 +48,8 @@ obench judge runs/my-run --export runs/my-run/judging        # material/<id>/pro
 obench judge --import runs/my-run/judging --judge-name claude-opus-5.5-agent --out runs/my-run/grades.jsonl
 ```
 
-The export uses the same prompt as the API judge. Items get neutral ids; the mapping to models is in `mapping.json`,
+`--tasks` limits both ways to some tasks (same selection as `obench run`), e.g. to grade a task again after it was
+changed and rerun; remove its old lines from the grades file first. The export uses the same prompt as the API judge. Items get neutral ids; the mapping to models is in `mapping.json`,
 which the agents are told not to open.
 
 ## Calibration

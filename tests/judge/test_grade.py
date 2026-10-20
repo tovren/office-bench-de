@@ -32,6 +32,12 @@ def test_select_items(tmp_path):
                     ("wartungsmail", 0, None, "Sehr geehrte …"), ("wartungsmail", 1, None, None)]
 
 
+def test_select_items_of_some_tasks(tmp_path):
+    only = {"wartungsmail": load_tasks()["wartungsmail"]}  # obench judge --tasks
+    items = grade.select_items([make_run(tmp_path)], samples=2, tasks=only)
+    assert [(i.task.id, i.rep) for i in items] == [("wartungsmail", 0), ("wartungsmail", 1)]
+
+
 def test_prompt_is_blind_and_complete(tmp_path):
     item = grade.select_items([make_run(tmp_path, "secret-model")], samples=1)[0]
     messages = grade.build_messages(item, "TEXT DER DATEI", [])

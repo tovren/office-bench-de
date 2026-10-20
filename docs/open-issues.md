@@ -14,6 +14,13 @@ docs/task-format.md.
   like `[1]`, and models then also write those markers into documents and e-mails. The harness deliberately puts
   attachments in front of the message without any citation instruction. In an Open WebUI instance with the default
   template, models will produce such markers more often than here.
+- **Percent columns of the tool.** The tool's spec says for a `percent` column "12.5 means 12.5 %" and stores the
+  value as 0.125, as Excel does. It does not say that formulas then see 0.125. In `anfrage` (version 2, which asks
+  for formulas) this goes wrong in two ways: models send 5 and write `(1-F2/100)` in the formula, or they send 0.05,
+  which the tool turns into 0.05 %. Both give a discount of 0.05 % instead of 5 % and a wrong net total; only 2 of
+  21 runs got net and gross right. The first way is a gap in the tool's description, the second a model error
+  against it. The vendored tool is kept unchanged, so the task measures this as it would happen to a user; a
+  sentence in the tool's spec ("formulas see 0.125, do not divide by 100") would probably remove most of it.
 - **Saturated tasks.** About a third of the tasks are solved by all strong models in every run. They test the
   basics (a valid call, a correct simple table, a plain letter) and still separate weak setups from working ones;
   the differences between strong models come from the rest. A difference in overall success between two strong
