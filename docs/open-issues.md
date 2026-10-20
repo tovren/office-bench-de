@@ -21,6 +21,10 @@ docs/task-format.md.
   21 runs got net and gross right. The first way is a gap in the tool's description, the second a model error
   against it. The vendored tool is kept unchanged, so the task measures this as it would happen to a user; a
   sentence in the tool's spec ("formulas see 0.125, do not divide by 100") would probably remove most of it.
+  Office Documents 0.2.0 says this in its spec and sends back fractions in a percent column, `/100` on a percent
+  cell and `*100` in a percent column (35 of the 660 Excel calls of v0.1 would have been sent back, mostly in
+  `anfrage`, `kostenumlage`, `planist` and `sparquote`). The benchmark keeps the vendored 0.1.0 until a new
+  run; a new tool version means new results.
 - **Saturated tasks.** About a third of the tasks are solved by all strong models in every run. They test the
   basics (a valid call, a correct simple table, a plain letter) and still separate weak setups from working ones;
   the differences between strong models come from the rest. A difference in overall success between two strong
