@@ -22,6 +22,7 @@ import json
 import random
 import re
 import shutil
+import sys
 import tempfile
 import tomllib
 from dataclasses import dataclass
@@ -209,6 +210,9 @@ def _render(items: list[Item], tmp: Path) -> list[tuple[Path | None, str, list[P
             copies[n] = tmp / f"f{n:05d}{item.file.suffix}"
             neutral_copy(item.file, copies[n])
     images = render_images(list(copies.values()), tmp / "images") if copies else {}
+    if missing := [items[n].file for n, c in copies.items() if not images.get(c)]:
+        print(f"warning: no page images for {len(missing)} files (LibreOffice made no PDF): "
+              + ", ".join(str(f) for f in missing[:10]) + (" …" if len(missing) > 10 else ""), file=sys.stderr)
     texts = render_texts(list(copies.values())) if copies else {}
     return [(c, texts.get(c, ""), images.get(c, [])) if (c := copies.get(n)) else (None, "", [])
             for n in range(len(items))]

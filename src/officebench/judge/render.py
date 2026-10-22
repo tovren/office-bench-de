@@ -897,15 +897,34 @@ def _soffice(args: list[str], folder: Path, timeout: float) -> None:
     run_soffice(args, fresh_profile(folder / "profile"), timeout)
 
 
+RENDER_BATCH = 15  # files per LibreOffice run: long runs of several hundred files left some files without a PDF
+
+
+def _to_pdf(copies: list[Path], tmp: Path, timeout: float) -> None:
+    """PDFs of the copies in tmp/pdf: LibreOffice runs of RENDER_BATCH files, then one run per file that still has no
+    PDF (a file that fails alone is broken, not a victim of the batch)."""
+    def convert(files: list[Path]) -> None:
+        for suffix_is_xlsx, target in ((False, "pdf"), (True, XLSX_PDF)):
+            group = [str(c) for c in files if (c.suffix == ".xlsx") == suffix_is_xlsx]
+            for i in range(0, len(group), RENDER_BATCH):
+                _soffice(["--convert-to", target, "--outdir", str(tmp / "pdf"), *group[i:i + RENDER_BATCH]], tmp,
+                         timeout)
+
+    convert(copies)
+    for copy in copies:
+        if not (tmp / "pdf" / f"{copy.stem}.pdf").exists():
+            convert([copy])
+
+
 def render_images(paths, out_dir, dpi: int = DPI, xlsx_size: int = XLSX_SIZE,
                   timeout: float = 1800) -> dict[Path, list[Path]]:
     """Page images: {path: [png, …]} in page order ([] if LibreOffice made no PDF of the file).
 
-    One LibreOffice run for all docx/pptx and one for all xlsx (Calc needs its own export filter for one page per
-    sheet), then pdftoppm per file: at most 8 Word pages, 12 slides, 12 sheets (MAX_PAGES). The files are rendered
-    from neutral copies under neutral names, so equal file names in different folders do not collide and nothing
-    in out_dir points to the model. The PNGs are named f<n>-<page>.png in out_dir; PDFs and the LibreOffice profile
-    live in a temp folder.
+    LibreOffice runs of RENDER_BATCH docx/pptx or xlsx files (Calc needs its own export filter for one page per
+    sheet), a retry per file without a PDF, then pdftoppm per file: at most 8 Word pages, 12 slides, 12 sheets
+    (MAX_PAGES). The files are rendered from neutral copies under neutral names, so equal file names in different
+    folders do not collide and nothing in out_dir points to the model. The PNGs are named f<n>-<page>.png in
+    out_dir; PDFs and the LibreOffice profile live in a temp folder.
     """
     paths = [Path(p) for p in dict.fromkeys(paths)]
     if unknown := [p.name for p in paths if p.suffix.lower() not in FILE_TYPES]:
@@ -919,12 +938,7 @@ def render_images(paths, out_dir, dpi: int = DPI, xlsx_size: int = XLSX_SIZE,
         copies = {p: tmp / "in" / f"f{i:05d}{p.suffix.lower()}" for i, p in enumerate(paths)}
         for p, copy in copies.items():
             neutral_copy(p, copy)
-        sheets = [str(c) for c in copies.values() if c.suffix == ".xlsx"]
-        others = [str(c) for c in copies.values() if c.suffix != ".xlsx"]
-        if others:
-            _soffice(["--convert-to", "pdf", "--outdir", str(tmp / "pdf"), *others], tmp, timeout)
-        if sheets:
-            _soffice(["--convert-to", XLSX_PDF, "--outdir", str(tmp / "pdf"), *sheets], tmp, timeout)
+        _to_pdf(list(copies.values()), tmp, timeout)
         for p, copy in copies.items():
             pdf, prefix = tmp / "pdf" / f"{copy.stem}.pdf", out_dir / copy.stem
             for old in out_dir.glob(f"{copy.stem}-*.png"):
