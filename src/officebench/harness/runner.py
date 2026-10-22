@@ -128,6 +128,23 @@ async def run_task(http: httpx.AsyncClient, model: ModelConfig, api_key: str | N
     return rec
 
 
+def resumed_meta(old: dict, new: dict) -> dict:
+    """meta.json when a run folder is resumed, e.g. to run some tasks again: the task selection is the old one plus
+    any new tasks, and the harness of the first start stays; a later harness is listed under reruns with the tasks
+    run then."""
+    from officebench.tasks import load_tasks  # noqa: PLC0415 - only needed on resume
+
+    ids = list(old.get("tasks") or []) + [t for t in new["tasks"] if t not in (old.get("tasks") or [])]
+    known = load_tasks()
+    meta = {**new, "tasks": ids, "task_selection_hash": selection_hash([known[t] for t in ids if t in known])}
+    meta["harness"], reruns = old.get("harness", new["harness"]), list(old.get("reruns") or [])
+    if new["harness"] != meta["harness"] or set(new["tasks"]) != set(ids):
+        reruns.append({"tasks": new["tasks"], "harness": new["harness"], "started": now()})
+    if reruns:
+        meta["reruns"] = reruns
+    return meta
+
+
 async def run(model: ModelConfig, profile: Profile, tasks: list[Task], repeats: int, out: Path, *,
               retry_failed: bool = False, progress=print) -> Path:
     """Run every task `repeats` times; resumes an existing run folder (finished task runs are skipped)."""
@@ -144,6 +161,7 @@ async def run(model: ModelConfig, profile: Profile, tasks: list[Task], repeats: 
         changed = [k for k in ("model", "profile_hash", "tool_hash") if old.get(k) != meta[k]]
         if changed:
             raise ValueError(f"{folder} was run with a different {', '.join(changed)}; use a new run name")
+        meta = resumed_meta(old, meta)
     meta["started"] = old.get("started") or now()
     meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     log_path = folder / "log.jsonl"

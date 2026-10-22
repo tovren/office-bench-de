@@ -279,3 +279,14 @@ def test_round_limit_in_first_turn_keeps_history_valid(tmp_path):
     answered = {m["tool_call_id"] for m in history if m["role"] == "tool"}
     calls = {tc["id"] for m in history if m["role"] == "assistant" for tc in m.get("tool_calls", [])}
     assert calls == answered and history[-1]["role"] == "user"
+
+
+def test_resumed_meta_keeps_the_selection():
+    from officebench.harness.runner import resumed_meta
+
+    old = {"tasks": ["anfrage", "quartal"], "harness": "0.3.0+a", "task_selection_hash": "x"}
+    new = {"tasks": ["quartal"], "harness": "0.3.0+b", "task_selection_hash": "y"}
+    meta = resumed_meta(old, new)
+    assert meta["tasks"] == ["anfrage", "quartal"] and meta["harness"] == "0.3.0+a"
+    assert meta["reruns"][0]["tasks"] == ["quartal"] and meta["reruns"][0]["harness"] == "0.3.0+b"
+    assert "reruns" not in resumed_meta(old, {**old, "task_selection_hash": "z"})  # a plain resume

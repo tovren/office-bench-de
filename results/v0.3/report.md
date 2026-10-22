@@ -1,13 +1,13 @@
 # Report (2026-10-22)
 
 Runs:
-- `claude-haiku-5.5-medium` (results/v0.3/claude-haiku-5.5-medium): Claude Haiku 5.5, thinking medium, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.3-3-gc072769
-- `deepseek-v4-flash-high` (results/v0.3/deepseek-v4-flash-high): DeepSeek V4 Flash 0731, thinking high, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.3-3-gc072769
-- `gemma-4-31b` (results/v0.3/gemma-4-31b): Gemma 4 31B, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.3-3-gc072769
-- `gpt-oss-120b-medium` (results/v0.3/gpt-oss-120b-medium): gpt-oss-120b, reasoning medium, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.3-3-gc072769
-- `nemotron-3.5-super` (results/v0.3/nemotron-3.5-super): Nemotron 3.5 Super VL, thinking on, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.3-3-gc072769
-- `qwen3.8-27b-medium` (results/v0.3/qwen3.8-27b-medium): Qwen3.8-27B, thinking medium, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.3-3-gc072769
-- `qwen3.8-flash-medium` (results/v0.3/qwen3.8-flash-medium): Qwen3.8-Flash, thinking medium, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.3-3-gc072769
+- `claude-haiku-5.5-medium` (results/v0.3/claude-haiku-5.5-medium): Claude Haiku 5.5, thinking medium, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.2-1-gd9df0fc
+- `deepseek-v4-flash-high` (results/v0.3/deepseek-v4-flash-high): DeepSeek V4 Flash 0731, thinking high, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.2-1-gd9df0fc
+- `gemma-4-31b` (results/v0.3/gemma-4-31b): Gemma 4 31B, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.2-1-gd9df0fc
+- `gpt-oss-120b-medium` (results/v0.3/gpt-oss-120b-medium): gpt-oss-120b, reasoning medium, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.2-1-gd9df0fc
+- `nemotron-3.5-super` (results/v0.3/nemotron-3.5-super): Nemotron 3.5 Super VL, thinking on, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.2-1-gd9df0fc
+- `qwen3.8-27b-medium` (results/v0.3/qwen3.8-27b-medium): Qwen3.8-27B, thinking medium, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.2-1-gd9df0fc
+- `qwen3.8-flash-medium` (results/v0.3/qwen3.8-flash-medium): Qwen3.8-Flash, thinking medium, 150 task runs, 50 tasks × 3, profile default (today 2026-10-13), tool 48c4834d4039, harness 0.3.0+v0.2-1-gd9df0fc
 
 > Tasks changed since the run (the checks of the current version apply): richtlinie, wartungsmail, zeiterfassung
 

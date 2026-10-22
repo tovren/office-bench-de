@@ -241,8 +241,9 @@ runs/<run>/<model>/
 | `tasks` | task ids of the selection |
 | `task_selection_hash` | short SHA-256 over the ids and hashes of the selected tasks |
 | `repeats` | runs per task |
-| `harness` | package version, plus `git describe` of the checkout if available |
+| `harness` | package version, plus `git describe` of the checkout if available, of the first start |
 | `started` | time of the first start of this folder |
+| `reruns` | only after some tasks ran again in the folder (e.g. a changed task): their ids, harness and start |
 
 **files/** — for every executed tool call, with `<n>` = the number of tool rounds executed before it in this task
 run (counted across turns, from 0) and `<i>` = its position in the round:

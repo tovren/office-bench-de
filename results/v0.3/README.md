@@ -25,7 +25,7 @@ uv run obench report results/v0.3
   with sum rows (`anfrage`, `preisaenderung`, `bueromaterial`, `angebot`): 70 of 84 runs (v0.2: 48).
 - **v0.3.1 (22 October 2026, after the run):** four checks missed correct answers and were fixed, and `quartal`
   got its numbers; all runs were rescored from the stored files, only `quartal` ran again (21 runs, harness
-  `c072769`, which `meta.json` now shows; the other tasks ran with `d9df0fc`). Changes: `wartungsmail` v2
+  `c072769`, listed under `reruns` in `meta.json`; the other tasks ran with `d9df0fc`). Changes: `wartungsmail` v2
   („abzumelden“ and „meldet euch … ab“ count as „abmelden“, +11 runs), `richtlinie` v2 („zwei (2) Arbeitstage“,
   „09:00 Uhr bis 15:00 Uhr“, +5), `zeiterfassung` v2 (the dot in „.xlsx“ ended the sentence for „Makro geht
   nicht“, +2), reply topics ignore Markdown bold (`homeoffice`, +2), `values_present` reads thousands separated by
