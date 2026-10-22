@@ -41,6 +41,7 @@ defect = "share planned times 100 in percent format (5,152 % instead of 51.5 %)"
 set = [["sheets.1.columns.4", { header = "Anteil verplant", type = "percent", formula = "=D{row}/(B{row}+C{row})*100" }]]
 expected = ["share_over_100", "value_ranges"]
 severity = "soft"
+prevented = "Office Documents 0.2.0 and later send *100 in a percent column back to the model."
 
 [[mutant]]
 # observed in earlier runs: calendar almost entirely before the reference date, past entries still „Geplant“

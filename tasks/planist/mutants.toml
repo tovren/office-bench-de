@@ -9,6 +9,7 @@ name = "percent_times_100"
 defect = "variance in % times 100 in percent format (Vertrieb Q3 1.000 % instead of 10 %, sheet 2 354,5 % instead of 3,5 %)"
 replace = [["=E{row}/C{row}", "=E{row}/C{row}*100"], ["=D{row}/B{row}", "=D{row}/B{row}*100"]]
 expected = ["calculations"]
+prevented = "Office Documents 0.2.0 and later send *100 in a percent column back to the model."
 
 # observed in an earlier run (the sheet asked for in message 3 is missing entirely)
 [[mutant]]

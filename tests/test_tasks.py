@@ -108,7 +108,8 @@ def test_extra_tools_exist_and_are_used():
         assert tool["spec"]["function"]["name"] == name
 
 
-MUTANT_KEYS = {"name", "defect", "set", "replace", "number", "remove", "expected", "severity", "gap"}
+MUTANT_KEYS = {"name", "defect", "set", "replace", "number", "remove", "expected", "severity", "gap",
+               "prevented"}
 
 
 def test_mutant_files_are_well_formed():

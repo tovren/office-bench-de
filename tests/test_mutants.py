@@ -4,7 +4,8 @@ raises no false alarm; this file shows that the checks catch real errors.
 
 Operations run in the order set, replace, number, remove, each on the arguments of the last call (a follow-up task
 keeps its `previous` file unchanged). The tool must accept the variant, and it must differ from the reference. A
-mutant with `gap` is a known blind spot of the checks: a strict xfail, so it fails once a check catches it.
+mutant with `gap` is a known blind spot of the checks, one with `prevented` an error the tool itself sends back or
+repairs: both are a strict xfail, so they fail once a check catches the defect in a built file.
 """
 
 import copy
@@ -19,7 +20,7 @@ from officebench.checks.registry import GENERAL_CHECKS, HARD, SOFT, TASK_CHECKS
 from officebench.tasks import load_tasks
 from officebench.tool import build
 
-KEYS = {"name", "defect", "set", "replace", "number", "remove", "expected", "severity", "gap"}
+KEYS = {"name", "defect", "set", "replace", "number", "remove", "expected", "severity", "gap", "prevented"}
 CHECKS = set(TASK_CHECKS) | set(GENERAL_CHECKS) | {"unreadable", "wrong_file_type"}
 
 
@@ -132,6 +133,7 @@ def test_mutants_well_formed():
         assert m.get("defect") and m.get("expected"), f"{task_id}-{m['name']}: defect and expected are required"
         assert set(m["expected"]) <= CHECKS, f"{task_id}-{m['name']}: unknown check {set(m['expected']) - CHECKS}"
         assert m.get("severity", HARD) in (HARD, SOFT)
+        assert not (m.get("gap") and m.get("prevented")), f"{task_id}-{m['name']}: gap or prevented, not both"
         assert any(m.get(k) for k in ("set", "replace", "number", "remove")), f"{task_id}-{m['name']}: no change"
 
 
@@ -165,7 +167,8 @@ def findings(tmp_path_factory) -> dict:
 
 
 def _param(task_id, m):
-    marks = [pytest.mark.xfail(strict=True, reason=m["gap"])] if m.get("gap") else []
+    reason = m.get("gap") or m.get("prevented")
+    marks = [pytest.mark.xfail(strict=True, reason=reason)] if reason else []
     return pytest.param(task_id, m, id=f"{task_id}-{m['name']}", marks=marks)
 
 

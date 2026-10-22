@@ -7,6 +7,7 @@ name = "percent_times_100"
 defect = "savings rate times 100 in percent format (1,094 % instead of 10.9 %)"
 replace = [["=D{row}/B{row}", "=D{row}/B{row}*100"]]
 expected = ["calculations"]
+prevented = "Office Documents 0.2.0 and later send *100 in a percent column back to the model."
 
 [[mutant]]
 name = "rate_over_expenses"

@@ -42,3 +42,4 @@ defect = "Markdown heading „## Vielen Dank …“ as text in a paragraph"
 set = [["blocks.2.text", "## Vielen Dank, dass ihr mithelft!"]]
 expected = ["markdown"]
 severity = "soft"
+prevented = "Office Documents 0.3.0 turns a Markdown heading line in a paragraph into a real heading."

@@ -3,7 +3,7 @@
   "type": "function",
   "function": {
    "name": "create_excel_file",
-   "description": "\n        Create an Excel workbook (.xlsx) and attach it to the answer. Use it when the user wants an Excel file or a\n        spreadsheet, e.g. a list, budget, plan or calculation. Numbers are real numbers; formulas, total rows and\n        charts are possible.\n        The file only exists once this tool has answered with 'Done'; never say it was created otherwise.\n        ",
+   "description": "Create an Excel workbook (.xlsx) and attach it to the answer. Use it when the user wants an Excel file or a\nspreadsheet, e.g. a list, budget, plan or calculation. Numbers are real numbers; formulas, total rows and\ncharts are possible.\nThe file only exists once this tool has answered with 'Done'; never say it was created otherwise.",
    "parameters": {
     "properties": {
      "sheets": {
@@ -25,14 +25,15 @@
            },
            "type": {
             "default": "text",
-            "description": "Value type. percent: 12.5 means 12.5 %. date: YYYY-MM-DD.",
+            "description": "Value type. percent: send 12.5 for 12.5 % (not 0.125); the cell then holds 0.125, as in Excel, so formulas use it as it is: =B{row}*(1-C{row}), without /100, and a percent formula column computes the fraction (=B{row}/C{row}, without *100). date: YYYY-MM-DD. time: hh:mm; the cell holds the fraction of a day, so a time column with =C{row}-B{row} shows 8:30, and hours as a number (8.5) need a number column with =(C{row}-B{row})*24.",
             "enum": [
              "text",
              "number",
              "integer",
              "currency",
              "percent",
-             "date"
+             "date",
+             "time"
             ],
             "type": "string"
            },
@@ -81,53 +82,120 @@
          "type": "array"
         },
         "chart": {
-         "description": "Optional chart next to the table.",
-         "properties": {
-          "type": {
-           "default": "column",
-           "description": "Chart type.",
-           "enum": [
-            "column",
-            "bar",
-            "line",
-            "pie"
-           ],
-           "title": "Type",
-           "type": "string"
-          },
-          "title": {
-           "default": "",
-           "description": "Chart title.",
-           "title": "Title",
-           "type": "string"
-          },
-          "category_column": {
-           "default": "",
-           "description": "Header of the column with the labels (x axis or pie slices). Not used with series_rows.",
-           "title": "Category Column",
-           "type": "string"
-          },
-          "value_columns": {
-           "default": [],
-           "description": "Headers of the numeric columns to plot (pie: only one). With series_rows: the columns that form the x axis, next to each other; default: the number columns after the first column.",
-           "items": {
-            "type": "string"
+         "anyOf": [
+          {
+           "properties": {
+            "type": {
+             "default": "column",
+             "description": "Chart type.",
+             "enum": [
+              "column",
+              "bar",
+              "line",
+              "pie"
+             ],
+             "title": "Type",
+             "type": "string"
+            },
+            "title": {
+             "default": "",
+             "description": "Chart title.",
+             "title": "Title",
+             "type": "string"
+            },
+            "category_column": {
+             "default": "",
+             "description": "Header of the column with the labels (x axis or pie slices). Not used with series_rows.",
+             "title": "Category Column",
+             "type": "string"
+            },
+            "value_columns": {
+             "default": [],
+             "description": "Headers of the numeric columns to plot (pie: only one). With series_rows: the columns that form the x axis, next to each other; default: the number columns after the first column.",
+             "items": {
+              "type": "string"
+             },
+             "title": "Value Columns",
+             "type": "array"
+            },
+            "series_rows": {
+             "default": [],
+             "description": "Only when each data series is a row, e.g. months as columns: the labels in the first column of the rows to plot, e.g. [\"Income\", \"Expenses\"].",
+             "items": {
+              "type": "string"
+             },
+             "title": "Series Rows",
+             "type": "array"
+            },
+            "unit": {
+             "default": "",
+             "description": "Unit of the values, e.g. 'EUR' or 'hours'; shown at the value axis.",
+             "title": "Unit",
+             "type": "string"
+            }
            },
-           "title": "Value Columns",
-           "type": "array"
+           "title": "ExcelChart",
+           "type": "object"
           },
-          "series_rows": {
-           "default": [],
-           "description": "Only when each data series is a row, e.g. months as columns: the labels in the first column of the rows to plot, e.g. [\"Income\", \"Expenses\"].",
+          {
            "items": {
-            "type": "string"
+            "properties": {
+             "type": {
+              "default": "column",
+              "description": "Chart type.",
+              "enum": [
+               "column",
+               "bar",
+               "line",
+               "pie"
+              ],
+              "title": "Type",
+              "type": "string"
+             },
+             "title": {
+              "default": "",
+              "description": "Chart title.",
+              "title": "Title",
+              "type": "string"
+             },
+             "category_column": {
+              "default": "",
+              "description": "Header of the column with the labels (x axis or pie slices). Not used with series_rows.",
+              "title": "Category Column",
+              "type": "string"
+             },
+             "value_columns": {
+              "default": [],
+              "description": "Headers of the numeric columns to plot (pie: only one). With series_rows: the columns that form the x axis, next to each other; default: the number columns after the first column.",
+              "items": {
+               "type": "string"
+              },
+              "title": "Value Columns",
+              "type": "array"
+             },
+             "series_rows": {
+              "default": [],
+              "description": "Only when each data series is a row, e.g. months as columns: the labels in the first column of the rows to plot, e.g. [\"Income\", \"Expenses\"].",
+              "items": {
+               "type": "string"
+              },
+              "title": "Series Rows",
+              "type": "array"
+             },
+             "unit": {
+              "default": "",
+              "description": "Unit of the values, e.g. 'EUR' or 'hours'; shown at the value axis.",
+              "title": "Unit",
+              "type": "string"
+             }
+            },
+            "title": "ExcelChart",
+            "type": "object"
            },
-           "title": "Series Rows",
            "type": "array"
           }
-         },
-         "title": "ExcelChart",
-         "type": "object"
+         ],
+         "description": "Optional chart next to the table; a list for up to 4 charts."
         }
        },
        "required": [
@@ -154,7 +222,7 @@
   "type": "function",
   "function": {
    "name": "create_powerpoint_file",
-   "description": "\n        Create a PowerPoint presentation (.pptx, 16:9) and attach it to the answer. Use it when the user wants\n        slides or a presentation. Start with a 'title' slide, keep bullets short (at most 6 per slide), and put\n        details into the speaker notes.\n        The file only exists once this tool has answered with 'Done'; never say it was created otherwise.\n        ",
+   "description": "Create a PowerPoint presentation (.pptx, 16:9) and attach it to the answer. Use it when the user wants\nslides or a presentation. Start with a 'title' slide, keep bullets short (at most 6 per slide), and put\ndetails into the speaker notes.\nThe file only exists once this tool has answered with 'Done'; never say it was created otherwise.",
    "parameters": {
     "properties": {
      "slides": {
@@ -323,7 +391,7 @@
   "type": "function",
   "function": {
    "name": "create_word_file",
-   "description": "\n        Create a Word document (.docx) and attach it to the answer. Use it when the user wants a Word file or a\n        document to download, e.g. a report, letter, minutes or concept. Write the complete text yourself.\n        The file only exists once this tool has answered with 'Done'; never say it was created otherwise.\n        ",
+   "description": "Create a Word document (.docx) and attach it to the answer. Use it when the user wants a Word file or a\ndocument to download, e.g. a report, letter, minutes or concept. Write the complete text yourself.\nThe file only exists once this tool has answered with 'Done'; never say it was created otherwise.",
    "parameters": {
     "properties": {
      "blocks": {

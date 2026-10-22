@@ -122,12 +122,13 @@ Every field of the profile goes into `profile_hash`; a resumed run refuses a cha
 ## The tool
 
 `src/officebench/tool/office_documents.py` is the Open WebUI tool "Office Documents"
-(https://github.com/tovren/open-webui-plugins, MIT), copied **unchanged** from commit `641df3a`. It offers three
+(https://github.com/tovren/open-webui-plugins, MIT), version 0.3.0, copied **unchanged** from commit `c90f89f`. It offers three
 functions: `create_word_file`, `create_excel_file`, `create_powerpoint_file`. The model sends the content as JSON
 (headings, paragraphs, tables, cells with formulas, charts, slides …); the tool validates it and builds the file.
 
 - **Specs.** `specs.json` holds the three tool specs exactly as Open WebUI 0.11.4 generates them from the method
-  signatures and docstrings, so the model sees the same tool as in Open WebUI. They are frozen; `tests/test_tool.py`
+  signatures and docstrings (`open_webui.utils.tools.get_tool_specs`), so the model sees the same tool as in Open
+  WebUI. They are frozen; `tests/test_tool.py`
   checks that they still match the code.
 - **Delivery.** In Open WebUI the tool attaches the file to the chat. Here the delivery step is replaced: the file
   is kept and saved to the run folder, and the model gets the same result text it would get in Open WebUI
@@ -236,7 +237,7 @@ runs/<run>/<model>/
 | `profile` | the full profile |
 | `profile_hash` | short SHA-256 of the profile |
 | `tool_hash` | short SHA-256 of `office_documents.py` and `specs.json` |
-| `tool_commit` | the upstream commit the tool was copied from (`641df3a`) |
+| `tool_commit` | the upstream commit the tool was copied from (`c90f89f`; v0.1: `641df3a`) |
 | `tasks` | task ids of the selection |
 | `task_selection_hash` | short SHA-256 over the ids and hashes of the selected tasks |
 | `repeats` | runs per task |

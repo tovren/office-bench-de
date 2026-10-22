@@ -8,6 +8,7 @@ name = "end_formula_wrong_columns"
 defect = "end date =C+D-1 calculates with responsible and start instead of start and duration: #VALUE!"
 replace = [["=D{row}+E{row}-1", "=C{row}+D{row}-1"]]
 expected = ["formula_errors", "calculations"]
+prevented = "Office Documents 0.3.0 sends arithmetic on a text column back to the model."
 
 # observed in several earlier runs: end dates on a Sunday, package 1 ends on All Saints' Day
 [[mutant]]

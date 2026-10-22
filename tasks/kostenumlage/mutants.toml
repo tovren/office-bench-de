@@ -17,6 +17,7 @@ name = "percent_times_100"
 defect = "area share times 100 in percent format (2,200 % instead of 22 %)"
 replace = [["=B{row}/SUM(B$2:B$5)", "=B{row}/SUM(B$2:B$5)*100"]]
 expected = ["values_present", "value_ranges", "chart_values"]
+prevented = "Office Documents 0.2.0 and later send *100 in a percent column back to the model."
 
 [[mutant]]
 name = "heating_digits_swapped"

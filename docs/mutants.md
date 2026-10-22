@@ -7,6 +7,11 @@ alarm; the mutants show that the checks catch real errors.
 A mutant can be marked as a known gap (`gap`): the checks miss the error today. It runs as a strict xfail, so the
 test fails as soon as a check does catch it; then remove `gap`.
 
+A mutant whose error the vendored tool itself prevents is marked `prevented`: the tool sends the variant back to the
+model (e.g. `*100` in a percent column, an impossible date) or repairs it (a Markdown heading line in a paragraph
+becomes a real heading), so the defect cannot reach a file. It also runs as a strict xfail and stays in the file,
+so that a tool version that lets the error through again makes the test fail and the check has to catch it.
+
 ## Format
 
 ```toml
@@ -21,6 +26,7 @@ remove = ["sheets.0.columns.*.total"]       # delete a key or list element; path
 expected = ["values_present", "total_row"]  # one of these checks must report it
 severity = "hard"                           # default; "soft" = a soft defect is enough (soft checks)
 gap = "reason"                              # known gap: the checks miss it (strict xfail, fails once caught)
+prevented = "reason"                        # the tool sends the variant back or repairs it (strict xfail)
 ```
 
 | Key | Required | Meaning |
@@ -34,6 +40,7 @@ gap = "reason"                              # known gap: the checks miss it (str
 | `expected` | yes | check names; one of them must report the defect. Allowed: keys of `[checks]`, names of general checks (`GENERAL_CHECKS`), `unreadable`, `wrong_file_type` |
 | `severity` | no | `hard` (default): the reported defect must be hard; `soft`: a soft defect is enough (for soft checks) |
 | `gap` | no | known gap with the reason and, ideally, how a check could catch it; the mutant then runs as a strict xfail |
+| `prevented` | no | the tool sends the variant back or repairs it, with the tool version; strict xfail like `gap`, not together with it |
 
 ¹ At least one of `set`, `replace`, `number`, `remove`. A task with `mutants.toml` needs a `reference.json`.
 
@@ -41,7 +48,8 @@ gap = "reason"                              # known gap: the checks miss it (str
 
 The operations run in the order `set`, `replace`, `number`, `remove`, each on the arguments of the last call
 (`arguments` in `reference.json`). A follow-up task keeps its `previous` call unchanged; only the file of the last
-turn is mutated. The office tool must accept the variant, and the variant must differ from the reference.
+turn is mutated. The office tool must accept the variant (unless it is `prevented`), and the variant must differ from
+the reference.
 
 ## TOML 1.0
 

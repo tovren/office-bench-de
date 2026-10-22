@@ -56,6 +56,7 @@ set = [
 ]
 expected = ["share_over_100", "value_ranges"]
 severity = "soft"
+prevented = "Office Documents 0.2.0 and later send *100 in a percent column back to the model."
 
 # The prompt asks for „ein Kreisdiagramm für den Wert“. (The real error from an earlier run, a pie chart over the 50
 # single prices on sheet 1, cannot be built with `set`: it creates no new key.)

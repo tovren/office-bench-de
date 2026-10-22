@@ -67,7 +67,8 @@ checklist (blind review) or approximated.
 ## Mutants the checks miss
 
 `tasks/*/mutants.toml` holds 202 broken variants of the reference solutions, each with one typical model error
-(docs/mutants.md). The content check catches 186. The other 16 are marked `gap` and run as strict xfail: the test
+(docs/mutants.md). Office Documents 0.3.0 itself sends back or repairs 8 of them (`prevented`); of the other 194 the
+content check catches 178. The other 16 are marked `gap` and run as strict xfail: the test
 fails as soon as a check catches one. Three are left open on purpose, because a check would raise false alarms on
 real runs or demand more than prompt and checklist do (`angebotsvergleich` / `installation_invented`,
 `bueromaterial` / `cost_centre_totals_as_constants`, `handbuch` / `sick_note_from_third_day`); the others need a
