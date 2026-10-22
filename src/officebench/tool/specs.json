@@ -39,7 +39,7 @@
            },
            "formula": {
             "default": "",
-            "description": "Optional formula filled into every data row, e.g. '=B{row}*C{row}' ({row} is the current row; data starts in row 2). English function names (SUM, AVERAGE, MIN, MAX, COUNT, IF, ROUND, IFERROR ...), commas between arguments. Cells of another sheet: 'Rates'!$B$3 (one fixed cell) or 'Rates'!B{row}. Put null in the rows for this column.",
+            "description": "Optional formula filled into every data row, e.g. '=B{row}*C{row}' ({row} is the current row; data starts in row 2). English function names (SUM, AVERAGE, MIN, MAX, COUNT, IF, ROUND, IFERROR ...), commas between arguments. Cells of another sheet: 'Rates'!$B$3 (one fixed cell) or 'Rates'!B{row}. Put null in the rows for this column; a row that needs another formula (a sum row below the items: '=SUM(D2:D6)', '=D7*0.19') gets it in its cell instead.",
             "type": "string"
            },
            "total": {

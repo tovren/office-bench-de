@@ -100,7 +100,7 @@ A full run of 150 task runs took 7 to 40 minutes per model through the gateway (
 - **Tasks** (`tasks/<id>/`): 43 tasks that end with a file (18 Excel, 16 Word, 9 PowerPoint), 6 of them follow-ups
   over several turns, and 7 tasks where the right answer is no file (a question, an e-mail text, an
   extra tool such as web search or a calendar entry). The reference date is Tuesday, 13 October 2026.
-- **The tool** is vendored unchanged (`src/officebench/tool/`, Office Documents 0.3.0, plugin commit `c90f89f`),
+- **The tool** is vendored unchanged (`src/officebench/tool/`, Office Documents 0.3.1, plugin commit `0386886`),
   with the function specs frozen as Open WebUI 0.11.4 sends them. The model only fills in JSON arguments; fixed code builds the file.
 - **The content check** has over 40 checks: required values and topics, formulas and their results after
   recalculation, total rows, weekdays and public holidays, numbers without a source, placeholders, retained

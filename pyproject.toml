@@ -1,6 +1,6 @@
 [project]
 name = "office-bench-de"
-version = "0.2.0"
+version = "0.3.0"
 description = "Benchmark: how well do LLMs create German Word, Excel and PowerPoint files through tool calls?"
 readme = "README.md"
 license = "MIT"
