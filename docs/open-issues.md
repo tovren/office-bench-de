@@ -14,17 +14,19 @@ docs/task-format.md.
   like `[1]`, and models then also write those markers into documents and e-mails. The harness deliberately puts
   attachments in front of the message without any citation instruction. In an Open WebUI instance with the default
   template, models will produce such markers more often than here.
-- **Percent columns of the tool.** The tool's spec says for a `percent` column "12.5 means 12.5 %" and stores the
-  value as 0.125, as Excel does. It does not say that formulas then see 0.125. In `anfrage` (version 2, which asks
-  for formulas) this goes wrong in two ways: models send 5 and write `(1-F2/100)` in the formula, or they send 0.05,
-  which the tool turns into 0.05 %. Both give a discount of 0.05 % instead of 5 % and a wrong net total; only 2 of
-  21 runs got net and gross right. The first way is a gap in the tool's description, the second a model error
-  against it. The vendored tool is kept unchanged, so the task measures this as it would happen to a user; a
-  sentence in the tool's spec ("formulas see 0.125, do not divide by 100") would probably remove most of it.
-  Office Documents 0.2.0 says this in its spec and sends back fractions in a percent column, `/100` on a percent
-  cell and `*100` in a percent column (35 of the 660 Excel calls of v0.1 would have been sent back, mostly in
-  `anfrage`, `kostenumlage`, `planist` and `sparquote`). The benchmark keeps the vendored 0.1.0 until a new
-  run; a new tool version means new results.
+- **Percent columns of the tool.** Office Documents 0.1.0 (results v0.1) stored a `percent` value of 12.5 as 0.125,
+  as Excel does, but its spec did not say that formulas then see 0.125. In `anfrage` (version 2, which asks for
+  formulas) models sent 5 and wrote `(1-F2/100)`, or sent 0.05, which became 0.05 %; only 2 of 21 runs got net and
+  gross right. Office Documents 0.2.0 and later say this in the spec and send back fractions in a percent column,
+  `/100` on a percent cell and `*100` in a percent column. With 0.3.0 (results v0.2) 10 of 21 `anfrage` runs are
+  right, and only 3 calls of the whole run were sent back for a percent error.
+- **Formulas in the rows of a formula column.** A column with a `formula` fills every data row with it, and the tool
+  drops what the model sends in that column. That is fine for numbers (0.3.0 sends a clear difference back), but a
+  formula string in such a row, typically `=SUM(F2:F6)` or `=F7*0.19` in a total row below the items, is replaced
+  by the column formula without a message, and the totals show 0. In v0.2 this decides 15 failed runs
+  (`preisaenderung` 6, `anfrage` 4, `bueromaterial` 4, `angebot` 1), in v0.1 13. The benchmark keeps the vendored
+  tool unchanged and measures this as it happens to a user; a tool that keeps such row formulas or sends them back
+  would probably remove most of it, and would mean a new run.
 - **Saturated tasks.** About a third of the tasks are solved by all strong models in every run. They test the
   basics (a valid call, a correct simple table, a plain letter) and still separate weak setups from working ones;
   the differences between strong models come from the rest. A difference in overall success between two strong
