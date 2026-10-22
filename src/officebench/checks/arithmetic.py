@@ -76,6 +76,15 @@ def numbers_in_text(text: str) -> list[float]:
     return out
 
 
+SPACED = re.compile(r"(?<![\w.,])(\d{1,3}(?:[ \u00a0\u202f]\d{3})+(?:,\d+)?)(?![\w.,])")
+
+
+def spaced_numbers(text: str) -> list[float]:
+    """Numbers with spaces between the thousands ('143 200', '1 736,5'), which numbers_in_text reads as two numbers;
+    only for values_present, where an extra reading cannot raise a false alarm."""
+    return [float(re.sub(r"\s", "", m[1]).replace(",", ".")) for m in SPACED.finditer(text or "")]
+
+
 def format_number(x: float) -> str:
     """German format: 7.680 / 2.558,15 / 0,125 (shares keep up to four decimals)."""
     if abs(x - round(x)) < 1e-9:

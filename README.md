@@ -12,17 +12,17 @@ run logs and grades.
 ## Results v0.3
 
 50 tasks × 3 runs per model, run on 22 October 2026 through the Vercel AI Gateway, with Office Documents 0.3.1 as
-the tool (v0.2: 0.3.0, v0.1: 0.1.0).
+the tool (v0.2: 0.3.0, v0.1: 0.1.0). All three runs are scored with the checks of v0.3.1 (see below).
 
 | Model | Success | pass^3 | Content ok | Cost of 150 runs | v0.2 | v0.1 |
 |---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (thinking medium) | 96 % (91–99) | 90 % | 96 % | $0.66 | 96 % | 91 % |
-| DeepSeek V4 Flash (thinking high) | 93 % (87–99) | 88 % | 94 % | $0.16 | 91 % | 87 % |
-| Nemotron 3.5 Super VL (thinking on) | 87 % (78–94) | 76 % | 88 % | $0.53 | 86 % | 85 % |
-| Qwen3.8-27B (thinking medium) | 85 % (76–93) | 70 % | 84 % | $0.28 | 79 % | 84 % |
-| Qwen3.8-Flash (thinking medium) | 85 % (77–92) | 64 % | 86 % | $0.44 | 88 % | 83 % |
-| gpt-oss-120b (reasoning medium) | 69 % (57–80) | 52 % | 70 % | $0.44 | 60 % | 66 % |
-| Gemma 4 31B | 65 % (52–77) | 54 % | 62 % | $0.34 | 62 % | 62 % |
+| Claude Haiku 5.5 (thinking medium) | 98 % (95–100) | 94 % | 98 % | $0.67 | 96 % | 91 % |
+| DeepSeek V4 Flash (thinking high) | 95 % (89–99) | 90 % | 95 % | $0.16 | 92 % | 88 % |
+| Nemotron 3.5 Super VL (thinking on) | 87 % (78–94) | 76 % | 88 % | $0.53 | 86 % | 86 % |
+| Qwen3.8-27B (thinking medium) | 86 % (78–93) | 70 % | 84 % | $0.28 | 79 % | 85 % |
+| Qwen3.8-Flash (thinking medium) | 86 % (79–93) | 66 % | 86 % | $0.44 | 89 % | 83 % |
+| gpt-oss-120b (reasoning medium) | 72 % (61–83) | 58 % | 71 % | $0.42 | 62 % | 68 % |
+| Gemma 4 31B | 69 % (57–81) | 58 % | 64 % | $0.34 | 66 % | 65 % |
 
 - **Success**: the run delivered what the task asks for (the file, every follow-up turn, no hard defect in the
   content check, reply and behavior checks where the task has them). 95 % intervals from a bootstrap over tasks.
@@ -30,7 +30,11 @@ the tool (v0.2: 0.3.0, v0.1: 0.1.0).
 - **Content ok**: file tasks only (43 of 50): the delivered file has no hard defect.
 - **Cost**: as reported by the gateway, for all 150 runs; prices depend on the provider.
 - **v0.2, v0.1**: success with the same tasks and checks and the older tool versions
-  ([results/v0.2](results/v0.2/README.md), [results/v0.1](results/v0.1/README.md)).
+  ([results/v0.2](results/v0.2/README.md), [results/v0.1](results/v0.1/README.md)); `quartal` there is still
+  version 1 (without numbers).
+- **v0.3.1** fixed four checks that missed correct answers and gave `quartal` the numbers it talks about; all three
+  runs were rescored from their stored files, only `quartal` ran again. Details in
+  [results/v0.3/README.md](results/v0.3/README.md).
 
 There is no blind quality review for v0.2 and v0.3. The quality grades of v0.1 (Claude Opus 5.5 agent sessions,
 696 files) are in [results/v0.1/README.md](results/v0.1/README.md): Haiku 4.30, DeepSeek 4.27, Nemotron 4.00,
@@ -48,14 +52,18 @@ Full report with per-task results, defects, tool errors and rejections:
 - **Fewer rounds lost to broken JSON.** 0.3.1 repairs swapped and extra closing brackets and stray quotes.
   Nemotron 3.5 Super had 49 calls with invalid JSON in v0.2 and 3 runs at the round limit; in v0.3 it has 1 and
   none.
+- **`quartal` comes with its numbers now.** Version 1 asked for slides „zu den Zahlen von Q3 2026“ without giving
+  any: Haiku asked for them and failed, Gemma, gpt-oss and Nemotron invented figures without saying so and passed.
+  With the numbers attached (version 2), 17 of 21 runs pass; most failures leave the wrong customer out of the top
+  five.
 - **The percent trap stays fixed** (since 0.2.0): `anfrage` 13 of 21 runs right (v0.1: 2 of 21).
-- **Most changes between runs are noise.** Paired by task against v0.2, only gpt-oss-120b's +9 points has a 95 %
-  interval that does not include zero (0 to +18); Qwen3.8-27B +6 (−1 to +14), the others within ±5. Haiku leads,
-  DeepSeek follows at a quarter of the cost, Nemotron, Qwen3.8-27B and Qwen3.8-Flash overlap, gpt-oss and Gemma
-  are clearly behind.
-- **Calling the tool is not the problem.** Every model ends with a file in 94–100 % of the file tasks. The
+- **Most changes between runs are noise.** Paired by task against v0.2 (without `quartal`), gpt-oss-120b's +10
+  points (+1 to +18) and Qwen3.8-27B's +8 (0 to +16) are at the edge of what chance explains; the others are within
+  ±4. Haiku leads, DeepSeek follows at a quarter of the cost, Nemotron, Qwen3.8-27B and Qwen3.8-Flash overlap,
+  gpt-oss and Gemma are clearly behind.
+- **Calling the tool is not the problem.** Every model ends with a file in 95–100 % of the file tasks. The
   failures are in the content: missing values and topics, wrong group sums, dates on the wrong weekday.
-- **gpt-oss-120b** still hits the limit of 8 tool rounds in 8 runs; only 70 of its 127 calls rejected by the
+- **gpt-oss-120b** still hits the limit of 8 tool rounds in 7 runs; only 70 of its 120 calls rejected by the
   tool's content validation are followed by a file.
 - **Qwen3.8-Flash** builds more files than needed in 32 of 150 runs (a new file for each small fix); **Haiku** twice
   sent a second, empty "Test" workbook in the same round, which then counts as the delivered file.

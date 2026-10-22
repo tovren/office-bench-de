@@ -4,7 +4,7 @@ whole text (topics, forbidden, names, count, words_min/max, values_present)."""
 import bisect
 import re
 
-from .arithmetic import format_number, numbers_in_text
+from .arithmetic import format_number, numbers_in_text, spaced_numbers
 from .core import Context, Document
 from .registry import SOFT
 from .util import normalize
@@ -158,7 +158,8 @@ def check_values(doc: Document, ctx: Context) -> None:
     """values_present: every number occurs in the file (xlsx: cell values; docx/pptx: numbers in the text; pptx also
     chart values), tolerance 0.005; an entry that is a list of numbers is met by any of them (−2,5 or 2,5)."""
     wanted = ctx.checks.get("values_present") or []
-    present = sorted(doc.numbers if doc.numbers is not None else numbers_in_text(doc.text))
+    present = sorted((doc.numbers if doc.numbers is not None else numbers_in_text(doc.text))
+                     + spaced_numbers(doc.text or ""))  # '143 200' with a space between the thousands
 
     def there(x) -> bool:
         i = bisect.bisect_left(present, x - 0.005)

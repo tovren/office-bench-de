@@ -9,6 +9,7 @@ from officebench.checks.arithmetic import (
     expressions,
     number_values,
     numbers_in_text,
+    spaced_numbers,
     table_sums,
 )
 from officebench.checks.core import Context, Document, Table
@@ -32,6 +33,11 @@ def test_number_values_german(s, values):
 def test_numbers_in_text():
     assert numbers_in_text("1.234,56 € und −200 €, 15-30 Plätze, 45,78,130") == [1234.56, -200, 15, 30, 45, 78, 130]
     assert numbers_in_text("am 12.10.2026, Version 1.2.3, KW42") == []
+
+
+def test_spaced_numbers():
+    assert spaced_numbers("143 200 €, 1\u202f736,5 und Q3 2026") == [143200, 1736.5]
+    assert spaced_numbers("Top 5 Kunden, 12 Monate, 2025 380") == []
     assert numbers_in_text("7,680") == [7.68, 7680]
 
 

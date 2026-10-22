@@ -20,5 +20,9 @@ uv run obench report results/v0.2
   +10.0), DeepSeek +4.0 (−0.7 to +9.3), Qwen3.8-Flash +5.3 (0.0 to +11.3), Nemotron +0.7 (−6.0 to +7.3),
   Qwen3.8-27B −5.3 (−12.0 to +1.3), gpt-oss-120b −6.0 (−14.0 to +1.3), Gemma 0.0 (−8.7 to +8.7). `anfrage`
   alone: 2 → 10 of 21 runs.
+- **Rescored with the checks of v0.3.1** (22 October 2026, same files, no new model calls): `wartungsmail`, `richtlinie`
+  and `zeiterfassung` in version 2, reply topics without Markdown bold, thousands separated by spaces. `quartal` keeps
+  its version 1 results. 11 runs change from failed to successful, none gets worse: Haiku 96, DeepSeek 92,
+  Qwen3.8-Flash 89, Nemotron 86, Qwen3.8-27B 79, Gemma 66, gpt-oss 62 %.
 - The built files are not in the repository; they are the release asset `v0.2-files.zip`
   (`<model>/files/…`, unzip here to rerun `obench score`).

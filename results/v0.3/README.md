@@ -23,5 +23,16 @@ uv run obench report results/v0.3
   (−4.7 to +4.7), DeepSeek +2.0 (−1.3 to +5.3), Nemotron +0.7 (−4.7 to +6.7), Qwen3.8-27B +6.0 (−1.3 to +14.0),
   Qwen3.8-Flash −3.3 (−8.7 to +2.0), gpt-oss-120b +8.7 (0.0 to +18.0), Gemma +2.7 (−5.3 to +10.7). The four tasks
   with sum rows (`anfrage`, `preisaenderung`, `bueromaterial`, `angebot`): 70 of 84 runs (v0.2: 48).
-- The built files are not in the repository; they are the release asset `v0.3-files.zip`
-  (`<model>/files/…`, unzip here to rerun `obench score`).
+- **v0.3.1 (22 October 2026, after the run):** four checks missed correct answers and were fixed, and `quartal`
+  got its numbers; all runs were rescored from the stored files, only `quartal` ran again (21 runs, harness
+  `c072769`, which `meta.json` now shows; the other tasks ran with `d9df0fc`). Changes: `wartungsmail` v2
+  („abzumelden“ and „meldet euch … ab“ count as „abmelden“, +11 runs), `richtlinie` v2 („zwei (2) Arbeitstage“,
+  „09:00 Uhr bis 15:00 Uhr“, +5), `zeiterfassung` v2 (the dot in „.xlsx“ ended the sentence for „Makro geht
+  nicht“, +2), reply topics ignore Markdown bold (`homeoffice`, +2), `values_present` reads thousands separated by
+  spaces („143 200“), and `quartal` v2 with the Q3 numbers as an attachment (version 1: 17 of 21 successful, version
+  2: 17 of 21). Before: Haiku 96, DeepSeek 93, Nemotron 87, Qwen3.8-27B 85, Qwen3.8-Flash 85, gpt-oss 69,
+  Gemma 65 %; after: 98, 95, 87, 86, 86, 72, 69 %. Haiku's two remaining file failures besides a wrong weekday are
+  the empty second workbooks (`budget`, `inventar`); Office Documents 0.3.2 sends a workbook without data rows
+  back.
+- The built files are not in the repository; they are the release asset `v0.3.1-files.zip` (`v0.3-files.zip`
+  has the `quartal` version 1 files; `<model>/files/…`, unzip here to rerun `obench score`).

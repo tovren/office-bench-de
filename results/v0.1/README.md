@@ -20,5 +20,10 @@ uv run obench report results/v0.1 --grades results/v0.1/grades.jsonl
   `data_rows_min` look at the main table instead of the first sheet. Four runs change from failed to successful
   (DeepSeek `bueromaterial` 1 and `preisaenderung` 1, Qwen3.8-27B `preisaenderung` 0, Gemma `sparquote` 1); no run
   gets worse. Before: DeepSeek 86 %, Qwen3.8-27B 83 %, Gemma 61 %.
+- **Rescored with the checks of v0.3.1** (22 October 2026, same files, no new model calls): `wartungsmail`, `richtlinie`
+  and `zeiterfassung` in version 2, reply topics without Markdown bold, thousands separated by spaces. `quartal` keeps
+  its version 1 results (these runs never saw the numbers of version 2). 12 runs change from failed to successful,
+  none gets worse: Haiku 91, DeepSeek 88, Nemotron 86, Qwen3.8-27B 85, Qwen3.8-Flash 83, gpt-oss 68, Gemma 65 %.
+  The quality grades are unchanged.
 - The built files are not in the repository; they are the release asset `v0.1-files.zip`
   (`<model>/files/…`, unzip here to rerun `obench score`).
