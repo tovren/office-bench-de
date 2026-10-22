@@ -9,78 +9,47 @@ Every delivered file goes through a deterministic content check (Excel files are
 and, separately, a blind quality review on five criteria. Everything is public: tasks, reference solutions, checks,
 run logs and grades.
 
-## Results v0.3
+## Results
 
-50 tasks × 3 runs per model, run on 22 October 2026 through the Vercel AI Gateway, with Office Documents 0.3.1 as
-the tool (v0.2: 0.3.0, v0.1: 0.1.0). All three runs are scored with the checks of v0.3.1 (see below).
+Run v0.3: 50 tasks × 3 runs per model on 22 October 2026 through the Vercel AI Gateway, with Office Documents
+0.3.1 as the tool, scored with the checks of v0.3.1 and graded in v0.3.2.
 
-| Model | Success | pass^3 | Content ok | Cost of 150 runs | v0.2 | v0.1 |
-|---|---:|---:|---:|---:|---:|---:|
-| Claude Haiku 5.5 (thinking medium) | 98 % (95–100) | 94 % | 98 % | $0.67 | 96 % | 91 % |
-| DeepSeek V4 Flash (thinking high) | 95 % (89–99) | 90 % | 95 % | $0.16 | 92 % | 88 % |
-| Nemotron 3.5 Super VL (thinking on) | 87 % (78–94) | 76 % | 88 % | $0.53 | 86 % | 86 % |
-| Qwen3.8-27B (thinking medium) | 86 % (78–93) | 70 % | 84 % | $0.28 | 79 % | 85 % |
-| Qwen3.8-Flash (thinking medium) | 86 % (79–93) | 66 % | 86 % | $0.44 | 89 % | 83 % |
-| gpt-oss-120b (reasoning medium) | 72 % (61–83) | 58 % | 71 % | $0.42 | 62 % | 68 % |
-| Gemma 4 31B | 69 % (57–81) | 58 % | 64 % | $0.34 | 66 % | 65 % |
+| Model | Success | pass^3 | Content ok | Quality (1–5) | Cost of 150 runs |
+|---|---:|---:|---:|---:|---:|
+| Claude Haiku 5.5 (thinking medium) | 98 % (95–100) | 94 % | 98 % | 4.45 (4.29–4.60) | $0.67 |
+| DeepSeek V4 Flash (thinking high) | 95 % (89–99) | 90 % | 95 % | 4.33 (4.21–4.45) | $0.16 |
+| Nemotron 3.5 Super VL (thinking on) | 87 % (78–94) | 76 % | 88 % | 4.15 (4.01–4.28) | $0.53 |
+| Qwen3.8-27B (thinking medium) | 86 % (78–93) | 70 % | 84 % | 4.03 (3.87–4.19) | $0.28 |
+| Qwen3.8-Flash (thinking medium) | 86 % (79–93) | 66 % | 86 % | 4.13 (3.99–4.27) | $0.44 |
+| gpt-oss-120b (reasoning medium) | 72 % (61–83) | 58 % | 71 % | 3.67 (3.51–3.85) | $0.42 |
+| Gemma 4 31B | 69 % (57–81) | 58 % | 64 % | 3.72 (3.54–3.89) | $0.34 |
 
 - **Success**: the run delivered what the task asks for (the file, every follow-up turn, no hard defect in the
-  content check, reply and behavior checks where the task has them). 95 % intervals from a bootstrap over tasks.
+  content check, reply and behavior checks where the task has them).
 - **pass^3**: chance that three fresh runs of a task all succeed: how reliable a model is, not just how good.
 - **Content ok**: file tasks only (43 of 50): the delivered file has no hard defect.
-- **Cost**: as reported by the gateway, for all 150 runs; prices depend on the provider.
-- **v0.2, v0.1**: success with the same tasks and checks and the older tool versions
-  ([results/v0.2](results/v0.2/README.md), [results/v0.1](results/v0.1/README.md)); `quartal` there is still
-  version 1 (without numbers).
-- **v0.3.1** fixed four checks that missed correct answers and gave `quartal` the numbers it talks about; all three
-  runs were rescored from their stored files, only `quartal` ran again. Details in
-  [results/v0.3/README.md](results/v0.3/README.md).
-
-Blind quality review of v0.3 (Claude Opus 5.5 agent sessions, 697 files as delivered, two per model and task,
-grades 1–5, mean of language, content, completeness, structure and usefulness; 95 % bootstrap over tasks):
-
-| Model | Quality | Content | Usefulness | v0.1 |
-|---|---:|---:|---:|---:|
-| Claude Haiku 5.5 | 4.45 (4.29–4.60) | 4.37 | 4.31 | 4.30 |
-| DeepSeek V4 Flash | 4.33 (4.21–4.45) | 4.14 | 4.12 | 4.27 |
-| Nemotron 3.5 Super VL | 4.15 (4.01–4.28) | 3.94 | 3.83 | 4.00 |
-| Qwen3.8-Flash | 4.13 (3.99–4.27) | 3.87 | 3.82 | 3.92 |
-| Qwen3.8-27B | 4.03 (3.87–4.19) | 3.68 | 3.73 | 3.91 |
-| Gemma 4 31B | 3.72 (3.54–3.89) | 3.47 | 3.36 | 3.63 |
-| gpt-oss-120b | 3.67 (3.51–3.85) | 3.31 | 3.24 | 3.57 |
-
-30 files of v0.1 were mixed blind into the review as anchors: they got +0.05 on average against their v0.1 grades
-(correlation 0.94), so the judge barely drifted. Every model gains 0.07 to 0.22 over v0.1, significantly only
-Nemotron and Qwen3.8-Flash; the order is the same. No review for v0.2. Details:
-[results/v0.3/README.md](results/v0.3/README.md).
-
-Full report with per-task results, defects, tool errors and rejections:
-[results/v0.3/report.md](results/v0.3/report.md).
+- **Quality**: blind review of 697 files as delivered (two per model and task) by Claude Opus 5.5 agent sessions,
+  mean of language, content, completeness, structure and usefulness.
+- **Cost**: as reported by the gateway; prices depend on the provider.
+- 95 % intervals from a bootstrap over tasks. Full report with per-task results, defects, tool errors and
+  rejections: [results/v0.3/report.md](results/v0.3/report.md); earlier runs and what changed between versions:
+  [CHANGELOG.md](CHANGELOG.md).
 
 ### What stands out
 
-- **Sum rows work now.** Office Documents 0.3.1 keeps a formula the model writes into a row of a formula column
-  (net, VAT and gross below the items); 0.3.0 replaced it with the line item formula, so the totals showed 0. The
-  four tasks with such rows (`anfrage`, `preisaenderung`, `bueromaterial`, `angebot`) succeed in 70 of 84 runs
-  over all models (v0.2: 48, v0.1: 41); `preisaenderung` alone goes from 8 to 20 of 21.
-- **Fewer rounds lost to broken JSON.** 0.3.1 repairs swapped and extra closing brackets and stray quotes.
-  Nemotron 3.5 Super had 49 calls with invalid JSON in v0.2 and 3 runs at the round limit; in v0.3 it has 1 and
-  none.
-- **`quartal` comes with its numbers now.** Version 1 asked for slides „zu den Zahlen von Q3 2026“ without giving
-  any: Haiku asked for them and failed, Gemma, gpt-oss and Nemotron invented figures without saying so and passed.
-  With the numbers attached (version 2), 17 of 21 runs pass; most failures leave the wrong customer out of the top
-  five.
-- **The percent trap stays fixed** (since 0.2.0): `anfrage` 13 of 21 runs right (v0.1: 2 of 21).
-- **Most changes between runs are noise.** Paired by task against v0.2 (without `quartal`), gpt-oss-120b's +10
-  points (+1 to +18) and Qwen3.8-27B's +8 (0 to +16) are at the edge of what chance explains; the others are within
-  ±4. Haiku leads, DeepSeek follows at a quarter of the cost, Nemotron, Qwen3.8-27B and Qwen3.8-Flash overlap,
-  gpt-oss and Gemma are clearly behind.
 - **Calling the tool is not the problem.** Every model ends with a file in 95–100 % of the file tasks. The
   failures are in the content: missing values and topics, wrong group sums, dates on the wrong weekday.
-- **gpt-oss-120b** still hits the limit of 8 tool rounds in 7 runs; only 70 of its 120 calls rejected by the
-  tool's content validation are followed by a file.
-- **Qwen3.8-Flash** builds more files than needed in 32 of 150 runs (a new file for each small fix); **Haiku** twice
-  sent a second, empty "Test" workbook in the same round, which then counts as the delivered file.
+- **Haiku and DeepSeek lead**, and their gap is within noise in both success and quality; DeepSeek costs a quarter
+  as much. Nemotron and the two Qwen models overlap, gpt-oss-120b and Gemma are clearly behind. Success and
+  quality form the same three groups.
+- **Content and usefulness get the lowest grades, language the highest** for every model except the two Qwen
+  models: their German gets 4.1, below Gemma, for made-up words, Denglisch and, in six Qwen3.8-Flash files,
+  Chinese characters.
+- **Reliability differs more than success.** The Qwen models succeed as often as Nemotron but less consistently
+  (pass^3 66–70 % against 76 %).
+- **Habits of single models:** gpt-oss-120b hits the limit of 8 tool rounds in 7 runs; Qwen3.8-Flash builds a new
+  file for each small fix in 32 of 150 runs; Haiku twice sent a second, empty "Test" workbook in the same round
+  (Office Documents 0.3.2 sends such a workbook back).
 
 What is measured is always the combination of model, this tool and this harness (system prompt, attachment
 template, round limit), not the model alone.
@@ -121,8 +90,9 @@ A full run of 150 task runs took 7 to 40 minutes per model through the gateway (
 - **Tasks** (`tasks/<id>/`): 43 tasks that end with a file (18 Excel, 16 Word, 9 PowerPoint), 6 of them follow-ups
   over several turns, and 7 tasks where the right answer is no file (a question, an e-mail text, an
   extra tool such as web search or a calendar entry). The reference date is Tuesday, 13 October 2026.
-- **The tool** is vendored unchanged (`src/officebench/tool/`, Office Documents 0.3.2, plugin commit `9ff6838`; the published results ran with older versions, see each `meta.json`),
-  with the function specs frozen as Open WebUI 0.11.4 sends them. The model only fills in JSON arguments; fixed code builds the file.
+- **The tool** is vendored unchanged (`src/officebench/tool/`, Office Documents 0.3.2, plugin commit `9ff6838`;
+  the published results ran with older versions, see each `meta.json`), with the function specs frozen as Open
+  WebUI 0.11.4 sends them. The model only fills in JSON arguments; fixed code builds the file.
 - **The content check** has over 40 checks: required values and topics, formulas and their results after
   recalculation, total rows, weekdays and public holidays, numbers without a source, placeholders, retained
   content in follow-ups and more. A hard defect means the file is not usable as delivered; soft defects are
@@ -132,12 +102,12 @@ A full run of 150 task runs took 7 to 40 minutes per model through the gateway (
 
 ## Data
 
-`results/v0.3/`, `results/v0.2/` and `results/v0.1/` hold, per model, `meta.json` (model config, profile, tool and task hashes),
-`log.jsonl` (every round: tokens, cost, provider, tool calls and their results; reasoning is not stored) and
-`results.jsonl` (the scored runs), plus the report; `results/v0.1/grades.jsonl` and `results/v0.3/grades.jsonl`
-have the quality grades with reasons (696 and 697 files), `results/v0.3/anchor-grades.jsonl` the 30 v0.1 anchors
-graded again. The built files (the documents plus the raw arguments of every tool call) are release
-downloads (`v0.3.1-files.zip`, `v0.3-files.zip`, `v0.2-files.zip`, `v0.1-files.zip`): unzip them into the matching folder to rerun the content check.
+`results/<version>/` holds, per model, `meta.json` (model config, profile, tool and task hashes), `log.jsonl`
+(every round: tokens, cost, provider, tool calls and their results; reasoning is not stored) and `results.jsonl`
+(the scored runs), plus the report. `results/v0.1/grades.jsonl` and `results/v0.3/grades.jsonl` have the quality
+grades with reasons, `results/v0.3/anchor-grades.jsonl` the 30 v0.1 files graded again as anchors. The built files
+(the documents plus the raw arguments of every tool call) are release downloads (`v0.3.1-files.zip`,
+`v0.2-files.zip`, `v0.1-files.zip`): unzip them into the matching folder to rerun the content check.
 
 ## License
 
