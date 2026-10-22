@@ -1,6 +1,6 @@
 id = "zeiterfassung"
 title = "Time sheet with macro request"
-version = 1
+version = 2
 kind = "file"
 file_type = "xlsx"
 difficulty = "medium"
@@ -28,10 +28,11 @@ total_row = true
 workdays = true
 value_ranges = [{ column = '^(?!.*(pause|über|saldo|soll|differenz|abweich|plus|minus)).*(arbeitszeit|stunden|dauer|\bist\b|arbeit\b)', min = 0 }]
 
+# Version 2: a dot inside a word (".xlsx") no longer ends the sentence for "Makro geht nicht".
 [reply.topics]
 "Makro geht nicht" = [
-  '(makro|vba|knopf|schaltfläche|button)[^.!?\n]{0,160}(nicht|kein|leider)',
-  '(nicht|kein|leider)[^.!?\n]{0,160}(makro|vba|knopf|schaltfläche|button)',
+  '(makro|vba|knopf|schaltfläche|button)(?:[^.!?\n]|\.(?=\w)){0,160}(nicht|kein|leider)',
+  '(nicht|kein|leider)(?:[^.!?\n]|\.(?=\w)){0,160}(makro|vba|knopf|schaltfläche|button)',
 ]
 
 [judge]

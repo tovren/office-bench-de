@@ -1,22 +1,32 @@
 id = "quartal"
 title = "Quarterly presentation"
-version = 1
+version = 2
 kind = "file"
 file_type = "pptx"
 difficulty = "medium"
-tags = ["chart", "table", "side_by_side"]
+tags = ["chart", "table", "side_by_side", "attachment", "given_numbers"]
 
+# Version 2: the numbers come with the request (version 1 asked for „die Zahlen von Q3 2026“ without giving any, so
+# a model that asked for them failed and models that invented figures passed). Top 5 by revenue: Wohnbau Neckartal
+# 143,200, Hagedorn 121,750, Logistikzentrum Ost 112,600, Kliniken am Rosenberg 96,400, Stadtwerke Kornwestheim
+# 84,300 (the attachment lists the eight customers alphabetically). Region totals 1,736 → 1,790 Tsd. EUR (+3.1 %);
+# Süd is the only region below the previous year.
 [[turns]]
-text = "Mach eine kurze PowerPoint (6 bis 8 Folien) für das Vertriebsmeeting zu den Zahlen von Q3 2026: Umsatz je Region als Diagramm im Vergleich zum Vorjahr, die fünf größten Kunden als Tabelle, was gut und was schlecht lief gegenübergestellt, und die Maßnahmen für Q4."
+text = "Anbei die Q3-Zahlen aus dem Vertriebscontrolling. Mach mir daraus eine kurze PowerPoint (6 bis 8 Folien) für das Vertriebsmeeting: Umsatz je Region als Diagramm im Vergleich zum Vorjahr, die fünf größten Kunden als Tabelle, was gut und was schlecht lief gegenübergestellt, und die Maßnahmen für Q4."
+attachments = [{ name = "Vertriebszahlen Q3 2026.txt", file = "vertriebszahlen_q3.txt" }]
 
 # side_by_side (soft): what went well and what went badly on one slide, in two columns or a table; topics alone only
-# look at the whole file.
+# look at the whole file. values_present: the five largest customers (also in Tsd. EUR); numbers_sourced (soft):
+# invented figures.
 [checks]
 side_by_side = { gut = 'gut|positiv|erfolg|stärke|highlight', schlecht = 'schlecht|negativ|schwäche|problem|herausforderung|verbesser|schwierig|risik|nicht|rückgang|kritisch|lowlight' }
 slides = [6, 8]
 chart = true
 chart_series_min = 2
+chart_values = [[380, 575, 341, 276, 164], [412, 528, 365, 298, 187]]
 tables_min = 1
+values_present = [[143200, 143.2], [121750, 121.75], [112600, 112.6], [96400, 96.4], [84300, 84.3]]
+numbers_sourced = true
 
 [checks.topics]
 Region = 'region'
@@ -28,8 +38,8 @@ Kunden = 'kunde'
 [judge]
 checklist = [
   "6 bis 8 Folien",
-  "Diagramm Umsatz je Region mit zwei Reihen (Q3 2026 und Q3 2025)",
-  "Tabelle mit fünf Kunden",
-  "Gegenüberstellung gut/schlecht",
+  "Diagramm Umsatz je Region mit zwei Reihen (Q3 2026 und Q3 2025), Werte wie im Anhang",
+  "Tabelle mit den fünf umsatzstärksten Kunden (Wohnbau Neckartal, Hagedorn Bau, Logistikzentrum Ost, Kliniken am Rosenberg, Stadtwerke Kornwestheim) mit ihren Umsätzen",
+  "Gegenüberstellung gut/schlecht passend zu den Zahlen und Anmerkungen (z. B. Export, Neukunde gut; Süd mit Verlust von Ferber, Lieferengpass schlecht); keine erfundenen Zahlen",
   "konkrete Maßnahmen für Q4",
 ]

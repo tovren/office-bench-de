@@ -1,6 +1,6 @@
 id = "richtlinie"
 title = "Remote work policy (two change rounds)"
-version = 1
+version = 2
 kind = "follow_up"
 file_type = "docx"
 difficulty = "hard"
@@ -29,10 +29,12 @@ retained = { hard = 0.6, soft = 0.85 }
 
 # Topic „Ausdrucke nicht in den Hausmüll“ asks for the disposal (Hausmüll, Aktenvernichter, entsorgen …), as in the
 # prompt; 'ausdruck|papier' would also match a distorted „Keine Kundendaten ausdrucken“ (mutant printouts_distorted).
+# Version 2: „zwei (2) Arbeitstage“, „09:00 Uhr bis 15:00 Uhr“ and „zwischen 9 und 15 Uhr“ count too, and „drei (3)
+# Tage“ is forbidden as well.
 [checks.topics]
-"höchstens 2 Tage" = '\b(2|zwei)\s+(homeoffice-?|mobile[n]?\s+)?(arbeits)?tag'
+"höchstens 2 Tage" = '\b(2|zwei)(\s*\(2\))?\s+(homeoffice-?|mobile[n]?\s+)?(arbeits)?tag'
 Kernarbeitszeit = 'kernarbeitszeit'
-"9 bis 15 Uhr" = '\b9(:00|\.00)?\s*(uhr)?\s*(bis|–|-)\s*15'
+"9 bis 15 Uhr" = '(?<![\d:.,])0?9([:.]00)?\s*(uhr)?\s*(bis|–|-|und)\s*15'
 Teams = 'teams'
 Headset = 'headset'
 "zweiter Bildschirm" = 'bildschirm|monitor'
@@ -44,7 +46,7 @@ VPN = 'vpn'
 
 [checks.forbidden]
 "Frau Keller" = '\bkeller\b'
-"3 Tage Homeoffice" = ['(höchstens|maximal|bis zu|max\.)\s+(3|drei)\s+(homeoffice-?)?(arbeits)?tag', '\b(3|drei)\s+homeoffice-?tag']
+"3 Tage Homeoffice" = ['(höchstens|maximal|bis zu|max\.)\s+(3|drei)(\s*\(3\))?\s+(homeoffice-?)?(arbeits)?tag', '\b(3|drei)(\s*\(3\))?\s+homeoffice-?tag']
 
 [judge]
 checklist = [

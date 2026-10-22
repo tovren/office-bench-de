@@ -1,0 +1,28 @@
+Vertriebscontrolling – Zahlen Q3 2026 (Juli bis September)
+Stand: 06.10.2026
+
+Umsatz je Region (Tsd. EUR)
+Region;Q3 2025;Q3 2026
+Nord;380;412
+Süd;575;528
+West;341;365
+Ost;276;298
+Export;164;187
+Gesamt;1736;1790
+
+Umsatz je Kunde Q3 2026 (EUR, alphabetisch)
+Kunde;Region;Umsatz Q3 2026
+Hagedorn Bau GmbH;Süd;121750
+Hotel Traube;West;41250
+Kliniken am Rosenberg;Ost;96400
+Logistikzentrum Ost GmbH;Ost;112600
+Möbelhaus Brettschneider;Nord;58900
+Schulze Maschinenbau AG;West;77800
+Stadtwerke Kornwestheim;Nord;84300
+Wohnbau Neckartal eG;Süd;143200
+
+Anmerkungen Vertriebsleitung
+- Süd: Großkunde Ferber Haustechnik bestellt seit Juli bei einem Wettbewerber.
+- Export: neuer Händler in Österreich seit Juli.
+- August: Lieferengpass bei Wärmepumpen (rund sechs Wochen Lieferzeit), mehrere Aufträge nach Q4 verschoben.
+- Logistikzentrum Ost GmbH ist seit Juni Neukunde.

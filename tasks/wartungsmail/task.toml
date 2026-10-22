@@ -1,6 +1,6 @@
 id = "wartungsmail"
 title = "Server maintenance email"
-version = 1
+version = 2
 kind = "no_file"
 difficulty = "easy"
 tags = ["no_file", "email", "short"]
@@ -18,7 +18,8 @@ Freitag = 'freitag'
 Beginn = '\b14(:00|\.00)?\s*uhr|\b14:00'
 Ende = '\b18(:00|\.00)?\s*uhr|\b18:00'
 Speichern = 'speicher|sichern'
-Abmelden = 'abmeld|ausloggen|melden sie sich\b.{0,40}\bab\b|meldet euch\b.{0,40}\bab\b'
+# Version 2: also „abzumelden“, „auszuloggen“ and „meldet euch … von den Systemen ab“ (up to 80 characters).
+Abmelden = 'ab(zu)?meld|aus(zu)?logg|(melden sie sich|meldet euch|meldet ihr euch|melde dich)\b.{0,80}\bab\b'
 
 [judge]
 checklist = [

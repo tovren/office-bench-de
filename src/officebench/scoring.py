@@ -364,16 +364,20 @@ def _texts(r: Result, rec: dict, by_turn: dict) -> str:
     return answer
 
 
+EMPHASIS = re.compile(r"\*\*|__|`")  # Markdown bold and code marks split '**bis zu drei** Tage' for the patterns
+
+
 def _reply_and_behavior(r: Result, task: Task, answer: str) -> None:
     reply = task.spec.reply
+    plain = EMPHASIS.sub("", answer)
     if reply.topics:
-        r.missing_reply_topics = missing_topics(answer, reply.topics) if answer else list(reply.topics)
+        r.missing_reply_topics = missing_topics(plain, reply.topics) if answer else list(reply.topics)
         if r.missing_reply_topics:
             label, severity = REPLY_CHECKS["topics"]
             r.other_defects.append({"label": label, "severity": severity, "check": "topics",
                                     "text": f"topic missing in the reply: {', '.join(r.missing_reply_topics)}"})
     if reply.forbidden:
-        r.forbidden_reply_hits = forbidden_found(answer, reply.forbidden) if answer else []
+        r.forbidden_reply_hits = forbidden_found(plain, reply.forbidden) if answer else []
         if r.forbidden_reply_hits:
             label, severity = REPLY_CHECKS["forbidden"]
             r.other_defects.append({"label": label, "severity": severity, "check": "forbidden",
