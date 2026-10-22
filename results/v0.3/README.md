@@ -6,11 +6,21 @@ Seven models, 50 tasks × 3 runs each, run on 22 October 2026 through the Vercel
 [report.md](report.md):
 
 ```sh
-uv run obench report results/v0.3
+uv run obench report results/v0.3 --grades results/v0.3/grades.jsonl
 ```
 
-- No blind quality review: `grades.jsonl` is missing on purpose. The quality grades of v0.1 are in
-  [../v0.1/README.md](../v0.1/README.md).
+- `grades.jsonl`: blind quality review of the files as delivered (an empty "Test" workbook is graded as the
+  file), one line per graded file (`model`, `task`, `rep`, `file`, five grades, reasons in German or English),
+  judge `claude-opus-5.5-agent`: Claude Opus 5.5 agent sessions with the export of `obench judge --export`, ten
+  files per session, two files per model and task, the same instructions as v0.1. `quartal` is graded in version 2.
+- `anchor-grades.jsonl`: 30 files of v0.1 mixed blind into the same review, to see whether the judge drifted. Against
+  their v0.1 grades: mean +0.05 (absolute difference 0.15, correlation 0.94); per criterion 22 to 28 of 30 grades
+  equal, none more than one point apart.
+- Quality against v0.1, paired by task without `quartal` (difference of the mean grade, 95 % bootstrap interval):
+  Haiku 4.30 → 4.45 (+0.15, −0.02 to +0.31), DeepSeek 4.27 → 4.33 (+0.07, −0.04 to +0.18), Nemotron 4.01 → 4.15
+  (+0.14, +0.03 to +0.27), Qwen3.8-Flash 3.92 → 4.14 (+0.22, +0.08 to +0.38), Qwen3.8-27B 3.91 → 4.03 (+0.13, 0.00
+  to +0.27), Gemma 3.64 → 3.72 (+0.08, −0.04 to +0.19), gpt-oss-120b 3.57 → 3.67 (+0.09, −0.02 to +0.20). All
+  models gain a little, which is about +0.05 more than the anchors drifted; the order stays the same.
 - What changed in the tool: formulas sent in the rows of a formula column (sum rows below the items) are kept
   instead of being replaced by the column formula, with checks for circular references, subtotals counted twice
   and references to empty rows; the JSON repair handles swapped and extra closing brackets, a missing `{`, a

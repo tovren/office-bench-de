@@ -36,9 +36,23 @@ the tool (v0.2: 0.3.0, v0.1: 0.1.0). All three runs are scored with the checks o
   runs were rescored from their stored files, only `quartal` ran again. Details in
   [results/v0.3/README.md](results/v0.3/README.md).
 
-There is no blind quality review for v0.2 and v0.3. The quality grades of v0.1 (Claude Opus 5.5 agent sessions,
-696 files) are in [results/v0.1/README.md](results/v0.1/README.md): Haiku 4.30, DeepSeek 4.27, Nemotron 4.00,
-Qwen3.8-Flash 3.92, Qwen3.8-27B 3.91, Gemma 3.63, gpt-oss-120b 3.57 (1–5).
+Blind quality review of v0.3 (Claude Opus 5.5 agent sessions, 697 files as delivered, two per model and task,
+grades 1–5, mean of language, content, completeness, structure and usefulness; 95 % bootstrap over tasks):
+
+| Model | Quality | Content | Usefulness | v0.1 |
+|---|---:|---:|---:|---:|
+| Claude Haiku 5.5 | 4.45 (4.29–4.60) | 4.37 | 4.31 | 4.30 |
+| DeepSeek V4 Flash | 4.33 (4.21–4.45) | 4.14 | 4.12 | 4.27 |
+| Nemotron 3.5 Super VL | 4.15 (4.01–4.28) | 3.94 | 3.83 | 4.00 |
+| Qwen3.8-Flash | 4.13 (3.99–4.27) | 3.87 | 3.82 | 3.92 |
+| Qwen3.8-27B | 4.03 (3.87–4.19) | 3.68 | 3.73 | 3.91 |
+| Gemma 4 31B | 3.72 (3.54–3.89) | 3.47 | 3.36 | 3.63 |
+| gpt-oss-120b | 3.67 (3.51–3.85) | 3.31 | 3.24 | 3.57 |
+
+30 files of v0.1 were mixed blind into the review as anchors: they got +0.05 on average against their v0.1 grades
+(correlation 0.94), so the judge barely drifted. Every model gains 0.07 to 0.22 over v0.1, significantly only
+Nemotron and Qwen3.8-Flash; the order is the same. No review for v0.2. Details:
+[results/v0.3/README.md](results/v0.3/README.md).
 
 Full report with per-task results, defects, tool errors and rejections:
 [results/v0.3/report.md](results/v0.3/report.md).
@@ -120,9 +134,10 @@ A full run of 150 task runs took 7 to 40 minutes per model through the gateway (
 
 `results/v0.3/`, `results/v0.2/` and `results/v0.1/` hold, per model, `meta.json` (model config, profile, tool and task hashes),
 `log.jsonl` (every round: tokens, cost, provider, tool calls and their results; reasoning is not stored) and
-`results.jsonl` (the scored runs), plus the report; `results/v0.1/grades.jsonl` has all 696 quality grades with
-reasons, in German. The built files (the documents plus the raw arguments of every tool call) are release
-downloads (`v0.3-files.zip`, `v0.2-files.zip`, `v0.1-files.zip`): unzip them into the matching folder to rerun the content check.
+`results.jsonl` (the scored runs), plus the report; `results/v0.1/grades.jsonl` and `results/v0.3/grades.jsonl`
+have the quality grades with reasons (696 and 697 files), `results/v0.3/anchor-grades.jsonl` the 30 v0.1 anchors
+graded again. The built files (the documents plus the raw arguments of every tool call) are release
+downloads (`v0.3.1-files.zip`, `v0.3-files.zip`, `v0.2-files.zip`, `v0.1-files.zip`): unzip them into the matching folder to rerun the content check.
 
 ## License
 

@@ -136,6 +136,31 @@ Defects of the content check, the reply and the behavior checks; per label the n
 
 Cell: file at 1st call · file at end · success / scored runs (? = success not determinable, e.g. the file of the last call is missing).
 
+## Judge grades
+
+| model | files | tasks | mean (95 %, bootstrap over tasks) | language | content | completeness | structure | usefulness |
+|---|---|---|---|---|---|---|---|---|
+| claude-haiku-5.5-medium | 100 | 50 | 4.45 (4.29–4.60) | 4.66 | 4.37 | 4.52 | 4.41 | 4.31 |
+| deepseek-v4-flash-high | 100 | 50 | 4.33 (4.21–4.45) | 4.65 | 4.14 | 4.42 | 4.33 | 4.12 |
+| nemotron-3.5-super | 100 | 50 | 4.15 (4.01–4.28) | 4.51 | 3.94 | 4.19 | 4.26 | 3.83 |
+| qwen3.8-flash-medium | 100 | 50 | 4.13 (3.99–4.27) | 4.11 | 3.87 | 4.60 | 4.26 | 3.82 |
+| qwen3.8-27b-medium | 100 | 50 | 4.03 (3.87–4.19) | 4.06 | 3.68 | 4.32 | 4.36 | 3.73 |
+| gemma-4-31b | 100 | 50 | 3.72 (3.54–3.89) | 4.23 | 3.47 | 3.63 | 3.89 | 3.36 |
+| gpt-oss-120b-medium | 97 | 49 | 3.67 (3.51–3.85) | 4.23 | 3.31 | 3.61 | 3.97 | 3.24 |
+
+Gap to the next model (paired over shared tasks):
+
+| models | difference (95 %) | p | shared tasks |
+|---|---|---|---|
+| claude-haiku-5.5-medium − deepseek-v4-flash-high | 0.12 (-0.01 to 0.24) | 0.068 | 50 |
+| deepseek-v4-flash-high − nemotron-3.5-super | 0.19 (0.10 to 0.27) | 0.000 | 50 |
+| nemotron-3.5-super − qwen3.8-flash-medium | 0.01 (-0.11 to 0.13) | 0.853 | 50 |
+| qwen3.8-flash-medium − qwen3.8-27b-medium | 0.10 (-0.01 to 0.21) | 0.087 | 50 |
+| qwen3.8-27b-medium − gemma-4-31b | 0.31 (0.11 to 0.52) | 0.005 | 50 |
+| gemma-4-31b − gpt-oss-120b-medium | 0.04 (-0.16 to 0.24) | 0.695 | 49 |
+
+Judges: claude-opus-5.5-agent (697 grades). Mean = average of the five criteria (grades 1–5) per file, averaged over judges; estimate = mean over tasks, interval: bootstrap over tasks. Do not mix grades from different judge instructions.
+
 ---
 
 Rates: estimate = mean over tasks of the per-task rate, 95 % interval from a cluster bootstrap over tasks (runs of one task are not independent), then the raw count. When the interval has zero width (all values equal), the Wilson interval is added (it treats runs as independent). File columns only count tasks that ask for a file; success counts all. Success = file at end, every turn fulfilled and content ok (no hard defect), plus the reply check and the behavior check where the task has them; without a file: no office call, a final answer with every required topic and nothing forbidden. Not scored: runs that a provider or network failure ended before the outcome was settled, and task runs without a log line. Server errors of the model's own server count as failures. pass^k: chance that k fresh runs of a task all succeed (mean over tasks). Details: docs/scoring.md.
