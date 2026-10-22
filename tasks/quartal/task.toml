@@ -9,8 +9,9 @@ tags = ["chart", "table", "side_by_side", "attachment", "given_numbers"]
 # Version 2: the numbers come with the request (version 1 asked for „die Zahlen von Q3 2026“ without giving any, so
 # a model that asked for them failed and models that invented figures passed). Top 5 by revenue: Wohnbau Neckartal
 # 143,200, Hagedorn 121,750, Logistikzentrum Ost 112,600, Kliniken am Rosenberg 96,400, Stadtwerke Kornwestheim
-# 84,300 (the attachment lists the eight customers alphabetically). Region totals 1,736 → 1,790 Tsd. EUR (+3.1 %);
-# Süd is the only region below the previous year.
+# 84,300 (the attachment lists the eight customers alphabetically). The attachment has no total row (a copied
+# „Gesamt“ bar in the region chart would make chart_values fail); totals 1,736 → 1,790 Tsd. EUR (+3.1 %). Süd is the
+# only region below the previous year.
 [[turns]]
 text = "Anbei die Q3-Zahlen aus dem Vertriebscontrolling. Mach mir daraus eine kurze PowerPoint (6 bis 8 Folien) für das Vertriebsmeeting: Umsatz je Region als Diagramm im Vergleich zum Vorjahr, die fünf größten Kunden als Tabelle, was gut und was schlecht lief gegenübergestellt, und die Maßnahmen für Q4."
 attachments = [{ name = "Vertriebszahlen Q3 2026.txt", file = "vertriebszahlen_q3.txt" }]

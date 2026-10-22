@@ -8,7 +8,6 @@ Süd;575;528
 West;341;365
 Ost;276;298
 Export;164;187
-Gesamt;1736;1790
 
 Umsatz je Kunde Q3 2026 (EUR, alphabetisch)
 Kunde;Region;Umsatz Q3 2026
