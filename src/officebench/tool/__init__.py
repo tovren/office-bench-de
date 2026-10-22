@@ -1,7 +1,7 @@
 """The office tool the models use, and how a tool call is executed.
 
 office_documents.py is the Open WebUI tool "Office Documents" (https://github.com/tovren/open-webui-plugins, MIT),
-version 0.3.1, copied unchanged from commit 0386886. The model only fills in a JSON schema; fixed code builds the
+version 0.3.2, copied unchanged from commit 9ff6838. The model only fills in a JSON schema; fixed code builds the
 file. Here it runs without Open WebUI: the file is captured instead of being attached to a chat. specs.json holds the
 tool specs exactly as Open WebUI 0.11.4 generates them from the method signatures and docstrings
 (open_webui.utils.tools.get_tool_specs, so the models see the same tool as in Open WebUI); tests/test_tool.py checks
@@ -26,7 +26,7 @@ from typing import Any
 from . import office_documents as _tool
 
 HERE = Path(__file__).resolve().parent
-SOURCE_COMMIT = "0386886"
+SOURCE_COMMIT = "9ff6838"
 SPECS: list[dict] = json.loads((HERE / "specs.json").read_text(encoding="utf-8"))
 FUNCTIONS = tuple(s["function"]["name"] for s in SPECS)
 FILE_TYPES = {"create_word_file": "docx", "create_excel_file": "xlsx", "create_powerpoint_file": "pptx"}
