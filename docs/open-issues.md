@@ -19,14 +19,12 @@ docs/task-format.md.
   formulas) models sent 5 and wrote `(1-F2/100)`, or sent 0.05, which became 0.05 %; only 2 of 21 runs got net and
   gross right. Office Documents 0.2.0 and later say this in the spec and send back fractions in a percent column,
   `/100` on a percent cell and `*100` in a percent column. With 0.3.0 (results v0.2) 10 of 21 `anfrage` runs are
-  right, and only 3 calls of the whole run were sent back for a percent error.
-- **Formulas in the rows of a formula column.** A column with a `formula` fills every data row with it, and the tool
-  drops what the model sends in that column. That is fine for numbers (0.3.0 sends a clear difference back), but a
-  formula string in such a row, typically `=SUM(F2:F6)` or `=F7*0.19` in a total row below the items, is replaced
-  by the column formula without a message, and the totals show 0. In v0.2 this decides 15 failed runs
-  (`preisaenderung` 6, `anfrage` 4, `bueromaterial` 4, `angebot` 1), in v0.1 13. The benchmark keeps the vendored
-  tool unchanged and measures this as it happens to a user; a tool that keeps such row formulas or sends them back
-  would probably remove most of it, and would mean a new run.
+  right, and only 3 calls of the whole run were sent back for a percent error; with 0.3.1 (results v0.3) 13 of 21.
+- **Formulas in the rows of a formula column.** Up to Office Documents 0.3.0 a column with a `formula` filled every
+  data row with it and dropped what the model sent in that column, also formula strings such as `=SUM(F2:F6)` or
+  `=F7*0.19` in the net, VAT and gross rows below the items; those totals showed 0. This decided 13 failed runs
+  in v0.1 and 15 in v0.2 (`preisaenderung`, `anfrage`, `bueromaterial`, `angebot`). 0.3.1 (results v0.3) keeps such
+  row formulas; the four tasks succeed in 70 of 84 runs (v0.2: 48).
 - **Saturated tasks.** About a third of the tasks are solved by all strong models in every run. They test the
   basics (a valid call, a correct simple table, a plain letter) and still separate weak setups from working ones;
   the differences between strong models come from the rest. A difference in overall success between two strong

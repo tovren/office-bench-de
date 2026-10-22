@@ -369,7 +369,7 @@ temperature = 0.7               # the sampling values of the model card
 ```
 uv run obench run configs/models/my-model-q4.toml --probe --out runs/probe
 uv run obench run configs/models/my-model-q4.toml --out runs/mine
-uv run obench report runs/mine results/v0.2       # next to the published models
+uv run obench report runs/mine results/v0.3       # next to the published models
 ```
 
 Points to watch:

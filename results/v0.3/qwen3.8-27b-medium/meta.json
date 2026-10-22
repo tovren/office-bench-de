@@ -1,0 +1,103 @@
+{
+ "model": {
+  "name": "qwen3.8-27b-medium",
+  "label": "Qwen3.8-27B, thinking medium",
+  "base_url": "https://ai-gateway.vercel.sh/v1",
+  "model": "alibaba/qwen3.8-27b",
+  "api_key_env": "AI_GATEWAY_API_KEY",
+  "api_key_file": null,
+  "params": {
+   "max_tokens": 32000,
+   "reasoning": {
+    "effort": "medium"
+   },
+   "temperature": 1.0,
+   "top_p": 0.95,
+   "top_k": 20,
+   "providerOptions": {
+    "gateway": {
+     "order": [
+      "runinfra"
+     ]
+    }
+   }
+  },
+  "info": {
+   "open_weights": true,
+   "parameters": "27B",
+   "weights_gb": 31
+  },
+  "concurrency": 4
+ },
+ "profile": {
+  "name": "default",
+  "description": "Fixed German system prompt with the reference date, attachments as text in front of the message.",
+  "today": "2026-10-13",
+  "system_prompt": "Heute ist Dienstag, 13. Oktober 2026. Antworte auf Deutsch.",
+  "attachment_message": "Angehängte Dateien (extrahierter Text):\n\n{files}\n\n{message}",
+  "attachment_file": "<file name=\"{name}\">\n{text}\n</file>",
+  "valves": {
+   "language": "de"
+  },
+  "max_rounds": 8
+ },
+ "profile_hash": "1b170755a889",
+ "tool_hash": "48c4834d4039",
+ "tool_commit": "0386886",
+ "tasks": [
+  "anfrage",
+  "angebot",
+  "angebotsvergleich",
+  "anweisung",
+  "arbeitstage",
+  "auftragsdaten",
+  "aushang",
+  "bahncard",
+  "befragung",
+  "budget",
+  "bueromaterial",
+  "einladung",
+  "filialumsatz",
+  "handbuch",
+  "homeoffice",
+  "inventar",
+  "jahresbericht",
+  "konzept",
+  "kostenumlage",
+  "kundenantwort",
+  "leasing",
+  "mahnung",
+  "planist",
+  "praesentation",
+  "preisaenderung",
+  "projektplan",
+  "projektstatus",
+  "protokoll",
+  "provision",
+  "quartal",
+  "reisekosten",
+  "richtlinie",
+  "rufbereitschaft",
+  "rundschreiben",
+  "schulung",
+  "servicebericht",
+  "sparquote",
+  "stellenanzeige",
+  "teamnotizen",
+  "termin",
+  "transkript",
+  "urlaubsplanung",
+  "vergleich",
+  "versammlung",
+  "vertrieb",
+  "wartungsmail",
+  "wartungsvertrag",
+  "workshop",
+  "zeiterfassung",
+  "zeugnis"
+ ],
+ "task_selection_hash": "a4e63b0d6b6b",
+ "repeats": 3,
+ "harness": "0.3.0+v0.2-1-gd9df0fc",
+ "started": "2026-10-22T14:38:15+02:00"
+}
