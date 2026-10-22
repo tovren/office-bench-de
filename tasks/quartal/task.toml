@@ -18,7 +18,8 @@ attachments = [{ name = "Vertriebszahlen Q3 2026.txt", file = "vertriebszahlen_q
 
 # side_by_side (soft): what went well and what went badly on one slide, in two columns or a table; topics alone only
 # look at the whole file. values_present: the five largest customers (also in Tsd. EUR); numbers_sourced (soft):
-# invented figures.
+# invented figures. No topic for the previous year: chart_values asks for both series, and the series names of a
+# slide chart are not in the text that topics sees (docs/open-issues.md).
 [checks]
 side_by_side = { gut = 'gut|positiv|erfolg|stärke|highlight', schlecht = 'schlecht|negativ|schwäche|problem|herausforderung|verbesser|schwierig|risik|nicht|rückgang|kritisch|lowlight' }
 slides = [6, 8]
@@ -31,7 +32,6 @@ numbers_sourced = true
 
 [checks.topics]
 Region = 'region'
-Vorjahr = 'vorjahr|2025'
 Kunden = 'kunde'
 "gut/schlecht" = 'gut|positiv|erfolg|stärke'
 "Maßnahmen Q4" = 'maßnahm|q4|nächste schritte|ausblick'
